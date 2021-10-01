@@ -1,0 +1,2 @@
+# notarisku
+aplikasi manajemen notaris
