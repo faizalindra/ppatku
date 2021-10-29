@@ -39,20 +39,22 @@
 				</span>
                 <!-- untuk meload pesan di flashdata -->
                 <?= $this->session->flashdata('pesan'); ?>
-                <form class="login100-form validate-form p-b-33 p-t-5" method="post" action="<?= base_url('autentifikasi')?>">
+                <form class="login100-form validate-form p-b-33 p-t-5" method="post" action="<?= base_url('Autentifikasi')?>">
 
                     <!-- //Username -->
-                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    <div class="wrap-input100 validate-input" >
+                    <!-- <div class="form-group"> -->
                         <input class="input100" type="text" name="username" placeholder="Username" value="<?= set_value('username');?>" id="username">
                         <?= form_error('username', '<small class="text-danger pl-3">', '</small>')?>
-                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                        <!-- <span class="focus-input100" data-placeholder="&#xe82a;"></span> -->
                     </div>
 
                     <!-- //Password -->
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <div class="wrap-input100 validate-input" >
+                    <!-- <div class="form-group"> -->
                         <input class="input100" type="password" name="password" placeholder="Password" id="password">
                         <?= form_error('password', '<small class="text-danger pl-3">', '</small>')?>
-                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                        <!-- <span class="focus-input100" data-placeholder="&#xe80f;"></span> -->
                     </div>
 
                     <div class="container-login100-form-btn m-t-32">

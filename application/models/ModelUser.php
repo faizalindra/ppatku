@@ -6,17 +6,17 @@ class ModelUser extends CI_Model {
     //MANAJEMEN USER
     //Fungsi Simpan data USER, simpan data dari variabel $data ke tabel tb_taff
     public function simpanData($data = null){
-        $this->db->insert('tb_staff', $data);
+        $this->db->insert('user', $data);
     }
 
-    //Fungsi Cek data USER (list), dari tabel tb_staff
+    //Fungsi Cek data USER (list), dari tabel user
     public function cekData($where = null){
-        return $this->db->get_where('tb_staff', $where);
+        return $this->db->get_where('user', $where);
     }
 
-    //Fungsi mencari data user, dari tabel tb_staff
+    //Fungsi mencari data user, dari tabel user
     public function getUserWhere($where = null){
-        return $this->db->get_where('tb_staff', $where);
+        return $this->db->get_where('user', $where);
     }
 
     //Fungsi untuk mengecek user akses database mysql (root/user)
@@ -30,7 +30,7 @@ class ModelUser extends CI_Model {
     //Fungsi untuk membatasi jumlah user
     public function getUserLimit(){
         $this->db->select('*');
-        $this->db->from('tb_staff');
+        $this->db->from('user');
         $this->db->limit(10, 0);
         return$this->db->get();
     }
