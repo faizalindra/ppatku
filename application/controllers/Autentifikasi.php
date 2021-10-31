@@ -20,7 +20,7 @@ class Autentifikasi extends CI_Controller{
         //jika validasi gagal maka tampilkan halaman login
         if($this->form_validation->run() == false){
             $data['user'] = '';
-            $this->load->view('login');
+            $this->load->view('member/login');
         }else{
             $this->_login();
         }
