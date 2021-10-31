@@ -39,7 +39,7 @@
 				</span>
                 <!-- untuk meload pesan di flashdata -->
                 <?= $this->session->flashdata('pesan'); ?>
-                <form class="login100-form validate-form p-b-33 p-t-5" method="post" action="<?= base_url('Autentifikasi')?>">
+                <form class="login100-form validate-form p-b-33 p-t-5" method="post" action="<?= base_url('autentifikasi')?>">
 
                     <!-- //Username -->
                     <div class="wrap-input100 validate-input" >
@@ -52,13 +52,13 @@
                     <!-- //Password -->
                     <div class="wrap-input100 validate-input" >
                     <!-- <div class="form-group"> -->
-                        <input class="input100" type="password" name="password" placeholder="Password" id="password">
+                        <input type="password" class="input100" name="password" placeholder="Password" id="password">
                         <?= form_error('password', '<small class="text-danger pl-3">', '</small>')?>
                         <!-- <span class="focus-input100" data-placeholder="&#xe80f;"></span> -->
                     </div>
 
                     <div class="container-login100-form-btn m-t-32">
-                        <button class="login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
 							Login
 						</button>
                     </div>
@@ -99,6 +99,11 @@
     <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
     <script>
       $('.alert-message').alert().delay(3000).slideUp('slow');
+    </script>
+    <script>
+    function alertJS(){
+        alert("User", $username, "password", $password);
+    }
     </script>
 </body>
 

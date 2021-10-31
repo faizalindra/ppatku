@@ -24,7 +24,7 @@ class ModelUser extends CI_Model {
         $this->db->select('*');
         $this->db->from('access_menu');
         $this->db->where($where);
-        return$this->db->get();
+        return $this->db->get();
     }
 
     //Fungsi untuk membatasi jumlah user
@@ -32,7 +32,7 @@ class ModelUser extends CI_Model {
         $this->db->select('*');
         $this->db->from('user');
         $this->db->limit(10, 0);
-        return$this->db->get();
+        return $this->db->get();
     }
 }
 ?>
