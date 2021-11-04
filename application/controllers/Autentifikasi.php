@@ -20,7 +20,7 @@ class Autentifikasi extends CI_Controller{
         //jika validasi gagal maka tampilkan halaman login
         if($this->form_validation->run() == false){
             $data['user'] = '';
-            $this->load->view('member/login');
+            $this->load->view('autentifikasi/login');
         }else{
             $this->_login();
         }
@@ -109,8 +109,8 @@ class Autentifikasi extends CI_Controller{
         //tampilan registrasi. tapi jika disubmit kemudian validasi form diatas berjalan, maka data yang 
         //diinput akan disimpan ke dalam tabel user
         if ($this->form_validation->run() == false) {
-            $data['judul'] = 'Registrasi Member';
-            $this->load->view('member/registrasi');
+            $data['judul'] = 'Registrasi';
+            $this->load->view('autentifikasi/registrasi');
             // $this->load->view('templates/aute_header', $data);
             // $this->load->view('autentifikasi/registrasi');
             // $this->load->view('templates/aute_footer');

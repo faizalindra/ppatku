@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ppatku</title>
+    <title>Login PPATKU</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -100,11 +100,4 @@
     <script>
       $('.alert-message').alert().delay(3000).slideUp('slow');
     </script>
-    <script>
-    function alertJS(){
-        alert("User", $username, "password", $password);
-    }
-    </script>
-</body>
-
 </html>
