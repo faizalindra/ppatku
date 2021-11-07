@@ -19,6 +19,11 @@ class ModelUser extends CI_Model {
         return $this->db->get_where('user', $where);
     }
 
+    public function hapusUser($where = null)
+    {
+        $this->db->delete('user', $where);
+    }
+
     //Fungsi untuk mengecek user akses database mysql (root/user)
     public function cekUserAccess($where = null){
         $this->db->select('*');

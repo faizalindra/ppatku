@@ -16,6 +16,10 @@
     <script src="<?= base_url()?>assets/js/demo/chart-area-demo.js"></script>
     <script src="<?= base_url()?>assets/js/demo/chart-pie-demo.js"></script>
 
+    <!-- other -->
+    <script src="<?= base_url() ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+
 </body>
 
 </html>
