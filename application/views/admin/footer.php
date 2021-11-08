@@ -18,6 +18,7 @@
 
     <!-- other -->
     <script src="<?= base_url() ?>assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/jquery/jquery-3.6.0.js"></script>
 
 
 </body>
