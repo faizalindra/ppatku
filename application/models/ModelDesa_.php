@@ -7,6 +7,10 @@ class ModelDesa extends CI_Model{
         $result = $this->db->get('nama_desa')->result();
         return $result;
     }
+
+    public function cekDesa($where = null){
+        $this->db->get('tb_desa', $where);
+    }
 }
 
 ?>

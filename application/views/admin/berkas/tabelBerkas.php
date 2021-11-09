@@ -21,21 +21,6 @@
                     <form id="formAwesome" method="post" action="<?= base_url('berkas') ?>">
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="nama" class="col-sm-6 col-form-label">
-                                    Tanggal Masuk
-                                </label>
-                                <div class="col-sm-6">
-                                    <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Pilih Tanggal" value="<?= set_value('tgl_masuk'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
-                                </div>
-                            </div>
-                            <script>
-                                // $(".input-group.date").datepicker({
-                                //     autoclose: true,
-                                //     todayHighlight: true
-                                // });
-                            </script>
-                            <div class="form-group row">
                                 <label for="username" class="col-sm-6 col-form-label">
                                     Nomor Registrasi Sertipikat
                                 </label>
