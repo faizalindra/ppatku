@@ -14,8 +14,8 @@
                 <h3>Product Form:</h3>
                 <form>
                     <div class="form-group">
-                        <label>Category</label>
-                        <select class="form-control" name="category" id="category" required>
+                        <label>Kecamatan</label>
+                        <select class="form-control" name="kecamatan" id="kecamatan" required>
                             <option value="">No Selected</option>
                             <?php foreach ($kecamatan as $row) : ?>
                                 <option value="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
@@ -23,23 +23,25 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Sub Category</label>
-                        <select class="form-control" id="sub_category" name="sub_category" required>
-                            <option>No Selected</option>
+                        <label>Desa</label>
+                        <select class="form-control" id="desa" name="desa" required>
+                            <option value="">No Selected</option>
 
                         </select>
                     </div>
+                    <button class="btn btn-success" type="submit">Save Product</button>
+
                 </form>
             </div>
         </div>
 
     </div>
     <script type="text/javascript" src="<?php echo base_url('assets/vendor/jquery/jquery-3.3.1.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.js.map')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.js') ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#desa').change(function() {
+            $('#kecamatan').change(function() {
                 var id = $(this).val();
                 $.ajax({
                     url: "<?php echo site_url('wilayah/get_desa'); ?>",
@@ -65,6 +67,10 @@
 
         });
     </script>
+
+    <p>
+        <!-- <?php $quer ?> -->
+    </p>
 </body>
 
 </html>
