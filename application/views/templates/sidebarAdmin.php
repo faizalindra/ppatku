@@ -41,7 +41,7 @@
                 <div id="collapseBerkas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Manajemen Berkas</h6>
-                        <a class="collapse-item" href="##">Input Berkas</a>
+                        <!-- <a class="collapse-item" href="##">Input Berkas</a> -->
                         <a class="collapse-item" href="##">Cari Berkas</a>
                         <a class="collapse-item" href="<?= base_url('Berkas'); ?>">Daftar Berkas</a>
                         <a class="collapse-item" href="##">Berkas Dalam Proses</a>

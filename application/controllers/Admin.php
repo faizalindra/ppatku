@@ -12,20 +12,19 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-        $this->load->view('admin/header');
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/topbar');
-        $this->load->view('admin/index', $data);
-        $this->load->view('admin/footer');
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebarAdmin');
+        $this->load->view('templates/topbar');
+        $this->load->view('index', $data);
+        $this->load->view('templates/footer');
     }
-
-    public function manajemenUser(){
-        $data['staff'] = $this->db->get('user')->result_array();
-        $this->load->view('admin/header');
-        $this->load->view('admin/sidebar');
-        $this->load->view('admin/topbar');
-        // $this->load->view('admin/user/formRegistrasi');
-        $this->load->view('admin/user/manajemenUser', $data);
-        $this->load->view('admin/footer');
-    }
+    // public function manajemenUser(){
+    //     $data['staff'] = $this->db->get('user')->result_array();
+    //     $this->load->view('templates/header');
+    //     $this->load->view('templates/sidebar');
+    //     $this->load->view('templates/topbar');
+    //     // $this->load->view('admin/user/formRegistrasi');
+    //     $this->load->view('admin/user/manajemenUser', $data);
+    //     $this->load->view('templates/footer');
+    // }
 }

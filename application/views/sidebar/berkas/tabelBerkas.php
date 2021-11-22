@@ -6,13 +6,13 @@
 
 
         <!-- This script got from www.frontendfreecode.com -->
-        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Tambah User</button>
+        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
 
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg role=" document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="formModalLabel">Form Registrasi</h3>
+                        <h3 class="modal-title" id="formModalLabel">Form Input</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -26,7 +26,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" value="<?= set_value('reg_sertipikat'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -34,8 +34,8 @@
                                     Desa
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="desa" class="form-control" id="desa" placeholder="desa" value="<?= set_value('desa'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>" required>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -43,8 +43,8 @@
                                     Kecamatan
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="kecamatan" value="<?= set_value('kecamatan'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>" required>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -52,8 +52,8 @@
                                     Jenis Berkas
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="jenis_berkas" class="form-control" id="jenis_berkas" placeholder="jenis_berkas" value="<?= set_value('jenis_berkas'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="jenis_berkas" class="form-control" id="jenis_berkas" placeholder="Jenis Berkas" value="<?= set_value('jenis_berkas'); ?>" required>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -61,8 +61,8 @@
                                     Nama Penjual
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="nama_penjual" value="<?= set_value('nama_penjual'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" required>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,7 +71,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" placeholder="Nama Pembeli" value="<?= set_value('nama_pembeli'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -79,8 +79,8 @@
                                     Biaya
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Biaya" value="<?= set_value('biaya'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Biaya" value="<?= set_value('Biaya'); ?>">
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -88,8 +88,8 @@
                                     dp
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="dp" class="form-control" id="dp" placeholder="DP" value="<?= set_value('dp'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <input type="text" name="dp" class="form-control" id="dp" placeholder="DP" value="<?= set_value('DP'); ?>">
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -98,7 +98,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Total Biaya" value="<?= set_value('tot_biaya'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -107,7 +107,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?= set_value('keterangan'); ?>">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <!-- <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?> -->
                                 </div>
                             </div>
 
@@ -172,10 +172,15 @@
                             <tr>
                                 <th scope="row"><?= $a++; ?></th>
                                 <td><?= $b['tgl_masuk']; ?></td>
-                                <td><?= $b['reg_sertpikiat']; ?></td>
+                                <td><?php
+                                    if ($b['reg_sertipikat'] == 0) {
+                                        echo " ";
+                                    } else {
+                                        $b['reg_sertipikat'];
+                                    } ?></td>
                                 <td><?= $b['desa']; ?></td>
                                 <td><?= $b['kecamatan']; ?></td>
-                                <td><?= $b['Jenis_berkas']; ?></td>
+                                <td><?= $b['jenis_berkas']; ?></td>
                                 <td><?= $b['id_proses']; ?></td>
                                 <td><?= $b['status_proses']; ?></td>
                                 <td><?= $b['nama_penjual']; ?></td>

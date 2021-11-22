@@ -85,12 +85,12 @@ class User extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['staff'] = $this->db->get('user')->result_array();
             $data['judul'] = 'Registrasi';
-            $this->load->view('admin/header');
-            $this->load->view('admin/sidebar');
-            $this->load->view('admin/topbar');
+            $this->load->view('templates/header');
+            $this->load->view('templates/sidebarAdmin');
+            $this->load->view('templates/topbar');
             $this->load->view('admin/user/formRegistrasi');
             $this->load->view('admin/user/tabelUser', $data);
-            $this->load->view('admin/footer');
+            $this->load->view('templates/footer');
             // $this->load->view('autentifikasi/registrasi');
         } else {
             $username = $this->input->post('username', true);
