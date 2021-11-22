@@ -35,7 +35,7 @@
         <div class="container-login100" style="background-image: url('<?= base_url() ?>assets/images/bg-01.jpg');">
             <div class="wrap-login100 p-t-30 p-b-50">
                 <span class="login100-form-title p-b-41">
-					Account Login
+					Login PPATKU
 				</span>
                 <!-- untuk meload pesan di flashdata -->
                 <?= $this->session->flashdata('pesan'); ?>
