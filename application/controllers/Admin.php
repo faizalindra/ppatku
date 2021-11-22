@@ -12,7 +12,8 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-        $this->load->view('templates/header');
+        $data['judul'] = "Dashboard";
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebarAdmin');
         $this->load->view('templates/topbar');
         $this->load->view('index', $data);

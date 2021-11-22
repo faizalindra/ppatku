@@ -25,7 +25,8 @@ class Berkas extends CI_Controller
         //     'required' => 'Nama Pembeli Belum diisi!!',
         // ]);
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header');
+            $data['judul'] = "Daftar Berkas";
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebarAdmin');
             $this->load->view('templates/topbar');
             $this->load->view('sidebar/berkas/tabelBerkas', $data);

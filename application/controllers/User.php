@@ -42,6 +42,7 @@ class User extends CI_Controller
 
 
         if ($this->form_validation->run() == false) {
+            $data['judul'] = "Daftar Berkas";
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
@@ -85,7 +86,7 @@ class User extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['staff'] = $this->db->get('user')->result_array();
             $data['judul'] = 'Registrasi';
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebarAdmin');
             $this->load->view('templates/topbar');
             $this->load->view('admin/user/formRegistrasi');
