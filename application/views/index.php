@@ -76,8 +76,8 @@
                                         <div class="row">
                                             <div class="col-md-6 text-left">
                                                 <?= $b['nama_penjual']; ?>
+                                                <p><?= $b['no_sertipikat']; ?> / <?= $b['desa']; ?></p>
                                                 <div class="text-white-50 small font-weight-bold"><?= $b['kecamatan']; ?></div>
-                                                <div class="text-white-50 small font-weight-bold"><?= $b['desa']; ?></div>
                                             </div>
                                             <div class="col-md-6 text-right">
                                                 <?= $b['jenis_berkas']; ?>
@@ -85,8 +85,9 @@
                                                 <div class="text-white-50 font-weight-bold"></div>
                                             </div>
                                         </div>
-                                        <div>
-                                            <?= $b['keterangan']; ?>
+                                        <p></p>
+                                        <div>Ket :
+                                            <div class="text-white-50 small font-weight-bold"><?= $b['keterangan']; ?></div>
                                         </div>
                                         <div class="text-center">
                                             <a href="<?= base_url('berkas'); ?>">
@@ -101,6 +102,7 @@
                     <?php if ($a >= 10) {
                                 break;
                             }
+                        
                         }
                     } ?>
                 </div>
