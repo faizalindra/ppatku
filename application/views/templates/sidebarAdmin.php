@@ -44,9 +44,9 @@
                         <!-- <a class="collapse-item" href="##">Input Berkas</a> -->
                         <a class="collapse-item" href="##">Cari Berkas</a>
                         <a class="collapse-item" href="<?= base_url('Berkas'); ?>">Daftar Berkas</a>
-                        <a class="collapse-item" href="##">Berkas Dalam Proses</a>
+                        <a class="collapse-item" href="<?= base_url('Berkas/berkasProses');?>">Berkas Dalam Proses</a>
                         <a class="collapse-item" href="##">Berkas Belum Lengkap</a>
-                        <a class="collapse-item" href="##">Berkas Selesai</a>
+                        <a class="collapse-item" href="<?= base_url('Berkas/berkasSelesai'); ?>">Berkas Selesai</a>
                     </div>
                 </div>
             </li>

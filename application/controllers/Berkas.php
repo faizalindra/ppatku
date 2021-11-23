@@ -11,6 +11,28 @@ class Berkas extends CI_Controller
         $this->load->model('ModelBerkas');
     }
 
+    public function berkasProses(){
+        $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
+        $data['judul'] = "Daftar Berkas Dalam Proses";
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebarAdmin');
+        $this->load->view('templates/topbar');
+        $this->load->view('sidebar/berkas/berkasProses', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function berkasSelesai(){
+        $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
+        $data['judul'] = "Daftar Berkas Selesai";
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebarAdmin');
+        $this->load->view('templates/topbar');
+        $this->load->view('sidebar/berkas/berkasSelesai', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+
     public function index()
     {
         $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
