@@ -31,7 +31,16 @@ class Berkas extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+	function cekBerkas_C(){
+		$noreg=$this->input->get('id');
+		$data=$this->ModelBerkas->cekBerkas($noreg);
+		echo json_encode($data);
+	}
 
+    function dataBerkas(){
+        $data=$this->ModelBerkas->getBerkas();
+        echo json_encode($data);
+    }
 
     public function index()
     {

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ModelBerkas extends CI_Model
+class ModelBerkas2 extends CI_Model
 {
     public function simpanBerkas($data1 = null)
     {
@@ -9,7 +9,7 @@ class ModelBerkas extends CI_Model
     }
 
     function cekBerkas($noreg){
-		$hsl=$this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$noreg' ");
+		$hsl=$this->db->query("SELECT * FROM tb_sertipikat left join 'tb_sertipikat' on 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat' WHERE no_reg='$noreg' ");
 		if($hsl->num_rows()>0){
 			foreach ($hsl->result() as $data) {
 				$hasil=array(

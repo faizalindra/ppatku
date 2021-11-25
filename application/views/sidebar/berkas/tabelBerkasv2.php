@@ -4,8 +4,11 @@
     </div>
     <div class="card-body">
 
+
+        <!-- This script got from www.frontendfreecode.com -->
         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
 
+        <!-- modal form registrasi -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
@@ -15,7 +18,6 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <?= $this->session->flashdata('pesan'); ?>
                     <form id="formAwesome" method="post" action="<?= base_url('berkas') ?>">
                         <div class="modal-body">
                             <div class="form-group row">
@@ -107,11 +109,57 @@
                 </div>
             </div>
         </div>
+        <!-- end modal form registrasi -->
+
+        <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel"><?= $b['reg_sertipikat'] ?></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col">Tanggal Masuk</th>
+                                    <th scope="col">Nomor Registrasi</th>
+                                    <th scope="col">Nomor Sertipikat</th>
+                                    <th scope="col">Kecamatan</th>
+                                    <th scope="col">Luas m<sup>2</sup></th>
+                                    <th scope="col">Atas Nama</th>
+                                    <th scope="col">Penerima Hak</th>
+                                    <th scope="col">Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-capitalize text-center">
+                                    <td><?= $b['tgl_masuk']; ?></td>
+                                    <td><?= $b['no_reg']; ?></td>
+                                    <td><?= $b['jenis_hak']; ?>. <?= $b['no_sertipikat']; ?>/<?= $b['desa']; ?></td>
+                                    <td><?= $b['kecamatan']; ?></td>
+                                    <td><?= $b['luas']; ?> m<sup>2</sup></td>
+                                    <td><?= $b['pemilik_hak']; ?></td>
+                                    <td><?= $b['pembeli_hak']; ?></td>
+                                    <td><?= $b['keterangan']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
-                <table class="table table-hover" class="mydata">
+                <table class="table table-hover" id="mydata">
                     <thead>
-                        <tr class="text-center" class="tabel-berkas">
+                        <tr class="text-center">
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Reg Sertipikat</th>
@@ -128,64 +176,25 @@
                             <th scope="col">Berkas Selesai</th>
                         </tr>
                     </thead>
-                    <tbody class="show_data">
+                    <tbody id="show_data">
+
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <!-- modal detail registrasi sertipikat  -->
-        <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title entah" id="myModalLabel"></h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="reload">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th scope="col">Tanggal Masuk</th>
-                                        <th scope="col">Nomor Registrasi</th>
-                                        <th scope="col">Nomor Sertipikat</th>
-                                        <th scope="col">Kecamatan</th>
-                                        <th scope="col">Luas m<sup>2</sup></th>
-                                        <th scope="col">Atas Nama</th>
-                                        <th scope="col">Penerima Hak</th>
-                                        <th scope="col">Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="show_data">
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal detail registrasi sertipikat -->
-        </td>
-        <!-- <script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery.js"></script> -->
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                data_berkas();
+
+                tampil_data_barang(); //pemanggilan fungsi tampil barang.
 
                 $('#mydata').dataTable();
 
                 //fungsi tampil barang
-                function data_berkas() {
+                function tampil_data_barang() {
                     $.ajax({
                         type: 'GET',
-                        url: '<?php echo base_url() ?>berkas/dataBerkas',
+                        url: '<?php echo base_url() ?>berkas2/data_berkas',
                         async: true,
                         dataType: 'json',
                         success: function(data) {
@@ -195,6 +204,7 @@
                                 html += '<tr>' +
                                     '<td>' + data[i].no_reg + '</td>' +
                                     '<td>' + data[i].no_sertipikat + '</td>' +
+                                    '<td>' + data[i].jenis_hak + '</td>' +
                                     '<td>' + data[i].dsa + '</td>' +
                                     '<td>' + data[i].kec + '</td>' +
                                     '<td>' + data[i].luas + '</td>' +
@@ -202,8 +212,9 @@
                                     '<td>' + data[i].pembeli_hak + '</td>' +
                                     '<td>' + data[i].tgl_masuk + '</td>' +
                                     '<td>' + data[i].proses + '</td>' +
-                                    '<td>' + data[i].ket + '</td>'
-                                '</tr>';
+                                    '<td>' + data[i].ket + '</td>' +
+                                    '<td style="text-align:right;">' +
+                                    '</tr>';
                             }
                             $('#show_data').html(html);
                         }
@@ -211,31 +222,27 @@
                     });
                 }
 
-                $('#show_data').on('click', '.detail-sertipikat', function() {
+                //GET UPDATE
+                $('#show_data').on('click', '.item_edit', function() {
                     var id = $(this).attr('data');
                     $.ajax({
                         type: "GET",
-                        url: "<?php echo base_url(); ?>berkas/cekBerkas_C",
+                        url: "<?php echo base_url('index.php/barang/get_barang') ?>",
                         dataType: "JSON",
                         data: {
                             id: id
                         },
                         success: function(data) {
-                            html += '<tr>' +
-                                '<td>' + data.no_reg + '</td>' +
-                                '<td>' + data.no_sertipikat + '</td>' +
-                                '<td>' + data.dsa + '</td>' +
-                                '<td>' + data.kec + '</td>' +
-                                '<td>' + data.luas + '</td>' +
-                                '<td>' + data.pemilik_hak + '</td>' +
-                                '<td>' + data.pembeli_hak + '</td>' +
-                                '<td>' + data.tgl_masuk + '</td>' +
-                                '<td>' + data.proses + '</td>' +
-                                '<td>' + data.ket + '</td>'
-                            '</tr>';
+                            $.each(data, function(barang_kode, barang_nama, barang_harga) {
+                                $('#ModalaEdit').modal('show');
+                                $('[name="kobar_edit"]').val(data.barang_kode);
+                                $('[name="nabar_edit"]').val(data.barang_nama);
+                                $('[name="harga_edit"]').val(data.barang_harga);
+                            });
                         }
                     });
                     return false;
                 });
+
             });
         </script>
