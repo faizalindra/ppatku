@@ -8,35 +8,7 @@ class ModelBerkas extends CI_Model
         $this->db->insert('tb_berkas', $data1);
     }
 
-    function cekBerkas($noreg){
-		$hsl=$this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$noreg' ");
-		if($hsl->num_rows()>0){
-			foreach ($hsl->result() as $data) {
-				$hasil=array(
-                    'no_reg' => $data->no_reg,
-                    'no_sertipikat' => $data->no_sertipikat,
-                    'jenis_hak' => $data->jenis_hak,
-                    'dsa' => $data->dsa,
-                    'kec' => $data->kec,
-                    'luas' => $data->luas,
-                    'pemilik_hak' => $data->pemilik_hak,
-                    'pembeli_hak' => $data->pembeli_hak,
-                    'tgl_masuk' => $data->tgl_masuk,
-                    'proses' => $data->proses,
-                    'ket' => $data->ket
-					);
-			}
-		}
-		return $hasil;
-	}
-
-    public function getBerkas($where = null)
-    {
-        return $this->db->get_where('tb_berkas', $where);
-    }
-
-    public function berkasGet()
-    {
+    public function getBerkas(){
         return $this->db->get('tb_berkas');
     }
 
@@ -60,12 +32,6 @@ class ModelBerkas extends CI_Model
         return $query->result_array();
     }
 
-    //update berkas
-    public function updateBerkas($data1 = null, $where = null)
-    {
-        $this->db->update('tb_berkas', $data1, $where);
-    }
-
     //menghitung total berkas
     public function totBerkas($field, $where)
     {
@@ -75,5 +41,54 @@ class ModelBerkas extends CI_Model
         }
         $this->db->from('tb_berkas');
         return $this->db->get()->row($field);
+    }
+
+    function berkas_list()
+    {
+        $hasil = $this->db->query("SELECT * FROM tb_berkas");
+        return $hasil->result();
+    }
+
+    function simpan_berkas($id, $napen, $desa)
+    {
+        $hasil = $this->db->query("INSERT INTO tb_berkas (id,nama_penjual,desa)VALUES('$id','$napen','$desa')");
+        return $hasil;
+    }
+
+    function get_berkas($id)
+    {
+        $hsl = $this->db->query("SELECT * FROM tb_berkas WHERE id='$id'");
+        if ($hsl->num_rows() > 0) {
+            foreach ($hsl->result() as $data) {
+                $hasil = array(
+                    'id' => $data->id,
+                    'tanggal_masuk' => $data->tanggal_masuk,
+                    'reg_sertipikat' => $data->reg_sertipikat,
+                    'desa' => $data->desa,
+                    'kecamatan' => $data->kecamatan,
+                    'jenis_berkas' => $data->jenis_berkas,
+                    'status_proses' => $data->status_proses,
+                    'nama_penjual' => $data->nama_penjual,
+                    'nama_pembeli' => $data->nama_pembeli,
+                    'biaya' => $data->biaya,
+                    'dp' => $data->dp,
+                    'tot_biaya' => $data->tot_biaya,
+                    'berkas_selesai' => $data->berkas_selesai,
+                );
+            }
+        }
+        return $hasil;
+    }
+
+    function update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s, )
+    {
+        $hasil = $this->db->query("UPDATE tb_berkas SET nama_penjual='$napen', tgl_masuk='$tgl', reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis, status_proses='$status', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', berkas_selesai='$berkas_s' WHERE id='$id'");
+        return $hasil;
+    }
+
+    function hapus_berkas($id)
+    {
+        $hasil = $this->db->query("DELETE FROM tb_berkas WHERE id='$id'");
+        return $hasil;
     }
 }

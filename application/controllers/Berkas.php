@@ -9,10 +9,11 @@ class Berkas extends CI_Controller
         cek_login();
         $this->load->library('form_validation');
         $this->load->model('ModelBerkas');
+        
     }
 
     public function berkasProses(){
-        $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
+        $data['berkas'] = $this->ModelBerkas->berkas_list();
         $data['judul'] = "Daftar Berkas Dalam Proses";
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebarAdmin');
@@ -31,20 +32,62 @@ class Berkas extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-	function cekBerkas_C(){
-		$noreg=$this->input->get('id');
-		$data=$this->ModelBerkas->cekBerkas($noreg);
+    function data_berkas(){
+		$data=$this->ModelBerkas->berkas_list();
 		echo json_encode($data);
 	}
 
-    function dataBerkas(){
-        $data=$this->ModelBerkas->getBerkas();
-        echo json_encode($data);
-    }
+	function get_berkas(){
+		$id=$this->input->get('id');
+		$data=$this->ModelBerkas->get_berkas($id);
+		echo json_encode($data);
+	}
+
+	function simpan_berkas(){
+		$id=$this->input->post('id');
+		$tgl=$this->input->post('tanggal_masuk');
+		$reg=$this->input->post('reg_sertipikat');
+		$desa=$this->input->post('desa');
+		$kec=$this->input->post('kecamatan');
+		$jenis=$this->input->post('jenis_berkas');
+		$status=$this->input->post('status_proses');
+		$napen=$this->input->post('nama_penjual');
+		$napem=$this->input->post('nama_pembeli');
+		$biaya=$this->input->post('biaya');
+		$dp=$this->input->post('dp');
+		$tot_biaya=$this->input->post('tot_biaya');
+		$berkas_s=$this->input->post('berkas_selesai');
+		$data=$this->ModelBerkas->simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
+		echo json_encode($data);
+	}
+
+	function update_berkas(){
+        $id=$this->input->post('id');
+		$tgl=$this->input->post('tanggal_masuk');
+		$reg=$this->input->post('reg_sertipikat');
+		$desa=$this->input->post('desa');
+		$kec=$this->input->post('kecamatan');
+		$jenis=$this->input->post('jenis_berkas');
+		$status=$this->input->post('status_proses');
+		$napen=$this->input->post('nama_penjual');
+		$napem=$this->input->post('nama_pembeli');
+		$biaya=$this->input->post('biaya');
+		$dp=$this->input->post('dp');
+		$tot_biaya=$this->input->post('tot_biaya');
+		$berkas_s=$this->input->post('berkas_selesai');
+		$data=$this->ModelBerkas->update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
+		echo json_encode($data);
+	}
+
+	function hapus_berkas(){
+		$id=$this->input->post('kode');
+		$data=$this->ModelBerkas->hapus_berkas($id);
+		echo json_encode($data);
+	}
 
     public function index()
     {
-        $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
+        $data['berkas'] = $this->ModelBerkas->getBerkasLeft();
 
         $this->form_validation->set_rules('jenis_berkas', 'Jenis Berkas', 'required', [
             'required' => 'Jenis Berkas Belum diisi!!',
