@@ -5,6 +5,7 @@
     <div class="card-body">
 
         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
+        <button id="ujimodal" type="button" class="btn btn-primary">Input Berkas</button>
 
         <div class="row">
             <div class="col-lg-12">
@@ -25,9 +26,10 @@
                             <th scope="col">DP</th>
                             <th scope="col">Total Biaya</th>
                             <th scope="col">Berkas Selesai</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody  id="show_data">
+                    <tbody id="show_data">
                     </tbody>
                 </table>
             </div>
@@ -136,8 +138,9 @@
         </div>
         <!-- end model form input -->
 
+
         <!-- modal detail registrasi sertipikat  -->
-        <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -176,11 +179,49 @@
         <!-- end modal detail registrasi sertipikat -->
 
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 data_berkas(); //pemanggilan fungsi tampil barang.
 
-                $('#tabel-berkas').dataTable();
+                // $('#tabel-berkas').dataTable({"searching": false,});
+                function addCommas(nStr) {
+                    nStr += '';
+                    x = nStr.split('.');
+                    x1 = x[0];
+                    x2 = x.length > 1 ? '.' + x[1] : '';
+                    var rgx = /(\d+)(\d{3})/;
+                    while (rgx.test(x1)) {
+                        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                    }
+                    return x1 + x2;
+                }
+
+                function antinull(val) {
+                    c = " ";
+                    val2 = "Rp. " + addCommas(val);
+                    val1 = addCommas(val);
+                    if (val > 0) {
+                        if (val >= 100000) {
+                            return val2;
+                        } else {
+                            return val1
+                        }
+                    } else {
+                        return c;
+                    }
+                }
+
+                function berkasSelesai(val) {
+                    tail = '</button>';
+                    condi1 = '<button class="badge badge-info"> Selesai';
+                    condi2 = '<button class="badge badge-danger"> Proses';
+                    if (val == 1) {
+                        return condi1 + tail;
+                    } else {
+                        return condi2 + tail;
+                    }
+                }
 
                 // fungsi tampil barang
                 function data_berkas() {
@@ -193,24 +234,24 @@
                             var html = '';
                             var i;
                             for (i = 0; i < data.length; i++) {
-                                html += '<tr>' +
-                                    '<td>'+ i +'</td>'+
-                                    '<td>'+data[i].tgl_masuk+'</td>' +
-                                    '<td>'+data[i].reg_sertipikat+'</td>'+
-                                    '<td>'+data[i].desa+'</td>'+
-                                    '<td>'+data[i].kecamatan+'</td>' +
-                                    '<td>'+data[i].jenis_berkas+'</td>'+
-                                    '<td>'+data[i].status_proses+'</td>'+
-                                    '<td>'+data[i].nama_penjual+'</td>' +
-                                    '<td>'+data[i].nama_pembeli+'</td>'+
-                                    '<td>'+data[i].biaya+'</td>'+
-                                    '<td>'+data[i].dp+'</td>' +
-                                    '<td>'+data[i].tot_biaya+'</td>'+
-                                    '<td>'+data[i].berkas_selesai+'</td>' +
-                                    '<td style="text-align:right;">'+
-                                    '<a href="javascript:;" class="btn btn-info btn-xs item_detail" data="'+data[i].id+'">Edit</a>'+' '+
-                                    '<a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].id+'">Hapus</a>'+
-                                    '</td>'+
+                                html += '<tr class="text-capitalize text-center">' +
+                                    '<td>' + data[i].id + '</td>' +
+                                    '<td>' + data[i].tgl_masuk + '</td>' +
+                                    '<td>' + antinull(data[i].reg_sertipikat) + '</td>' +
+                                    '<td>' + data[i].desa + '</td>' +
+                                    '<td>' + data[i].kecamatan + '</td>' +
+                                    '<td>' + data[i].jenis_berkas + '</td>' +
+                                    '<td>' + antinull(data[i].id_proses) + '</td>' +
+                                    '<td>' + data[i].status_proses + '</td>' +
+                                    '<td>' + data[i].nama_penjual + '</td>' +
+                                    '<td>' + data[i].nama_pembeli + '</td>' +
+                                    '<td>' + addCommas(antinull(data[i].biaya)) + '</td>' +
+                                    '<td>' + addCommas(antinull(data[i].dp)) + '</td>' +
+                                    '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
+                                    '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
+                                    '<td style="text-align:right;">' +
+                                    '<button id="ujimodal" class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
+                                    '</td>' +
                                     '</tr>';
                             }
                             $('#show_data').html(html);
@@ -218,6 +259,28 @@
 
                     });
                 }
+
+                $('#ujimodal').on('click', function() {
+                    var id = $(this).attr('data');
+                    $.ajax({
+                        type: "GET",
+                        url: "<?php base_url() ?>berkas/get_berkas",
+                        dataType: "JSON",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            $.each(data, function(id, nama_penjual, desa) {
+                                $('#ModalDetail').modal('show');
+                                $('[name="id_edit"]').val(data.id);
+                                $('[name="napen_edit"]').val(data.nama_penjual);
+                                $('[name="desa_edit"]').val(data.desa);
+                            });
+                        }
+                    });
+                    return false;
+                    // $('#ModalDetail').modal('show');
+                });
 
                 //GET UPDATE
                 $('#show_data').on('click', '.item_detail', function() {
@@ -231,7 +294,7 @@
                         },
                         success: function(data) {
                             $.each(data, function(id, nama_penjual, desa) {
-                                $('#ModalaEdit').modal('show');
+                                $('#ModalDetail').modal('show');
                                 $('[name="id_edit"]').val(data.id);
                                 $('[name="napen_edit"]').val(data.nama_penjual);
                                 $('[name="desa_edit"]').val(data.desa);
@@ -239,14 +302,6 @@
                         }
                     });
                     return false;
-                });
-
-
-                //GET HAPUS
-                $('#show_data').on('click', '.item_hapus', function() {
-                    var id = $(this).attr('data');
-                    $('#ModalHapus').modal('show');
-                    $('[name="kode"]').val(id);
                 });
 
                 //Simpan Barang
@@ -293,24 +348,6 @@
                             $('[name="napen_edit"]').val("");
                             $('[name="desa_edit"]').val("");
                             $('#ModalaEdit').modal('hide');
-                            data_berkas();
-                        }
-                    });
-                    return false;
-                });
-
-                //Hapus Barang
-                $('#btn_hapus').on('click', function() {
-                    var kode = $('#textkode').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "<?php echo base_url('index.php/berkas/hapus_berkas') ?>",
-                        dataType: "JSON",
-                        data: {
-                            kode: kode
-                        },
-                        success: function(data) {
-                            $('#ModalHapus').modal('hide');
                             data_berkas();
                         }
                     });
