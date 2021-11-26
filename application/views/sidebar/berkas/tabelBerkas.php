@@ -8,36 +8,38 @@
         <button id="ujimodal" type="button" class="btn btn-primary">Input Berkas</button>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-auto">
                 <table class="table table-striped" id="tabel-berkas">
                     <thead>
-                        <tr class="text-center">
-                            <th scope="col">#</th>
-                            <th scope="col">Tanggal Masuk</th>
-                            <th scope="col">Reg Sertipikat</th>
-                            <th scope="col">Desa</th>
-                            <th scope="col">Kecamatan</th>
-                            <th scope="col">Jenis Berkas</th>
-                            <th scope="col">Id Proses</th>
-                            <th scope="col">Status Proses</th>
-                            <th scope="col">Nama Penjual</th>
-                            <th scope="col">Nama Pembeli</th>
-                            <th scope="col">Biaya</th>
-                            <th scope="col">DP</th>
-                            <th scope="col">Total Biaya</th>
-                            <th scope="col">Berkas Selesai</th>
-                            <th scope="col"></th>
+                        <tr>
+                            <th>#</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Reg Sertipikat</th>
+                            <th>Desa</th>
+                            <th>Kecamatan</th>
+                            <th>Jenis Berkas</th>
+                            <th>Id Proses</th>
+                            <th>Status Proses</th>
+                            <th>Nama Penjual</th>
+                            <th>Nama Pembeli</th>
+                            <th>Biaya</th>
+                            <th>DP</th>
+                            <th>Total Biaya</th>
+                            <th>Berkas Selesai</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="show_data">
                     </tbody>
                 </table>
+
             </div>
         </div>
 
+
         <!-- model form input -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md" role="document">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="formModalLabel">Form Input</h3>
@@ -48,7 +50,7 @@
                     <form id="formAwesome" method="post" action="<?= base_url('berkas') ?>">
                         <div class="modal-body">
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="reg_sertipikat" class="col-sm-6 col-form-label">
                                     Nomor Registrasi Sertipikat
                                 </label>
                                 <div class="col-sm-6">
@@ -56,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="desa" class="col-sm-6 col-form-label">
                                     Desa
                                 </label>
                                 <div class="col-sm-6">
@@ -64,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="kecamatan" class="col-sm-6 col-form-label">
                                     Kecamatan
                                 </label>
                                 <div class="col-sm-6">
@@ -72,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="jenis_berkas" class="col-sm-6 col-form-label">
                                     Jenis Berkas
                                 </label>
                                 <div class="col-sm-6">
@@ -80,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="nama_penjual" class="col-sm-6 col-form-label">
                                     Nama Penjual
                                 </label>
                                 <div class="col-sm-6">
@@ -88,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="nama_pembeli" class="col-sm-6 col-form-label">
                                     Nama Pembeli
                                 </label>
                                 <div class="col-sm-6">
@@ -96,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="biaya" class="col-sm-6 col-form-label">
                                     Biaya
                                 </label>
                                 <div class="col-sm-6">
@@ -104,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="dp" class="col-sm-6 col-form-label">
                                     dp
                                 </label>
                                 <div class="col-sm-6">
@@ -112,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="tot_biaya" class="col-sm-6 col-form-label">
                                     Total Biaya
                                 </label>
                                 <div class="col-sm-6">
@@ -120,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
+                                <label for="keterangan" class="col-sm-6 col-form-label">
                                     Keterangan
                                 </label>
                                 <div class="col-sm-6">
@@ -138,13 +140,12 @@
         </div>
         <!-- end model form input -->
 
-
         <!-- modal detail registrasi sertipikat  -->
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title entah" id="myModalLabel"></h3>
+                        <h3 class="modal-title" id="myModalLabel">Title</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -154,14 +155,14 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr class="text-center">
-                                        <th scope="col">Tanggal Masuk</th>
-                                        <th scope="col">Nomor Registrasi</th>
-                                        <th scope="col">Nomor Sertipikat</th>
-                                        <th scope="col">Kecamatan</th>
-                                        <th scope="col">Luas m<sup>2</sup></th>
-                                        <th scope="col">Atas Nama</th>
-                                        <th scope="col">Penerima Hak</th>
-                                        <th scope="col">Keterangan</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Nomor Registrasi</th>
+                                        <th>Nomor Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Luas m<sup>2</sup></th>
+                                        <th>Atas Nama</th>
+                                        <th>Penerima Hak</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -179,12 +180,12 @@
         <!-- end modal detail registrasi sertipikat -->
 
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css"></script>
+        <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+
         <script type="text/javascript">
             $(document).ready(function() {
                 data_berkas(); //pemanggilan fungsi tampil barang.
 
-                // $('#tabel-berkas').dataTable({"searching": false,});
                 function addCommas(nStr) {
                     nStr += '';
                     x = nStr.split('.');
@@ -250,44 +251,29 @@
                                     '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
                                     '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
                                     '<td style="text-align:right;">' +
-                                    '<button id="ujimodal" class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
+                                    '<button href="javascript:;"  class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
+                                    '<a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].id + '">Edit</a>' + ' ' +
                                     '</td>' +
                                     '</tr>';
                             }
                             $('#show_data').html(html);
+                            var table = $('#tabel-berkas').dataTable({
+                                // "searching": false,
+                                // "ordering": false,
+                            });
                         }
 
                     });
                 }
 
-                $('#ujimodal').on('click', function() {
-                    var id = $(this).attr('data');
-                    $.ajax({
-                        type: "GET",
-                        url: "<?php base_url() ?>berkas/get_berkas",
-                        dataType: "JSON",
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $.each(data, function(id, nama_penjual, desa) {
-                                $('#ModalDetail').modal('show');
-                                $('[name="id_edit"]').val(data.id);
-                                $('[name="napen_edit"]').val(data.nama_penjual);
-                                $('[name="desa_edit"]').val(data.desa);
-                            });
-                        }
-                    });
-                    return false;
-                    // $('#ModalDetail').modal('show');
-                });
+
 
                 //GET UPDATE
                 $('#show_data').on('click', '.item_detail', function() {
                     var id = $(this).attr('data');
                     $.ajax({
                         type: "GET",
-                        url: "<?php echo base_url('berkas/get_berkas') ?>",
+                        url: "<?php echo base_url() ?>berkas/get_berkas",
                         dataType: "JSON",
                         data: {
                             id: id
