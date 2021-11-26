@@ -8,9 +8,9 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <table class="table table-hover" class="mydata">
+                <table class="table table-striped" id="tabel-berkas">
                     <thead>
-                        <tr class="text-center" class="tabel-berkas">
+                        <tr class="text-center">
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Reg Sertipikat</th>
@@ -27,7 +27,7 @@
                             <th scope="col">Berkas Selesai</th>
                         </tr>
                     </thead>
-                    <tbody class="show_data">
+                    <tbody  id="show_data">
                     </tbody>
                 </table>
             </div>
@@ -180,13 +180,13 @@
             $(document).ready(function() {
                 data_berkas(); //pemanggilan fungsi tampil barang.
 
-                $('#mydata').dataTable();
+                $('#tabel-berkas').dataTable();
 
-                //fungsi tampil barang
+                // fungsi tampil barang
                 function data_berkas() {
                     $.ajax({
-                        type: 'GET',
-                        url: '<?php echo base_url() ?>berkas/data_berkas',
+                        method: 'GET',
+                        url: '<?php base_url(); ?>Berkas/data_berkas',
                         async: true,
                         dataType: 'json',
                         success: function(data) {
@@ -194,13 +194,23 @@
                             var i;
                             for (i = 0; i < data.length; i++) {
                                 html += '<tr>' +
-                                    '<td>' + data[i].id + '</td>' +
-                                    '<td>' + data[i].nama_penjual + '</td>' +
-                                    '<td>' + data[i].desa + '</td>' +
-                                    '<td style="text-align:right;">' +
-                                    '<a href="javascript:;" class="btn btn-info btn-xs item_detail" data="' + data[i].id + '">Edit</a>' + ' ' +
-                                    '<a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="' + data[i].id + '">Hapus</a>' +
-                                    '</td>' +
+                                    '<td>'+ i +'</td>'+
+                                    '<td>'+data[i].tgl_masuk+'</td>' +
+                                    '<td>'+data[i].reg_sertipikat+'</td>'+
+                                    '<td>'+data[i].desa+'</td>'+
+                                    '<td>'+data[i].kecamatan+'</td>' +
+                                    '<td>'+data[i].jenis_berkas+'</td>'+
+                                    '<td>'+data[i].status_proses+'</td>'+
+                                    '<td>'+data[i].nama_penjual+'</td>' +
+                                    '<td>'+data[i].nama_pembeli+'</td>'+
+                                    '<td>'+data[i].biaya+'</td>'+
+                                    '<td>'+data[i].dp+'</td>' +
+                                    '<td>'+data[i].tot_biaya+'</td>'+
+                                    '<td>'+data[i].berkas_selesai+'</td>' +
+                                    '<td style="text-align:right;">'+
+                                    '<a href="javascript:;" class="btn btn-info btn-xs item_detail" data="'+data[i].id+'">Edit</a>'+' '+
+                                    '<a href="javascript:;" class="btn btn-danger btn-xs item_hapus" data="'+data[i].id+'">Hapus</a>'+
+                                    '</td>'+
                                     '</tr>';
                             }
                             $('#show_data').html(html);
