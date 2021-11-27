@@ -8,7 +8,8 @@ class ModelBerkas extends CI_Model
         $this->db->insert('tb_berkas', $data1);
     }
 
-    public function getBerkas(){
+    public function getBerkas()
+    {
         return $this->db->get('tb_berkas');
     }
 
@@ -57,16 +58,17 @@ class ModelBerkas extends CI_Model
 
     function get_berkas($id)
     {
-        $hsl = $this->db->query("SELECT * FROM tb_berkas WHERE id='$id'");
+        $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE id='$id'");
         if ($hsl->num_rows() > 0) {
             foreach ($hsl->result() as $data) {
                 $hasil = array(
                     'id' => $data->id,
-                    'tanggal_masuk' => $data->tanggal_masuk,
+                    'tgl_masuk' => $data->tgl_masuk,
                     'reg_sertipikat' => $data->reg_sertipikat,
                     'desa' => $data->desa,
                     'kecamatan' => $data->kecamatan,
                     'jenis_berkas' => $data->jenis_berkas,
+                    'id_proses' => $data->id_proses,
                     'status_proses' => $data->status_proses,
                     'nama_penjual' => $data->nama_penjual,
                     'nama_pembeli' => $data->nama_pembeli,
@@ -74,13 +76,23 @@ class ModelBerkas extends CI_Model
                     'dp' => $data->dp,
                     'tot_biaya' => $data->tot_biaya,
                     'berkas_selesai' => $data->berkas_selesai,
+                    'keterangan' => $data->keterangan,
+                    'no_reg' => $data->no_reg,
+                    'no_sertipikat' => $data->no_sertipikat,
+                    'luas' => $data->luas,
+                    'tgl_daftar' => $data->tgl_daftar,
+                    'jenis_hak' => $data->jenis_hak,
+                    'pemilik_hak' => $data->pemilik_hak,
+                    'pembeli_hak' => $data->pembeli_hak,
+                    'proses' => $data->proses,
+                    'ket' => $data->ket,
                 );
             }
         }
         return $hasil;
     }
 
-    function update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s, )
+    function update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s,)
     {
         $hasil = $this->db->query("UPDATE tb_berkas SET nama_penjual='$napen', tgl_masuk='$tgl', reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis, status_proses='$status', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', berkas_selesai='$berkas_s' WHERE id='$id'");
         return $hasil;

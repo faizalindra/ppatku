@@ -5,7 +5,7 @@
     <div class="card-body">
 
         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
-        <button id="ujimodal" type="button" class="btn btn-primary">Input Berkas</button>
+        <button id="uji" type="button" class="btn btn-primary ujitombol">Input Berkas</button>
 
         <div class="row">
             <div class="col-auto">
@@ -35,7 +35,6 @@
 
             </div>
         </div>
-
 
         <!-- model form input -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
@@ -140,32 +139,37 @@
         </div>
         <!-- end model form input -->
 
-        <!-- modal detail registrasi sertipikat  -->
+        <!-- modal detail -->
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Title</h3>
+                        <h3 class="modal-title" id="myModalLabel">Detai Berkas</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div id="reload">
-                            <table class="table table-hover">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr class="text-center">
+                                        <th>#</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Nomor Registrasi</th>
-                                        <th>Nomor Sertipikat</th>
+                                        <th>Reg Sertipikat</th>
+                                        <th>Desa</th>
                                         <th>Kecamatan</th>
-                                        <th>Luas m<sup>2</sup></th>
-                                        <th>Atas Nama</th>
-                                        <th>Penerima Hak</th>
-                                        <th>Keterangan</th>
+                                        <th>Jenis Berkas</th>
+                                        <th>Id Proses</th>
+                                        <th>Status Proses</th>
+                                        <th>Nama Penjual</th>
+                                        <th>Nama Pembeli</th>
+                                        <th>Biaya</th>
+                                        <th>DP</th>
+                                        <th>Total Biaya</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="data_detail">
 
                                 </tbody>
                             </table>
@@ -177,7 +181,90 @@
                 </div>
             </div>
         </div>
-        <!-- end modal detail registrasi sertipikat -->
+        <!-- end modal detail -->
+
+        <!-- modal sertipikat -->
+        <div class="modal fade" id="ModalSertipikat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Detai Sertipikat</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="reload">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Nomor Registrasi</th>
+                                        <th>Nomor Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Luas m<sup>2</sup></th>
+                                        <th>Atas Nama</th>
+                                        <th>Penerima Hak</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail_sertipikat">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal sertipikat -->
+
+        <!-- MODAL EDIT -->
+        <div class="modal fade" id="ModalaEdit" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title" id="myModalLabel">Edit Barang</h3>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Kode Barang</label>
+                                <div class="col-xs-9">
+                                    <input name="id_edit" id="kode_barang2" class="form-control" type="text" placeholder="Kode Barang" style="width:335px;" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Nama Barang</label>
+                                <div class="col-xs-9">
+                                    <input name="napen_edit" id="nama_barang2" class="form-control" type="text" placeholder="Nama Barang" style="width:335px;" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">Harga</label>
+                                <div class="col-xs-9">
+                                    <input name="desa_edit" id="harga2" class="form-control" type="text" placeholder="Harga" style="width:335px;" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                            <button class="btn btn-info" id="btn_update">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--END MODAL EDIT-->
 
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
         <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
@@ -224,7 +311,8 @@
                     }
                 }
 
-                // fungsi tampil barang
+
+                // fungsi tampil berkas
                 function data_berkas() {
                     $.ajax({
                         method: 'GET',
@@ -238,7 +326,7 @@
                                 html += '<tr class="text-capitalize text-center">' +
                                     '<td>' + data[i].id + '</td>' +
                                     '<td>' + data[i].tgl_masuk + '</td>' +
-                                    '<td>' + antinull(data[i].reg_sertipikat) + '</td>' +
+                                    '<td>' + '<button href="javascript:;" class="btn btn-info btn_sertipikat" data="' + data[i].id + '">' + antinull(data[i].reg_sertipikat) + '</td>' +
                                     '<td>' + data[i].desa + '</td>' +
                                     '<td>' + data[i].kecamatan + '</td>' +
                                     '<td>' + data[i].jenis_berkas + '</td>' +
@@ -251,8 +339,7 @@
                                     '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
                                     '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
                                     '<td style="text-align:right;">' +
-                                    '<button href="javascript:;"  class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
-                                    '<a href="javascript:;" class="btn btn-info btn-xs item_edit" data="' + data[i].id + '">Edit</a>' + ' ' +
+                                    '<button id="uji1" href="javascript:;"  class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
                                     '</td>' +
                                     '</tr>';
                             }
@@ -266,50 +353,89 @@
                     });
                 }
 
-
-
-                //GET UPDATE
+                //tombol detail berkas
                 $('#show_data').on('click', '.item_detail', function() {
                     var id = $(this).attr('data');
+                    // alert(id);
                     $.ajax({
-                        type: "GET",
-                        url: "<?php echo base_url() ?>berkas/get_berkas",
+                        method: "GET",
+                        url: '<?php base_url(); ?>Berkas/get_berkas',
                         dataType: "JSON",
                         data: {
                             id: id
                         },
                         success: function(data) {
-                            $.each(data, function(id, nama_penjual, desa) {
+                            $.each(data, function(id, tgl_masuk, reg_sertipikat, desa, kecamatan, jenis_berkas, status_proses, nama_penjual, nama_pembeli, dp, biaya, tot_biaya, berkas_selesai, luas) {
+                                // $.each(data, function(id, desa, nama_penjual) {
                                 $('#ModalDetail').modal('show');
-                                $('[name="id_edit"]').val(data.id);
-                                $('[name="napen_edit"]').val(data.nama_penjual);
-                                $('[name="desa_edit"]').val(data.desa);
+                                var html = "";
+                                html += '<tr class="text-capitalize text-center">' +
+                                    '<td>' + data.id + '</td>' +
+                                    '<td>' + data.tgl_masuk + '</td>' +
+                                    '<td>' + antinull(data.reg_sertipikat) + '</td>' +
+                                    '<td>' + data.desa + '</td>' +
+                                    '<td>' + data.kecamatan + '</td>' +
+                                    '<td>' + data.jenis_berkas + '</td>' +
+                                    '<td>' + data.luas + '</td>' +
+                                    '<td>' + data.status_proses + '</td>' +
+                                    '<td>' + data.nama_penjual + '</td>' +
+                                    '<td>' + data.nama_pembeli + '</td>' +
+                                    '<td>' + antinull(data.biaya) + '</td>' +
+                                    '<td>' + antinull(data.dp) + '</td>' +
+                                    '<td>' + antinull(data.tot_biaya) + '</td>' +
+                                    // '<td>' + data.berkas_selesai + '</td>' +
+                                    '</tr>' +
+                                    '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
+                                    '</td>' + '</tr>' +
+                                    '<tr>' + '<td colspan="14"> Proses :' + data.luas +
+                                    '</td>' + '</tr>';
+
+                                $('#data_detail').html(html);
                             });
+                        },
+                        error: function() {
+                            // $('#ModalDetail').modal('show');
+
                         }
                     });
                     return false;
                 });
 
-                //Simpan Barang
-                $('#btn_simpan').on('click', function() {
-                    var id = $('#kode_barang').val();
-                    var napen = $('#nama_barang').val();
-                    var desa = $('#desa').val();
+                // tombol detail sertipikat
+                $('#show_data').on('click', '.btn_sertipikat', function() {
+                    var id = $(this).attr('data');
+                    // alert(id);
                     $.ajax({
-                        type: "POST",
-                        url: "<?php echo base_url('index.php/berkas/simpan_berkas') ?>",
+                        method: "GET",
+                        url: '<?php base_url(); ?>Berkas/get_berkas',
                         dataType: "JSON",
                         data: {
-                            id: id,
-                            napen: napen,
-                            desa: desa
+                            id: id
                         },
                         success: function(data) {
-                            $('[name="id"]').val("");
-                            $('[name="napen"]').val("");
-                            $('[name="desa"]').val("");
-                            $('#ModalaAdd').modal('hide');
-                            data_berkas();
+                            $.each(data, function(no_reg, no_sertipikat, tgl_daftar, jenis_hak, luas, desa, kecamatan, pemilik_hak, pembeli_hak, proses, ket) {
+                                // $.each(data, function(id, desa, nama_penjual) {
+                                $('#ModalSertipikat').modal('show');
+                                var html = "";
+                                html += '<tr class="text-capitalize text-center">' +
+                                    '<td>' + id + '</td>' +
+                                    '<td>' + data.tgl_daftar + '</td>' +
+                                    '<td>' + data.no_reg + '</td>' +
+                                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + '</td>' +
+                                    '<td>' + data.kecamatan + '</td>' +
+                                    '<td>' + antinull(data.luas) + '</td>' +
+                                    '<td>' + data.pemilik_hak + '</td>' +
+                                    '<td>' + data.pembeli_hak + '</td>' +
+                                    '</tr>' +
+                                    '<tr>' + '<td colspan="8"> Keterangan :' + '<p>' + antinull(data.ket) + '</p>' +
+                                    '</td>' + '</tr>';
+
+                                $('#detail_sertipikat').html(html);
+                            });
+                        },
+                        error: function() {
+                            // $('#ModalDetail').modal('show');
+
                         }
                     });
                     return false;
@@ -342,3 +468,11 @@
 
             });
         </script>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
