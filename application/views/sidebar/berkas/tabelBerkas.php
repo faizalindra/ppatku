@@ -3,11 +3,12 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
+            <p id="testing" data-value='1' onload="uji()" value="2" class='uji'></p>
         </div>
         <div class="card-body">
 
             <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
-            <button id="uji" type="button" class="btn btn-primary ujitombol">Input Berkas</button>
+            <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button>
 
             <div class="row">
                 <div class="col-auto">
@@ -239,6 +240,7 @@
             <script type="text/javascript">
                 $(document).ready(function() {
                     data_berkas(); //pemanggilan fungsi tampil barang.
+                    uji();
 
                     function addCommas(nStr) {
                         nStr += '';
@@ -254,12 +256,8 @@
 
                     $('.datepicker').datepicker({
                         format: 'yy-mm-dd',
-                        formatSubmit: 'yy-mm-dd'
+                        formatSubmit: 'yyyy-mm-dd'
                     });
-                    // $(".datepicker").on("change", function() {
-                    //     var fromdate = $(this).val();
-                    //     alert(fromdate);
-                    // });
 
                     function antinull(val) {
                         c = " ";
@@ -288,6 +286,34 @@
                     }
 
 
+
+                    // script uji
+                    function uji() {
+                        var id = document.getElementById('testing').getAttribute('data-value');
+                        $.ajax({
+                            method: 'GET',
+                            url: '<?php base_url(); ?>sertipikat/uji',
+                            async: true,
+                            dataType: 'json',
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+                                $.each(data, function(pembeli_hak) {
+                                    var ujia = data.pembeli_hak;
+                                    var u = "pembeli hak adalah : " + ujia
+                                    $('.uji').html(u);
+                                })
+
+                            },
+                            error: function(data) {
+                                var test2 = "gagal";
+                                var hsl = test2 + "id"
+                                $('.uji').html(id);
+                            }
+                        });
+                    }
+
                     // fungsi tampil berkas
                     function data_berkas() {
                         $.ajax({
@@ -296,13 +322,28 @@
                             async: true,
                             dataType: 'json',
                             success: function(data) {
+                                function sertipikat(val) {
+                                    cond1 = '<button href="javascript:;" class="btn btn-info btn_sertipikat" data="' + data[i].id + '">' + val
+                                    cond2 = " "
+                                    if (val >= 1) {
+                                        return cond1;
+                                    } else
+                                        return cond2;
+                                }
+                                function proses(val){
+                                    if(val >= 1){
+                                        return val
+                                    }
+                                }
                                 var html = '';
                                 var i;
+                                var c = 0;
                                 for (i = 0; i < data.length; i++) {
+                                    c++
                                     html += '<tr class="text-capitalize text-center">' +
-                                        '<td>' + data[i].id + '</td>' +
+                                        '<td>' + c + '</td>' +
                                         '<td>' + data[i].tgl_masuk + '</td>' +
-                                        '<td>' + '<button href="javascript:;" class="btn btn-info btn_sertipikat" data="' + data[i].id + '">' + antinull(data[i].reg_sertipikat) + '</td>' +
+                                        '<td>' +  sertipikat(antinull(data[i].reg_sertipikat)) + '</td>' +
                                         '<td>' + data[i].desa + '</td>' +
                                         '<td>' + data[i].kecamatan + '</td>' +
                                         '<td>' + data[i].jenis_berkas + '</td>' +
@@ -320,10 +361,8 @@
                                         '</tr>';
                                 }
                                 $('#show_data').html(html);
-                                var table = $('#tabel-berkas').dataTable({
-                                    // "searching": false,
-                                    // "ordering": false,
-                                });
+                                var table = $('#tabel-berkas').dataTable({});
+
                             }
 
                         });
