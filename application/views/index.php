@@ -76,8 +76,10 @@
                                         <div class="row">
                                             <div class="col-md-6 text-left">
                                                 <?= $b['nama_penjual']; ?>
-                                                <p><?= $b['no_sertipikat']; ?> / <?= $b['desa']; ?></p>
-                                                <div class="text-white-50 small font-weight-bold"><?= $b['kecamatan']; ?></div>
+                                                <div class="text-white-50 small font-weight-bold">
+                                                    <?= $b['no_sertipikat']; ?> / <?= $b['desa']; ?><br>
+                                                    <?= $b['kecamatan']; ?>
+                                                </div>
                                             </div>
                                             <div class="col-md-6 text-right">
                                                 <?= $b['jenis_berkas']; ?>
@@ -102,7 +104,6 @@
                     <?php if ($a >= 6) {
                                 break;
                             }
-                        
                         }
                     } ?>
                 </div>

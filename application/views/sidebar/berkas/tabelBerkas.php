@@ -49,6 +49,242 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div>
+                            <ul class="nav nav-tabs nav-justified md-tabs indigo" id="tabinput" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="berkas-tab-just" data-toggle="tab" href="#berkas-just" role="tab" aria-controls="berkas-just" aria-selected="true">Berkas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sertipikat-tab-just" data-toggle="tab" href="#sertipikat-just" role="tab" aria-controls="sertipikat-just" aria-selected="false">Sertipikat</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer">
+                            <!-- <form id="formAwesome"> -->
+                            <div class="modal-body">
+                                <div class="tab-content card pt-5" id="myTabContentJust">
+                                    <div class="tab-pane fade show active" id="berkas-just" role="tabpanel" aria-labelledby="berkas-tab-just">
+                                        <div class="form-group row">
+                                            <label for="tgl_masuk" class="col-sm-6 col-form-label">
+                                                Tanggal Masuk
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" value="<?= set_value('tgl_masuk'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="reg_sertipikat" class="col-sm-6 col-form-label">
+                                                Nomor Registrasi Sertipikat
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" value="<?= set_value('reg_sertipikat'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="kecamatan" class="col-sm-6 col-form-label">
+                                                Kecamatan
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>">
+                                                    <option value="">No Selected</option>
+                                                    <?php foreach ($kecamatan as $row) : ?>
+                                                        <option id="kecamatan1" value="<?php echo $row->nama; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group row">
+                                            <label for="desa" class="col-sm-6 col-form-label">
+                                                Desa
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>">
+                                                <option value="">No Selected</option>
+                                                </input>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group row">
+                                            <label for="desa" class="col-sm-6 col-form-label">
+                                                Desa
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <select name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>">
+                                                    <option value="">No Selected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="jenis_berkas" class="col-sm-6 col-form-label">
+                                                Proses
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
+                                                    <!-- <option value="" disabled selected>Pilih :</option> -->
+                                                    <option>AJB</option>
+                                                    <option>APHT</option>
+                                                    <option>APHB</option>
+                                                    <option>SKMHT</option>
+                                                    <option>Hibah</option>
+                                                    <option>Konversi</option>
+                                                    <option>Ganti Nama</option>
+                                                    <option>Waris</option>
+                                                    <option>Peningkatan Hak</option>
+                                                    <option>Pengeringan</option>
+                                                    <option>Pemecahan</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="nama_penjual" class="col-sm-6 col-form-label">
+                                                Nama Penjual
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="nama_pembeli" class="col-sm-6 col-form-label">
+                                                Nama Pembeli
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" placeholder="Nama Pembeli" value="<?= set_value('nama_pembeli'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="biaya" class="col-sm-6 col-form-label">
+                                                Biaya
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Biaya" value="<?= set_value('Biaya'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="dp" class="col-sm-6 col-form-label">
+                                                dp
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="dp" class="form-control" id="dp" placeholder="DP" value="<?= set_value('DP'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="tot_biaya" class="col-sm-6 col-form-label">
+                                                Total Biaya
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Total Biaya" value="<?= set_value('tot_biaya'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="keterangan" class="col-sm-6 col-form-label">
+                                                Keterangan
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <textarea cols="40" rows="5" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?= set_value('keterangan'); ?>"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sertipikat-just" role="tabpanel" aria-labelledby="sertipikat-tab-just">
+                                        <div class="form-group row">
+                                            <label for="no_sertipikat" class="col-5 col-form-label">Nomor Sertipikat</label>
+                                            <div class="col-7">
+                                                <input id="no_sertipikat" name="no_sertipikat" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="proses" class="col-5 col-form-label">Proses</label>
+                                            <div class="col-7">
+                                                <select id="proses" name="proses[]" class="form-control select2 select2-hidden-accessible" multiple="multiple" id="proses" tabindex="-1" value="" style="width: 100%;">
+                                                    <option>AJB</option>
+                                                    <option>APHT</option>
+                                                    <option>APHB</option>
+                                                    <option>SKMHT</option>
+                                                    <option>Hibah</option>
+                                                    <option>Konversi</option>
+                                                    <option>Ganti Nama</option>
+                                                    <option>Waris</option>
+                                                    <option>Peningkatan Hak</option>
+                                                    <option>Pengeringan</option>
+                                                    <option>Pemecahan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="jenis_hak" class="col-5 col-form-label">Jenis Hak</label>
+                                            <div class="col-7">
+                                                <select id="jenis_hak" name="jenis_hak" class="custom-select">
+                                                    <option value="SHM">SHM</option>
+                                                    <option value="SHGB">SHGB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="kec" class="col-5 col-form-label">Kecamatan</label>
+                                            <div class="col-7">
+                                                <select id="kec" name="kec" class="custom-select">
+                                                    <option value="">No Selected</option>
+                                                    <?php foreach ($kecamatan as $row) : ?>
+                                                        <option id="kec_<?php echo $row->id; ?>" class="list_desa" value="<?php echo $row->nama; ?>" data="<?php echo $row->id; ?>"><?php echo $row->nama; ?> - <?php echo $row->id; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="dsa" class="col-5 col-form-label">Desa</label>
+                                            <div class="col-7">
+                                                <select id="dsa" name="dsa" class="custom-select">
+                                                    <option value="">No Selected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="luas" class="col-5 col-form-label">Luas</label>
+                                            <div class="col-7">
+                                                <input id="luas" name="luas" placeholder="m2" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="pemilik_hak" class="col-5 col-form-label">Pemilik Hak</label>
+                                            <div class="col-7">
+                                                <input id="pemilik_hak" name="pemilik_hak" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="pembeli_hak" class="col-5 col-form-label">Penerima Hak</label>
+                                            <div class="col-7">
+                                                <input id="pembeli_hak" name="pembeli_hak" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="ket" class="col-5 col-form-label">Keterangan</label>
+                                            <div class="col-7">
+                                                <textarea id="ket" name="ket" cols="40" rows="5" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button id="btn_simpan" type="submit" class="btn btn-primary">Submit</button>
+                                <!-- <button id="btnbtn" class="btn btn-danger">?</button> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end model form input -->
+
+            <!-- model form edit -->
+            <div class="modal fade" id="formedit" tabindex="-1" role="dialog" aria-labelledby="formeditLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="formedit">Form Edit</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer">
                             <!-- <form id="formAwesome"> -->
                             <div class="modal-body">
@@ -57,7 +293,7 @@
                                         Tanggal Masuk
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" value="<?= set_value('tgl_masuk'); ?>">
+                                        <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -65,7 +301,7 @@
                                         Nomor Registrasi Sertipikat
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" value="<?= set_value('reg_sertipikat'); ?>">
+                                        <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -73,10 +309,10 @@
                                         Kecamatan
                                     </label>
                                     <div class="col-sm-6">
-                                        <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>">
+                                        <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan">
                                             <option value="">No Selected</option>
                                             <?php foreach ($kecamatan as $row) : ?>
-                                                <option id="kec" value="<?php echo $row->nama; ?>" data-value="<?php echo $row->id?>"><?php echo $row->nama; ?></option>
+                                                <option id="kecamatan" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -86,9 +322,9 @@
                                         Desa
                                     </label>
                                     <div class="col-sm-6">
-                                        <select name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>">
-                                            <option value="">No Selected</option>
-                                        </select>
+                                        <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa">
+                                        <!-- <option value="">No Selected</option> -->
+                                        </input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,7 +332,7 @@
                                         Jenis Berkas
                                     </label>
                                     <div class="col-sm-6">
-                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
+                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" data-placeholder="Jenis Berkas" style="width: 100%;">
                                             <!-- <option value="" disabled selected>Pilih :</option> -->
                                             <option>AJB</option>
                                             <option>APHT</option>
@@ -115,10 +351,18 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="nama_penjual" class="col-sm-6 col-form-label">
+                                        Status Proses
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="status_proses" class="form-control" id="nama_penjual" placeholder="Nama Penjual">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="nama_penjual" class="col-sm-6 col-form-label">
                                         Nama Penjual
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>">
+                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -126,7 +370,7 @@
                                         Nama Pembeli
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" placeholder="Nama Pembeli" value="<?= set_value('nama_pembeli'); ?>">
+                                        <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" placeholder="Nama Pembeli">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -134,15 +378,15 @@
                                         Biaya
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Biaya" value="<?= set_value('Biaya'); ?>">
+                                        <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="dp" class="col-sm-6 col-form-label">
-                                        dp
+                                        DP
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="dp" class="form-control" id="dp" placeholder="DP" value="<?= set_value('DP'); ?>">
+                                        <input type="text" name="dp" class="form-control" id="dp" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -150,7 +394,7 @@
                                         Total Biaya
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Total Biaya" value="<?= set_value('tot_biaya'); ?>">
+                                        <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -158,7 +402,7 @@
                                         Keterangan
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan" value="<?= set_value('keterangan'); ?>">
+                                        <textarea name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan : "></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -178,12 +422,13 @@
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel">Detai Berkas</h3>
+                            <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <button class='btn btn-info btn-sm' id="editberkas"><i class="fa fa-edit">Edit</i></button>
                             <div id="reload">
                                 <table class="table table-striped">
                                     <thead>
@@ -288,6 +533,7 @@
                         formatSubmit: 'yyyy-mm-dd'
                     });
                     $('.select2').select2();
+                    $('.proses').select2();
 
 
                     function antinull(val) {
@@ -316,8 +562,9 @@
                         }
                     }
 
+                    // dynamic select wilayah
                     $('#kecamatan').change(function() {
-                        var id = document.getElementById('kec').getAttribute('data-value');
+                        var id = document.getElementById('kecamatan1').getAttribute('data-value');
                         $.ajax({
                             url: "<?php echo site_url('wilayah/get_desa'); ?>",
                             method: "POST",
@@ -410,7 +657,7 @@
                                         '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
                                         '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
                                         '<td style="text-align:right;">' +
-                                        '<button id="uji1" href="javascript:;"  class="badge badge-info item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
+                                        '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
                                         '</td>' +
                                         '</tr>';
                                 }
@@ -421,62 +668,6 @@
 
                         });
                     }
-
-                    // $('#btnbtn').on('click',function(){
-                    //     var sel2 = $('.select2').val();
-                    //     alert(sel2);
-                    // })
-
-                    // tombol input berkas
-                    // $('#btn_simpan').on('click', function() {
-                    //     var reg_sertipikat = $('#reg_sertipikat').val();
-                    //     var desa = $('#desa').val();
-                    //     var kecamatan = $('#kecamatan').val();
-                    //     var jenis_berkas = $('#jenis_berkas').val();
-                    //     var nama_pembeli = $('#nama_pembeli').val();
-                    //     var nama_penjual = $('#nama_penjual').val();
-                    //     var biaya = $('#biaya').val();
-                    //     var dp = $('#dp').val();
-                    //     var tot_biaya = $('#tot_biaya').val();
-                    //     var keterangan = $('#keterangan').val();
-                    //     // alert(keterangan);
-                    //     $.ajax({
-                    //         type: "POST",
-                    //         url: "<?php base_url(); ?>berkas/simpan_berkas",
-                    //         dataType: "json",
-                    //         data: {
-                    //             reg_sertipikat: reg_sertipikat,
-                    //             desa: desa,
-                    //             kecamatan: kecamatan,
-                    //             jenis_berkas: jenis_berkas,
-                    //             nama_penjual: nama_penjual,
-                    //             nama_pembeli: nama_pembeli,
-                    //             biaya: biaya,
-                    //             dp: dp,
-                    //             tot_biaya: tot_biaya,
-                    //             keterangan:keterangan
-                    //         },
-                    //         success: function(){
-                    //             // $('[name="reg_sertipikat]').val("");
-                    //             // $('[name="desa]').val("");
-                    //             // $('[name="kecamatan]').val("");
-                    //             // $('[name="jenis_berkas]').val("");
-                    //             // $('[name="nama_pembeli]').val("");
-                    //             // $('[name="nama_penjual]').val("");
-                    //             // $('[name="biaya]').val("");
-                    //             // $('[name="dp]').val("");
-                    //             // $('[name="tot_biaya]').val("");
-                    //             // $('[name="keterangan]').val("");
-                    //             $('#formInputBerkas').modal('hide');
-                    //             data_berkas();
-                    //         },
-                    //         error: function(){
-                    //             alert(jenis_berkas);
-                    //         }
-                    //     });
-                    //     return false;
-                    // });
-
                     //tombol detail berkas
                     $('#show_data').on('click', '.item_detail', function() {
                         var id = $(this).attr('data');
@@ -565,11 +756,48 @@
                         return false;
                     });
 
+                    //GET UPDATE
+                    $('#show_data').on('click', '.edit_berkas', function() {
+                        var id = $(this).attr('data');
+                        $.ajax({
+                            type: "GET",
+                            url: "<?php base_url(); ?>berkas/get_berkas",
+                            dataType: "JSON",
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+                                $.each(data, function(id, reg_sertipikat, desa, kecamatan, jenis_berkas, status_proses, nama_penjual, nama_pembeli, biaya, dp, tot_biaya, keterangan) {
+                                    $('#formedit').modal('show');
+                                    $('[name="id"]').val(data.id);
+                                    $('[name="tgl_masuk"]').val(data.tgl_masuk);
+                                    $('[name="reg_sertipikat"]').val(data.reg_sertipikat);
+                                    $('[name="desa"]').val(data.desa);
+                                    $('[name="kecamatan"]').val(data.kecamatan);
+                                    $('[name="jenis_berkas"]').val(data.jenis_berkas);
+                                    $('[name="status_proses"]').val(data.status_proses);
+                                    $('[name="nama_penjual"]').val(data.nama_penjual);
+                                    $('[name="nama_pembeli"]').val(data.nama_pembeli);
+                                    $('[name="biaya"]').val(data.biaya);
+                                    $('[name="dp"]').val(data.dp);
+                                    $('[name="harga_edit"]').val(data.tot_biaya);
+                                    $('[name="keterangan"]').val(data.keterangan);
+                                });
+                            },
+                            error: function(data) {
+                                alert(id);
+                            }
+                        });
+                        return false;
+                    });
+
                     //Update Barang
                     $('#btn_update').on('click', function() {
-                        var id = $('#kode_barang2').val();
-                        var napen = $('#nama_barang2').val();
-                        var desa = $('#desa2').val();
+                        var desa = $('#desa').val();
+                        var kec = $('#kecamatan').val();
+                        var jb = $('#jenis_berkas').val();
+                        var napen = $('#nama_penjual').val();
+                        var napem = $('#nama_pembeli').val();
                         $.ajax({
                             type: "POST",
                             url: "<?php echo base_url('index.php/berkas/update_berkas') ?>",
@@ -589,6 +817,240 @@
                         });
                         return false;
                     });
+
+                    //tes tombol
+                    // $('#btnbtn').on('click',function(){
+                    //     var sel2 = $('.select2').val();
+                    //     alert(sel2);
+                    // })
+
+                    // tombol input berkas
+                    // $('#btn_simpan').on('click', function() {
+                    //     var reg_sertipikat = $('#reg_sertipikat').val();
+                    //     var desa = $('#desa').val();
+                    //     var kecamatan = $('#kecamatan').val();
+                    //     var jenis_berkas = $('#jenis_berkas').val();
+                    //     var nama_pembeli = $('#nama_pembeli').val();
+                    //     var nama_penjual = $('#nama_penjual').val();
+                    //     var biaya = $('#biaya').val();
+                    //     var dp = $('#dp').val();
+                    //     var tot_biaya = $('#tot_biaya').val();
+                    //     var keterangan = $('#keterangan').val();
+                    //     // alert(keterangan);
+                    //     $.ajax({
+                    //         type: "POST",
+                    //         url: "<?php base_url(); ?>berkas/simpan_berkas",
+                    //         dataType: "json",
+                    //         data: {
+                    //             reg_sertipikat: reg_sertipikat,
+                    //             desa: desa,
+                    //             kecamatan: kecamatan,
+                    //             jenis_berkas: jenis_berkas,
+                    //             nama_penjual: nama_penjual,
+                    //             nama_pembeli: nama_pembeli,
+                    //             biaya: biaya,
+                    //             dp: dp,
+                    //             tot_biaya: tot_biaya,
+                    //             keterangan:keterangan
+                    //         },
+                    //         success: function(){
+                    //             // $('[name="reg_sertipikat]').val("");
+                    //             // $('[name="desa]').val("");
+                    //             // $('[name="kecamatan]').val("");
+                    //             // $('[name="jenis_berkas]').val("");
+                    //             // $('[name="nama_pembeli]').val("");
+                    //             // $('[name="nama_penjual]').val("");
+                    //             // $('[name="biaya]').val("");
+                    //             // $('[name="dp]').val("");
+                    //             // $('[name="tot_biaya]').val("");
+                    //             // $('[name="keterangan]').val("");
+                    //             $('#formInputBerkas').modal('hide');
+                    //             data_berkas();
+                    //         },
+                    //         error: function(){
+                    //             alert(jenis_berkas);
+                    //         }
+                    //     });
+                    //     return false;
+                    // });
+                    // dynamic select desa
+                    $('#kecamatan').change(function() {
+                        var kec1 = $('#kecamatan').val();
+                        var id = "";
+                        switch (kec1) {
+                            case "Banjarmangu":
+                                id = 1;
+                                break;
+                            case "Banjarnegara":
+                                id = 2;
+                                break;
+                            case "Batur":
+                                id = 3;
+                                break;
+                            case "Bawang":
+                                id = 4;
+                                break;
+                            case "Kalibening":
+                                id = 5;
+                                break;
+                            case "Karangkobar":
+                                id = 6;
+                                break;
+                            case "Madukara":
+                                id = 7;
+                                break;
+                            case "Mandiraja":
+                                id = 8;
+                                break;
+                            case "Pagedongan":
+                                id = 9;
+                                break;
+                            case "Pagentan":
+                                id = 10;
+                                break;
+                            case "Pandanarum":
+                                id = 11;
+                                break;
+                            case "Pejawaran":
+                                id = 12;
+                                break;
+                            case "Punggelan":
+                                id = 13;
+                                break;
+                            case "Purwanegara":
+                                id = 14;
+                                break;
+                            case "Purwareja Klampok":
+                                id = 15;
+                                break;
+                            case "Rakit":
+                                id = 16;
+                                break;
+                            case "Sigaluh":
+                                id = 17;
+                                break;
+                            case "Susukan":
+                                id = 18;
+                                break;
+                            case "Wanadadi":
+                                id = 19;
+                                break;
+                            case "Wanayasa":
+                                id = 20;
+                                break;
+                        }
+                        // alert(id);
+                        $.ajax({
+                            url: "<?php site_url(); ?>wilayah/get_desa",
+                            method: "get",
+                            data: {
+                                id: id
+                            },
+                            async: true,
+                            dataType: 'json',
+                            success: function(data) {
+                                // alert(id);
+
+                                var html = '';
+                                var i;
+                                for (i = 0; i < data.length; i++) {
+                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                                }
+                                $('#desa').html(html);
+
+                            }
+                        });
+                        return false;
+                    });
+                    $('#kec').change(function() {
+                        var kec = $('#kec').val();
+                        var id = "";
+                        switch (kec) {
+                            case "Banjarmangu":
+                                id = 1;
+                                break;
+                            case "Banjarnegara":
+                                id = 2;
+                                break;
+                            case "Batur":
+                                id = 3;
+                                break;
+                            case "Bawang":
+                                id = 4;
+                                break;
+                            case "Kalibening":
+                                id = 5;
+                                break;
+                            case "Karangkobar":
+                                id = 6;
+                                break;
+                            case "Madukara":
+                                id = 7;
+                                break;
+                            case "Mandiraja":
+                                id = 8;
+                                break;
+                            case "Pagedongan":
+                                id = 9;
+                                break;
+                            case "Pagentan":
+                                id = 10;
+                                break;
+                            case "Pandanarum":
+                                id = 11;
+                                break;
+                            case "Pejawaran":
+                                id = 12;
+                                break;
+                            case "Punggelan":
+                                id = 13;
+                                break;
+                            case "Purwanegara":
+                                id = 14;
+                                break;
+                            case "Purwareja Klampok":
+                                id = 15;
+                                break;
+                            case "Rakit":
+                                id = 16;
+                                break;
+                            case "Sigaluh":
+                                id = 17;
+                                break;
+                            case "Susukan":
+                                id = 18;
+                                break;
+                            case "Wanadadi":
+                                id = 19;
+                                break;
+                            case "Wanayasa":
+                                id = 20;
+                                break;
+                        }
+                        // alert(id);
+                        $.ajax({
+                            url: "<?php site_url(); ?>wilayah/get_desa",
+                            method: "get",
+                            data: {
+                                id: id
+                            },
+                            async: true,
+                            dataType: 'json',
+                            success: function(data) {
+                                // alert(id);
+
+                                var html = '';
+                                var i;
+                                for (i = 0; i < data.length; i++) {
+                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                                }
+                                $('#dsa').html(html);
+
+                            }
+                        });
+                        return false;
+                    });
+
 
                 });
             </script>
