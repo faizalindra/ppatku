@@ -50,11 +50,16 @@ class ModelBerkas extends CI_Model
         return $hasil->result();
     }
 
-    function simpan_berkas($id, $napen, $desa)
-    {
-        $hasil = $this->db->query("INSERT INTO tb_berkas (id,nama_penjual,desa)VALUES('$id','$napen','$desa')");
-        return $hasil;
-    }
+    // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
+    // {
+    //     $hasil = $this->db->query("INSERT INTO tb_berkas (id,tgl_masuk,reg_sertipikat,desa,kecamatan,jenis_berkas,status_proses,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan,berkas_selesai)VALUES('$id','$tgl','$reg','$desa','$kec','$jenis','$status','$napen','$napem','$biaya','$dp','$tot_biaya','$ket','$berkas_s')");
+    //     return $hasil;
+    // }
+    // function simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
+    // {
+    //     $hasil = $this->db->query("INSERT INTO tb_berkas (reg_sertipikat,desa,kecamatan,jenis_berkas,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan)VALUES('$reg','$desa','$kec','$jenis','$napen','$napem','$biaya','$dp','$tot_biaya','$ket')");
+    //     return $hasil;
+    // }
 
     function get_berkas($id)
     {

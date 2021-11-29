@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
 
-            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Berkas</button>
+            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
             <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button>
 
             <div class="row">
@@ -40,16 +40,17 @@
             </div>
 
             <!-- model form input -->
-            <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md">
+            <div class="modal fade" id="formInputBerkas" tabindex="-1" role="dialog" aria-labelledby="formInputBerkasLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="formModalLabel">Form Input</h3>
+                            <h3 class="modal-title" id="formInputBerkasLabel">Form Input</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="formAwesome" method="post" action="<?= base_url('berkas') ?>">
+                        <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer">
+                            <!-- <form id="formAwesome"> -->
                             <div class="modal-body">
                                 <div class="form-group row">
                                     <label for="tgl_masuk" class="col-sm-6 col-form-label">
@@ -72,7 +73,7 @@
                                         Desa
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>" required>
+                                        <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -80,7 +81,7 @@
                                         Kecamatan
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>" required>
+                                        <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -88,7 +89,16 @@
                                         Jenis Berkas
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="jenis_berkas" class="form-control" id="jenis_berkas" placeholder="Jenis Berkas" value="<?= set_value('jenis_berkas'); ?>" required>
+                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;" >
+                                            <!-- <option value="" disabled selected>Pilih :</option> -->
+                                            <option>APHT</option>
+                                            <option>SKMHT</option>
+                                            <option>Konversi</option>
+                                            <option>Hibah</option>
+                                            <option>Pemecahan</option>
+                                            <option>APHB</option>
+
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,7 +106,7 @@
                                         Nama Penjual
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" required>
+                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" >
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -142,7 +152,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button id="btn_simpan" type="submit" class="btn btn-primary">Submit</button>
+                                <!-- <button id="btnbtn" class="btn btn-danger">?</button> -->
                             </div>
                         </form>
                     </div>
@@ -236,8 +247,12 @@
 
             <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
             <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> -->
             <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
             <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+            <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
 
             <script type="text/javascript">
                 $(document).ready(function() {
@@ -260,6 +275,8 @@
                         format: 'yy-mm-dd',
                         formatSubmit: 'yyyy-mm-dd'
                     });
+                    $('.select2').select2();
+
 
                     function antinull(val) {
                         c = " ";
@@ -332,8 +349,9 @@
                                     } else
                                         return cond2;
                                 }
-                                function proses(val){
-                                    if(val >= 1){
+
+                                function proses(val) {
+                                    if (val >= 1) {
                                         return val
                                     }
                                 }
@@ -345,7 +363,7 @@
                                     html += '<tr class="text-capitalize text-center">' +
                                         '<td>' + c + '</td>' +
                                         '<td>' + data[i].tgl_masuk + '</td>' +
-                                        '<td>' +  sertipikat(antinull(data[i].reg_sertipikat)) + '</td>' +
+                                        '<td>' + sertipikat(antinull(data[i].reg_sertipikat)) + '</td>' +
                                         '<td>' + data[i].desa + '</td>' +
                                         '<td>' + data[i].kecamatan + '</td>' +
                                         '<td>' + data[i].jenis_berkas + '</td>' +
@@ -369,6 +387,61 @@
 
                         });
                     }
+
+                    // $('#btnbtn').on('click',function(){
+                    //     var sel2 = $('.select2').val();
+                    //     alert(sel2);
+                    // })
+
+                    // tombol input berkas
+                    // $('#btn_simpan').on('click', function() {
+                    //     var reg_sertipikat = $('#reg_sertipikat').val();
+                    //     var desa = $('#desa').val();
+                    //     var kecamatan = $('#kecamatan').val();
+                    //     var jenis_berkas = $('#jenis_berkas').val();
+                    //     var nama_pembeli = $('#nama_pembeli').val();
+                    //     var nama_penjual = $('#nama_penjual').val();
+                    //     var biaya = $('#biaya').val();
+                    //     var dp = $('#dp').val();
+                    //     var tot_biaya = $('#tot_biaya').val();
+                    //     var keterangan = $('#keterangan').val();
+                    //     // alert(keterangan);
+                    //     $.ajax({
+                    //         type: "POST",
+                    //         url: "<?php base_url(); ?>berkas/simpan_berkas",
+                    //         dataType: "json",
+                    //         data: {
+                    //             reg_sertipikat: reg_sertipikat,
+                    //             desa: desa,
+                    //             kecamatan: kecamatan,
+                    //             jenis_berkas: jenis_berkas,
+                    //             nama_penjual: nama_penjual,
+                    //             nama_pembeli: nama_pembeli,
+                    //             biaya: biaya,
+                    //             dp: dp,
+                    //             tot_biaya: tot_biaya,
+                    //             keterangan:keterangan
+                    //         },
+                    //         success: function(){
+                    //             // $('[name="reg_sertipikat]').val("");
+                    //             // $('[name="desa]').val("");
+                    //             // $('[name="kecamatan]').val("");
+                    //             // $('[name="jenis_berkas]').val("");
+                    //             // $('[name="nama_pembeli]').val("");
+                    //             // $('[name="nama_penjual]').val("");
+                    //             // $('[name="biaya]').val("");
+                    //             // $('[name="dp]').val("");
+                    //             // $('[name="tot_biaya]').val("");
+                    //             // $('[name="keterangan]').val("");
+                    //             $('#formInputBerkas').modal('hide');
+                    //             data_berkas();
+                    //         },
+                    //         error: function(){
+                    //             alert(jenis_berkas);
+                    //         }
+                    //     });
+                    //     return false;
+                    // });
 
                     //tombol detail berkas
                     $('#show_data').on('click', '.item_detail', function() {
@@ -485,11 +558,11 @@
 
                 });
             </script>
-            <style>
+            <!-- <style>
                 table,
                 th,
                 td {
                     border: 1px solid black;
                     border-collapse: collapse;
                 }
-            </style>
+            </style> -->
