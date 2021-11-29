@@ -60,7 +60,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Berkas Belum Lengkap</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Berkas Belum Selesai</h6>
             </div>
             <div class="card-body">
 
@@ -70,7 +70,7 @@
                     foreach ($berkas as $b) {
                         $a++;
                         if ($b['berkas_selesai'] == 0) { ?>
-                            <div class="col-lg 3 mb-4">
+                            <div class="col-lg-4 mb-4">
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline">
                                     <div class="card-body">
                                         <div class="row">
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                             </div>
-                    <?php if ($a >= 10) {
+                    <?php if ($a >= 6) {
                                 break;
                             }
                         
