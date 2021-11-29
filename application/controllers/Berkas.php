@@ -136,6 +136,7 @@ class Berkas extends CI_Controller
     public function index()
     {
         $data['berkas'] = $this->ModelBerkas->getBerkasLeft();
+        $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
 
         $this->form_validation->set_rules('jenis_berkas', 'Jenis Berkas', 'required', [
             'required' => 'Jenis Berkas Belum diisi!!',

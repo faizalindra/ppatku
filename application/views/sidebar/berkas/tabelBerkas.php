@@ -69,19 +69,26 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="desa" class="col-sm-6 col-form-label">
-                                        Desa
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>" >
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="kecamatan" class="col-sm-6 col-form-label">
                                         Kecamatan
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>" >
+                                        <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>">
+                                            <option value="">No Selected</option>
+                                            <?php foreach ($kecamatan as $row) : ?>
+                                                <option id="kec" value="<?php echo $row->nama; ?>" data-value="<?php echo $row->id?>"><?php echo $row->nama; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="desa" class="col-sm-6 col-form-label">
+                                        Desa
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <select name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>">
+                                            <option value="">No Selected</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -89,14 +96,19 @@
                                         Jenis Berkas
                                     </label>
                                     <div class="col-sm-6">
-                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;" >
+                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
                                             <!-- <option value="" disabled selected>Pilih :</option> -->
+                                            <option>AJB</option>
                                             <option>APHT</option>
-                                            <option>SKMHT</option>
-                                            <option>Konversi</option>
-                                            <option>Hibah</option>
-                                            <option>Pemecahan</option>
                                             <option>APHB</option>
+                                            <option>SKMHT</option>
+                                            <option>Hibah</option>
+                                            <option>Konversi</option>
+                                            <option>Ganti Nama</option>
+                                            <option>Waris</option>
+                                            <option>Peningkatan Hak</option>
+                                            <option>Pengeringan</option>
+                                            <option>Pemecahan</option>
 
                                         </select>
                                     </div>
@@ -106,7 +118,7 @@
                                         Nama Penjual
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" >
+                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -304,7 +316,29 @@
                         }
                     }
 
+                    $('#kecamatan').change(function() {
+                        var id = document.getElementById('kec').getAttribute('data-value');
+                        $.ajax({
+                            url: "<?php echo site_url('wilayah/get_desa'); ?>",
+                            method: "POST",
+                            data: {
+                                id: id
+                            },
+                            async: true,
+                            dataType: 'json',
+                            success: function(data) {
 
+                                var html = '';
+                                var i;
+                                for (i = 0; i < data.length; i++) {
+                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                                }
+                                $('#desa').html(html);
+
+                            }
+                        });
+                        return false;
+                    });
 
                     // script uji
                     function uji() {
