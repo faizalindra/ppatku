@@ -46,50 +46,16 @@ class Berkas extends CI_Controller
         echo json_encode($data);
     }
 
-    // function simpan_berkas()
-    // {
-    //     $id = $this->input->post('id');
-    //     $tgl = $this->input->post('tanggal_masuk');
-    //     $reg = $this->input->post('reg_sertipikat');
-    //     $desa = $this->input->post('desa');
-    //     $kec = $this->input->post('kecamatan');
-    //     $jenis = $this->input->post('jenis_berkas');
-    //     $status = $this->input->post('status_proses');
-    //     $napen = $this->input->post('nama_penjual');
-    //     $napem = $this->input->post('nama_pembeli');
-    //     $biaya = $this->input->post('biaya');
-    //     $dp = $this->input->post('dp');
-    //     $tot_biaya = $this->input->post('tot_biaya');
-    //     $ket = $this->input->post('keterangan');
-    //     $berkas_s = $this->input->post('berkas_selesai');
-    //     $data = $this->ModelBerkas->simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s);
-    //     echo json_encode($data);
-    // }
-
-    // function simpan_berkas2()
-    // {
-    //     $reg = $this->input->post('reg_sertipikat');
-    //     $desa = $this->input->post('desa');
-    //     $kec = $this->input->post('kecamatan');
-    //     $jenis = $this->input->post('jenis_berkas');
-    //     $napen = $this->input->post('nama_penjual');
-    //     $napem = $this->input->post('nama_pembeli');
-    //     $biaya = $this->input->post('biaya');
-    //     $dp = $this->input->post('dp');
-    //     $tot_biaya = $this->input->post('tot_biaya');
-    //     $ket = $this->input->post('keterangan');
-    //     $data = $this->ModelBerkas->simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
-    //     echo json_encode($data);
-    // }
-
     function update_berkas()
     {
+        $jb = $this->input->post('jenis_berkas', true);
+        $jbs = implode(",", $jb);
         $id = $this->input->post('id');
         $tgl = $this->input->post('tanggal_masuk');
         $reg = $this->input->post('reg_sertipikat');
         $desa = $this->input->post('desa');
         $kec = $this->input->post('kecamatan');
-        $jenis = $this->input->post('jenis_berkas');
+        $jenis = $jbs;
         $status = $this->input->post('status_proses');
         $napen = $this->input->post('nama_penjual');
         $napem = $this->input->post('nama_pembeli');
@@ -99,6 +65,7 @@ class Berkas extends CI_Controller
         $berkas_s = $this->input->post('berkas_selesai');
         $data = $this->ModelBerkas->update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
         echo json_encode($data);
+        redirect('berkas');
     }
 
     function hapus_berkas()
@@ -110,8 +77,9 @@ class Berkas extends CI_Controller
 
     function simpanBer()
     {
+        //data input berkas Tabel Berkas
         $jb = $this->input->post('jenis_berkas', true);
-        $jbs = implode(",",$jb);
+        $jbs = implode(",", $jb); //mengubah array menjadi string
         $data = [
             // 'tgl_masuk' => $this->input->post('tgl_masuk', true),
             'reg_sertipikat' => $this->input->post('reg_sertipikat', true),
@@ -127,10 +95,25 @@ class Berkas extends CI_Controller
             'keterangan' => $this->input->post('keterangan', true),
             'berkas_selesai' => 0
         ];
+        $this->ModelBerkas->simpanBerkas($data);
 
-        $this->ModelBerkas->simpanBerkas($data); //menggunakan model
+        //data input Sertipikat Tabel Berkas
+        $datas = [
+            'no_sertipikat' => $this->input->post('no_sertipikat'),
+            'proses' => $this->input->post('proses'),
+            'jenis_hak' => $this->input->post('jenis_hak'),
+            'kec' => $this->input->post('kec'),
+            'dsa' => $this->input->post('dsa'),
+            'luas' => $this->input->post('luas'),
+            'pemilik_hak' => $this->input->post('pemilik_hak'),
+            'pembeli_hak' => $this->input->post('pembeli_hak'),
+            'ket' => $this->input->post('ket'),
+        ];
+        $switch = $this->input->post('switch-input', true); //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
+        if ($switch == 1) {
+            $this->ModelSertipikat->simpanSertipikat($datas);
+        }
         redirect('berkas');
-
     }
 
     public function index()
@@ -179,4 +162,40 @@ class Berkas extends CI_Controller
             redirect('berkas');
         }
     }
+
+    // function simpan_berkas()
+    // {
+    //     $id = $this->input->post('id');
+    //     $tgl = $this->input->post('tanggal_masuk');
+    //     $reg = $this->input->post('reg_sertipikat');
+    //     $desa = $this->input->post('desa');
+    //     $kec = $this->input->post('kecamatan');
+    //     $jenis = $this->input->post('jenis_berkas');
+    //     $status = $this->input->post('status_proses');
+    //     $napen = $this->input->post('nama_penjual');
+    //     $napem = $this->input->post('nama_pembeli');
+    //     $biaya = $this->input->post('biaya');
+    //     $dp = $this->input->post('dp');
+    //     $tot_biaya = $this->input->post('tot_biaya');
+    //     $ket = $this->input->post('keterangan');
+    //     $berkas_s = $this->input->post('berkas_selesai');
+    //     $data = $this->ModelBerkas->simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s);
+    //     echo json_encode($data);
+    // }
+
+    // function simpan_berkas2()
+    // {
+    //     $reg = $this->input->post('reg_sertipikat');
+    //     $desa = $this->input->post('desa');
+    //     $kec = $this->input->post('kecamatan');
+    //     $jenis = $this->input->post('jenis_berkas');
+    //     $napen = $this->input->post('nama_penjual');
+    //     $napem = $this->input->post('nama_pembeli');
+    //     $biaya = $this->input->post('biaya');
+    //     $dp = $this->input->post('dp');
+    //     $tot_biaya = $this->input->post('tot_biaya');
+    //     $ket = $this->input->post('keterangan');
+    //     $data = $this->ModelBerkas->simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
+    //     echo json_encode($data);
+    // }
 }

@@ -13,7 +13,12 @@ class Wilayah extends CI_Controller {
     }
  
     function get_desa(){
-        $id_kec = $this->input->post('id',TRUE);
+        $id_kec = $this->input->get('id');
+        $data = $this->ModelWilayah->get_desa($id_kec)->result();
+        echo json_encode($data);
+    }
+    function get_desa2(){
+        $id_kec = $this->input->get('id');
         $data = $this->ModelWilayah->get_desa($id_kec)->result();
         echo json_encode($data);
     }

@@ -8,13 +8,13 @@
         <div class="card-body">
 
             <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
-            <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button>
+            <!-- <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button> -->
 
             <div class="row">
                 <div class="col-auto">
                     <table class="table table-striped" id="tabel-berkas">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>#</th>
                                 <th>Tanggal Masuk</th>
                                 <th>Reg Sertipikat</th>
@@ -25,9 +25,9 @@
                                 <th>Status Proses</th>
                                 <th>Nama Penjual</th>
                                 <th>Nama Pembeli</th>
-                                <th>Biaya</th>
+                                <!-- <th>Biaya</th>
                                 <th>DP</th>
-                                <th>Total Biaya</th>
+                                <th>Total Biaya</th> -->
                                 <th>Berkas Selesai</th>
                                 <th></th>
                             </tr>
@@ -63,6 +63,8 @@
                             <!-- <form id="formAwesome"> -->
                             <div class="modal-body">
                                 <div class="tab-content card pt-5" id="myTabContentJust">
+
+                                    <!-- Input Berkas -->
                                     <div class="tab-pane fade show active" id="berkas-just" role="tabpanel" aria-labelledby="berkas-tab-just">
                                         <div class="form-group row">
                                             <label for="tgl_masuk" class="col-sm-6 col-form-label">
@@ -93,16 +95,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group row">
-                                            <label for="desa" class="col-sm-6 col-form-label">
-                                                Desa
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa" value="<?= set_value('desa'); ?>">
-                                                <option value="">No Selected</option>
-                                                </input>
-                                            </div>
-                                        </div> -->
                                         <div class="form-group row">
                                             <label for="desa" class="col-sm-6 col-form-label">
                                                 Desa
@@ -131,7 +123,6 @@
                                                     <option>Peningkatan Hak</option>
                                                     <option>Pengeringan</option>
                                                     <option>Pemecahan</option>
-
                                                 </select>
                                             </div>
                                         </div>
@@ -184,17 +175,27 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Input sertipikat -->
+                                    <div class="form-group-row">
+                                        <div class="col-sm-6">
+                                            <div class="custom-control custom-switch">
+                                                <input name="switch-input" type="checkbox" class="custom-control-input switch-input-sertipikat" id="customSwitch1" value=1>
+                                                <label class="custom-control-label" for="customSwitch1">Input Sertipikat</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="tab-pane fade" id="sertipikat-just" role="tabpanel" aria-labelledby="sertipikat-tab-just">
                                         <div class="form-group row">
                                             <label for="no_sertipikat" class="col-5 col-form-label">Nomor Sertipikat</label>
                                             <div class="col-7">
-                                                <input id="no_sertipikat" name="no_sertipikat" type="text" class="form-control">
+                                                <input id="no_sertipikat" name="no_sertipikat" type="text" class="form-control input_sert">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="proses" class="col-5 col-form-label">Proses</label>
                                             <div class="col-7">
-                                                <select id="proses" name="proses[]" class="form-control select2 select2-hidden-accessible" multiple="multiple" id="proses" tabindex="-1" value="" style="width: 100%;">
+                                                <select id="proses" name="proses[]" placeholder="uuuu" class="form-control select2 select2-hidden-accessible input_sert" multiple="multiple" id="proses" tabindex="-1" value="" style="width: 100%;">
                                                     <option>AJB</option>
                                                     <option>APHT</option>
                                                     <option>APHB</option>
@@ -212,7 +213,7 @@
                                         <div class="form-group row">
                                             <label for="jenis_hak" class="col-5 col-form-label">Jenis Hak</label>
                                             <div class="col-7">
-                                                <select id="jenis_hak" name="jenis_hak" class="custom-select">
+                                                <select id="jenis_hak" name="jenis_hak" class="custom-select input_sert">
                                                     <option value="SHM">SHM</option>
                                                     <option value="SHGB">SHGB</option>
                                                 </select>
@@ -221,10 +222,10 @@
                                         <div class="form-group row">
                                             <label for="kec" class="col-5 col-form-label">Kecamatan</label>
                                             <div class="col-7">
-                                                <select id="kec" name="kec" class="custom-select">
+                                                <select id="kec" name="kec" class="custom-select input_sert">
                                                     <option value="">No Selected</option>
                                                     <?php foreach ($kecamatan as $row) : ?>
-                                                        <option id="kec_<?php echo $row->id; ?>" class="list_desa" value="<?php echo $row->nama; ?>" data="<?php echo $row->id; ?>"><?php echo $row->nama; ?> - <?php echo $row->id; ?></option>
+                                                        <option id="kec_<?php echo $row->id; ?>" class="list_desa" value="<?php echo $row->nama; ?>" data="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -232,7 +233,7 @@
                                         <div class="form-group row">
                                             <label for="dsa" class="col-5 col-form-label">Desa</label>
                                             <div class="col-7">
-                                                <select id="dsa" name="dsa" class="custom-select">
+                                                <select id="dsa" name="dsa" class="custom-select input_sert">
                                                     <option value="">No Selected</option>
                                                 </select>
                                             </div>
@@ -240,25 +241,25 @@
                                         <div class="form-group row">
                                             <label for="luas" class="col-5 col-form-label">Luas</label>
                                             <div class="col-7">
-                                                <input id="luas" name="luas" placeholder="m2" type="text" class="form-control">
+                                                <input id="luas" name="luas" placeholder="m2" type="text" class="form-control input_sert">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pemilik_hak" class="col-5 col-form-label">Pemilik Hak</label>
                                             <div class="col-7">
-                                                <input id="pemilik_hak" name="pemilik_hak" type="text" class="form-control">
+                                                <input id="pemilik_hak" name="pemilik_hak" type="text" class="form-control input_sert">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pembeli_hak" class="col-5 col-form-label">Penerima Hak</label>
                                             <div class="col-7">
-                                                <input id="pembeli_hak" name="pembeli_hak" type="text" class="form-control">
+                                                <input id="pembeli_hak" name="pembeli_hak" type="text" class="form-control input_sert">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="ket" class="col-5 col-form-label">Keterangan</label>
                                             <div class="col-7">
-                                                <textarea id="ket" name="ket" cols="40" rows="5" class="form-control"></textarea>
+                                                <textarea id="ket" name="ket" cols="40" rows="5" class="form-control input_sert"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -285,9 +286,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer">
+                        <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/update_berkas">
                             <!-- <form id="formAwesome"> -->
                             <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="id" class="form-control datepicker" id="id" placeholder="Tanggal Masuk" readonly hidden>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="tgl_masuk" class="col-sm-6 col-form-label">
                                         Tanggal Masuk
@@ -309,12 +315,12 @@
                                         Kecamatan
                                     </label>
                                     <div class="col-sm-6">
-                                        <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan">
-                                            <option value="">No Selected</option>
+                                        <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan">
+                                        <!-- <option value="">No Selected</option>
                                             <?php foreach ($kecamatan as $row) : ?>
                                                 <option id="kecamatan" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
                                             <?php endforeach; ?>
-                                        </select>
+                                        </select> -->
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -345,8 +351,8 @@
                                             <option>Peningkatan Hak</option>
                                             <option>Pengeringan</option>
                                             <option>Pemecahan</option>
-
                                         </select>
+                                        <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -415,7 +421,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end model form input -->
+            <!-- end model form edit -->
 
             <!-- modal detail -->
             <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
@@ -505,8 +511,6 @@
             <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
             <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
             <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
-            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" /> -->
             <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
             <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
             <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
@@ -535,7 +539,7 @@
                     $('.select2').select2();
                     $('.proses').select2();
 
-
+                    //mengubah null menjadi whitespace
                     function antinull(val) {
                         c = " ";
                         val2 = "Rp. " + addCommas(val);
@@ -562,18 +566,96 @@
                         }
                     }
 
-                    // dynamic select wilayah
+                    //convert value input kecamatan menjadi id kecamatan
+                    function conv_kec(val) {
+                        // id = "";
+                        switch (val) {
+                            case "Banjarmangu":
+                                id = 1;
+                                break;
+                            case "Banjarnegara":
+                                id = 2;
+                                break;
+                            case "Batur":
+                                id = 3;
+                                break;
+                            case "Bawang":
+                                id = 4;
+                                break;
+                            case "Kalibening":
+                                id = 5;
+                                break;
+                            case "Karangkobar":
+                                id = 6;
+                                break;
+                            case "Madukara":
+                                id = 7;
+                                break;
+                            case "Mandiraja":
+                                id = 8;
+                                break;
+                            case "Pagedongan":
+                                id = 9;
+                                break;
+                            case "Pagentan":
+                                id = 10;
+                                break;
+                            case "Pandanarum":
+                                id = 11;
+                                break;
+                            case "Pejawaran":
+                                id = 12;
+                                break;
+                            case "Punggelan":
+                                id = 13;
+                                break;
+                            case "Purwanegara":
+                                id = 14;
+                                break;
+                            case "Purwareja Klampok":
+                                id = 15;
+                                break;
+                            case "Rakit":
+                                id = 16;
+                                break;
+                            case "Sigaluh":
+                                id = 17;
+                                break;
+                            case "Susukan":
+                                id = 18;
+                                break;
+                            case "Wanadadi":
+                                id = 19;
+                                break;
+                            case "Wanayasa":
+                                id = 20;
+                                break;
+                        }
+                        return id;
+                    }
+
+                    //switch untuk disable input sertipikat
+                    $('.switch-input-sertipikat').on('change', function(event, state) {
+                        var status = $('.input_sert').prop('disabled');
+                        $('.input_sert').prop('disabled', !status);
+                    });
+
+                    // dynamic select desa
+                    //selector for input berkas
                     $('#kecamatan').change(function() {
-                        var id = document.getElementById('kecamatan1').getAttribute('data-value');
+                        var kec1 = $('#kecamatan').val();
+                        var id = conv_kec(kec1);
+                        // alert(id);
                         $.ajax({
-                            url: "<?php echo site_url('wilayah/get_desa'); ?>",
-                            method: "POST",
+                            url: "<?php site_url(); ?>wilayah/get_desa",
+                            method: "get",
                             data: {
                                 id: id
                             },
                             async: true,
                             dataType: 'json',
                             success: function(data) {
+                                // alert(id);
 
                                 var html = '';
                                 var i;
@@ -581,6 +663,34 @@
                                     html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
                                 }
                                 $('#desa').html(html);
+
+                            }
+                        });
+                        return false;
+                    });
+
+                    //selector for input sertipikat
+                    $('#kec').change(function() {
+                        var kec = $('#kec').val();
+                        var id = conv_kec(kec);
+                        // alert(id);
+                        $.ajax({
+                            url: "<?php site_url(); ?>wilayah/get_desa",
+                            method: "get",
+                            data: {
+                                id: id
+                            },
+                            async: true,
+                            dataType: 'json',
+                            success: function(data) {
+                                // alert(id);
+
+                                var html = '';
+                                var i;
+                                for (i = 0; i < data.length; i++) {
+                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                                }
+                                $('#dsa').html(html);
 
                             }
                         });
@@ -652,12 +762,13 @@
                                         '<td>' + data[i].status_proses + '</td>' +
                                         '<td>' + data[i].nama_penjual + '</td>' +
                                         '<td>' + data[i].nama_pembeli + '</td>' +
-                                        '<td>' + addCommas(antinull(data[i].biaya)) + '</td>' +
-                                        '<td>' + addCommas(antinull(data[i].dp)) + '</td>' +
-                                        '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
+                                        // '<td>' + addCommas(antinull(data[i].biaya)) + '</td>' +
+                                        // '<td>' + addCommas(antinull(data[i].dp)) + '</td>' +
+                                        // '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
                                         '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
                                         '<td style="text-align:right;">' +
-                                        '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' + ' ' +
+                                        '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
+                                        '<button id="uji1" href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
                                         '</td>' +
                                         '</tr>';
                                 }
@@ -756,6 +867,12 @@
                         return false;
                     });
 
+                    // mengubah string menjadi array berdasarkan comma
+                    function sring_to_array(val) {
+                        var val = string.split(',');
+                        return val;
+                    }
+                    //edit berkas
                     //GET UPDATE
                     $('#show_data').on('click', '.edit_berkas', function() {
                         var id = $(this).attr('data');
@@ -782,6 +899,7 @@
                                     $('[name="dp"]').val(data.dp);
                                     $('[name="harga_edit"]').val(data.tot_biaya);
                                     $('[name="keterangan"]').val(data.keterangan);
+                                    $(".coment").html("Jenis Berkas : " + data.jenis_berkas);
                                 });
                             },
                             error: function(data) {
@@ -873,184 +991,6 @@
                     //     });
                     //     return false;
                     // });
-                    // dynamic select desa
-                    $('#kecamatan').change(function() {
-                        var kec1 = $('#kecamatan').val();
-                        var id = "";
-                        switch (kec1) {
-                            case "Banjarmangu":
-                                id = 1;
-                                break;
-                            case "Banjarnegara":
-                                id = 2;
-                                break;
-                            case "Batur":
-                                id = 3;
-                                break;
-                            case "Bawang":
-                                id = 4;
-                                break;
-                            case "Kalibening":
-                                id = 5;
-                                break;
-                            case "Karangkobar":
-                                id = 6;
-                                break;
-                            case "Madukara":
-                                id = 7;
-                                break;
-                            case "Mandiraja":
-                                id = 8;
-                                break;
-                            case "Pagedongan":
-                                id = 9;
-                                break;
-                            case "Pagentan":
-                                id = 10;
-                                break;
-                            case "Pandanarum":
-                                id = 11;
-                                break;
-                            case "Pejawaran":
-                                id = 12;
-                                break;
-                            case "Punggelan":
-                                id = 13;
-                                break;
-                            case "Purwanegara":
-                                id = 14;
-                                break;
-                            case "Purwareja Klampok":
-                                id = 15;
-                                break;
-                            case "Rakit":
-                                id = 16;
-                                break;
-                            case "Sigaluh":
-                                id = 17;
-                                break;
-                            case "Susukan":
-                                id = 18;
-                                break;
-                            case "Wanadadi":
-                                id = 19;
-                                break;
-                            case "Wanayasa":
-                                id = 20;
-                                break;
-                        }
-                        // alert(id);
-                        $.ajax({
-                            url: "<?php site_url(); ?>wilayah/get_desa",
-                            method: "get",
-                            data: {
-                                id: id
-                            },
-                            async: true,
-                            dataType: 'json',
-                            success: function(data) {
-                                // alert(id);
-
-                                var html = '';
-                                var i;
-                                for (i = 0; i < data.length; i++) {
-                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
-                                }
-                                $('#desa').html(html);
-
-                            }
-                        });
-                        return false;
-                    });
-                    $('#kec').change(function() {
-                        var kec = $('#kec').val();
-                        var id = "";
-                        switch (kec) {
-                            case "Banjarmangu":
-                                id = 1;
-                                break;
-                            case "Banjarnegara":
-                                id = 2;
-                                break;
-                            case "Batur":
-                                id = 3;
-                                break;
-                            case "Bawang":
-                                id = 4;
-                                break;
-                            case "Kalibening":
-                                id = 5;
-                                break;
-                            case "Karangkobar":
-                                id = 6;
-                                break;
-                            case "Madukara":
-                                id = 7;
-                                break;
-                            case "Mandiraja":
-                                id = 8;
-                                break;
-                            case "Pagedongan":
-                                id = 9;
-                                break;
-                            case "Pagentan":
-                                id = 10;
-                                break;
-                            case "Pandanarum":
-                                id = 11;
-                                break;
-                            case "Pejawaran":
-                                id = 12;
-                                break;
-                            case "Punggelan":
-                                id = 13;
-                                break;
-                            case "Purwanegara":
-                                id = 14;
-                                break;
-                            case "Purwareja Klampok":
-                                id = 15;
-                                break;
-                            case "Rakit":
-                                id = 16;
-                                break;
-                            case "Sigaluh":
-                                id = 17;
-                                break;
-                            case "Susukan":
-                                id = 18;
-                                break;
-                            case "Wanadadi":
-                                id = 19;
-                                break;
-                            case "Wanayasa":
-                                id = 20;
-                                break;
-                        }
-                        // alert(id);
-                        $.ajax({
-                            url: "<?php site_url(); ?>wilayah/get_desa",
-                            method: "get",
-                            data: {
-                                id: id
-                            },
-                            async: true,
-                            dataType: 'json',
-                            success: function(data) {
-                                // alert(id);
-
-                                var html = '';
-                                var i;
-                                for (i = 0; i < data.length; i++) {
-                                    html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
-                                }
-                                $('#dsa').html(html);
-
-                            }
-                        });
-                        return false;
-                    });
-
 
                 });
             </script>
