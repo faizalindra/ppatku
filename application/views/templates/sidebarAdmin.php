@@ -42,7 +42,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Manajemen Berkas</h6>
                         <!-- <a class="collapse-item" href="##">Input Berkas</a> -->
-                        <a class="collapse-item" href="##">Cari Berkas</a>
+                        <!-- <a class="collapse-item" href="##">Cari Berkas</a> -->
                         <a class="collapse-item" href="<?= base_url('Berkas'); ?>">Daftar Berkas</a>
                         <a class="collapse-item" href="<?= base_url('Berkas/berkasProses');?>">Berkas Dalam Proses</a>
                         <a class="collapse-item" href="##">Berkas Belum Lengkap</a>
@@ -63,8 +63,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Manajemen Sertipikat</h6>
                         <a class="collapse-item" href="##">Input Sertipikat</a>
-                        <a class="collapse-item" href="##">Cari Sertipikat</a>
-                        <a class="collapse-item" href="##">Daftar Sertipikat</a>
+                        <!-- <a class="collapse-item" href="##">Cari Sertipikat</a> -->
+                        <a class="collapse-item" href="<?= base_url('sertipikat'); ?>">Daftar Sertipikat</a>
                     </div>
                 </div>
             </li>

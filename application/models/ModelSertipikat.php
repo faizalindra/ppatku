@@ -23,12 +23,19 @@ class ModelSertipikat extends CI_Model
         return $this->db->where('tb_sertipikat', $where);
     }
 
-    public function get_sertipikat($id){
-        $hasil=$this->db->query("SELECT * FROM `tb_sertipikat` WHERE no_reg='$id'");
-        if($hasil->num_rows()>0){
-            foreach($hasil->result() as $data){
+    function sertipikat_list()
+    {
+        $hasil = $this->db->query("SELECT * FROM tb_sertipikat");
+        return $hasil->result();
+    }
+
+    public function get_sertipikat($id)
+    {
+        $hasil = $this->db->query("SELECT * FROM `tb_sertipikat` WHERE no_reg='$id'");
+        if ($hasil->num_rows() > 0) {
+            foreach ($hasil->result() as $data) {
                 $hsl = array(
-                    'pembeli_hak'=> $data->pembeli_hak
+                    'pembeli_hak' => $data->pembeli_hak
                 );
             }
         }
