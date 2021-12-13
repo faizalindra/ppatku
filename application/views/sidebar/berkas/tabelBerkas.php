@@ -762,15 +762,11 @@
                                         '<td>' + data[i].status_proses + '</td>' +
                                         '<td>' + data[i].nama_penjual + '</td>' +
                                         '<td>' + data[i].nama_pembeli + '</td>' +
-                                        // '<td>' + addCommas(antinull(data[i].biaya)) + '</td>' +
-                                        // '<td>' + addCommas(antinull(data[i].dp)) + '</td>' +
-                                        // '<td>' + addCommas(antinull(data[i].tot_biaya)) + '</td>' +
                                         '<td>' + berkasSelesai(data[i].berkas_selesai) + '</td>' +
                                         '<td style="text-align:right;">' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
-                                        '</td>' +
-                                        '</tr>';
+                                        '</td>' + '</tr>';
                                 }
                                 $('#show_data').html(html);
                                 var table = $('#tabel-berkas').dataTable({});
@@ -779,6 +775,7 @@
 
                         });
                     }
+
                     //tombol detail berkas
                     $('#show_data').on('click', '.item_detail', function() {
                         var id = $(this).attr('data');
@@ -795,6 +792,19 @@
                                     // $.each(data, function(id, desa, nama_penjual) {
                                     $('#ModalDetail').modal('show');
                                     var html = "";
+                                    // function detail_proses(val, val1) {
+                                    //     var jenis = val1; 
+                                    //     var arrJenis = jenis.split('-');
+                                    //     switch(arrJenis){
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //         case "APHT": id=1;break;
+                                    //     }
+                                    // }
                                     html += '<tr class="text-capitalize text-center">' +
                                         '<td>' + data.id + '</td>' +
                                         '<td>' + data.tgl_masuk + '</td>' +
@@ -814,7 +824,7 @@
                                         '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
                                         '</td>' + '</tr>' +
                                         '<tr>' + '<td colspan="14"> Proses :' + data.luas +
-                                        '</td>' + '</tr>';
+                                        '</td>' + '<div class="tdProses">' + '</div>' + '</tr>';
 
                                     $('#data_detail').html(html);
                                 });

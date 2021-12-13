@@ -458,7 +458,7 @@ CREATE TABLE `tb_ket_proses` (
   `znt` varchar(50) DEFAULT NULL,
   `cek_sertipikat` varchar(50) DEFAULT NULL,
   `tapak_kapling` varchar(50) DEFAULT NULL,
-  `tematik` varchar(50) DEFAULT NULL,
+  `pert_teknis` varchar(50) DEFAULT NULL,
   `pemecahan` varchar(50) DEFAULT NULL,
   `ukur` varchar(50) DEFAULT NULL,
   `ht` varchar(50) DEFAULT NULL,
@@ -475,7 +475,7 @@ CREATE TABLE `tb_ket_proses` (
 -- Dumping data for table `tb_ket_proses`
 --
 
-INSERT INTO `tb_ket_proses` (`no_proses`, `cek_plot`, `ganti_nama`, `roya`, `znt`, `cek_sertipikat`, `tapak_kapling`, `tematik`, `pemecahan`, `ukur`, `ht`, `konversi`, `ganti_blangko`, `peningkatan_hak`, `balik_nama`, `waris`, `iph`, `lainnya`) VALUES
+INSERT INTO `tb_ket_proses` (`no_proses`, `cek_plot`, `ganti_nama`, `roya`, `znt`, `cek_sertipikat`, `tapak_kapling`, `pert_teknis`, `pemecahan`, `ukur`, `ht`, `konversi`, `ganti_blangko`, `peningkatan_hak`, `balik_nama`, `waris`, `iph`, `lainnya`) VALUES
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
