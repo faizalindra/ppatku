@@ -135,6 +135,12 @@
 					case "Pengeringan":
 						arrayy = ['2','3','4'];
 						break;
+					case "Peningkatan Hak":
+						arrayy = ['14'];
+						break;
+					case "Waris":
+						arrayy = ['5','10','12'];
+						break;
 				}
 				//mengabungkan array
 				array_jb = array_jb.concat(arrayy);
