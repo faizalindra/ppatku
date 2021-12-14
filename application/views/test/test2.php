@@ -101,60 +101,6 @@
 			testr();
 			// uji();
 
-			var array_jb = [];
-			var arrjb = 'AJB,Peningkatan Hak,Pengeringan';
-			var hasil = arrjb.split(","); //mengubah string menjadi array
-			for (i = 0; i < hasil.length; i++) {
-				// var c =c+i
-				// arrayy= [c]
-				switch (hasil[i]) {
-					case "AJB":
-						arrayy = ['5', '7', '8', '10', '13'];
-						break;
-					case "Hibah":
-						arrayy = ['5', '7', '8', '10', '13'];
-						break;
-					case "APHB":
-						arrayy = ['5', '7', '8', '10', '13'];
-						break;
-					case "Pemecahan":
-						arrayy = ['5','9'];
-						break;
-					case "APHT":
-						arrayy = ['5','6','16'];
-						break;
-					case "SKMHT":
-						arrayy = ['15'];
-						break;
-					case "Konversi":
-						arrayy = ['1','10','11'];
-						break;
-					case "Ganti Nama":
-						arrayy = ['5','8'];
-						break;
-					case "Pengeringan":
-						arrayy = ['2','3','4'];
-						break;
-					case "Peningkatan Hak":
-						arrayy = ['14'];
-						break;
-					case "Waris":
-						arrayy = ['5','10','12'];
-						break;
-				}
-				//mengabungkan array
-				array_jb = array_jb.concat(arrayy);
-			}
-			//mengurutkan array dari kecil ke besar
-			array_jb.sort(function(a, b) {
-				return a - b
-			});
-
-			//menghapus duplikat value dari array
-			var uniq = array_jb.reduce(function(a, b) {
-				if (a.indexOf(b) < 0) a.push(b);
-				return a;
-			}, []);
 
 
 			document.getElementById("demo").innerHTML = uniq;
@@ -172,11 +118,62 @@
 						id: id
 					},
 					success: function(data) {
+						var arrjb = 'AJB,Peningkatan Hak,Pengeringan';
+						var array_jb = [];
+						var hasil = arrjb.split(","); //mengubah string menjadi array
+						for (i = 0; i < hasil.length; i++) {
+							// var c =c+i
+							// arrayy= [c]
+							switch (hasil[i]) {
+								case "AJB":
+									arrayy = ['5', '7', '8', '10', '13'];
+									break;
+								case "Hibah":
+									arrayy = ['5', '7', '8', '10', '13'];
+									break;
+								case "APHB":
+									arrayy = ['5', '7', '8', '10', '13'];
+									break;
+								case "Pemecahan":
+									arrayy = ['5', '9'];
+									break;
+								case "APHT":
+									arrayy = ['5', '6', '16'];
+									break;
+								case "SKMHT":
+									arrayy = ['15'];
+									break;
+								case "Konversi":
+									arrayy = ['1', '10', '11'];
+									break;
+								case "Ganti Nama":
+									arrayy = ['5', '8'];
+									break;
+								case "Pengeringan":
+									arrayy = ['2', '3', '4'];
+									break;
+								case "Peningkatan Hak":
+									arrayy = ['14'];
+									break;
+								case "Waris":
+									arrayy = ['5', '10', '12'];
+									break;
+							}
+							//mengabungkan array
+							array_jb = array_jb.concat(arrayy);
+						}
+						//mengurutkan array dari kecil ke besar
+						array_jb.sort(function(a, b) {
+							return a - b
+						});
+
+						//menghapus duplikat value dari array
+						var uniq = array_jb.reduce(function(a, b) {
+							if (a.indexOf(b) < 0) a.push(b);
+							return a;
+						}, []);
 						var html = "";
-						// var uniq = [1,4,5,7];
-						var summ = 1;
-						// $.each(data, function(ukur, pert_teknis, perijinan, pengeringan, cek_plot, cek_sertipikat, roya, ganti_nama, tapak_kapling, bayar_pajak, pajak_konv, konversi, waris, balik_nama, peningkatan_hak, skmht, ht, ganti_blangko, iph, znt) {
-						// for (i = 0; i < uniq.length; i++) {
+
 						for (i = 0; i < uniq.length; i++) {
 							// summ = summ + i;
 							switch (uniq[i]) {
@@ -363,16 +360,6 @@
 							}
 						}
 						document.getElementById("tester").innerHTML = html;
-						// }),
-						// qwe = proses_roya(data.roya);
-						// qwr = proses_ukur(data.ukur);
-
-						// document.getElementById("demo").innerHTML = summ;
-
-						// })
-						// alert('Sukses');
-
-
 					},
 					error: function() {
 						alert('gagal');

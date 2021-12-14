@@ -434,19 +434,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <button class='btn btn-info btn-sm' id="editberkas"><i class="fa fa-edit">Edit</i></button>
+                            <button class='btn btn-info btn-sm' id="lh_proses"><i class="fa fa-edit">Lihat Proses</i></button>
                             <div id="reload">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
-                                            <th>#</th>
+                                            <th>No Berkas</th>
                                             <th>Tanggal Masuk</th>
                                             <th>Reg Sertipikat</th>
                                             <th>Desa</th>
                                             <th>Kecamatan</th>
                                             <th>Jenis Berkas</th>
-                                            <th>Id Proses</th>
-                                            <th>Status Proses</th>
                                             <th>Nama Penjual</th>
                                             <th>Nama Pembeli</th>
                                             <th>Biaya</th>
@@ -775,6 +773,7 @@
 
                         });
                     }
+                    // testr();
 
                     //tombol detail berkas
                     $('#show_data').on('click', '.item_detail', function() {
@@ -789,31 +788,15 @@
                             },
                             success: function(data) {
                                 $.each(data, function(id, tgl_masuk, reg_sertipikat, desa, kecamatan, jenis_berkas, status_proses, nama_penjual, nama_pembeli, dp, biaya, tot_biaya, berkas_selesai, luas) {
-                                    // $.each(data, function(id, desa, nama_penjual) {
                                     $('#ModalDetail').modal('show');
-                                    var html = "";
-                                    // function detail_proses(val, val1) {
-                                    //     var jenis = val1; 
-                                    //     var arrJenis = jenis.split('-');
-                                    //     switch(arrJenis){
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //         case "APHT": id=1;break;
-                                    //     }
-                                    // }
-                                    html += '<tr class="text-capitalize text-center">' +
-                                        '<td>' + data.id + '</td>' +
+                                    var html1 = "";
+                                    html1 += '<tr class="text-capitalize text-center">' +
+                                        '<td id="id_proses_id" data-value="' + data.id + '">' + data.id + '</td>' +
                                         '<td>' + data.tgl_masuk + '</td>' +
                                         '<td>' + antinull(data.reg_sertipikat) + '</td>' +
                                         '<td>' + data.desa + '</td>' +
                                         '<td>' + data.kecamatan + '</td>' +
-                                        '<td>' + data.jenis_berkas + '</td>' +
-                                        '<td>' + data.luas + '</td>' +
-                                        '<td>' + data.status_proses + '</td>' +
+                                        '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
                                         '<td>' + data.nama_penjual + '</td>' +
                                         '<td>' + data.nama_pembeli + '</td>' +
                                         '<td>' + antinull(data.biaya) + '</td>' +
@@ -823,10 +806,12 @@
                                         '</tr>' +
                                         '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
                                         '</td>' + '</tr>' +
-                                        '<tr>' + '<td colspan="14"> Proses :' + data.luas +
-                                        '</td>' + '<div class="tdProses">' + '</div>' + '</tr>';
+                                        '<tr>' + '<td colspan="14" id="ujtes"> Proses : ' +
+                                        '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
 
-                                    $('#data_detail').html(html);
+                                    $('#data_detail').html(html1);
+                                    testr();
+
                                 });
                             },
                             error: function() {
@@ -836,6 +821,274 @@
                         });
                         return false;
                     });
+
+                    function testr() {
+                        var id = document.getElementById('id_proses_id').getAttribute('data-value');
+                        // var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
+                        // alert(id);
+                        // alert(arrjb);
+                        var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
+                        var array_jb = [];
+                        var hasil = arrjb.split(","); //mengubah string menjadi array
+                        for (i = 0; i < hasil.length; i++) {
+                            switch (hasil[i]) {
+                                case "AJB":
+                                    arrayy = ['5', '7', '8', '10', '13'];
+                                    break;
+                                case "Hibah":
+                                    arrayy = ['5', '7', '8', '10', '13'];
+                                    break;
+                                case "APHB":
+                                    arrayy = ['5', '7', '8', '10', '13'];
+                                    break;
+                                case "Pemecahan":
+                                    arrayy = ['5', '9'];
+                                    break;
+                                case "APHT":
+                                    arrayy = ['5', '6', '16'];
+                                    break;
+                                case "SKMHT":
+                                    arrayy = ['15'];
+                                    break;
+                                case "Konversi":
+                                    arrayy = ['1', '10', '11'];
+                                    break;
+                                case "Ganti Nama":
+                                    arrayy = ['5', '8'];
+                                    break;
+                                case "Pengeringan":
+                                    arrayy = ['2', '3', '4'];
+                                    break;
+                                case "Peningkatan Hak":
+                                    arrayy = ['14'];
+                                    break;
+                                case "Waris":
+                                    arrayy = ['5', '10', '12'];
+                                    break;
+                            }
+                            //mengabungkan array
+                            array_jb = array_jb.concat(arrayy);
+                        }
+                        //mengurutkan array dari kecil ke besar
+                        array_jb.sort(function(a, b) {
+                            return a - b
+                        });
+
+                        //menghapus duplikat value dari array
+                        var uniq = array_jb.reduce(function(a, b) {
+                            if (a.indexOf(b) < 0) a.push(b);
+                            return a;
+                        }, []);
+                        // alert(id);
+                        // alert(arrjb);
+                        $.ajax({
+                            method: 'GET',
+                            url: '<?php base_url() ?>testing/uji',
+                            async: true,
+                            dataType: 'json',
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+
+                                var html = "";
+
+                                for (i = 0; i < uniq.length; i++) {
+                                    // summ = summ + i;
+                                    switch (uniq[i]) {
+                                        case uniq[i] = '1':
+                                            if (data.ukur == 0 || data.ukur == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/ukur">Ukur </button>';
+                                            } else if (data.ukur == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/ukur">Ukur </button>';
+                                            } else if (data.ukur == 3) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/ukur">Ukur </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '2':
+                                            if (data.pert_teknis == 0 || data.pert_teknis == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/tematik">Tematik </button>';
+                                            } else if (data.pert_teknis == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/tematik">Tematik </button>';
+                                            } else if (data.pert_teknis == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/tematik">Tematik </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '3':
+                                            if (data.perijinan == 0 || data.perijinan == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/perijinan">Perijinan </button>';
+                                            } else if (data.perijinan == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/perijinan">Perijinan </button>';
+                                            } else if (data.perijinan == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/perijinan">Perijinan </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '4':
+                                            if (data.pengeringan == 0 || data.pengeringan == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/pengeringan">Pengeringan </button>';
+                                            } else if (data.pengeringan == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/pengeringan">Pengeringan </button>';
+                                            } else if (data.pengeringan == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/pengeringan">Pengeringan </button>';
+                                            }
+                                            break;
+                                        case uniq[i] = '5':
+                                            if (data.cek_plot == 0 || data.cek_plot == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/cek_plot">Cek Plot </button>';
+                                            } else if (data.cek_plot == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/cek_plot">Cek Plot </button>';
+                                            } else if (data.cek_plot == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/cek_plot">Cek Plot </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '6':
+                                            if (data.cek_sertipikat == 0 || data.cek_sertipikat == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/cek">Cek Sertipikat </button>';
+                                            } else if (data.cek_sertipikat == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/cek">Cek Sertipikat </button>';
+                                            } else if (data.cek_sertipikat == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/cek">Cek Sertipikat </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '7':
+                                            if (data.roya == 0 || data.roya == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/roya">Roya </button>';
+                                            } else if (data.roya == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/roya">Roya </button>';
+                                            } else if (data.roya == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/roya">Roya </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '8':
+                                            if (data.ganti_nama == 0 || data.ganti_nama == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/ganti_nama">Ganti Nama </button>';
+                                            } else if (data.ganti_nama == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/ganti_nama">Ganti Nama </button>';
+                                            } else if (data.ganti_nama == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/ganti_nama">Ganti Nama </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '9':
+                                            if (data.tapak_kapling == 0 || data.tapak_kapling == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/tapak_kapling">Tapak Kapling </button>';
+                                            } else if (data.tapak_kapling == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/tapak_kapling">Tapak Kapling </button>';
+                                            } else if (data.tapak_kapling == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/tapak_kapling">Tapak Kapling </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '10':
+                                            if (data.bayar_pajak == 0 || data.bayar_pajak == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/pajak">Bayar Pajak </button>';
+                                            } else if (data.bayar_pajak == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/pajak">Bayar Pajak </button>';
+                                            } else if (data.bayar_pajak == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/pajak">Bayar Pajak </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '11':
+                                            if (data.konversi == 0 || data.konversi == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/konversi">Konversi </button>';
+                                            } else if (data.konversi == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/konversi">Konversi </button>';
+                                            } else if (data.konversi == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/konversi">Konversi </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '12':
+                                            if (data.waris == 0 || data.waris == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/waris">Waris </button>';
+                                            } else if (data.waris == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/waris">Waris </button>';
+                                            } else if (data.waris == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/waris">Waris </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '13':
+                                            if (data.balik_nama == 0 || data.balik_nama == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/balik_nama">Balik Nama </button>';
+                                            } else if (data.balik_nama == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/balik_nama">Balik Nama </button>';
+                                            } else if (data.balik_nama == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/balik_nama">Balik Nama </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '14':
+                                            if (data.peningkatan_hak == 0 || data.peningkatan_hak == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/peningkatan_hak">Peningkatan Hak </button>';
+                                            } else if (data.peningkatan_hak == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/peningkatan_hak">Peningkatan Hak </button>';
+                                            } else if (data.peningkatan_hak == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/peningkatan_hak">Peningkatan Hak </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '15':
+                                            if (data.skmht == 0 || data.skmht == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/skmht">SKMHT </button>';
+                                            } else if (data.skmht == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/skmht">SKMHT </button>';
+                                            } else if (data.skmht == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/skmht">SKMHT </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '16':
+                                            if (data.ht == 0 || data.ht == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/ht">HT </button>';
+                                            } else if (data.ht == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/ht">HT </button>';
+                                            } else if (data.ht == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/ht">HT </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '17':
+                                            if (data.ganti_blangko == 0 || data.ganti_blangko == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/ganti_blangko">Ganti Blangko </button>';
+                                            } else if (data.ganti_blangko == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/ganti_blangko">Ganti Blangko </button>';
+                                            } else if (data.ganti_blangko == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/ganti_blangko">Ganti Blangko </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '18':
+                                            if (data.iph == 0 || data.iph == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/iph">IPH </button>';
+                                            } else if (data.iph == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/iph">IPH </button>';
+                                            } else if (data.iph == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/iph">IPH </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '19':
+                                            if (data.znt == 0 || data.znt == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/znt">ZNT </button>';
+                                            } else if (data.znt == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/znt">ZNT </button>';
+                                            } else if (data, znt == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/znt">ZNT </button>';
+                                            };
+                                            break;
+                                        case uniq[i] = '20':
+                                            if (data.pajak_konv == 0 || data.pajak_konv == null) {
+                                                html += '<button type="button" class="btn btn-secondary btn-rounded href="<?php base_url(); ?>proses/pajak_konv">Bayar Pajak Konversi </button>';
+                                            } else if (data.pajak_konv == 1) {
+                                                html += '<button type="button" class="btn btn-warning btn-rounded href="<?php base_url(); ?>proses/pajak_konv">Bayar Pajak Konversi </button>';
+                                            } else if (data.pajak_konv == 2) {
+                                                html += '<button type="button" class="btn btn-success btn-rounded href="<?php base_url(); ?>proses/pajak_konv">Bayar Pajak Konversi </button>';
+                                            };
+                                            break;
+                                    }
+                                }
+                                // document.getElementById("tdProses").innerHTML = html;
+                                var testi = "jfevuvaduvu";
+                                $('#ujtes').html(html);
+
+                            },
+                            error: function() {
+                                alert('tester gagal');
+                            }
+                        });
+                    }
+
 
                     // tombol detail sertipikat
                     $('#show_data').on('click', '.btn_sertipikat', function() {
