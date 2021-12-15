@@ -9,11 +9,6 @@ class ModelTest extends CI_Model{
         return $hasil->result_array();
     }
  
-    function get_desa($id_kec){
-        $query = $this->db->get_where('desa', array('id_kecamatan' => $id_kec));
-        return $query;
-    }
-
     public function proses($where)
     {
         return $this->db->where('tb_ket_proses', $where);
@@ -35,7 +30,7 @@ class ModelTest extends CI_Model{
                     'ganti_nama' => $data->ganti_nama,
                     'tapak_kapling' => $data->tapak_kapling,
                     'bayar_pajak' => $data->bayar_pajak,
-                    'pajak_konv' => $data->pajak_konv,
+                    // 'pajak_konv' => $data->pajak_konv,
                     'konversi' => $data->konversi,
                     'waris' => $data->waris,
                     'balik_nama' => $data->balik_nama,
@@ -43,7 +38,7 @@ class ModelTest extends CI_Model{
                     'skmht' => $data->skmht,
                     'ht' => $data->ht,
                     'ganti_blangko' => $data->ganti_blangko,
-                    'iph' => $data->iph,
+                    // 'iph' => $data->iph,
                     'znt' => $data->znt,
                 );
             }

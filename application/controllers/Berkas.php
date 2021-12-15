@@ -51,7 +51,7 @@ class Berkas extends CI_Controller
         $jb = $this->input->post('jenis_berkas', true);
         $jbs = implode(",", $jb);
         $id = $this->input->post('id');
-        $tgl = $this->input->post('tanggal_masuk');
+        // $tgl = $this->input->post('tanggal_masuk');
         $reg = $this->input->post('reg_sertipikat');
         $desa = $this->input->post('desa');
         $kec = $this->input->post('kecamatan');
@@ -63,7 +63,7 @@ class Berkas extends CI_Controller
         $dp = $this->input->post('dp');
         $tot_biaya = $this->input->post('tot_biaya');
         $berkas_s = $this->input->post('berkas_selesai');
-        $data = $this->ModelBerkas->update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
+        $data = $this->ModelBerkas->update_berkas($id, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
         echo json_encode($data);
         redirect('berkas');
     }

@@ -12,7 +12,7 @@
 	<h1>JavaScript Strings</h1>
 	<h2>The split() Method</h2>
 
-	<p>split() splits a string into an array of substrings, and returns the array:</p>
+	<p>split() splits a string into an array of substrings, and returns the array: <?php echo $data[1], $data[2]?></p>
 
 	<p id="demo"></p>
 	<p id="uji" class="uji"></p>

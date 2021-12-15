@@ -28,4 +28,11 @@ class Testing extends CI_Controller
         echo json_encode($data);
     }
 
+    public function uji3()
+    {
+        $where = ['id' => $this->uri->segment(3)];
+        $this->ModelTest->proses1($where);
+        // redirect('buku');
+        echo json_encode($where);
+    }
 }
