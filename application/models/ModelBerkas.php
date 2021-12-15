@@ -13,6 +13,14 @@ class ModelBerkas extends CI_Model
         return $this->db->get('tb_berkas');
     }
 
+    //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
+    public function getBerkasUnfinish()
+    {
+        $data = 0;
+        $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='$data'");
+        return $hsl->result_array();
+    }
+
     //left join berkas untuk tabelBerkas
     public function getBerkasLeft()
     {
@@ -50,7 +58,7 @@ class ModelBerkas extends CI_Model
         return $hasil->result();
     }
 
-   
+
     function get_berkas($id)
     {
         $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE id='$id'");
@@ -93,7 +101,7 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-     // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
+    // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
     // {
     //     $hasil = $this->db->query("INSERT INTO tb_berkas (id,tgl_masuk,reg_sertipikat,desa,kecamatan,jenis_berkas,status_proses,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan,berkas_selesai)VALUES('$id','$tgl','$reg','$desa','$kec','$jenis','$status','$napen','$napem','$biaya','$dp','$tot_biaya','$ket','$berkas_s')");
     //     return $hasil;

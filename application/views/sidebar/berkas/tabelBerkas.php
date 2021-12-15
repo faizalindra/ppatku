@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
 
-            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
+            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button><p></p>
             <!-- <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button> -->
 
             <div class="row">
@@ -82,7 +82,7 @@
                                                 Kecamatan
                                             </label>
                                             <div class="col-sm-6">
-                                                <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>">
+                                                <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan'); ?>" required>
                                                     <option value="">No Selected</option>
                                                     <?php foreach ($kecamatan as $row) : ?>
                                                         <option id="kecamatan1" value="<?php echo $row->nama; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
@@ -105,7 +105,7 @@
                                                 Proses
                                             </label>
                                             <div class="col-sm-6">
-                                                <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
+                                                <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;" required>
                                                     <!-- <option value="" disabled selected>Pilih :</option> -->
                                                     <option>AJB</option>
                                                     <option>APHT</option>
@@ -118,6 +118,7 @@
                                                     <option>Peningkatan Hak</option>
                                                     <option>Pengeringan</option>
                                                     <option>Pemecahan</option>
+                                                    <option>IPH</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -126,7 +127,7 @@
                                                 Nama Penjual
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>">
+                                                <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -172,15 +173,15 @@
                                     </div>
 
                                     <!-- Input sertipikat -->
-                                    <div class="form-group-row">
-                                        <div class="col-sm-6">
-                                            <div class="custom-control custom-switch">
-                                                <input name="switch-input" type="checkbox" class="custom-control-input switch-input-sertipikat" id="customSwitch1" value=1>
-                                                <label class="custom-control-label" for="customSwitch1">Input Sertipikat</label>
+                                    <div class="tab-pane fade" id="sertipikat-just" role="tabpanel" aria-labelledby="sertipikat-tab-just">
+                                        <div class="form-group-row">
+                                            <div class="col-sm-6">
+                                                <div class="custom-control custom-switch">
+                                                    <input name="switch-input" type="checkbox" class="custom-control-input switch-input-sertipikat" id="customSwitch1" value=0>
+                                                    <label class="custom-control-label" for="customSwitch1">Input Sertipikat</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="sertipikat-just" role="tabpanel" aria-labelledby="sertipikat-tab-just">
                                         <div class="form-group row">
                                             <label for="no_sertipikat" class="col-5 col-form-label">Nomor Sertipikat</label>
                                             <div class="col-7">
@@ -263,7 +264,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button id="btn_simpan" type="submit" class="btn btn-primary">Submit</button>
-                               
+
                             </div>
                         </form>
                     </div>
@@ -623,9 +624,17 @@
                     }
 
                     //switch untuk disable input sertipikat
-                    $('.switch-input-sertipikat').on('change', function(event, state) {
-                        var status = $('.input_sert').prop('disabled');
-                        $('.input_sert').prop('disabled', !status);
+                    // $('.switch-input-sertipikat').on('change', function(event, state) {
+                    //     var status = $('.input_sert').prop('disabled');
+                    //     $('.input_sert').prop('disabled', !status);
+                    // });
+
+                    $('.switch-input-sertipikat').click(function() {
+                        if ($(this).is(':checked')) {
+                            $('.input_sert').prop('disabled', false);
+                        } else {
+                            $('.input_sert').prop('disabled', true);
+                        }
                     });
 
                     // dynamic select desa
@@ -686,7 +695,7 @@
                     });
 
                     // script uji
-                    
+
 
                     // fungsi tampil berkas
                     function data_berkas() {
@@ -712,11 +721,11 @@
                                 }
                                 var html = '';
                                 var i;
-                                var c = 0;
+                                // var c = 0;
                                 for (i = 0; i < data.length; i++) {
-                                    c++
+                                    // c++
                                     html += '<tr class="text-capitalize text-center">' +
-                                        '<td>' + c + '</td>' +
+                                        '<td>' + data[i].id + '</td>' +
                                         '<td>' + data[i].tgl_masuk + '</td>' +
                                         '<td>' + sertipikat(antinull(data[i].reg_sertipikat)) + '</td>' +
                                         '<td>' + data[i].desa + '</td>' +
@@ -726,7 +735,7 @@
                                         // '<td>' + data[i].status_proses + '</td>' +
                                         '<td>' + data[i].nama_penjual + '</td>' +
                                         '<td>' + data[i].nama_pembeli + '</td>' +
-                                        '<td>' + berkasSelesai(data[i].berkas_selesai,data[i].id) + '</td>' +
+                                        '<td>' + berkasSelesai(data[i].berkas_selesai, data[i].id) + '</td>' +
                                         '<td style="text-align:right;">' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
@@ -870,11 +879,11 @@
                                             break;
                                         case uniq[i] = '2':
                                             if (data.pert_teknis == 0 || data.pert_teknis == null) {
-                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/tematik/' + id + '/1' + '">Tematik </a>';
+                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/pert_teknis/' + id + '/1' + '">Pertimbangan Teknis </a>';
                                             } else if (data.pert_teknis == 1) {
-                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/tematik/' + id + '/2' + '">Tematik </a>';
+                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/pert_teknis/' + id + '/2' + '">Pertimbangan Teknis </a>';
                                             } else if (data.pert_teknis == 2) {
-                                                html += '<a class="btn btn-success btn-rounded" role="button">Tematik </a>';
+                                                html += '<a class="btn btn-success btn-rounded" role="button">Pertimbangan Teknis </a>';
                                             };
                                             break;
                                         case uniq[i] = '3':
@@ -906,9 +915,9 @@
                                             break;
                                         case uniq[i] = '6':
                                             if (data.cek_sertipikat == 0 || data.cek_sertipikat == null) {
-                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/cek/' + id + '/1' + '">Cek Sertipikat </a>';
+                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/cek_sertipikat/' + id + '/1' + '">Cek Sertipikat </a>';
                                             } else if (data.cek_sertipikat == 1) {
-                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/cek/' + id + '/2' + '">Cek Sertipikat </a>';
+                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/cek_sertipikat/' + id + '/2' + '">Cek Sertipikat </a>';
                                             } else if (data.cek_sertipikat == 2) {
                                                 html += '<a class="btn btn-success btn-rounded" role="button">Cek Sertipikat </a>';
                                             };
@@ -942,11 +951,11 @@
                                             break;
                                         case uniq[i] = '10':
                                             if (data.bayar_pajak == 0 || data.bayar_pajak == null) {
-                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/pajak/' + id + '/1' + '">Bayar Pajak </a>';
+                                                html += '<a class="btn btn-secondary btn-rounded" role="button" href="' + window.base_url + 'proses/bayar_pajak/' + id + '/1' + '">Validasi Pajak </a>';
                                             } else if (data.bayar_pajak == 1) {
-                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/pajak/' + id + '/2' + '">Bayar Pajak </a>';
+                                                html += '<a class="btn btn-warning btn-rounded" role="button" href="' + window.base_url + 'proses/bayar_pajak/' + id + '/2' + '">Validasi Pajak </a>';
                                             } else if (data.bayar_pajak == 2) {
-                                                html += '<a class="btn btn-success btn-rounded" role="button">Bayar Pajak </a>';
+                                                html += '<a class="btn btn-success btn-rounded" role="button">Validasi Pajak</a>';
                                             };
                                             break;
                                         case uniq[i] = '11':

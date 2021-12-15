@@ -10,7 +10,7 @@
     <div class="col">
 
         <div class="row">
-            <div class="col-xl-4 col-md-4 mb-4">
+            <div class="col-xl-6 col-md-4 mb-4">
                 <div class="card border-left-danger shadow h-100 py-2 bg-primary">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-4 mb-4">
+            <div class="col-xl-6 col-md-4 mb-4">
                 <div class="card border-left-danger shadow h-100 py-2 bg-primary">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -35,22 +35,6 @@
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('berkas'); ?>"><i class="fas fa-certificate fa-3x text-warning"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-4 mb-4">
-                <div class="card border-left-danger shadow h-100 py-2 bg-primary">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Jumlah Proses</div>
-                                <!-- <div class="h1 mb-0 font-weight-bold text-white"><?= $this->ModelSertipikat->cekSertipikat()->num_rows() - 1; ?></div> -->
-                                <div class="h1 mb-0 font-weight-bold text-white">5</div>
-                            </div>
-                            <div class="col-auto">
-                                <a href="<?= base_url('berkas'); ?>"><i class="fas fa-cogs fa-3x text-warning"></i></a>
                             </div>
                         </div>
                     </div>
@@ -68,9 +52,8 @@
                     <?php
                     $a = 0;
                     foreach ($berkas as $b) {
-                        $a++;
-                        if ($b['berkas_selesai'] == 0) { ?>
-                            <div class="col-lg-4 mb-4">
+                        $a++;?>
+                            <div class="col-lg-3 mb-4">
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline">
                                     <div class="card-body">
                                         <div class="row">
@@ -91,19 +74,19 @@
                                         <div>Ket :
                                             <div class="text-white-50 small font-weight-bold"><?= $b['keterangan']; ?></div>
                                         </div>
-                                        <div class="text-center">
+                                        <!-- <div class="text-center">
                                             <a href="<?= base_url('berkas'); ?>">
                                                 <button type="button" class="btn btn-info btn-sm">Lihat Proses
                                                     <i class="fas fa-search" aria-hidden="true"></i>
                                                 </button>
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
-                    <?php if ($a >= 6) {
+                    <?php if ($a >= 8) {
                                 break;
-                            }
+                            
                         }
                     } ?>
                 </div>

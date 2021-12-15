@@ -95,6 +95,11 @@ class Berkas extends CI_Controller
             'keterangan' => $this->input->post('keterangan', true),
             'berkas_selesai' => 0
         ];
+        
+        //jika tanggal masuk tidak di isi maka tambahkan $this->input->post('tgl_masuk', true) ke $data
+        if ($this->input->post('tgl_masuk', true) > 0){
+            $data += $this->input->post('tgl_masuk', true);
+        }
         $this->ModelBerkas->simpanBerkas($data);
 
         //data input Sertipikat Tabel Berkas
