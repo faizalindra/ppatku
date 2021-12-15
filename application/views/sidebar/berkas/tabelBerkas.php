@@ -3,12 +3,11 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
-            <p id="testing" data-value='1' onload="uji()" value="2" class='uji'></p>
         </div>
         <div class="card-body">
 
-            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button><p></p>
-            <!-- <button id="uji" type="button" data="3" class="btn btn-primary ujitombol">Input Berkas</button> -->
+            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
+            <p></p>
 
             <div class="row">
                 <div class="col-auto">
@@ -143,15 +142,15 @@
                                                 Biaya
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Biaya" value="<?= set_value('Biaya'); ?>">
+                                                <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Rp." value="<?= set_value('Biaya'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="dp" class="col-sm-6 col-form-label">
-                                                dp
+                                                DP
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="dp" class="form-control" id="dp" placeholder="DP" value="<?= set_value('DP'); ?>">
+                                                <input type="text" name="dp" class="form-control" id="dp" placeholder="Rp. " value="<?= set_value('DP'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -159,7 +158,7 @@
                                                 Total Biaya
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Total Biaya" value="<?= set_value('tot_biaya'); ?>">
+                                                <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Rp." value="<?= set_value('tot_biaya'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -191,7 +190,7 @@
                                         <div class="form-group row">
                                             <label for="proses" class="col-5 col-form-label">Proses</label>
                                             <div class="col-7">
-                                                <select id="proses" name="proses[]" placeholder="uuuu" class="form-control select2 select2-hidden-accessible input_sert" multiple="multiple" id="proses" tabindex="-1" value="" style="width: 100%;">
+                                                <select id="proses" name="proses[]" placeholder="uuuu" class="form-control select2 select2-hidden-accessible input_sert" multiple="multiple" id="proses" tabindex="-1" value="" style="width: 100%;" required>
                                                     <option>AJB</option>
                                                     <option>APHT</option>
                                                     <option>APHB</option>
@@ -209,7 +208,7 @@
                                         <div class="form-group row">
                                             <label for="jenis_hak" class="col-5 col-form-label">Jenis Hak</label>
                                             <div class="col-7">
-                                                <select id="jenis_hak" name="jenis_hak" class="custom-select input_sert">
+                                                <select id="jenis_hak" name="jenis_hak" class="custom-select input_sert" required>
                                                     <option value="SHM">SHM</option>
                                                     <option value="SHGB">SHGB</option>
                                                 </select>
@@ -218,7 +217,7 @@
                                         <div class="form-group row">
                                             <label for="kec" class="col-5 col-form-label">Kecamatan</label>
                                             <div class="col-7">
-                                                <select id="kec" name="kec" class="custom-select input_sert">
+                                                <select id="kec" name="kec" class="custom-select input_sert" required>
                                                     <option value="">No Selected</option>
                                                     <?php foreach ($kecamatan as $row) : ?>
                                                         <option id="kec_<?php echo $row->id; ?>" class="list_desa" value="<?php echo $row->nama; ?>" data="<?php echo $row->id; ?>"><?php echo $row->nama; ?></option>
@@ -229,7 +228,7 @@
                                         <div class="form-group row">
                                             <label for="dsa" class="col-5 col-form-label">Desa</label>
                                             <div class="col-7">
-                                                <select id="dsa" name="dsa" class="custom-select input_sert">
+                                                <select id="dsa" name="dsa" class="custom-select input_sert" required>
                                                     <option value="">No Selected</option>
                                                 </select>
                                             </div>
@@ -243,13 +242,13 @@
                                         <div class="form-group row">
                                             <label for="pemilik_hak" class="col-5 col-form-label">Pemilik Hak</label>
                                             <div class="col-7">
-                                                <input id="pemilik_hak" name="pemilik_hak" type="text" class="form-control input_sert">
+                                                <input id="pemilik_hak" name="pemilik_hak" type="text" class="form-control input_sert" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="pembeli_hak" class="col-5 col-form-label">Penerima Hak</label>
                                             <div class="col-7">
-                                                <input id="pembeli_hak" name="pembeli_hak" type="text" class="form-control input_sert">
+                                                <input id="pembeli_hak" name="pembeli_hak" type="text" class="form-control input_sert" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -422,7 +421,6 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <button class='btn btn-info btn-sm' id="lh_proses"><i class="fa fa-edit">Lihat Proses</i></button>
                             <div id="reload">
                                 <table class="table table-striped">
                                     <thead>
@@ -546,7 +544,6 @@
                         window.base_url = <?php echo json_encode(base_url()); ?>;
                         tail = '</a>';
                         condi1 = '<a href="#" class="badge badge-info"> Selesai';
-                        // condi2 = '<a href="#" class="badge badge-warning"> Proses';
                         condi2 = '<a href="' + base_url + '/proses/berkas_selesai/' + vall + '/1/" class="badge badge-danger"> Proses';
                         if (val == 1) {
                             return condi1 + tail;
@@ -628,7 +625,7 @@
                     //     var status = $('.input_sert').prop('disabled');
                     //     $('.input_sert').prop('disabled', !status);
                     // });
-
+                    $('.input_sert').prop('disabled', true);
                     $('.switch-input-sertipikat').click(function() {
                         if ($(this).is(':checked')) {
                             $('.input_sert').prop('disabled', false);
@@ -736,7 +733,7 @@
                                         '<td>' + data[i].nama_penjual + '</td>' +
                                         '<td>' + data[i].nama_pembeli + '</td>' +
                                         '<td>' + berkasSelesai(data[i].berkas_selesai, data[i].id) + '</td>' +
-                                        '<td style="text-align:right;">' +
+                                        '<td style="text-align:center;">' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
                                         '<button id="uji1" href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
                                         '</td>' + '</tr>';
@@ -1159,6 +1156,11 @@
                         });
                         return false;
                     });
+
+                    // $('#tabel-berkas thead tr')
+                    //     .clone(true)
+                    //     .addClass('filters')
+                    //     .appendTo('#tabel-berkas thead');
 
                     // function uji() {
                     //     var id = document.getElementById('testing').getAttribute('data-value');
