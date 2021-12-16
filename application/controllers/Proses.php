@@ -10,184 +10,298 @@ class Proses extends CI_Controller
         // get_uri();
     }
 
+    function index()
+    {
+        $jp = $this->input->post('jp');
+        switch ($jp) {
+            case $jp = '1':
+                $data = ['ukur' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '2':
+                $data = ['pert_teknis' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '3':
+                $data = ['perijinan' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '4':
+                $data = ['pengeringan' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '5':
+                $data = ['cek_plot' => $this->input->post('val')];
+                $where = ['no_proses' => $this->input->post('id')];
+                $datas = $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '6':
+                $data = ['cek_sertipikat' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '7':
+                $data = ['roya' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '8':
+                $data = ['ganti_nama' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '9':
+                $data = ['ukur' =>  $this->input->post('val')];
+                $where = ['tapak_kapling' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '10':
+                $data = ['bayar_pajak' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '11':
+                $data = ['konversi' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '12':
+                $data = ['waris' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '13':
+                $data = ['balik_nama' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '14':
+                $data = ['peningkatan_hak' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '15':
+                $data = ['skmht' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '16':
+                $data = ['ht' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '17':
+                $data = ['ganti_blangko' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '18':
+                $data = ['iph' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '19':
+                $data = ['znt' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+        }
+    }
+
     function berkas_selesai()
     {
-        $data = [
-            'berkas_selesai' => $this->uri->segment('4'),
-        ];
-        $where = ['id' => $this->uri->segment('3')];
-        $this->ModelProses->berkas_selesai($data, $where);
+        $data = ['berkas_selesai' =>  $this->uri->segment(4)];
+        $where = ['id' => $this->uri->segment(3)];
+        $datas = $this->ModelProses->berkas_selesai($data, $where);
+        echo json_encode($datas);
         redirect('berkas');
     }
     function ukur()
     {
-        $data = [
-            'ukur' => $this->uri->segment('4'),
-        ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $data = ['ukur' =>  $this->input->post('val')];
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function pert_teknis()
     {
-        $data = [
-            'pert_teknis' => $this->uri->segment('4'),
-        ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $data = ['pert_teknis' =>  $this->input->post('val')];
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function perijinan()
     {
         $data = [
-            'perijinan' => $this->uri->segment('4'),
+            'perijinan' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function pengeringan()
     {
-        $data = [
-            'pengeringan' => $this->uri->segment('4'),
-        ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $data = ['pengeringan' =>  $this->input->post('val')];
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function cek_plot()
     {
-        $data = [
-            'cek_plot' => $this->uri->segment('4'),
-        ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $data = ['cek_plot' => $this->input->post('val')];
+        $where = ['no_proses' => $this->input->post('id')];
+        $datas = $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
+        // echo json_encode($datas);
+
     }
     function cek_sertipikat()
     {
         $data = [
-            'cek_sertipikat' => $this->uri->segment('4'),
+            'cek_sertipikat' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function roya()
     {
         $data = [
-            'roya' => $this->uri->segment('4'),
+            'roya' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function ganti_nama()
     {
         $data = [
-            'ganti_nama' => $this->uri->segment('4'),
+            'ganti_nama' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function tapak_kapling()
     {
         $data = [
-            'ukur' => $this->uri->segment('4'),
+            'tapak_kapling' =>  $this->input->post('val'),
         ];
-        $where = ['tapak_kapling' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function bayar_pajak()
     {
         $data = [
-            'bayar_pajak' => $this->uri->segment('4'),
+            'bayar_pajak' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function konversi()
     {
         $data = [
-            'konversi' => $this->uri->segment('4'),
+            'konversi' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function waris()
     {
         $data = [
-            'waris' => $this->uri->segment('4'),
+            'waris' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function balik_nama()
     {
         $data = [
-            'balik_nama' => $this->uri->segment('4'),
+            'balik_nama' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function peningkatan_hak()
     {
         $data = [
-            'peningkatan_hak' => $this->uri->segment('4'),
+            'peningkatan_hak' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function skmht()
     {
         $data = [
-            'skmht' => $this->uri->segment('4'),
+            'skmht' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function ht()
     {
         $data = [
-            'ht' => $this->uri->segment('4'),
+            'ht' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function ganti_blangko()
     {
         $data = [
-            'ganti_blangko' => $this->uri->segment('4'),
+            'ganti_blangko' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function znt()
     {
         $data = [
-            'znt' => $this->uri->segment('4'),
+            'znt' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
     function iph()
     {
         $data = [
-            'iph' => $this->uri->segment('4'),
+            'iph' =>  $this->input->post('val'),
         ];
-        $where = ['no_proses' => $this->uri->segment('3')];
-        $this->ModelProses->update_proses($data, $where);
-        redirect('berkas');
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
     }
 }
