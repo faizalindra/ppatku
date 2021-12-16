@@ -4,7 +4,8 @@
     </div>
     <div class="card-body">
 
-        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Sertipikat</button><p></p>
+        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Input Sertipikat</button>
+        <p></p>
 
         <div class="row">
             <div class="col-lg-12">
@@ -28,6 +29,7 @@
                 </table>
             </div>
         </div>
+
         <!-- modal input sertipikat -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md" role="document">
@@ -57,7 +59,7 @@
                                     Nomor Sertipikat
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="no_sertipikat" class="form-control" id="no_sertipikat" placeholder="Nomor Sertipikat" value="<?= set_value('no_sertipikat'); ?>" required>
+                                    <input type="text" name="no_sertipikat" class="form-control" id="no_sertipikat" placeholder="Nomor Sertipikat" value="<?= set_value('no_sertipikat'); ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -84,7 +86,7 @@
                                     Luas
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="luas" class="form-control" id="luas" placeholder="m2" value="<?= set_value('luas'); ?>">
+                                    <input type="text" name="luas" class="form-control" id="luas" placeholder="m2" value="<?= set_value('luas'); ?>" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -92,7 +94,7 @@
                                     Pemilik Hak
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="pemilik_hak" class="form-control" id="pemilik_hak" placeholder="" value="<?= set_value('nama_penjual'); ?>" required>
+                                    <input type="text" name="pemilik_hak" class="form-control" id="pemilik_hak" placeholder="" value="<?= set_value('nama_penjual'); ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -100,7 +102,7 @@
                                     Penerima Hak
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="pembeli_hak" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" required>
+                                    <input type="text" name="pembeli_hak" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -108,7 +110,7 @@
                                     Proses
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="proses" class="form-control" id="proses" placeholder="" value="<?= set_value('proses'); ?>" required>
+                                    <input type="text" name="proses" class="form-control" id="proses" placeholder="" value="<?= set_value('proses'); ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -119,11 +121,11 @@
                                     <textarea name="ket" class="form-control" id="ket" placeholder="" value="<?= set_value('ket'); ?>"></textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                            <!-- </div> -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
                     </form>
                 </div>
             </div>
@@ -131,11 +133,15 @@
         <!-- end modal input sertipikat -->
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
         <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+        <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
         <script type="text/javascript">
             $(document).ready(function() {
                 data_sertipikat();
+                // $('.proses').select2();
+
 
                 // fungsi tampil berkas
                 function data_sertipikat() {
@@ -213,10 +219,10 @@
                         case "Pagentan":
                             id = 10;
                             break;
-                        case "Pandanarum":
+                        case "Padanarum":
                             id = 11;
                             break;
-                        case "Pejawaran":
+                        case "Pajewaran":
                             id = 12;
                             break;
                         case "Punggelan":
@@ -225,7 +231,7 @@
                         case "Purwanegara":
                             id = 14;
                             break;
-                        case "Purwareja Klampok":
+                        case "Purworejo Klampok":
                             id = 15;
                             break;
                         case "Rakit":
