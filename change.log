@@ -1,3 +1,6 @@
+23 Desember 2021 #00003
+    - fix base_url di tabelBerkas.js
+
 16 Desember 2021 #00002
     - Memisah script tabelBerkas ke assets/vendor/custom.js
     - Perbaikan Input sertipikat tabelsertipikat 

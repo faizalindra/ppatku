@@ -1,6 +1,9 @@
 data_berkas(); //pemanggilan fungsi tampil barang.
 // uji();
 
+var getUrl = window.location;
+const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 // alert(base_url);
 function addCommas(nStr) {
     nStr += '';
