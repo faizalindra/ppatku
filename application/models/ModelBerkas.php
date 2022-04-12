@@ -95,9 +95,9 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    function update_berkas($id, $reg, $desa, $kec,  $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s)
+    function update_berkas($id, $reg, $desa, $kec,  $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s, $ket)
     {
-        $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', status_proses='$status', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', berkas_selesai='$berkas_s' WHERE id='$id'");
+        $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', status_proses='$status', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', berkas_selesai='$berkas_s', keterangan='$ket' WHERE id='$id'");
         return $hasil;
     }
 
