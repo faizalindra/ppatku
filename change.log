@@ -1,3 +1,7 @@
+25 April 2022 #00004
+    - hapus kolom status proses di modal edit 
+    - memperbaiki masalah saat update data, 'berkas_selesai' kembali menjadi 'proses' saat selesai edit data
+
 23 Desember 2021 #00003
     - fix base_url di tabelBerkas.js
 

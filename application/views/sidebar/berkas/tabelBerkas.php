@@ -295,14 +295,14 @@
                                         <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="nama_penjual" class="col-sm-6 col-form-label">
                                         Status Proses
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="status_proses" class="form-control" id="nama_penjual" placeholder="Nama Penjual">
+                                        <input type="text" name="status_proses" class="form-control" id="status_proses" placeholder="Status Proses">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label for="nama_penjual" class="col-sm-6 col-form-label">
                                         Nama Penjual
