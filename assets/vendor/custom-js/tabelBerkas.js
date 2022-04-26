@@ -5,6 +5,7 @@ var getUrl = window.location;
 const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
 // alert(base_url);
+
 function addCommas(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -140,8 +141,9 @@ $('#kecamatan').change(function() {
     // alert(id);
     var getUrl = window.location;
     var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    // alert(base_url) + "wilayah/get_desa";
     $.ajax({
-        url: base_url + "wilayah/get_desa",
+        url: base_url + "/wilayah/get_desa",
         method: "get",
         data: {
             id: id
@@ -155,7 +157,9 @@ $('#kecamatan').change(function() {
                 html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
             }
             $('#desa').html(html);
-
+        },
+        error: function(data) {
+            alert(id);
         }
     });
     return false;
@@ -621,7 +625,7 @@ $('#show_data').on('click', '.edit_berkas', function() {
                 $('[name="reg_sertipikat"]').val(data.reg_sertipikat);
                 $('[name="desa"]').val(data.desa);
                 $('[name="kecamatan"]').val(data.kecamatan);
-                $('[name="jenis_berkas"]').val(data.jenis_berkas);
+                $('[name="jenis_berkas[]"]').val(data.jenis_berkas);
                 $('[name="status_proses"]').val(data.status_proses);
                 $('[name="nama_penjual"]').val(data.nama_penjual);
                 $('[name="nama_pembeli"]').val(data.nama_pembeli);

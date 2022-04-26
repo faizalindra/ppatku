@@ -26,7 +26,7 @@ class Berkas extends CI_Controller
 
     function update_berkas()
     {
-        $jb = $this->input->post('jenis_berkas', true);
+        $jb = $this->input->post('jenis_berkas', True);
         $jbs = implode(",", $jb);
         $id = $this->input->post('id');
         // $tgl = $this->input->post('tanggal_masuk');

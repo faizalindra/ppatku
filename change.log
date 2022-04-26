@@ -1,3 +1,8 @@
+26 April 2022 #00005
+    - Hapus kode sampah di footer
+    - Memperbaiki kolom jenis berkas di form edit tabel berkas, value jenis_berkas akan hilang jika tidak jenis berkas tidak di submit ulang
+    - memperbaiki kolom desa di input berkas & edit berkas tidak memunculkan desa setelah memilih kecamatan
+
 25 April 2022 #00004
     - hapus kolom status proses di modal edit 
     - memperbaiki masalah saat update data, 'berkas_selesai' kembali menjadi 'proses' saat selesai edit data
