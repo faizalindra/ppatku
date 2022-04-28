@@ -143,7 +143,7 @@
                                                 Biaya
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="biaya" class="form-control" id="biaya" autocomplete="off" placeholder="Rp." value="<?= set_value('Biaya'); ?>">
+                                                <input type="text" name="biaya" class="form-control matik biaya_f" id="biaya" autocomplete="off" placeholder="Rp." >
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -151,15 +151,15 @@
                                                 DP
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="dp" class="form-control" id="dp" autocomplete="off" placeholder="Rp. " value="<?= set_value('DP'); ?>">
+                                                <input type="text" name="dp" class="form-control matik dp_f" id="dp" autocomplete="off" placeholder="Rp. ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="tot_biaya" class="col-sm-6 col-form-label">
-                                                Total Biaya
+                                                Total Bayar
                                             </label>
                                             <div class="col-sm-6">
-                                                <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" autocomplete="off" placeholder="Rp." value="<?= set_value('tot_biaya'); ?>">
+                                                <input type="text" name="tot_biaya" class="form-control tot-bayar_f" id="tot_biaya" autocomplete="off" placeholder="Rp. ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -300,7 +300,7 @@
                                         Nama Penjual
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" placeholder="Nama Penjual">
+                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" autocomplete="off" placeholder="Nama Penjual">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -308,7 +308,7 @@
                                         Nama Pembeli
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" placeholder="Nama Pembeli">
+                                        <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" autocomplete="off" placeholder="Nama Pembeli">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -316,7 +316,7 @@
                                         Biaya
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="biaya" class="form-control" id="biaya" placeholder="Rp. ">
+                                        <input type="text" name="biaya" class="form-control matik biaya_f" id="biaya" autocomplete="off" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -324,7 +324,7 @@
                                         DP
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="dp" class="form-control" id="dp" placeholder="Rp. ">
+                                        <input type="text" name="dp" class="form-control matik fp_f" id="dp" autocomplete="off" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -332,7 +332,7 @@
                                         Total Biaya
                                     </label>
                                     <div class="col-sm-6">
-                                        <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" placeholder="Rp. ">
+                                        <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" autocomplete="off" placeholder="Rp. ">
                                     </div>
                                 </div>
                                 <div class="form-group row">

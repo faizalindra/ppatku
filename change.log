@@ -1,3 +1,9 @@
+27 April 2022 #00006
+    - Memperbaiki form input berkas di halaman tabelBerkas
+      - memperbaiki tot_bayar tidak ikut terPOST saat melakukan input
+      - menghapus comma separation di tot_bayar
+      - memperbaiki tombol switch form input sertipikat
+
 26 April 2022 #00005
     - Hapus kode sampah di footer
     - Memperbaiki kolom jenis berkas di form edit tabel berkas, value jenis_berkas akan hilang jika tidak jenis berkas tidak di submit ulang

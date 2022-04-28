@@ -78,20 +78,20 @@ class Berkas extends CI_Controller
         }
 
         //data input Sertipikat Tabel Berkas
-        $datas = [
-            'no_sertipikat' => $this->input->post('no_sertipikat'),
-            'jenis_hak' => $this->input->post('jenis_hak'),
-            'proses' => $jbs,
-            'kec' => $this->input->post('kecamatan'),
-            'dsa' => $this->input->post('desa'),
-            'luas' => $this->input->post('luas'),
-            'pemilik_hak' => $this->input->post('nama_penjual'),
-            'pembeli_hak' => $this->input->post('nama_pembeli'),
-            'ket' => $this->input->post('ket'),
-        ];
         $switch = $this->input->post('switch-input', true);
         // echo $switch; 
-        if ($switch == 0) { //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
+        if ($switch == true) {
+            $datas = [
+                'no_sertipikat' => $this->input->post('no_sertipikat'),
+                'jenis_hak' => $this->input->post('jenis_hak'),
+                'proses' => $jbs,
+                'kec' => $this->input->post('kecamatan'),
+                'dsa' => $this->input->post('desa'),
+                'luas' => $this->input->post('luas'),
+                'pemilik_hak' => $this->input->post('nama_penjual'),
+                'pembeli_hak' => $this->input->post('nama_pembeli'),
+                'ket' => $this->input->post('ket'),
+            ]; //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
             $this->ModelSertipikat->simpanSertipikat($datas);
             // echo json_encode($datas);
         }
