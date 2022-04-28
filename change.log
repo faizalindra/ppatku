@@ -1,3 +1,6 @@
+28 April 2022 #00007
+    - menghapus form input sertipikat di halaman manajemen berkas
+
 27 April 2022 #00006
     - Memperbaiki form input berkas di halaman tabelBerkas
       - memperbaiki tot_bayar tidak ikut terPOST saat melakukan input
