@@ -23,19 +23,12 @@ class Sertipikat extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function uji()
+    public function get_sertipikat()
     {
         $id = $this->input->get('id');
         $data = $this->ModelSertipikat->get_sertipikat($id);
         echo json_encode($data);
     }
-
-    public function uji1()
-    {
-        $data = $this->ModelSertipikat->cekSertipikat()->result_array();
-        echo json_encode($data);
-    }
-
 
     function data_sertipikat()
     {
@@ -44,6 +37,8 @@ class Sertipikat extends CI_Controller
     }
 
     function inputSertipikat(){
+        $proses = $this->input->post('proses', true);
+        $prosess = implode(",", $proses); //mengubah array menjadi string
         $data = [
             'jenis_hak' => $this->input->post('jenis_hak', true),
             'no_sertipikat' => $this->input->post('no_sertipikat', true),
@@ -52,10 +47,27 @@ class Sertipikat extends CI_Controller
             'luas' => $this->input->post('luas', true),
             'pemilik_hak' => $this->input->post('pemilik_hak', true),
             'pembeli_hak' => $this->input->post('pembeli_hak', true),
-            'proses' => $this->input->post('proses', true),
+            'proses' => $prosess,
             'ket' => $this->input->post('ket', true),
         ];
         $this->ModelSertipikat->simpanSertipikat($data);
+        redirect('sertipikat');
+    }
+
+    function update_sertipikat()
+    {
+        $proses = implode(",", $this->input->post('proses', true));
+        $no_reg = $this->input->post('no_reg_e', true);
+        $jenis_hak = $this->input->post('jenis_hak_e', True);
+        $no_sertipikat = $this->input->post('no_sertipikat_e');
+        $dsa = $this->input->post('dsa_e');
+        $kec = $this->input->post('kec_e');
+        $luas = $this->input->post('luas_e');
+        $pemilik_hak = $this->input->post('pemilik_hak_e');
+        $pembeli_hak = $this->input->post('pembeli_hak_e');
+        $ket = $this->input->post('ket_e');
+        $data = $this->ModelSertipikat->update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $proses, $ket);
+        echo json_encode($data);
         redirect('sertipikat');
     }
 }
