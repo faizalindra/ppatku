@@ -1,3 +1,11 @@
+30 April 2022 #00009
+    - menambah menu pencatatan proses BPN
+      - membuat controller pencatatan proses BPN
+      - membuat hamaman pencatatan proses BPN
+      - membuat model pencatatan proses BPN
+      - membuat script pencatatan proses BPN
+      - membuat tabel pencatatan proses BPN 
+
 29 April 2022 #00008
     - menambah tombol edit di tabel sertipikat
 

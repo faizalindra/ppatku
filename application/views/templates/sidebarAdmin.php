@@ -63,6 +63,13 @@
                     <span>Sertipikat</span></a>
             </li>
 
+            <!-- Nav Item - Proses BPN Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('bpn');?>">
+                    <i class="fas fas fa-fw fa-cogs"></i>
+                    <span>Proses BPN</span></a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
