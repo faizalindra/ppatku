@@ -7,7 +7,8 @@
     <div class="card-body">
 
         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
-        <p></p>
+        <!-- <p><?php $Date="2010-09-17";$mod=3  ?> <?php $tgl = date('Y-m-d', strtotime('now'. '+ 3 days')); echo $tgl?></p> -->
+        <div id='testing' ></div>
 
         <div class="row">
             <div class="col-lg-12 col-auto">
@@ -50,7 +51,7 @@
                                 Tanggal Masuk
                             </label>
                             <div class="col-sm-6">
-                                <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" autocomplete="off" value="<?= set_value('tgl_masuk'); ?>">
+                                <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -58,29 +59,31 @@
                                 Nama Pemohon
                             </label>
                             <div class="col-sm-6">
-                                <input type="text" name="nama_pemohon" class="form-control" id="nama_pemohon" placeholder="Nama Pemohon" value="<?= set_value('nama_pemohon'); ?>" autocomplete="on" required>
+                                <input type="text" name="nama_pemohon" class="form-control" id="nama_pemohon" placeholder="Nama Pemohon"  autocomplete="on" required>
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="jenis_proses" class="col-sm-6 col-form-label">
                                 Jenis Proses
                             </label>
                             <div class="col-sm-6">
-                                <select type="text" name="jenis_proses" class="form-control" id="jenis_proses" placeholder="Jenis Proses" value="<?= set_value('jenis_proses'); ?>" autocomplete="on" required>
+                                <select type="text" name="jenis_proses" class="form-control" id="jenis_proses" placeholder="Jenis Proses" autocomplete="off" required>
                                 <option value="">Pilih Jenis Proses</option>    
-                                <option value="1">Peningkatan Hak</option>    
-                                <option value="2">Pengecekan</option>    
-                                <option value="3">Pemberian Hak Tanggungan</option>    
-                                <option value="4">Roya</option>  
+                                <option value="Peningkatan Hak">Peningkatan Hak</option>    
+                                <option value="Pengecekan">Pengecekan</option>    
+                                <option value="Pemberian Hak Tanggungan">Pemberian Hak Tanggungan</option>    
+                                <option value="Roya">Roya</option>  
+                                <option value="Cek Plot">Cek Plot</option>  
+                                <option value="Pengalihan Hak">Pengalihan Hak</option>  
                             </select>
                                 </div>
-                        </div> -->
+                        </div>
                         <div class="form-group row">
                             <label for="nomor_bpn" class="col-sm-6 col-form-label">
                                 Nomor BPN
                             </label>
                             <div class="col-sm-6">
-                                <input type="number" name="nomor_bpn" class="form-control" id="nomor_bpn" placeholder="Nomor BPN" value="<?= set_value('nomor_bpn'); ?>" autocomplete="off">
+                                <input type="number" name="nomor_bpn" class="form-control" id="nomor_bpn" placeholder="Nomor BPN"  autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -88,7 +91,7 @@
                                 Keterangan
                             </label>
                             <div class="col-sm-6">
-                                <textarea name="ket" class="form-control" id="ket" placeholder="" value="<?= set_value('ket'); ?>"></textarea>
+                                <textarea name="ket" class="form-control" id="ket" placeholder="" autocomplete="off"></textarea>
                             </div>
                         </div>
                         <!-- </div> -->

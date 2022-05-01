@@ -11,7 +11,8 @@ class Bpn extends CI_Controller
         // $this->load->model('ModelBpn');
     }
 
-    public function index(){
+    public function index()
+    {
         $data['judul'] = "Daftar Proses BPN";
         $data['sertipikat'] = $this->ModelBpn->get_prosesBPN();
         $this->load->view('templates/header', $data);
@@ -21,19 +22,31 @@ class Bpn extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function get_prosesBPN(){
+    public function get_prosesBPN()
+    {
         $data = $this->ModelBpn->get_prosesBPN();
         echo json_encode($data);
     }
 
-    public function inputBPN(){
+    public function inputBPN()
+    {
+
         $data = array(
-            'tgl_masuk' => $this->input->post('tgl_masuk'),
             'nama_pemohon' => $this->input->post('nama_pemohon'),
-            'no_bpn' => $this->input->post('no_bpn'),
+            'jenis_proses' => $this->input->post('jenis_proses'),
+            'no_bpn' => $this->input->post('nomor_bpn'),
             'ket' => $this->input->post('ket')
         );
-        $data = $this->ModelBpn->inputBPN($data);
+        if ($this->input->post('tgl_masuk') == null) {
+            // echo json_encode($data);
+            $data = $this->ModelBpn->inputBPN($data);
+        } else {
+            $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
+            $data_tgl = array_merge($data, $tgl);
+            $this->ModelBpn->inputBPN($data_tgl);
+        }
+
         echo json_encode($data);
+        redirect('bpn');
     }
 }

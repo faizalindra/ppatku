@@ -1,16 +1,18 @@
 $(document).ready(function() {
     var getUrl = window.location;
     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    const current = new Date();
+    current.setDate(current.getDate() + 2);
+    // $('testing').html(current.toDateString());
+    // alert(current.toDateString());
     data_BPN();
+
 
     //select2 for proses
     $('.select2').select2();
     $('.proses').select2();
 
-    $('.datepicker').datepicker({
-        format: 'yy-mm-dd',
-        formatSubmit: 'yyyy-mm-dd'
-    });
+    $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
 
     // fungsi tampil berkas
     function data_BPN() {
@@ -83,6 +85,32 @@ $(document).ready(function() {
         return false;
     });
 
+    $('#jenis_proses').on('change', function() {
+        val = document.getElementById('jenis_proses').getAttribute('value');
+        switch (val) {
+            case 'Peningkatan Hak':
+                jp = '1', est = 30;
+                break;
+            case 'Pengecekan':
+                jp = '2', est = 7;
+                break;
+            case 'Pemberian Hak Tanggungan':
+                jp = '3', est = 30;
+                break;
+            case 'Roya':
+                jp = '4', est = 14;
+                break;
+            case 'Cek Plot':
+                jp = '5', est = 7;
+                break;
+            case 'Pengalihan Hak':
+                jp = '6', est = 180;
+                break;
+        }
+        // $date = date("Y-m-d");
+        // date('Y-m-d', strtotime($Date. ' + 1 days'));
+        // $('#estimasi').val()
+    });
 
     //mengubah null di kolom keterangan menjadi whitespace
     function antinull(val) {
