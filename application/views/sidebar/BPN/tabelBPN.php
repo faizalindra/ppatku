@@ -5,21 +5,28 @@
         <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas Proses BPN</h6>
     </div>
     <div class="card-body">
-
-        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
-        <!-- <p><?php $Date="2010-09-17";$mod=3  ?> <?php $tgl = date('Y-m-d', strtotime('now'. '+ 3 days')); echo $tgl?></p> -->
-        <div id='testing' ></div>
+        <div class="row">
+            <div class="col-auto">
+                <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
+            </div>
+            <div class="col-sm-6 col-auto"></div>
+            <div class="col-sm-4">
+                <div class="col-auto">Proses Terdaftar :</div>
+                <div class="col-auto">Proses Berjalan :</div>
+                <div class="col-auto">Proses Selesai :</div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-BPN">
                     <thead>
                         <tr class="text-center">
-                            <th scope="col">#</th>
-                            <th scope="col">No. Proses</th>
+                            <th scope="col">No.</th>
+                            <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
-                            <th scope="col">Tanggal Masuk</th>
+                            <th scope="col">Jenis Proses</th>
                             <th scope="col">Estimasi</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Action</th>
@@ -59,7 +66,7 @@
                                 Nama Pemohon
                             </label>
                             <div class="col-sm-6">
-                                <input type="text" name="nama_pemohon" class="form-control" id="nama_pemohon" placeholder="Nama Pemohon"  autocomplete="on" required>
+                                <input type="text" name="nama_pemohon" class="form-control" id="nama_pemohon" placeholder="Nama Pemohon" autocomplete="on" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -68,22 +75,22 @@
                             </label>
                             <div class="col-sm-6">
                                 <select type="text" name="jenis_proses" class="form-control" id="jenis_proses" placeholder="Jenis Proses" autocomplete="off" required>
-                                <option value="">Pilih Jenis Proses</option>    
-                                <option value="Peningkatan Hak">Peningkatan Hak</option>    
-                                <option value="Pengecekan">Pengecekan</option>    
-                                <option value="Pemberian Hak Tanggungan">Pemberian Hak Tanggungan</option>    
-                                <option value="Roya">Roya</option>  
-                                <option value="Cek Plot">Cek Plot</option>  
-                                <option value="Pengalihan Hak">Pengalihan Hak</option>  
-                            </select>
-                                </div>
+                                    <option value="">Pilih Jenis Proses</option>
+                                    <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                    <option value="Pengecekan">Pengecekan</option>
+                                    <option value="Pemberian Hak Tanggungan">Pemberian Hak Tanggungan</option>
+                                    <option value="Roya">Roya</option>
+                                    <option value="Cek Plot">Cek Plot</option>
+                                    <option value="Pengalihan Hak">Pengalihan Hak</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="nomor_bpn" class="col-sm-6 col-form-label">
                                 Nomor BPN
                             </label>
                             <div class="col-sm-6">
-                                <input type="number" name="nomor_bpn" class="form-control" id="nomor_bpn" placeholder="Nomor BPN"  autocomplete="off">
+                                <input type="number" name="nomor_bpn" class="form-control" id="nomor_bpn" placeholder="Nomor BPN" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">

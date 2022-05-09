@@ -13,4 +13,24 @@ class ModelBpn extends CI_Model
     {
         $this->db->insert('tb_proses_bpn', $data);
     }
+
+    function get_procBPN($id)
+    {
+        $hsl = $this->db->query("SELECT * FROM tb_proses_bpn WHERE no_proses_bpn='$id'");
+        if ($hsl->num_rows() > 0) {
+            foreach ($hsl->result() as $data) {
+                $hasil = array(
+                    'no_proses_bpn' => $data->no_proses_bpn,
+                    'tgl_masuk' => $data->tgl_masuk,
+                    'nama_pemohon' => $data->nama_pemohon,
+                    'no_bpn' => $data->no_bpn,
+                    'jenis_proses' => $data->jenis_proses,
+                    'estimasi' => $data->estimasi,
+                    'ket' => $data->ket,
+                    'status' => $data->status,
+                );
+            }
+        }
+        return $hasil;
+    }
 }
