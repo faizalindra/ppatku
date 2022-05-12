@@ -26,6 +26,24 @@ class Bpn extends CI_Controller
     {
         $data = $this->ModelBpn->get_prosesBPN();
         echo json_encode($data);
+        return $data;
+    }
+
+    public function get_BPN_dashboard()
+    {
+        $data = $this->ModelBpn->get_prosesBPN();
+        foreach ($data as $key => $value) {
+            $d1 = strtotime($value['estimasi']);
+            $est = ceil(($d1 - time()) / 60 / 60 / 24);
+            $est = $est - 1;
+            $value['estimasi'] = $est;
+            if ($est <= '2') {
+                if ($est >= '-7') {
+                    $data2[] = $value;
+                }
+            }
+        }
+        echo json_encode($data2);
     }
 
     public function inputBPN()
@@ -75,7 +93,7 @@ class Bpn extends CI_Controller
             echo json_encode($data);
 
 
-        //jika tgl_masuk tidak kosong maka akan mengambil tanggal yang diinputkan
+            //jika tgl_masuk tidak kosong maka akan mengambil tanggal yang diinputkan
         } else {
             $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
             $data_tgl = array_merge($data, $tgl);
