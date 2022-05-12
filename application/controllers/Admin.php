@@ -7,6 +7,10 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         cek_login();
+        if ($this->session->userdata('role_id') != 1) {
+            //jika bukan admin arahkan ke autentifikasi/acc_block
+            redirect('autentifikasi/acc_block');
+        }
     }
 
     public function index()

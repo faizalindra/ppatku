@@ -58,6 +58,29 @@ class User extends CI_Controller
         }
     }
 
+    public function user(){
+        $data['staff'] = $this->db->get('user')->result_array();
+        $data['judul'] = 'Registrasi';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebarNotaris');
+        $this->load->view('templates/topbar');
+        $this->load->view('notaris/formRegistrasi');
+        $this->load->view('notaris/tabelUser', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function inputUser(){
+        $username = $this->input->post('username', true);
+        $data = [
+            'nama' => htmlspecialchars($this->input->post('nama', true)),
+            'username' => htmlspecialchars($username),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'is_active' => 1,
+        ];
+        $this->ModelUser->simpanData($data);
+    }
+
     public function manajemenUser()
     {
         // if ($this->session->userdata('username')) {

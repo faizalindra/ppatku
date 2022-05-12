@@ -1,3 +1,12 @@
+12 Mei 2022 #00013
+    - Menambah user notaris
+        - menambah halaman notaris
+        - membuat halaman manajemen user menampilkan semua user kecuali user notaris
+        - membuat form input user memiliki opsi untuk memilih role user
+    - Mencegah user notaris masuk ke halaman admin dan sebaliknya
+        - jika user notaris masuk ke halaman admin, maka akan diarahkan ke halaman autentikasi/acc_block dan sebaliknya
+    
+
 12 Mei 2022 #00012
     - Menambah kartu estimasi di halaman dashboard
     - Menambah text di kartu berkas dan sertipikat di dashboard 

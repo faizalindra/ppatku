@@ -21,7 +21,7 @@
                             <?php
                             $a = 1;
                             foreach ($staff as $b) { ?>
-                                <?php if ($b['role_id'] == 2) { ?>
+                                <?php if ($b['role_id'] != 0) { ?>
                                     <tr>
                                         <th scope="row"><?= $a++; ?></th>
                                         <td><?= $b['nama']; ?></td>
