@@ -33,6 +33,11 @@
 
             <!-- Nav Item - Berkas Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('Berkas');?>">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Berkas</span></a>
+            </li>
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBerkas"
                     aria-expanded="true" aria-controls="collapseBerkas">
                     <i class="fas fa-fw fa-folder"></i>
@@ -41,49 +46,26 @@
                 <div id="collapseBerkas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Manajemen Berkas</h6>
-                        <!-- <a class="collapse-item" href="##">Input Berkas</a> -->
-                        <a class="collapse-item" href="##">Cari Berkas</a>
                         <a class="collapse-item" href="<?= base_url('Berkas'); ?>">Daftar Berkas</a>
-                        <a class="collapse-item" href="##">Berkas Dalam Proses</a>
+                        <a class="collapse-item" href="<?= base_url('Berkas/berkasProses');?>">Berkas Dalam Proses</a>
                         <a class="collapse-item" href="##">Berkas Belum Lengkap</a>
-                        <a class="collapse-item" href="##">Berkas Selesai</a>
+                        <a class="collapse-item" href="<?= base_url('Berkas/berkasSelesai'); ?>">Berkas Selesai</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
+
+
 
             <!-- Nav Item - Sertipikat Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSertipikat"
-                    aria-expanded="true" aria-controls="collapseSertipikat">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Sertipikat</span>
-                </a>
-                <div id="collapseSertipikat" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Manajemen Sertipikat</h6>
-                        <!-- <a class="collapse-item" href="##">Input Sertipikat</a> -->
-                        <a class="collapse-item" href="##">Cari Sertipikat</a>
-                        <a class="collapse-item" href="##">Daftar Sertipikat</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="<?= base_url('sertipikat');?>">
+                    <i class="fas fas fa-fw fa-book"></i>
+                    <span>Sertipikat</span></a>
             </li>
 
-            <!-- Nav Item - Proses Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProses"
-                    aria-expanded="true" aria-controls="collapseProses">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Proses</span>
-                </a>
-                <div id="collapseProses" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="##">Daftar Proses</a>
-                        <a class="collapse-item" href="##">Cari Proses</a>
-                    </div>
-                </div>
-            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

@@ -1,3 +1,46 @@
+<<<<<<< HEAD
+=======
+12 Mei 2022 #00013
+    - Menambah user notaris
+        - menambah halaman notaris
+        - membuat halaman manajemen user menampilkan semua user kecuali user notaris
+        - membuat form input user memiliki opsi untuk memilih role user
+    - Mencegah user notaris masuk ke halaman admin dan sebaliknya
+        - jika user notaris masuk ke halaman admin, maka akan diarahkan ke halaman autentikasi/acc_block dan sebaliknya
+    
+
+12 Mei 2022 #00012
+    - Menambah kartu estimasi di halaman dashboard
+    - Menambah text di kartu berkas dan sertipikat di dashboard 
+
+9 Mei 2022 #00011
+    - menambah kolom estimasi di tabel proses BPN
+    - memperbaiki input tanggal proses BPN
+
+1 Mei 2022 #00010
+    - Menambah fungsi input Proses BPN
+
+30 April 2022 #00009
+    - menambah menu pencatatan proses BPN
+      - membuat controller pencatatan proses BPN
+      - membuat hamaman pencatatan proses BPN
+      - membuat model pencatatan proses BPN
+      - membuat script pencatatan proses BPN
+      - membuat tabel pencatatan proses BPN 
+
+29 April 2022 #00008
+    - menambah tombol edit di tabel sertipikat
+
+28 April 2022 #00007
+    - menghapus form input sertipikat di halaman manajemen berkas
+
+27 April 2022 #00006
+    - Memperbaiki form input berkas di halaman tabelBerkas
+      - memperbaiki tot_bayar tidak ikut terPOST saat melakukan input
+      - menghapus comma separation di tot_bayar
+      - memperbaiki tombol switch form input sertipikat
+
+>>>>>>> tugas-akhir
 26 April 2022 #00005
     - Hapus kode sampah di footer
     - Memperbaiki kolom jenis berkas di form edit tabel berkas, value jenis_berkas akan hilang jika tidak jenis berkas tidak di submit ulang

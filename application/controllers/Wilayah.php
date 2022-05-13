@@ -9,7 +9,8 @@ class Wilayah extends CI_Controller {
  
     function index(){
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
-        $this->load->view('test/wilayah', $data);
+        echo json_encode($data);
+        // $this->load->view('test/wilayah', $data);
     }
  
     function get_desa(){

@@ -13,6 +13,14 @@ class ModelBerkas extends CI_Model
         return $this->db->get('tb_berkas');
     }
 
+    //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
+    public function getBerkasUnfinish()
+    {
+        $data = 0;
+        $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='$data'");
+        return $hsl->result_array();
+    }
+
     //left join berkas untuk tabelBerkas
     public function getBerkasLeft()
     {
@@ -50,16 +58,6 @@ class ModelBerkas extends CI_Model
         return $hasil->result();
     }
 
-    // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
-    // {
-    //     $hasil = $this->db->query("INSERT INTO tb_berkas (id,tgl_masuk,reg_sertipikat,desa,kecamatan,jenis_berkas,status_proses,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan,berkas_selesai)VALUES('$id','$tgl','$reg','$desa','$kec','$jenis','$status','$napen','$napem','$biaya','$dp','$tot_biaya','$ket','$berkas_s')");
-    //     return $hasil;
-    // }
-    // function simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
-    // {
-    //     $hasil = $this->db->query("INSERT INTO tb_berkas (reg_sertipikat,desa,kecamatan,jenis_berkas,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan)VALUES('$reg','$desa','$kec','$jenis','$napen','$napem','$biaya','$dp','$tot_biaya','$ket')");
-    //     return $hasil;
-    // }
 
     function get_berkas($id)
     {
@@ -97,15 +95,21 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    function update_berkas($id, $tgl, $reg, $desa, $kec,  $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s)
+    function update_berkas($id, $reg, $desa, $kec,  $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
     {
-        $hasil = $this->db->query("UPDATE tb_berkas SET tgl_masuk='$tgl', reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', status_proses='$status', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', berkas_selesai='$berkas_s' WHERE id='$id'");
+        $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', status_proses='$status', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', keterangan='$ket' WHERE id='$id'");
         return $hasil;
     }
 
-    function hapus_berkas($id)
-    {
-        $hasil = $this->db->query("DELETE FROM tb_berkas WHERE id='$id'");
-        return $hasil;
-    }
+    // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
+    // {
+    //     $hasil = $this->db->query("INSERT INTO tb_berkas (id,tgl_masuk,reg_sertipikat,desa,kecamatan,jenis_berkas,status_proses,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan,berkas_selesai)VALUES('$id','$tgl','$reg','$desa','$kec','$jenis','$status','$napen','$napem','$biaya','$dp','$tot_biaya','$ket','$berkas_s')");
+    //     return $hasil;
+    // }
+    // function simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
+    // {
+    //     $hasil = $this->db->query("INSERT INTO tb_berkas (reg_sertipikat,desa,kecamatan,jenis_berkas,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan)VALUES('$reg','$desa','$kec','$jenis','$napen','$napem','$biaya','$dp','$tot_biaya','$ket')");
+    //     return $hasil;
+    // }
+
 }

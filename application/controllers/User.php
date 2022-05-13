@@ -11,17 +11,15 @@ class User extends CI_Controller
 
     public function index()
     {
-        // $data['judul'] = 'Profil Saya';
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-        // $data['judul'] = 'Data Anggota';
-        // $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
-        // $this->db->where('role_id', 1);
-        // $data['user'] = $this->db->get('user')->result_array();
-        // $this->load->view('templates/header', $data);
-        // $this->load->view('templates/sidebar', $data);
-        // $this->load->view('templates/topbar', $data);
-        // $this->load->view('user/index', $data);
-        // $this->load->view('templates/footer');
+        $data['berkas'] = $this->ModelBerkas->getBerkasQuery();
+        // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
+        $data['judul'] = "Dashboard";
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebarStaff');
+        $this->load->view('templates/topbar');
+        $this->load->view('index', $data);
+        $this->load->view('templates/footer');
     }
 
     public function hapusUser()
@@ -58,6 +56,29 @@ class User extends CI_Controller
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Profil Berhasil diubah </div>');
             redirect('user');
         }
+    }
+
+    public function user(){
+        $data['staff'] = $this->db->get('user')->result_array();
+        $data['judul'] = 'Registrasi';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebarNotaris');
+        $this->load->view('templates/topbar');
+        $this->load->view('notaris/formRegistrasi');
+        $this->load->view('notaris/tabelUser', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function inputUser(){
+        $username = $this->input->post('username', true);
+        $data = [
+            'nama' => htmlspecialchars($this->input->post('nama', true)),
+            'username' => htmlspecialchars($username),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'is_active' => 1,
+        ];
+        $this->ModelUser->simpanData($data);
     }
 
     public function manajemenUser()

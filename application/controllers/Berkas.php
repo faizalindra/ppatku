@@ -11,28 +11,6 @@ class Berkas extends CI_Controller
         $this->load->model('ModelBerkas');
     }
 
-    public function berkasProses()
-    {
-        $data['berkas'] = $this->ModelBerkas->berkas_list();
-        $data['judul'] = "Daftar Berkas Dalam Proses";
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarAdmin');
-        $this->load->view('templates/topbar');
-        $this->load->view('sidebar/berkas/berkasProses', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function berkasSelesai()
-    {
-        $data['berkas'] = $this->ModelBerkas->getBerkas()->result_array();
-        $data['judul'] = "Daftar Berkas Selesai";
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarAdmin');
-        $this->load->view('templates/topbar');
-        $this->load->view('sidebar/berkas/berkasSelesai', $data);
-        $this->load->view('templates/footer');
-    }
-
     function data_berkas()
     {
         $data = $this->ModelBerkas->berkas_list();
@@ -48,10 +26,10 @@ class Berkas extends CI_Controller
 
     function update_berkas()
     {
-        $jb = $this->input->post('jenis_berkas', true);
+        $jb = $this->input->post('jenis_berkas', True);
         $jbs = implode(",", $jb);
         $id = $this->input->post('id');
-        $tgl = $this->input->post('tanggal_masuk');
+        // $tgl = $this->input->post('tanggal_masuk');
         $reg = $this->input->post('reg_sertipikat');
         $desa = $this->input->post('desa');
         $kec = $this->input->post('kecamatan');
@@ -62,18 +40,13 @@ class Berkas extends CI_Controller
         $biaya = $this->input->post('biaya');
         $dp = $this->input->post('dp');
         $tot_biaya = $this->input->post('tot_biaya');
-        $berkas_s = $this->input->post('berkas_selesai');
-        $data = $this->ModelBerkas->update_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $berkas_s);
+        // $berkas_s = $this->input->post('berkas_selesai');
+        $ket = $this->input->post('keterangan');
+        $data = $this->ModelBerkas->update_berkas($id, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
         echo json_encode($data);
         redirect('berkas');
     }
 
-    function hapus_berkas()
-    {
-        $id = $this->input->post('kode');
-        $data = $this->ModelBerkas->hapus_berkas($id);
-        echo json_encode($data);
-    }
 
     function simpanBer()
     {
@@ -81,7 +54,6 @@ class Berkas extends CI_Controller
         $jb = $this->input->post('jenis_berkas', true);
         $jbs = implode(",", $jb); //mengubah array menjadi string
         $data = [
-            // 'tgl_masuk' => $this->input->post('tgl_masuk', true),
             'reg_sertipikat' => $this->input->post('reg_sertipikat', true),
             'desa' => $this->input->post('desa', true),
             'kecamatan' => $this->input->post('kecamatan', true),
@@ -95,23 +67,33 @@ class Berkas extends CI_Controller
             'keterangan' => $this->input->post('keterangan', true),
             'berkas_selesai' => 0
         ];
-        $this->ModelBerkas->simpanBerkas($data);
+        if ($this->input->post('tgl_masuk') == null) {
+            // echo json_encode($data);
+            $this->ModelBerkas->simpanBerkas($data);
+        } else {
+            $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
+            $data_tgl = array_merge($data,$tgl);
+            // echo json_encode($data_tgl);
+            $this->ModelBerkas->simpanBerkas($data_tgl);
+        }
 
         //data input Sertipikat Tabel Berkas
-        $datas = [
-            'no_sertipikat' => $this->input->post('no_sertipikat'),
-            'proses' => $this->input->post('proses'),
-            'jenis_hak' => $this->input->post('jenis_hak'),
-            'kec' => $this->input->post('kec'),
-            'dsa' => $this->input->post('dsa'),
-            'luas' => $this->input->post('luas'),
-            'pemilik_hak' => $this->input->post('pemilik_hak'),
-            'pembeli_hak' => $this->input->post('pembeli_hak'),
-            'ket' => $this->input->post('ket'),
-        ];
-        $switch = $this->input->post('switch-input', true); //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
-        if ($switch == 1) {
+        $switch = $this->input->post('switch-input', true);
+        // echo $switch; 
+        if ($switch == true) {
+            $datas = [
+                'no_sertipikat' => $this->input->post('no_sertipikat'),
+                'jenis_hak' => $this->input->post('jenis_hak'),
+                'proses' => $jbs,
+                'kec' => $this->input->post('kecamatan'),
+                'dsa' => $this->input->post('desa'),
+                'luas' => $this->input->post('luas'),
+                'pemilik_hak' => $this->input->post('nama_penjual'),
+                'pembeli_hak' => $this->input->post('nama_pembeli'),
+                'ket' => $this->input->post('ket'),
+            ]; //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
             $this->ModelSertipikat->simpanSertipikat($datas);
+            // echo json_encode($datas);
         }
         redirect('berkas');
     }
@@ -127,9 +109,7 @@ class Berkas extends CI_Controller
         $this->form_validation->set_rules('nama_penjual', 'Nama Penjual', 'required', [
             'required' => 'Nama Penjual Belum diisi!!',
         ]);
-        // $this->form_validation->set_rules('nama_pembeli', 'Nama Pembeli', 'required|trim|', [
-        //     'required' => 'Nama Pembeli Belum diisi!!',
-        // ]);
+
         if ($this->form_validation->run() == false) {
             $data['judul'] = "Daftar Berkas";
             $this->load->view('templates/header', $data);

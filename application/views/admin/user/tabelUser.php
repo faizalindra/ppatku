@@ -6,7 +6,6 @@
                             <?= validation_errors(); ?>
                         </div>
                     <?php } ?>
-                    <!-- <?= $this->session->flashdata('pesan'); ?> -->
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -22,17 +21,19 @@
                             <?php
                             $a = 1;
                             foreach ($staff as $b) { ?>
-                                <tr>
-                                    <th scope="row"><?= $a++; ?></th>
-                                    <td><?= $b['nama']; ?></td>
-                                    <td><?= $b['username']; ?></td>
-                                    <td><?= $b['role_id']; ?></td>
-                                    <td><?= $b['is_active']; ?></td>
-                                    <td>
-                                        <!-- <a href="<?= base_url('buku/ubahBuku/') . $b['id']; ?>" class="badge badge-info"><i class="fas fa-edit"></i> Ubah</a> -->
-                                        <a href="<?= base_url('user/hapusUser/') . $b['id']; ?>" onclick="return confirm('Kamu yakin akan menghapus <?= $b['username']; ?> ?');" class="badge badge-danger"><i class="fas fa-trash"></i> Hapus</a>
-                                    </td>
-                                </tr>
+                                <?php if ($b['role_id'] == 2) { ?>
+                                    <tr>
+                                        <th scope="row"><?= $a++; ?></th>
+                                        <td><?= $b['nama']; ?></td>
+                                        <td><?= $b['username']; ?></td>
+                                        <td><?= $b['role_id']; ?></td>
+                                        <td><?= $b['is_active']; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('user/hapusUser/') . $b['id']; ?>" onclick="return confirm('Kamu yakin akan menghapus <?= $b['username']; ?> ?');" class="badge badge-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+
                             <?php } ?>
                         </tbody>
                     </table>

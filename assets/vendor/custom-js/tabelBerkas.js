@@ -55,6 +55,15 @@ function berkasSelesai(val, vall) {
     }
 }
 
+
+$('.matik').on('change', function() {
+    var biaya_f = document.getElementsByClassName('biaya_f')[0].value;
+    var dp_f = document.getElementsByClassName('dp_f')[0].value;
+    // var dp_f = document.getElementsByClassName('dp_f')[0].value;
+    var tot_bayar_f = biaya_f - dp_f;
+    $('[name="tot_biaya"]').val(tot_bayar_f);
+});
+
 //convert value input kecamatan menjadi id kecamatan
 function conv_kec(val) {
     // id = "";
@@ -365,9 +374,6 @@ function testr() {
         },
         success: function(data) {
             // var window.base_url = < ? php echo json_encode(base_url()); ? > ;
-
-
-
             var html = "";
 
             for (i = 0; i < uniq.length; i++) {
@@ -631,7 +637,7 @@ $('#show_data').on('click', '.edit_berkas', function() {
                 $('[name="nama_pembeli"]').val(data.nama_pembeli);
                 $('[name="biaya"]').val(data.biaya);
                 $('[name="dp"]').val(data.dp);
-                $('[name="harga_edit"]').val(data.tot_biaya);
+                $('[name="tot_biaya"]').val(data.tot_biaya);
                 $('[name="keterangan"]').val(data.keterangan);
                 $(".coment").html("Jenis Berkas : " + data.jenis_berkas);
             });

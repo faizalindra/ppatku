@@ -41,14 +41,18 @@ class Autentifikasi extends CI_Controller{
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'username' => $user['username'],
+                        'nama' => $user['nama'],
                         'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
-                    if($user['role_id'] == 1){
+                    if($user['role_id'] == 0){
+                        //jika benar arahkan ke controller notaris
+                        redirect('notaris');
+                    } else if ($user['role_id'] == 1){
                         //jika benar arahkan ke controller admin
                         redirect('admin');
-                    } else {
-                        //jika benar arahkan ke controller user
+                    }else{
+                        //arahkan ke controller user
                         redirect('user');
                     }
                     // redirect('test1');
@@ -69,6 +73,10 @@ class Autentifikasi extends CI_Controller{
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">User tidak terdaftar</div>');
             redirect('autentifikasi');
         }
+    }
+
+    public function acc_block(){
+        $this->load->view('autentifikasi/blocked');
     }
 
     public function logout()

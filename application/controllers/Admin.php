@@ -7,12 +7,16 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         cek_login();
+        if ($this->session->userdata('role_id') != 1) {
+            //jika bukan admin arahkan ke autentifikasi/acc_block
+            redirect('autentifikasi/acc_block');
+        }
     }
 
     public function index()
     {
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-        $data['berkas'] = $this->ModelBerkas->getBerkasQuery();
+        $data['berkas'] = $this->ModelBerkas->getBerkasUnfinish();
         // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
         $data['judul'] = "Dashboard";
         $this->load->view('templates/header', $data);

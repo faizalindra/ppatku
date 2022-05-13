@@ -757,7 +757,7 @@ CREATE TABLE `tb_ket_proses` (
   `znt` varchar(50) DEFAULT NULL,
   `cek_sertipikat` varchar(50) DEFAULT NULL,
   `tapak_kapling` varchar(50) DEFAULT NULL,
-  `tematik` varchar(50) DEFAULT NULL,
+  `pert_teknis` varchar(50) DEFAULT NULL,
   `pemecahan` varchar(50) DEFAULT NULL,
   `ukur` varchar(50) DEFAULT NULL,
   `ht` varchar(50) DEFAULT NULL,

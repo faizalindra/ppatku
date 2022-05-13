@@ -23,35 +23,43 @@ class ModelSertipikat extends CI_Model
         return $this->db->where('tb_sertipikat', $where);
     }
 
+    //List Sertipikat Tersimpan di tabel tb_sertipikat
     function sertipikat_list()
     {
         $hasil = $this->db->query("SELECT * FROM tb_sertipikat");
         return $hasil->result();
     }
 
-    public function get_sertipikat($id)
+    //untuk mendapatkan sertipikat berdasarkan no_reg
+    function get_sertipikat($id)
     {
-        $hasil = $this->db->query("SELECT * FROM `tb_sertipikat` WHERE no_reg='$id'");
-        if ($hasil->num_rows() > 0) {
-            foreach ($hasil->result() as $data) {
-                $hsl = array(
-                    'pembeli_hak' => $data->pembeli_hak
+        $hsl = $this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$id'");
+        if ($hsl->num_rows() > 0) {
+            foreach ($hsl->result() as $data) {
+                $hasil = array(
+                    'no_reg' => $data->no_reg,
+                    'no_sertipikat' => $data->no_sertipikat,
+                    'luas' => $data->luas,
+                    'dsa' => $data->dsa,
+                    'kec' => $data->kec,
+                    'jenis_hak' => $data->jenis_hak,
+                    'pemilik_hak' => $data->pemilik_hak,
+                    'pembeli_hak' => $data->pembeli_hak,
+                    'proses' => $data->proses,
+                    'ket' => $data->ket,
                 );
             }
         }
-        return $hsl;
+        return $hasil;
     }
 
     //Untuk memperbaharui sertipikat di tb_sertipikat
-    public function updateSertipikat($data = null, $where = null)
+    public function update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $proses, $ket)
     {
-        $this->db->update('tb_sertipikat', $data, $where);
+        $hasil = $this->db->query("UPDATE tb_sertipikat SET jenis_hak='$jenis_hak', no_sertipikat='$no_sertipikat', kec='$kec', dsa='$dsa', luas='$luas', pemilik_hak='$pemilik_hak', pembeli_hak='$pembeli_hak', proses='$proses', ket='$ket' WHERE no_reg='$no_reg'");
+        return $hasil;
     }
 
-    //untuk menghapus sertipikat di tb_sertipikat
-    // public function hapusSertipikat($where = null){
-    //     $this->db->delete('tb_sertipikat', $where);
-    // }
 
     //Untuk mengurutkan dan menghitung sertipikat?, fungsi belum diketahui
     public function total($field, $where)
