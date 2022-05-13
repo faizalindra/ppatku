@@ -13,10 +13,7 @@ class Sertipikat extends CI_Controller
     public function index()
     {
 
-<<<<<<< HEAD
-=======
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
->>>>>>> tugas-akhir
         $data['sertipikat'] = $this->ModelSertipikat->cekSertipikat()->result_array();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
@@ -26,25 +23,6 @@ class Sertipikat extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-<<<<<<< HEAD
-    public function uji()
-    {
-        $id = $this->input->get('id');
-        $data = $this->ModelSertipikat->get_sertipikat($id);
-        echo json_encode($data);
-    }
-
-    public function uji1()
-    {
-        $data = $this->ModelSertipikat->cekSertipikat()->result_array();
-        echo json_encode($data);
-    }
-
-
-    function data_sertipikat()
-    {
-        $data = $this->ModelSertipikat->sertipikat_list();
-=======
     public function get_sertipikat()
     {
         $id = $this->input->get('id');
@@ -89,7 +67,6 @@ class Sertipikat extends CI_Controller
         $pembeli_hak = $this->input->post('pembeli_hak_e');
         $ket = $this->input->post('ket_e');
         $data = $this->ModelSertipikat->update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $proses, $ket);
->>>>>>> tugas-akhir
         echo json_encode($data);
         redirect('sertipikat');
     }
