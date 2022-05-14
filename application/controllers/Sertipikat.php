@@ -17,9 +17,21 @@ class Sertipikat extends CI_Controller
         $data['sertipikat'] = $this->ModelSertipikat->cekSertipikat()->result_array();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarAdmin');
-        $this->load->view('templates/topbar');
-        $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
+        //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
+        if ($this->session->userdata('role_id') == 0) {
+            $this->load->view('templates/sidebarNotaris');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $this->load->view('templates/sidebarAdmin');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $this->load->view('templates/sidebarStaff');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/sertipikat/tabelSertipikat_staff', $data);
+        }
+
         $this->load->view('templates/footer');
     }
 

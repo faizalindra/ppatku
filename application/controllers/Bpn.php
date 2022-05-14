@@ -16,9 +16,20 @@ class Bpn extends CI_Controller
         $data['judul'] = "Daftar Proses BPN";
         $data['sertipikat'] = $this->ModelBpn->get_prosesBPN();
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarAdmin');
-        $this->load->view('templates/topbar');
-        $this->load->view('sidebar/BPN/tabelBPN');
+        //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
+        if ($this->session->userdata('role_id') == 0) {
+            $this->load->view('templates/sidebarNotaris');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn', $data);
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $this->load->view('templates/sidebarAdmin');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn', $data);
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $this->load->view('templates/sidebarStaff');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn_staff', $data);
+        }
         $this->load->view('templates/footer');
     }
 

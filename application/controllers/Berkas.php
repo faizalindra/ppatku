@@ -34,7 +34,6 @@ class Berkas extends CI_Controller
         $desa = $this->input->post('desa');
         $kec = $this->input->post('kecamatan');
         $jenis = $jbs;
-        $status = $this->input->post('status_proses');
         $napen = $this->input->post('nama_penjual');
         $napem = $this->input->post('nama_pembeli');
         $biaya = $this->input->post('biaya');
@@ -42,7 +41,7 @@ class Berkas extends CI_Controller
         $tot_biaya = $this->input->post('tot_biaya');
         // $berkas_s = $this->input->post('berkas_selesai');
         $ket = $this->input->post('keterangan');
-        $data = $this->ModelBerkas->update_berkas($id, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
+        $data = $this->ModelBerkas->update_berkas($id, $reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
         echo json_encode($data);
         redirect('berkas');
     }
@@ -54,11 +53,9 @@ class Berkas extends CI_Controller
         $jb = $this->input->post('jenis_berkas', true);
         $jbs = implode(",", $jb); //mengubah array menjadi string
         $data = [
-            'reg_sertipikat' => $this->input->post('reg_sertipikat', true),
             'desa' => $this->input->post('desa', true),
             'kecamatan' => $this->input->post('kecamatan', true),
             'jenis_berkas' => $jbs,
-            'status_proses' => $this->input->post('status_proses', true),
             'nama_penjual' => $this->input->post('nama_penjual', true),
             'nama_pembeli' => $this->input->post('nama_pembeli', true),
             'biaya' => $this->input->post('biaya', true),
@@ -67,15 +64,23 @@ class Berkas extends CI_Controller
             'keterangan' => $this->input->post('keterangan', true),
             'berkas_selesai' => 0
         ];
-        if ($this->input->post('tgl_masuk') == null) {
-            // echo json_encode($data);
-            $this->ModelBerkas->simpanBerkas($data);
-        } else {
-            $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
-            $data_tgl = array_merge($data,$tgl);
-            // echo json_encode($data_tgl);
-            $this->ModelBerkas->simpanBerkas($data_tgl);
+        if ($this->input->post('tgl_masuk') != null) {
+            $data['tanggal_masuk'] = $this->input->post('tgl_masuk', true);
         }
+        //jika reg_sertipikat tidak kosong maka post data
+        if (!empty($this->input->post('reg_sertipikat'))) {
+            $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
+        }
+        //post $data
+        $this->ModelBerkas->simpanBerkas($data);
+        // if ($this->input->post('tgl_masuk') == null) {
+        //     $this->ModelBerkas->simpanBerkas($data);
+        // } else {
+        //     $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
+        //     $data_tgl = array_merge($data, $tgl);
+        //     // echo json_encode($data_tgl);
+        //     $this->ModelBerkas->simpanBerkas($data_tgl);
+        // }
 
         //data input Sertipikat Tabel Berkas
         $switch = $this->input->post('switch-input', true);
@@ -113,10 +118,22 @@ class Berkas extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = "Daftar Berkas";
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebarAdmin');
-            $this->load->view('templates/topbar');
-            $this->load->view('sidebar/berkas/tabelBerkas', $data);
-            $this->load->view('templates/footer');
+            if ($this->session->userdata('role_id') == 0) {
+                $this->load->view('templates/sidebarNotaris', $data);
+                $this->load->view('templates/topbar');
+                $this->load->view('sidebar/berkas/tabelBerkas', $data);
+                $this->load->view('templates/footer');
+            } else if ($this->session->userdata('role_id') == 1) {
+                $this->load->view('templates/sidebarAdmin', $data);
+                $this->load->view('templates/topbar');
+                $this->load->view('sidebar/berkas/tabelBerkas', $data);
+                $this->load->view('templates/footer');
+            } else {
+                $this->load->view('templates/sidebarAdmin');
+                $this->load->view('templates/topbar');
+                $this->load->view('sidebar/berkas/tabelBerkas_staff', $data);
+                $this->load->view('templates/footer');
+            }
         } else {
             // $username = $this->input->post('username', true);
             // $jb = [$this->input->post('jenis_berkas', true)];
@@ -127,7 +144,6 @@ class Berkas extends CI_Controller
                 'desa' => $this->input->post('desa', true),
                 'kecamatan' => $this->input->post('kecamatan', true),
                 'jenis_berkas' => $this->input->post('jenis_berkas', true),
-                'status_proses' => $this->input->post('status_proses', true),
                 'nama_penjual' => $this->input->post('nama_penjual', true),
                 'nama_pembeli' => $this->input->post('nama_pembeli', true),
                 'biaya' => $this->input->post('biaya', true),

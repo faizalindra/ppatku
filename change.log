@@ -1,3 +1,22 @@
+14 Mei 2022 #00014
+    - Perubahan tabelBerkas
+      - menghapus kolom desa di tabelBerkas
+      - mengubah nomor registrasi menjadi nomor sertipikat pada tabelBerkas
+        - data yang digunakan untuk tabelBerkas sekarang adalah hasil join dari tb_berkas & tb_sertipikat
+      - mengubah tombol reg_sertipikat menjadi nomor sertipikat
+      - menambah badge 'Berkas Dicabut' di tabelBerkas
+      - memperbaiki template berkas terdaftar, proses dan selesai pada tabelBerkas & tabelBPN
+      - menghapus funsgsi sring_to_array() pada tabelBerkas.js
+      - memindah fungsi berkasSelesai() ke dalam fungsi data_berkas() pada tabelBerkas.js
+    - menambah list gitignore(controller/test, model/test & folder test)
+    - memperbaiki bug post nomor reg_sertipikat pada form input berkas
+      - sebelum fix reg_sertipikat di POST dengan value 0, setelah fix jika reg_sertipikat NULL maka tidak usah post reg_sertipikat
+    - menghapus status_proses dari database & file
+    - fix bug sidebarAdmin di load di halaman berkas dan sertipikat pada notaris
+    - menghapus file tabelBerkasv2.php
+    - menambah file tabelBerkas_staff.php(belum di edit)
+
+
 12 Mei 2022 #00013
     - Menambah user notaris
         - menambah halaman notaris

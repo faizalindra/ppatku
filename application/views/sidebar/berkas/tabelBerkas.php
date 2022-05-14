@@ -6,18 +6,37 @@
         </div>
         <div class="card-body">
 
-            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
-            
-            <p></p>
+            <div class="comtainer">
+                <div class="row">
+                    <div class="col-auto col-md-2">
+                        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Proses Terdaftar </div>
+                            <div class="row-md-2 justify-content-end">: 13</div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Proses Berjalan</div>
+                            <div class="row-md-2 justify-content-end">: 12</div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Proses Selesai</div>
+                            <div class="row-md-2 justify-content-end">: 31</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-auto">
+                <div class="col-lg-12 col-auto">
                     <table class="table table-striped" id="tabel-berkas">
                         <thead>
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Tanggal Masuk</th>
-                                <th>Reg Sertipikat</th>
-                                <th>Desa</th>
+                                <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
                                 <th>Jenis Berkas</th>
                                 <th>Nama Penjual</th>
@@ -61,7 +80,7 @@
                                             Nomor Registrasi Sertipikat
                                         </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" autocomplete="off" value="<?= set_value('reg_sertipikat'); ?>">
+                                            <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -5,15 +5,27 @@
         <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas Proses BPN</h6>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-auto">
-                <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
-            </div>
-            <div class="col-sm-6 col-auto"></div>
-            <div class="col-sm-4">
-                <div class="col-auto">Proses Terdaftar :</div>
-                <div class="col-auto">Proses Berjalan :</div>
-                <div class="col-auto">Proses Selesai :</div>
+
+        <div class="comtainer">
+            <div class="row">
+                <div class="col-auto col-md-2">
+                    <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
+                </div>
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                    <div class="row justify-content-end">
+                        <div class="row-md-2 justify-content-end">Proses Terdaftar </div>
+                        <div class="row-md-2 justify-content-end">: 13</div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="row-md-2 justify-content-end">Proses Berjalan</div>
+                        <div class="row-md-2 justify-content-end">: 12</div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="row-md-2 justify-content-end">Proses Selesai</div>
+                        <div class="row-md-2 justify-content-end">: 31</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -121,11 +133,11 @@
 <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
 <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
-<style>
+<!-- <style>
     table,
     th,
     td {
         border: 1px solid black;
         border-collapse: collapse;
     }
-</style>
+</style> -->

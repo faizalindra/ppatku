@@ -54,7 +54,7 @@ class ModelBerkas extends CI_Model
 
     function berkas_list()
     {
-        $hasil = $this->db->query("SELECT * FROM tb_berkas");
+        $hasil = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat");
         return $hasil->result();
     }
 
@@ -72,7 +72,6 @@ class ModelBerkas extends CI_Model
                     'kecamatan' => $data->kecamatan,
                     'jenis_berkas' => $data->jenis_berkas,
                     'id_proses' => $data->id_proses,
-                    'status_proses' => $data->status_proses,
                     'nama_penjual' => $data->nama_penjual,
                     'nama_pembeli' => $data->nama_pembeli,
                     'biaya' => $data->biaya,
@@ -95,9 +94,9 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    function update_berkas($id, $reg, $desa, $kec,  $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
+    function update_berkas($id, $reg, $desa, $kec,  $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
     {
-        $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', status_proses='$status', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', keterangan='$ket' WHERE id='$id'");
+        $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', keterangan='$ket' WHERE id='$id'");
         return $hasil;
     }
 

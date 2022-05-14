@@ -25,7 +25,7 @@ $('.datepicker').datepicker({
 $('.select2').select2();
 $('.proses').select2();
 
-//mengubah null menjadi whitespace
+//mengubah null pada kolom biaya menjadi whitespace
 function antinull(val) {
     c = " ";
     val2 = "Rp. " + addCommas(val);
@@ -41,21 +41,7 @@ function antinull(val) {
     }
 }
 
-function berkasSelesai(val, vall) {
-    // window.base_url = '<?php echo json_encode(base_url()); ?>';
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    tail = '</a>';
-    condi1 = '<a href="#"  class="badge badge-info btn-berkas_selesai"> Selesai';
-    condi2 = '<a href="' + base_url + '/proses/berkas_selesai/' + vall + '/1/" onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-danger"> Proses';
-    if (val == 1) {
-        return condi1 + tail;
-    } else {
-        return condi2 + tail;
-    }
-}
-
-
+//menghitung total biaya
 $('.matik').on('change', function() {
     var biaya_f = document.getElementsByClassName('biaya_f')[0].value;
     var dp_f = document.getElementsByClassName('dp_f')[0].value;
@@ -147,10 +133,8 @@ $('.switch-input-sertipikat').click(function() {
 $('#kecamatan').change(function() {
     var kec1 = $('#kecamatan').val();
     var id = conv_kec(kec1);
-    // alert(id);
     var getUrl = window.location;
     var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    // alert(base_url) + "wilayah/get_desa";
     $.ajax({
         url: base_url + "/wilayah/get_desa",
         method: "get",
@@ -178,7 +162,6 @@ $('#kecamatan').change(function() {
 $('#kec').change(function() {
     var kec = $('#kec').val();
     var id = conv_kec(kec);
-    // alert(id);
     var getUrl = window.location;
     var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
@@ -190,8 +173,6 @@ $('#kec').change(function() {
         async: true,
         dataType: 'json',
         success: function(data) {
-            // alert(id);
-
             var html = '';
             var i;
             for (i = 0; i < data.length; i++) {
@@ -214,40 +195,48 @@ function data_berkas() {
         async: true,
         dataType: 'json',
         success: function(data) {
-            function sertipikat(val) {
-                cond1 = '<button href="javascript:;" class="btn btn-info btn_sertipikat" data="' + data[i].id + '">' + val
-                cond2 = " "
-                if (val >= 1) {
-                    return cond1;
-                } else
-                    return cond2;
-            }
-
-            function proses(val) {
-                if (val >= 1) {
-                    return val
+            function sertipikat(val0, val1, val2) {
+                c = " ";
+                cond1 = '<href href="javascript:;" class="btn_sertipikat" data="' + data[i].id + '">'
+                if (val1 == null) {
+                    return c;
+                } else {
+                    sert = val0 + '. ' + val1 + "/" + val2;
+                    return cond1 + sert;
                 }
             }
+
+            function berkasSelesai(val, vall) {
+                var getUrl = window.location;
+                var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+                condi0 = '<a href=' + base_url + '/proses/berkas_selesai/' + vall + '/1/ onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-warning"> Proses </a>';
+                condi1 = '<i class="badge badge-info"> Selesai </i>';
+                condi2 = '<a href="#"  class="badge badge-danger"> Berkas Dicabut </a>';
+                if (val == 0) {
+                    return condi0;
+                } else if (val == 1) {
+                    return condi1;
+                } else {
+                    return condi2;
+                }
+            }
+
             var html = '';
             var i;
-            // var c = 0;
             for (i = 0; i < data.length; i++) {
                 // c++
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + data[i].id + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
-                    '<td>' + sertipikat(antinull(data[i].reg_sertipikat)) + '</td>' +
-                    '<td>' + data[i].desa + '</td>' +
+                    '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].dsa) + '</td>' +
                     '<td>' + data[i].kecamatan + '</td>' +
                     '<td>' + data[i].jenis_berkas + '</td>' +
-                    // '<td>' + antinull(data[i].id_proses) + '</td>' +
-                    // '<td>' + data[i].status_proses + '</td>' +
                     '<td>' + data[i].nama_penjual + '</td>' +
                     '<td>' + data[i].nama_pembeli + '</td>' +
                     '<td>' + berkasSelesai(data[i].berkas_selesai, data[i].id) + '</td>' +
                     '<td style="text-align:center;">' +
-                    '<button id="uji1" href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
-                    '<button id="uji1" href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
+                    '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
+                    '<button href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
                     '</td>' + '</tr>';
             }
             $('#show_data').html(html);
@@ -274,7 +263,7 @@ $('#show_data').on('click', '.item_detail', function() {
             id: id
         },
         success: function(data) {
-            $.each(data, function(id, tgl_masuk, reg_sertipikat, desa, kecamatan, jenis_berkas, status_proses, nama_penjual, nama_pembeli, dp, biaya, tot_biaya, berkas_selesai, luas) {
+            $.each(data, function(id, tgl_masuk, reg_sertipikat, desa, kecamatan, jenis_berkas, nama_penjual, nama_pembeli, dp, biaya, tot_biaya, berkas_selesai, luas) {
                 $('#ModalDetail').modal('show');
                 var html1 = "";
                 html1 += '<tr class="text-capitalize text-center">' +
@@ -289,7 +278,6 @@ $('#show_data').on('click', '.item_detail', function() {
                     '<td>' + antinull(data.biaya) + '</td>' +
                     '<td>' + antinull(data.dp) + '</td>' +
                     '<td>' + antinull(data.tot_biaya) + '</td>' +
-                    // '<td>' + data.berkas_selesai + '</td>' +
                     '</tr>' +
                     '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
                     '</td>' + '</tr>' +
@@ -577,7 +565,6 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
         },
         success: function(data) {
             $.each(data, function(no_reg, no_sertipikat, tgl_daftar, jenis_hak, luas, desa, kecamatan, pemilik_hak, pembeli_hak, proses, ket) {
-                // $.each(data, function(id, desa, nama_penjual) {
                 $('#ModalSertipikat').modal('show');
                 var html = "";
                 html += '<tr class="text-capitalize text-center">' +
@@ -597,7 +584,6 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
             });
         },
         error: function() {
-            // $('#ModalDetail').modal('show');
             alert('gagal mengambil data sertipikat');
 
         }
@@ -605,13 +591,8 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
     return false;
 });
 
-// mengubah string menjadi array berdasarkan comma
-function sring_to_array(val) {
-    var val = string.split(',');
-    return val;
-}
+
 //edit berkas
-//GET UPDATE
 $('#show_data').on('click', '.edit_berkas', function() {
     var id = $(this).attr('data');
     var getUrl = window.location;
@@ -624,7 +605,7 @@ $('#show_data').on('click', '.edit_berkas', function() {
             id: id
         },
         success: function(data) {
-            $.each(data, function(id, reg_sertipikat, desa, kecamatan, jenis_berkas, status_proses, nama_penjual, nama_pembeli, biaya, dp, tot_biaya, keterangan) {
+            $.each(data, function(id, reg_sertipikat, desa, kecamatan, jenis_berkas, nama_penjual, nama_pembeli, biaya, dp, tot_biaya, keterangan) {
                 $('#formedit').modal('show');
                 $('[name="id"]').val(data.id);
                 $('[name="tgl_masuk"]').val(data.tgl_masuk);
@@ -632,7 +613,6 @@ $('#show_data').on('click', '.edit_berkas', function() {
                 $('[name="desa"]').val(data.desa);
                 $('[name="kecamatan"]').val(data.kecamatan);
                 $('[name="jenis_berkas[]"]').val(data.jenis_berkas);
-                $('[name="status_proses"]').val(data.status_proses);
                 $('[name="nama_penjual"]').val(data.nama_penjual);
                 $('[name="nama_pembeli"]').val(data.nama_pembeli);
                 $('[name="biaya"]').val(data.biaya);
@@ -852,30 +832,6 @@ $('#ModalDetail').on('click', '.btn-tapak_kapling', function() {
             });
         }
     })
-    //tombol tapak_kapling
-    // $('#ModalDetail').on('click', '.btn-tapak_kapling', function() {
-    //     var id = document.getElementById('id_btn-tapak_kapling').getAttribute('data-id');
-    //     var val = document.getElementById('id_btn-tapak_kapling').getAttribute('data-val');
-    //     // alert(id);
-    //     // alert(val);
-    //     if (confirm("Lanjutkan Proses?")) {
-    //         $.ajax({
-    //             type: 'post',
-    //             url: base_url + '/proses/tapak_kapling',
-    //             dataType: 'JSON',
-    //             data: {
-    //                 id: id,
-    //                 val: val
-    //             },
-    //             success: function(data) {
-    //                 testr();
-    //             },
-    //             error: function() {
-    //                 alert('Gagal mengambil data proses');
-    //             }
-    //         });
-    //     }
-    // })
     //tombol bayar_pajak
 $('#ModalDetail').on('click', '.btn-bayar_pajak', function() {
         var id = document.getElementById('id_btn-bayar_pajak').getAttribute('data-id');
