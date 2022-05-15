@@ -19,8 +19,7 @@ function addCommas(nStr) {
 }
 
 $('.datepicker').datepicker({
-    format: 'yy-mm-dd',
-    formatSubmit: 'yyyy-mm-dd'
+    dateFormat: 'yy-mm-dd'
 });
 $('.select2').select2();
 $('.proses').select2();
@@ -185,6 +184,17 @@ $('#kec').change(function() {
     return false;
 });
 
+function sertipikat(val0, val1, val2, val3, val4) {
+    c = " ";
+    cond1 = '<href href="javascript:;" class="btn_sertipikat" data="' + val4 + '">'
+    if (val1 == null) {
+        return c + '/ ' + val3;
+    } else {
+        sert = val0 + '. ' + val1 + "/" + val2;
+        return cond1 + sert;
+    }
+}
+
 // fungsi tampil berkas
 function data_berkas() {
     var getUrl = window.location;
@@ -195,16 +205,7 @@ function data_berkas() {
         async: true,
         dataType: 'json',
         success: function(data) {
-            function sertipikat(val0, val1, val2) {
-                c = " ";
-                cond1 = '<href href="javascript:;" class="btn_sertipikat" data="' + data[i].id + '">'
-                if (val1 == null) {
-                    return c;
-                } else {
-                    sert = val0 + '. ' + val1 + "/" + val2;
-                    return cond1 + sert;
-                }
-            }
+
 
             function berkasSelesai(val, vall) {
                 var getUrl = window.location;
@@ -228,7 +229,7 @@ function data_berkas() {
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + data[i].id + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
-                    '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].dsa) + '</td>' +
+                    '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].dsa, data[i].desa, data[i].reg_sertipikat) + '</td>' +
                     '<td>' + data[i].kecamatan + '</td>' +
                     '<td>' + data[i].jenis_berkas + '</td>' +
                     '<td>' + data[i].nama_penjual + '</td>' +
@@ -263,31 +264,27 @@ $('#show_data').on('click', '.item_detail', function() {
             id: id
         },
         success: function(data) {
-            $.each(data, function(id, tgl_masuk, reg_sertipikat, desa, kecamatan, jenis_berkas, nama_penjual, nama_pembeli, dp, biaya, tot_biaya, berkas_selesai, luas) {
-                $('#ModalDetail').modal('show');
-                var html1 = "";
-                html1 += '<tr class="text-capitalize text-center">' +
-                    '<td id="id_proses_id" data-value="' + data.id + '">' + data.id + '</td>' +
-                    '<td>' + data.tgl_masuk + '</td>' +
-                    '<td>' + antinull(data.reg_sertipikat) + '</td>' +
-                    '<td>' + data.desa + '</td>' +
-                    '<td>' + data.kecamatan + '</td>' +
-                    '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
-                    '<td>' + data.nama_penjual + '</td>' +
-                    '<td>' + data.nama_pembeli + '</td>' +
-                    '<td>' + antinull(data.biaya) + '</td>' +
-                    '<td>' + antinull(data.dp) + '</td>' +
-                    '<td>' + antinull(data.tot_biaya) + '</td>' +
-                    '</tr>' +
-                    '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
-                    '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="14" id="ujtes"> Proses : ' +
-                    '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
+            $('#ModalDetail').modal('show');
+            var html1 = "";
+            html1 += '<tr class="text-capitalize text-center">' +
+                '<td id="id_proses_id" data-value="' + data.id + '">' + data.id + '</td>' +
+                '<td>' + data.tgl_masuk + '</td>' +
+                '<td>' + sertipikat(data.jenis_hak, data.no_sertipikat, data.dsa, data.desa) + '</td>' +
+                '<td>' + data.kecamatan + '</td>' +
+                '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
+                '<td>' + data.nama_penjual + '</td>' +
+                '<td>' + data.nama_pembeli + '</td>' +
+                '<td>' + antinull(data.biaya) + '</td>' +
+                '<td>' + antinull(data.dp) + '</td>' +
+                '<td>' + antinull(data.tot_biaya) + '</td>' +
+                '</tr>' +
+                '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
+                '</td>' + '</tr>' +
+                '<tr>' + '<td colspan="14" id="ujtes"> Proses : ' +
+                '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
 
-                $('#data_detail').html(html1);
-                testr();
-
-            });
+            $('#data_detail').html(html1);
+            testr();
         },
         error: function() {
             alert('Gagal Mengambil detail berkas');
@@ -558,21 +555,20 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
     var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         method: "GET",
-        url: base_url + '/berkas/get_berkas',
+        url: base_url + '/sertipikat/get_sertipikat',
         dataType: "JSON",
         data: {
             id: id
         },
         success: function(data) {
-            $.each(data, function(no_reg, no_sertipikat, tgl_daftar, jenis_hak, luas, desa, kecamatan, pemilik_hak, pembeli_hak, proses, ket) {
+            $.each(data, function(no_sertipikat, tgl_daftar, jenis_hak, luas, dsa, kec, pemilik_hak, pembeli_hak, proses, ket) {
                 $('#ModalSertipikat').modal('show');
                 var html = "";
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + id + '</td>' +
                     '<td>' + data.tgl_daftar + '</td>' +
-                    '<td>' + data.no_reg + '</td>' +
-                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + '</td>' +
-                    '<td>' + data.kecamatan + '</td>' +
+                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.dsa + '</td>' +
+                    '<td>' + data.kec + '</td>' +
                     '<td>' + antinull(data.luas) + '</td>' +
                     '<td>' + data.pemilik_hak + '</td>' +
                     '<td>' + data.pembeli_hak + '</td>' +

@@ -33,7 +33,6 @@ $(document).ready(function() {
                         '<td>' + data[i].nama_pemohon + '</td>' +
                         '<td>' + data[i].no_bpn + '</td>' +
                         '<td>' + data[i].jenis_proses + '</td>' +
-                        '<td>' + estimasi(data[i].estimasi) + '</td>' +
                         '<td class="text-left">' + antinull(data[i].ket) + '</td>' +
                         '<td style="text-align:center;">' +
                         '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' +
@@ -57,27 +56,27 @@ $(document).ready(function() {
         });
     }
 
-    function estimasi(tgl) {
-        var date1 = new Date(tgl);
-        var date2 = new Date();
+    // function estimasi(tgl) {
+    //     var date1 = new Date(tgl);
+    //     var date2 = new Date();
 
-        // To calculate the time difference of two dates
-        var Difference_In_Time = date1.getTime() - date2.getTime();
+    //     // To calculate the time difference of two dates
+    //     var Difference_In_Time = date1.getTime() - date2.getTime();
 
-        // To calculate the no. of days between two dates
-        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-        hari = Difference_In_Days.toFixed(0);
-        var bulan = 0;
-        if (hari >= 30) {
-            while (hari >= 30) {
-                hari = hari - 30;
-                bulan = bulan + 1;
-            }
-            return bulan + " Bulan " + hari + " Hari";
-        } else {
-            return hari + " Hari";
-        }
-    }
+    //     // To calculate the no. of days between two dates
+    //     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    //     hari = Difference_In_Days.toFixed(0);
+    //     var bulan = 0;
+    //     if (hari >= 30) {
+    //         while (hari >= 30) {
+    //             hari = hari - 30;
+    //             bulan = bulan + 1;
+    //         }
+    //         return bulan + " Bulan " + hari + " Hari";
+    //     } else {
+    //         return hari + " Hari";
+    //     }
+    // }
 
     // $('#uji2').on('click', function() {
     //     var one_day = 1000 * 60 * 60 * 24

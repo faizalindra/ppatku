@@ -65,7 +65,7 @@ class Berkas extends CI_Controller
             'berkas_selesai' => 0
         ];
         if ($this->input->post('tgl_masuk') != null) {
-            $data['tanggal_masuk'] = $this->input->post('tgl_masuk', true);
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk', true);
         }
         //jika reg_sertipikat tidak kosong maka post data
         if (!empty($this->input->post('reg_sertipikat'))) {
@@ -73,33 +73,6 @@ class Berkas extends CI_Controller
         }
         //post $data
         $this->ModelBerkas->simpanBerkas($data);
-        // if ($this->input->post('tgl_masuk') == null) {
-        //     $this->ModelBerkas->simpanBerkas($data);
-        // } else {
-        //     $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
-        //     $data_tgl = array_merge($data, $tgl);
-        //     // echo json_encode($data_tgl);
-        //     $this->ModelBerkas->simpanBerkas($data_tgl);
-        // }
-
-        //data input Sertipikat Tabel Berkas
-        $switch = $this->input->post('switch-input', true);
-        // echo $switch; 
-        if ($switch == true) {
-            $datas = [
-                'no_sertipikat' => $this->input->post('no_sertipikat'),
-                'jenis_hak' => $this->input->post('jenis_hak'),
-                'proses' => $jbs,
-                'kec' => $this->input->post('kecamatan'),
-                'dsa' => $this->input->post('desa'),
-                'luas' => $this->input->post('luas'),
-                'pemilik_hak' => $this->input->post('nama_penjual'),
-                'pembeli_hak' => $this->input->post('nama_pembeli'),
-                'ket' => $this->input->post('ket'),
-            ]; //cek switch input sertipikat, jika di aktifkan maka simpan sertipikat
-            $this->ModelSertipikat->simpanSertipikat($datas);
-            // echo json_encode($datas);
-        }
         redirect('berkas');
     }
 

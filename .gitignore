@@ -18,3 +18,5 @@ application/logs/*
 application/views/test/
 .Testing.php
 .ModelTest.php
+application/controllers/Testing.php
+application/models/ModelTest.php

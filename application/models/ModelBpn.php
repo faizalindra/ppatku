@@ -25,7 +25,6 @@ class ModelBpn extends CI_Model
                     'nama_pemohon' => $data->nama_pemohon,
                     'no_bpn' => $data->no_bpn,
                     'jenis_proses' => $data->jenis_proses,
-                    'estimasi' => $data->estimasi,
                     'ket' => $data->ket,
                     'status' => $data->status,
                 );

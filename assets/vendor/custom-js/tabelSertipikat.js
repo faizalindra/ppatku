@@ -23,7 +23,7 @@ $(document).ready(function() {
                 for (i = 1; i < data.length; i++) {
                     c++
                     html += '<tr class="text-capitalize text-center">' +
-                        '<td>' + c + '</td>' +
+                        // '<td>' + c + '</td>' +
                         '<td>' + data[i].no_reg + '</td>' +
                         '<td>' + data[i].tgl_daftar + '</td>' +
                         '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + ' / ' + data[i].dsa + '</td>' +

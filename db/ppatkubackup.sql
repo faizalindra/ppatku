@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2021 at 08:53 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Generation Time: May 15, 2022 at 06:12 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -352,7 +352,7 @@ INSERT INTO `kecamatan` (`id`, `nama`) VALUES
 (17, 'Sigaluh'),
 (18, 'Susukan'),
 (19, 'Wanadadi'),
-(20, 'Wanayas');
+(20, 'Wanayasa');
 
 -- --------------------------------------------------------
 
@@ -367,15 +367,12 @@ CREATE TABLE `tb_berkas` (
   `desa` text NOT NULL,
   `kecamatan` text NOT NULL,
   `jenis_berkas` varchar(100) NOT NULL,
-  `id_proses` int(5) DEFAULT NULL,
-  `status_proses` int(5) DEFAULT NULL,
   `nama_penjual` varchar(255) NOT NULL,
-  `nama_pembeli` varchar(255) NOT NULL,
+  `nama_pembeli` varchar(255) DEFAULT NULL,
   `biaya` int(12) DEFAULT 0,
   `dp` int(8) DEFAULT 0,
   `tot_biaya` int(9) DEFAULT 0,
   `keterangan` varchar(255) DEFAULT ' ',
-  `konversi` int(1) NOT NULL DEFAULT 0,
   `berkas_selesai` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -383,44 +380,80 @@ CREATE TABLE `tb_berkas` (
 -- Dumping data for table `tb_berkas`
 --
 
-INSERT INTO `tb_berkas` (`id`, `tgl_masuk`, `reg_sertipikat`, `desa`, `kecamatan`, `jenis_berkas`, `id_proses`, `status_proses`, `nama_penjual`, `nama_pembeli`, `biaya`, `dp`, `tot_biaya`, `keterangan`, `konversi`, `berkas_selesai`) VALUES
-(1, '2021-12-01', 1, 'Mandiraja', 'Mandiraja Wetan', 'AJB', 0, 0, 'iubfub', 'bjubbvis', 0, 0, 0, ' ', 0, 0),
-(2, '2021-12-05', 2, 'Mandiraja', 'Mandiraja Kulon', 'APHT', 1, 0, 'pohiah', 'nhifhiasf', 62686000, 4749720, 0, 'nofnofhhbs', 0, 0),
-(3, '2021-11-29', NULL, 'purwanegara', 'purwanegara', 'SKMHT', NULL, NULL, 'sri', 'khosiyah', 0, 0, 0, ' ', 0, 0),
-(6, '2021-11-29', 3, 'Banjengan', 'Mandiraja', 'APHT', 0, NULL, 'Indra', 'Indra', 40000000, NULL, 0, ' ', 0, 0),
-(8, '2021-11-29', 4, 'Banjengan', 'Mandiraja', 'APHT', 0, NULL, 'Faizali', '', 0, 0, 0, ' ', 0, 1),
-(9, '2021-11-29', 2, 'Kaliwungu', 'Mandiraja', 'APHB', 0, NULL, 'Amri', 'Indra', 40000000, NULL, 0, ' ', 0, 0),
-(12, '2021-11-29', NULL, 'kalimendong', 'purwanegara', 'AJB,Konversi', 0, NULL, 'Munawar', 'Hamid', 0, 0, 0, ' ', 0, 0),
-(14, '2021-11-29', NULL, 'merden', 'purwanegara', 'SKMHT', NULL, NULL, 'arif', 'mustakim', 0, 0, 0, ' ', 0, 0),
-(19, '2021-11-29', NULL, 'gfuegabni', 'nfois', 'AJB', NULL, NULL, 'noitbu9w9jcn', 'obofweboub', 0, 0, 0, ' ', 0, 0),
-(20, '2021-11-29', NULL, 'fnon', 'ofneona', 'APHT', NULL, NULL, 'kjbfjeb', 'kjbfejob', 0, 0, 0, ' ', 0, 0),
-(23, '2021-11-29', NULL, 'qazwsx', 'edcrfv', 'Pemecahan', NULL, NULL, 'indra', 'faizal', 0, 0, 0, ' ', 0, 0),
-(24, '2021-11-29', NULL, 'plmokj', 'iif', 'Pengeringan', NULL, NULL, 'indra', 'faizal', 0, 0, 0, ' ', 0, 0),
-(28, '2021-11-29', 0, 'Banjengan', 'Mandiraja', 'APHT', NULL, NULL, 'infi', 'infwin', 0, 0, 0, '', 0, 0),
-(29, '2021-11-29', 0, 'Purwasaba', 'Mandiraja', 'Hibah', NULL, NULL, 'Indra', 'Hamid', 0, 0, 0, '', 0, 0),
-(30, '2021-11-29', 0, 'Purwasaba', 'Mandiraja', 'APHT', NULL, NULL, 'Indra', 'infwin', 0, 0, 0, '', 0, 0),
-(36, '2021-11-29', 0, 'Banjengan', 'Mandiraja', 'Hibah', NULL, NULL, 'infi', 'fniqn', 0, 0, 0, '', 0, 0),
-(40, '2021-11-29', 0, 'Banjengan', 'Mandiraja', 'Hibah', NULL, NULL, 'Indra', 'infwin', 0, 0, 0, '', 0, 0),
-(41, '2021-11-29', 0, 'Banjengan', 'Mandiraja', 'Konversi', NULL, NULL, 'Faizal', 'infwin', 0, 0, 0, '', 0, 0),
-(42, '2021-11-29', 0, 'Purwasaba', 'jfijnn', 'Konversi', NULL, NULL, 'Indra', 'Hamid', 0, 0, 0, '', 0, 0),
-(43, '2021-11-29', 0, 'ih8', 'ojonfro', 'APHB', NULL, NULL, 'infi', 'Hamid', 0, 0, 0, '', 0, 0),
-(44, '2021-11-29', 0, 'kfbi', 'fnwofn', 'SKMHT', NULL, NULL, 'knfqpnkwfn', 'ofnwo', 0, 0, 0, '', 0, 0),
-(45, '2021-11-29', 0, 'Purwasaba', 'ifi0on', 'Hibah', NULL, NULL, 'Indra', 'Hamid', 0, 0, 0, '', 0, 0),
-(46, '2021-11-29', 0, 'Purwasaba', 'ifi0on', 'Hibah', NULL, NULL, 'infi', 'infwin', 0, 0, 0, '', 0, 0),
-(47, '2021-11-29', 0, 'kfbi', 'fnwofn', 'APHB', NULL, NULL, 'Indra', 'nifn', 0, 0, 0, '', 0, 0),
-(48, '2021-11-29', 0, 'kfbi', 'fnwofn', 'APHB', NULL, NULL, 'Indra', 'nifn', 0, 0, 0, '', 0, 0),
-(49, '2021-11-29', 0, 'Purwasaba', 'fnwofn', 'Hibah', NULL, NULL, 'inifn', 'nifn', 0, 0, 0, '', 0, 0),
-(50, '2021-11-29', 0, 'Banjengan,mandiraja', 'mandiraja', 'Pemecahan', NULL, NULL, 'inifn', 'infwin', 0, 0, 0, '', 0, 0),
-(51, '2021-11-29', 0, 'Banjengan', 'fnwofn', 'Hibah', NULL, NULL, 'Faizal', 'ofnwo', 0, 0, 0, '', 0, 0),
-(76, '2021-11-29', 0, 'Purwasaba', 'ifi0on', 'Konversi,Hibah', NULL, NULL, 'knfqpnkwfn', 'Indra', 0, 0, 0, '', 0, 0),
-(77, '2021-11-29', 0, 'Purwasaba', 'ifi0on', 'APHT,SKMHT,Hibah', NULL, NULL, 'amri', 'faizul', 0, 0, 0, '', 0, 0),
-(78, '2021-11-29', 0, 'Purwasaba', 'ifi0on', 'APHT,SKMHT,Hibah', NULL, NULL, 'amri', 'faizul', 0, 0, 0, '', 0, 0),
-(80, '2021-11-29', 0, 'Kesenet', 'Banjarnegara', 'SKMHT', NULL, NULL, 'infi', 'Hamid', 0, 0, 0, '', 0, 0),
-(81, '2021-11-30', 0, 'Mandiraja Wetan', 'Mandiraja', 'AJB,Hibah', NULL, 0, 'Indra', 'Faizal', 0, 0, 0, '', 0, 0),
-(85, '0000-00-00', NULL, 'Mandiraja Kulon', 'Mandiraja', 'AJB', NULL, NULL, 'QAZ', 'WSX', 0, 0, 0, ' ', 0, 0),
-(86, '0000-00-00', NULL, 'Mandiraja Kulon', 'Mandiraja', 'AJB', NULL, NULL, 'QAZ', 'WSX', 0, 0, 0, ' ', 0, 0),
-(87, '0000-00-00', NULL, 'Banjengan', 'Mandiraja', 'APHT', NULL, NULL, 'qaz', 'wsx', 0, 0, 0, ' ', 0, 0),
-(88, '0000-00-00', 1, 'Bawang', 'Mantrianom', 'AJB,SKMHT,Konversi', NULL, 0, 'infi', 'Hamid', 4000000, 0, 0, '- kurang ktp\r\n- kurang sppt', 0, 0);
+INSERT INTO `tb_berkas` (`id`, `tgl_masuk`, `reg_sertipikat`, `desa`, `kecamatan`, `jenis_berkas`, `nama_penjual`, `nama_pembeli`, `biaya`, `dp`, `tot_biaya`, `keterangan`, `berkas_selesai`) VALUES
+(1, '2021-12-01', 1, 'Mandiraja', 'Mandiraja Wetan', 'AJB', 'iubfub', 'bjubbvis', 0, 0, 0, ' Selesai', 1),
+(2, '2021-12-05', 2, 'Mandiraja Kulon', 'Mandiraja', 'APHT', 'pohiah', 'nhifhiasf', 62686000, 4749720, 0, 'nofnofhhbs', 1),
+(3, '2021-11-29', 21, 'purwanegara', 'purwanegara', 'AJB', 'sri', 'khosiyah', 0, 0, 0, ' jajal; drop table lapangan;', 1),
+(6, '2021-11-29', 3, 'Banjengan', 'Mandiraja', 'APHT', 'Indra', 'Indra', 40000000, NULL, 0, ' ', 1),
+(8, '2021-11-29', 4, 'Banjengan', 'Mandiraja', 'APHT', 'Faizali', '', 0, 0, 0, ' ', 1),
+(9, '2021-11-29', 2, 'Mandiraja', 'Kaliwungu', 'APHB', 'Amri', 'Indra', 40000000, 5000000, 0, ' ', 1),
+(12, '2021-11-29', NULL, 'kalimendong', 'purwanegara', 'AJB,Konversi', 'Munawar', 'Hamid', 0, 0, 0, ' ', 1),
+(14, '2021-11-29', NULL, 'merden', 'purwanegara', 'APHT', 'arif', 'mustakim', 0, 0, 0, ' ', 1),
+(19, '2021-11-29', NULL, 'gfuegabni', 'nfois', 'AJB', 'noitbu9w9jcn', 'obofweboub', 0, 0, 0, ' ', 1),
+(20, '2021-11-29', NULL, 'fnon', 'ofneona', 'APHT', 'kjbfjeb', 'kjbfejob', 0, 0, 0, ' ', 1),
+(23, '2021-11-29', NULL, 'qazwsx', 'edcrfv', 'Pemecahan', 'indra', 'faizal', 0, 0, 0, ' ', 0),
+(24, '2021-11-29', NULL, 'plmokj', 'iif', 'Pengeringan', 'indra', 'faizal', 0, 0, 0, ' ', 0),
+(28, '2021-11-29', NULL, 'Banjengan', 'Mandiraja', 'APHT', 'infi', 'infwin', 0, 0, 0, '', 0),
+(29, '2021-11-29', NULL, 'Purwasaba', 'Mandiraja', 'Hibah', 'Indra', 'Hamid', 0, 0, 0, '', 0),
+(30, '2021-11-29', NULL, 'Purwasaba', 'Mandiraja', 'APHT', 'Indra', 'infwin', 0, 0, 0, '', 0),
+(36, '2021-11-29', NULL, 'Banjengan', 'Mandiraja', 'Hibah', 'infi', 'fniqn', 0, 0, 0, '', 0),
+(40, '2021-11-29', NULL, 'Banjengan', 'Mandiraja', 'Hibah', 'Indra', 'infwin', 0, 0, 0, '', 0),
+(41, '2021-11-29', NULL, 'Banjengan', 'Mandiraja', 'Konversi', 'Faizal', 'infwin', 0, 0, 0, '', 0),
+(42, '2021-11-29', NULL, 'Purwasaba', 'jfijnn', 'Konversi', 'Indra', 'Hamid', 0, 0, 0, '', 1),
+(43, '2021-11-29', NULL, 'ih8', 'ojonfro', 'APHB', 'infi', 'Hamid', 0, 0, 0, '', 1),
+(44, '2021-11-29', NULL, 'kfbi', 'fnwofn', 'SKMHT', 'knfqpnkwfn', 'ofnwo', 0, 0, 0, '', 0),
+(45, '2021-11-29', NULL, 'Purwasaba', 'ifi0on', 'Hibah', 'Indra', 'Hamid', 0, 0, 0, '', 0),
+(46, '2021-11-29', NULL, 'Purwasaba', 'ifi0on', 'Hibah', 'infi', 'infwin', 0, 0, 0, '', 0),
+(47, '2021-11-29', NULL, 'kfbi', 'fnwofn', 'APHB', 'Indra', 'nifn', 0, 0, 0, '', 0),
+(48, '2021-11-29', NULL, 'kfbi', 'fnwofn', 'APHB', 'Indra', 'nifn', 0, 0, 0, '', 0),
+(49, '2021-11-29', NULL, 'Purwasaba', 'fnwofn', 'Hibah', 'inifn', 'nifn', 0, 0, 0, '', 0),
+(50, '2021-11-29', NULL, 'Banjengan,mandiraja', 'mandiraja', 'Pemecahan', 'inifn', 'infwin', 0, 0, 0, '', 0),
+(51, '2021-11-29', NULL, 'Banjengan', 'fnwofn', 'Hibah', 'Faizal', 'ofnwo', 0, 0, 0, '', 0),
+(76, '2021-11-29', NULL, 'ifi0on', 'Purwasaba', '', 'knfqpnkwfn', 'Indra', 0, 0, 0, '', 0),
+(77, '2021-11-29', NULL, 'Mandiraja', 'Purwasaba', '', 'infi', 'faizul', 0, 0, 0, 'jkbdjba', 0),
+(78, '2021-11-29', NULL, 'Purwasaba', 'ifi0on', 'APHT,SKMHT,Hibah', 'amri', 'faizul', 0, 0, 0, '', 0),
+(80, '2021-11-29', NULL, 'Kesenet', 'Banjarnegara', 'SKMHT', 'infi', 'Hamid', 0, 0, 0, '', 0),
+(81, '2021-11-30', NULL, 'Mandiraja Wetan', 'Mandiraja', 'AJB,Hibah', 'Indra', 'Faizal', 0, 0, 0, '', 0),
+(85, '0000-00-00', NULL, 'Mandiraja Kulon', 'Mandiraja', 'AJB', 'QAZ', 'WSX', 0, 0, 0, ' ', 0),
+(86, '0000-00-00', NULL, 'Mandiraja Kulon', 'Mandiraja', 'AJB', 'QAZ', 'WSX', 0, 0, 0, ' ', 0),
+(87, '0000-00-00', NULL, 'Banjengan', 'Mandiraja', 'APHT', 'qaz', 'wsx', 0, 0, 0, ' ', 0),
+(88, '0000-00-00', 1, 'Bawang', 'Mantrianom', 'AJB,SKMHT,Konversi', 'infi', 'Hamid', 4000000, 0, 0, '- kurang ktp\r\n- kurang sppt', 0),
+(89, '0000-00-00', NULL, 'Gripit', 'Banjarmangu', 'APHT', 'gfsf', 'adffaergtez', 0, 0, 0, '', 0),
+(90, '2021-12-15', NULL, 'Aribaya', 'Pagentan', 'SKMHT,Hibah', 'rgzdg', 'eggrgxhgx', 0, 0, 0, '', 0),
+(91, '2021-12-16', NULL, 'Dieng', 'Batur', 'APHT,SKMHT', 'Indra', 'fazal', 0, 0, 0, '', 1),
+(92, '2021-12-16', NULL, 'Krandegan', 'Banjarnegara', 'AJB, APHT, APHB, SKMHT', 'Poiha', 'Polini', 0, 0, 0, '', 0),
+(94, '2021-12-16', NULL, 'Karangtengah', 'Batur', 'AJB, APHT, APHB', 'infini', 'indvsini', 0, 0, 0, '', 0),
+(95, '2021-12-16', NULL, 'Sijenggung', 'Banjarmangu', 'APHT', 'bfub', 'vdisnfio', 0, 0, 0, '', 0),
+(96, '2021-12-16', NULL, 'Sijenggung', 'Banjarmangu', 'APHT', 'bfub', 'vdisnfio', 0, 0, 0, '', 0),
+(97, '2021-12-16', NULL, 'Krandegan', 'Banjarnegara', 'SKMHT', 'ysda', 'dads', 0, 0, 0, '', 0),
+(98, '2021-12-16', NULL, 'Cendana', 'Banjarnegara', 'Hibah', 'afd', 'feEde', 0, 0, 0, '', 0),
+(99, '2021-12-16', NULL, 'Cendana', 'Banjarnegara', 'SKMHT', 'bbab', 'fnaeindi', 0, 0, 0, '', 0),
+(100, '2021-12-16', NULL, 'Cendana', 'Banjarnegara', 'SKMHT', 'bbab', 'fnaeindi', 0, 0, 0, '', 2),
+(101, '2021-12-16', NULL, 'Kaliajir', 'Purwanegara', 'SKMHT', 'yhn', 'ujm', 0, 0, 0, '', 0),
+(102, '2021-12-16', NULL, 'Bandingan', 'Rakit', 'Hibah', 'wert', 'rtyu', 0, 0, 0, '', 1),
+(103, '2021-12-16', NULL, 'Mandiraja', 'Mandiraja Wetan', 'APHT', 'Wendys', 'McDonald', 5000000, 3000000, 0, '', 0),
+(104, '2022-04-28', NULL, 'Gumelar', 'Karangkobar', 'AJB,SKMHT', 'indra', 'faizal', 8000000, 2000000, 0, '- BSY Mandiraja', 0),
+(106, '2022-04-28', NULL, 'Badamita', 'Rakit', 'Hibah,Konversi', 'Mahmud CS', 'Lara', 9000000, 2000000, 0, '- kurang ktp', 0),
+(107, '2022-04-28', NULL, 'Badamita', 'Rakit', 'Hibah,Konversi', 'Mahmud CS', 'Lara', 9000000, 2000000, 0, '- kurang ktp', 0),
+(108, '2022-04-28', NULL, 'Badamita', 'Rakit', 'Hibah,Konversi', 'Mahmud CS', 'Lara', 9000000, 2000000, 0, '- kurang ktp', 0),
+(109, '2022-04-28', NULL, 'Panerusan', 'Susukan', 'APHB,Hibah', 'mahmud', 'litfi', 6500000, 4000000, 0, '- belum roya', 0),
+(110, '2022-04-28', NULL, 'Sigaluh', 'Sawal', 'APHB', 'Nami', 'Zoro', 10000000, 5000000, 35000000, '- belum roya', 0),
+(111, '2022-04-28', NULL, 'Purworejo Klampok', 'Klampok', 'Hibah', 'Hakim', 'Jury', 13000000, 5000000, 35000000, '- ofenbwid', 0),
+(112, '2022-04-28', NULL, 'Kuta', 'Banjarnegara', 'AJB', 'oj fdj', 'fonaidni auidn', 120000000, 5000000, 0, '', 0),
+(113, '2022-04-28', NULL, 'Sawal', 'Sigaluh', 'SKMHT', 'ufun nihf8h', 'finnd inriaje0i', 13000000, 1000000, 0, '', 0),
+(114, '2022-04-28', NULL, 'Gelang', 'Rakit', 'APHB', 'ih j auh', 'jqw9ea9 9wjd9', 13000000, 1000000, 12000000, '', 0),
+(115, '2022-04-28', NULL, 'Kalitengah', 'Purwanegara', 'APHT', 'ugnih98ha adiwhn', '9hadnn 8hduaudn', 13130000, 213130, 12916870, '- hqegb daubu', 0),
+(116, '2022-04-28', 16, 'Kincang', 'Rakit', 'APHB', 'ugfemsudi ihda', 'fishijd ihaifhi', 5000000, 2000000, 4800000, '', 0),
+(117, '2022-04-28', NULL, 'Rakit', 'Gelang', 'AJB', 'qwsdf', 'sadfvs', 5000000, 3000000, 0, '', 0),
+(118, '2022-04-28', NULL, 'Gemuruh', 'Bawang', 'AJB', 'infinin', 'ifnindin', 14000000, 4000000, 10000000, '', 0),
+(119, '2022-04-28', NULL, 'Berta', 'Susukan', 'APHB', 'hyvfyaninh audnub', 'ifn dq huqhd', 0, 0, 0, '', 0),
+(120, '2022-04-28', 17, 'Batur', 'Pekasiran', 'AJB', 'qwsd', 'ytfvc', 12000000, 10000000, 2000000, '', 0),
+(122, '2022-05-12', NULL, 'Dieng', 'Batur', 'AJB', 'Kusmiah', 'Lastri', 5000000, 0, 5000000, '', 1),
+(123, '2022-05-14', NULL, 'Krandegan', 'Banjarnegara', 'AJB', 'Miki', 'Kitti', 3000000, 1000000, 2000000, '', 0),
+(124, '2022-05-14', NULL, 'Argasoka', 'Banjarnegara', 'APHT', 'Oyen', 'Black', 0, 0, 0, '', 0),
+(125, '2022-05-14', NULL, 'Beji', 'Banjarmangu', 'SKMHT', 'Madun', 'mujer', 0, 0, 0, '', 1),
+(126, '2022-05-14', NULL, 'Adipasir', 'Rakit', 'APHT', 'Mukhlis', 'Riyadi', 0, 0, 0, '', 1),
+(127, '2022-05-14', NULL, 'Karangtengah', 'Batur', 'SKMHT', 'Udin', 'Sedunia', 0, 0, 0, '', 1);
 
 --
 -- Triggers `tb_berkas`
@@ -429,17 +462,6 @@ DELIMITER $$
 CREATE TRIGGER `mk_proses` AFTER INSERT ON `tb_berkas` FOR EACH ROW insert into tb_ket_proses set no_proses=new.id
 $$
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_jenis_berkas`
---
-
-CREATE TABLE `tb_jenis_berkas` (
-  `id_jenis_berkas` int(11) NOT NULL,
-  `nama_jenis` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -467,6 +489,7 @@ CREATE TABLE `tb_ket_proses` (
   `ht` int(1) DEFAULT NULL,
   `ganti_blangko` int(1) DEFAULT NULL,
   `znt` int(1) DEFAULT NULL,
+  `iph` int(11) NOT NULL,
   `lainnya` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -474,64 +497,102 @@ CREATE TABLE `tb_ket_proses` (
 -- Dumping data for table `tb_ket_proses`
 --
 
-INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `pengeringan`, `cek_plot`, `cek_sertipikat`, `roya`, `ganti_nama`, `tapak_kapling`, `bayar_pajak`, `konversi`, `waris`, `balik_nama`, `peningkatan_hak`, `skmht`, `ht`, `ganti_blangko`, `znt`, `lainnya`) VALUES
-(1, 2, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(20, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(31, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(46, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(51, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(72, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(73, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(75, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(76, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(77, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(78, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(79, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(80, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(81, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(85, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(86, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(87, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-(88, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `pengeringan`, `cek_plot`, `cek_sertipikat`, `roya`, `ganti_nama`, `tapak_kapling`, `bayar_pajak`, `konversi`, `waris`, `balik_nama`, `peningkatan_hak`, `skmht`, `ht`, `ganti_blangko`, `znt`, `iph`, `lainnya`) VALUES
+(1, 2, NULL, NULL, NULL, 2, 1, 2, 2, NULL, 2, NULL, NULL, 2, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(2, 1, NULL, NULL, NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, 0, NULL),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 0, NULL),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(6, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(8, NULL, NULL, NULL, NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, 0, NULL),
+(9, 1, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(12, 2, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, 2, 2, NULL, 2, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(14, NULL, NULL, NULL, NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 2, NULL, NULL, 0, NULL),
+(15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(19, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(20, NULL, NULL, NULL, NULL, 2, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(23, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(28, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(30, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(31, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(41, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(46, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(51, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(72, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(73, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(75, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(76, 2, NULL, NULL, NULL, 1, NULL, 1, NULL, NULL, 1, 1, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(77, NULL, NULL, NULL, NULL, 2, 2, 2, 2, NULL, 1, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(78, NULL, NULL, NULL, NULL, 2, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(79, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(80, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(81, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(85, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(86, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(87, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL),
+(88, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(89, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(90, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(91, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(92, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, 0, NULL),
+(93, 1, 1, 1, NULL, 1, 1, 1, NULL, NULL, 1, 1, 2, 2, 1, 1, 1, NULL, NULL, 0, NULL),
+(94, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, NULL, NULL, 0, NULL),
+(95, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(96, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(97, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(98, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(99, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(101, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, 0, NULL),
+(102, NULL, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(103, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(104, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(105, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(106, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(107, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(108, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(109, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(110, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(111, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(112, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(113, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(114, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(115, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(116, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(117, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(118, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(120, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(122, NULL, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(123, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(124, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(125, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(126, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(127, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -560,12 +621,45 @@ INSERT INTO `tb_proses` (`proses_id`, `nama_proses`, `proses_rank`) VALUES
 
 CREATE TABLE `tb_proses_bpn` (
   `no_proses_bpn` int(11) NOT NULL,
-  `nama_pemohon` varchar(50) NOT NULL,
-  `no_bpn` varchar(50) DEFAULT NULL,
   `tgl_masuk` date NOT NULL DEFAULT current_timestamp(),
-  `estimasi` int(4) NOT NULL,
-  `ket` text DEFAULT NULL
+  `no_bpn` varchar(11) DEFAULT NULL,
+  `nama_pemohon` varchar(50) NOT NULL,
+  `jenis_proses` varchar(30) NOT NULL,
+  `id_berkas` int(5) DEFAULT NULL,
+  `estimasi` date NOT NULL,
+  `ket` text DEFAULT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_proses_bpn`
+--
+
+INSERT INTO `tb_proses_bpn` (`no_proses_bpn`, `tgl_masuk`, `no_bpn`, `nama_pemohon`, `jenis_proses`, `id_berkas`, `estimasi`, `ket`, `status`) VALUES
+(1, '2022-04-30', '123131/2022', 'Indra Faizal', '', 0, '0000-00-00', 'fsdf', 0),
+(2, '2022-04-30', '1231/2022', 'Indra Faizal', '', 0, '0000-00-00', 'fsdzdad', 0),
+(3, '0000-00-00', NULL, 'Muhammad', '4', 0, '0000-00-00', 'dzd', 0),
+(5, '0000-00-00', '1234', 'Muhammad', '3', 0, '0000-00-00', 'adsdcz', 0),
+(7, '2022-05-02', '123131/2022', 'Indra Faizal', 'A', 0, '0000-00-00', NULL, 0),
+(9, '2022-05-02', '13121', 'Muhi', 'Pengecekan', 0, '0000-00-00', 'sdadad', 0),
+(10, '0000-00-00', '123131', 'Mahmud', 'Cek Plot', 0, '0000-00-00', 'dfad', 0),
+(11, '0000-00-00', '', 'Abdul', 'Pengalihan Hak', 0, '0000-00-00', '05/01/2022', 0),
+(12, '2022-05-02', '12313', 'Abdul', 'Pengecekan', 0, '0000-00-00', '2022-05-05', 0),
+(13, '2022-05-01', '11111', 'indra', 'Pengecekan', 0, '0000-00-00', 'qazwsxedc', 0),
+(14, '2022-05-05', '41321', 'Muhammad', 'Roya', 0, '0000-00-00', 'onadindi', 0),
+(15, '2022-05-05', '1231', 'Muhammad', 'Peningkatan Hak', 0, '0000-00-00', 'daknd', 0),
+(16, '2022-05-05', '23132', 'Maki', 'Pengecekan', 0, '0000-00-00', 'odo', 0),
+(17, '2022-05-05', '23132', 'Maki', 'Pengecekan', 0, '0000-00-00', 'odo', 0),
+(18, '2022-05-05', '5555', 'Abdul', 'Roya', 0, '0000-00-00', 'qa', 0),
+(19, '2022-05-05', '5555', 'Abdul', 'Roya', 0, '0000-00-00', 'qa', 0),
+(20, '2022-05-01', '1212', 'Muhi', 'Pemberian Hak Tanggungan', 0, '0000-00-00', 'tt', 0),
+(21, '2022-05-05', '1234', 'indra', 'Roya', 0, '0000-00-00', 'qazwsx', 0),
+(22, '2022-05-05', '1234', 'indra', 'Roya', 0, '0000-00-00', 'qazwsx', 0),
+(23, '2022-05-01', '777', 'Mahmud', 'Pengecekan', 0, '0000-00-00', '7yh', 0),
+(24, '2022-05-05', '1234', 'Abdul', 'Pengecekan', 0, '0000-00-00', 'oifehwhf', 0),
+(25, '2022-05-05', '7878', 'Abdul', 'Pengecekan', 0, '2022-05-08', 'ihi', 0),
+(26, '2022-05-09', '1212', 'Abdul', 'Pengecekan', 0, '2022-05-12', 'ttt', 0),
+(27, '2022-05-09', '6565', 'Muhammad', 'Pengalihan Hak', 0, '2022-11-09', 'rrr', 0);
 
 -- --------------------------------------------------------
 
@@ -575,7 +669,7 @@ CREATE TABLE `tb_proses_bpn` (
 
 CREATE TABLE `tb_role` (
   `id` int(11) NOT NULL,
-  `role` varchar(5) NOT NULL
+  `role` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -583,8 +677,9 @@ CREATE TABLE `tb_role` (
 --
 
 INSERT INTO `tb_role` (`id`, `role`) VALUES
+(0, 'notaris'),
 (1, 'admin'),
-(2, 'user');
+(2, 'staff');
 
 -- --------------------------------------------------------
 
@@ -612,13 +707,27 @@ CREATE TABLE `tb_sertipikat` (
 
 INSERT INTO `tb_sertipikat` (`no_reg`, `tgl_daftar`, `no_sertipikat`, `jenis_hak`, `dsa`, `kec`, `luas`, `pemilik_hak`, `pembeli_hak`, `proses`, `ket`) VALUES
 (0, '0000-00-00', 0, 'null', '', '', NULL, '', '', NULL, NULL),
-(1, '2021-11-03', 57193, 'M', 'Mandiraja Wetan', 'Mandiraja', 5388, 'Indra Faizal Amri', 'Irfan', 'AJB', NULL),
-(2, '2021-11-17', 7521, 'GB', 'Somawangi', 'Mandiraja', 412, 'Purnomo', 'Ajiz', 'AJB', NULL),
-(3, '2021-11-17', 1311, 'M', 'Kaliwungu', 'Mandiraja', 912, 'Amri', 'Injiz', 'AJB', NULL),
-(4, '2021-11-17', 6172, 'M', 'Jalatunda', 'Mandiraja', 723, 'indra', 'Ajiz', 'AJB', NULL),
-(5, '2021-12-08', 1234, 'M', '1234', 'Mandiraja', 400, 'Indra', 'Faizal', 'AJB', 'entah'),
-(6, '2021-12-08', 57123, 'M', 'Glempang', 'Mandiraja', 123, 'qaz', 'wsx', 'APHT', ''),
-(7, '2021-12-08', 4321, 'M', 'Beji', 'Banjarmangu', 0, 'Faiz', 'Indra', 'Konversi', '');
+(1, '2021-11-03', 57193, 'M', 'Mandiraja Wetan', 'Mandiraja', 3231, 'Indra Faizal Amri', 'Irfan', 'Hibah', 'sffs'),
+(2, '2021-11-17', 7521, 'GB', 'Somawangi', 'Mandiraja', 33, 'Purnomo', 'Ajiz', 'Hibah', 'ubfeuwendmia'),
+(3, '2021-11-17', 1311, 'M', 'Kaliwungu', 'Mandiraja', 2131, 'Amri', 'Injiz', 'Hibah', 'adasdwq'),
+(4, '2021-11-17', 6172, 'M', 'Jalatunda', 'Mandiraja', 723, 'indra', 'Ajiz', 'AJB', 'dadad'),
+(5, '2021-12-08', 1234, 'M', 'Somawangi', 'Mandiraja', 111, 'Indra', 'Faizal', 'SKMHT', 'entah'),
+(6, '2021-12-08', 57123, 'M', 'Glempang', 'Mandiraja', 123, 'qaz', 'wsx', 'SKMHT', '- sda'),
+(7, '2021-12-08', 4321, 'M', 'Beji', 'Banjarmangu', 450, 'Faiz', 'Indra', 'APHT', 'dad'),
+(8, '2021-12-16', 1234, 'M', 'Karangtengah', 'Batur', 400, 'Indra', 'wsx', 'AJB', 'gsdff'),
+(9, '2021-12-16', 442, 'M', 'Wanadri', 'Bawang', 441, 'fas', 'dads', 'APHT', 'ada'),
+(10, '2021-12-16', 13412, 'GB', 'Bandingan', 'Bawang', 5718, 'ufuaebfu', 'ifninin', 'APHT', 'fsad'),
+(11, '2021-12-16', 13412, 'M', 'Bandingan', 'Bawang', 5718, 'ufuaebfu', 'ifninin', 'APHT', ''),
+(12, '2021-12-16', 6826, 'M', 'Lengkong', 'Rakit', 7000, 'poiuytrewq', 'qwertyuiop', 'AJB,APHB', ''),
+(13, '2021-12-16', 6826, 'M', 'Lengkong', 'Rakit', 7000, 'poiuytrewq', 'qwertyuiop', 'AJB,APHB', ''),
+(14, '2021-12-16', 1234, 'M', 'Balun', 'Wanayasa', 1234, 'qazwsxedc', 'edcwsxqaz', 'AJB', ''),
+(15, '2021-12-16', 1234, 'M', 'Balun', 'Wanayasa', 1234, 'qazwsxedc', 'edcwsxqaz', 'AJB', ''),
+(16, '2021-12-16', 102938, 'M', 'Kalilandak', 'Purworejo Klampok', 1234, 'Indra', 'Edi', 'AJB', ''),
+(17, '2022-04-28', 1231, 'M', 'Krandegan', 'Banjarnegara', 1212, 'qdadced', 'dasfsfrser', 'AJB', ''),
+(18, '2022-04-28', 2113, 'M', 'Kalilunjar', 'Banjarmangu', 300, 'Indra', 'Faizal', 'AJB', '- belum roya'),
+(19, '2022-04-28', 9898, 'M', 'Kepakisan', 'Batur', 0, 'Albert', 'Udit', 'SKMHT', ''),
+(20, '2022-04-29', 11111, 'M', 'Banjarkulon', 'Banjarmangu', 1111, 'satu satu', 'dua dua', 'AJB', '1 satu'),
+(21, '2022-04-29', 2222, 'M', 'Argasoka', 'Banjarnegara', 2222, 'dua dua', 'satu satu', 'APHT', 'dua 2 2 2');
 
 -- --------------------------------------------------------
 
@@ -641,7 +750,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `role_id`, `is_active`) VALUES
 (19, 'faizal', 'faizal', '$2y$10$bGs5rqiB.6U7GI5krXghoOxNUBIfQFk2DRrX0bf.S2ZS3byjm/MbG', 1, 1),
-(20, 'amria', 'amria', '$2y$10$Hep2TqmTE9BQfMjCrTOkUOr36NIinWYqowXrTSOVyB9PvowIZh4xe', 2, 1);
+(20, 'amria', 'amria', '$2y$10$Hep2TqmTE9BQfMjCrTOkUOr36NIinWYqowXrTSOVyB9PvowIZh4xe', 2, 1),
+(25, 'Dea', 'dea01', '$2y$10$.BPkIAhQhrlfrKlHdU64X.TKk2HNb/.i3PgLcT2Qn8m9p2TWC.sQq', 2, 1),
+(26, 'indra', 'indra', '$2y$10$lEVEGbpCSFhX8U5qLdceCe8.OAoytifh945ySnHQu6Ge448O04Sx2', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -666,14 +777,7 @@ ALTER TABLE `kecamatan`
 --
 ALTER TABLE `tb_berkas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `reg_sertipikat` (`reg_sertipikat`),
-  ADD KEY `status_proses` (`status_proses`);
-
---
--- Indexes for table `tb_jenis_berkas`
---
-ALTER TABLE `tb_jenis_berkas`
-  ADD PRIMARY KEY (`id_jenis_berkas`);
+  ADD KEY `reg_sertipikat` (`reg_sertipikat`);
 
 --
 -- Indexes for table `tb_ket_proses`
@@ -732,13 +836,7 @@ ALTER TABLE `kecamatan`
 -- AUTO_INCREMENT for table `tb_berkas`
 --
 ALTER TABLE `tb_berkas`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
-
---
--- AUTO_INCREMENT for table `tb_jenis_berkas`
---
-ALTER TABLE `tb_jenis_berkas`
-  MODIFY `id_jenis_berkas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `tb_proses`
@@ -750,25 +848,25 @@ ALTER TABLE `tb_proses`
 -- AUTO_INCREMENT for table `tb_proses_bpn`
 --
 ALTER TABLE `tb_proses_bpn`
-  MODIFY `no_proses_bpn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `no_proses_bpn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
 --
 ALTER TABLE `tb_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_sertipikat`
 --
 ALTER TABLE `tb_sertipikat`
-  MODIFY `no_reg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `no_reg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

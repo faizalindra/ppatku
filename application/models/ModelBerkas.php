@@ -52,13 +52,14 @@ class ModelBerkas extends CI_Model
         return $this->db->get()->row($field);
     }
 
+    //untuk tabelBerkas
     function berkas_list()
     {
         $hasil = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat");
         return $hasil->result();
     }
-
-
+    
+    //untuk form edit
     function get_berkas($id)
     {
         $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE id='$id'");
@@ -71,7 +72,7 @@ class ModelBerkas extends CI_Model
                     'desa' => $data->desa,
                     'kecamatan' => $data->kecamatan,
                     'jenis_berkas' => $data->jenis_berkas,
-                    'id_proses' => $data->id_proses,
+                    // 'id_proses' => $data->id_proses,
                     'nama_penjual' => $data->nama_penjual,
                     'nama_pembeli' => $data->nama_pembeli,
                     'biaya' => $data->biaya,
@@ -79,6 +80,7 @@ class ModelBerkas extends CI_Model
                     'tot_biaya' => $data->tot_biaya,
                     'berkas_selesai' => $data->berkas_selesai,
                     'keterangan' => $data->keterangan,
+                    'dsa'=>$data->dsa,
                     'no_reg' => $data->no_reg,
                     'no_sertipikat' => $data->no_sertipikat,
                     'luas' => $data->luas,
@@ -100,15 +102,5 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    // function simpan_berkas($id, $tgl, $reg, $kec, $desa, $jenis, $status, $napen, $napem, $biaya, $dp, $tot_biaya, $ket, $berkas_s)
-    // {
-    //     $hasil = $this->db->query("INSERT INTO tb_berkas (id,tgl_masuk,reg_sertipikat,desa,kecamatan,jenis_berkas,status_proses,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan,berkas_selesai)VALUES('$id','$tgl','$reg','$desa','$kec','$jenis','$status','$napen','$napem','$biaya','$dp','$tot_biaya','$ket','$berkas_s')");
-    //     return $hasil;
-    // }
-    // function simpan_berkas2($reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
-    // {
-    //     $hasil = $this->db->query("INSERT INTO tb_berkas (reg_sertipikat,desa,kecamatan,jenis_berkas,nama_penjual,nama_pembeli,biaya,dp,tot_biaya,keterangan)VALUES('$reg','$desa','$kec','$jenis','$napen','$napem','$biaya','$dp','$tot_biaya','$ket')");
-    //     return $hasil;
-    // }
 
 }

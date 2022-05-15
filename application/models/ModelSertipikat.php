@@ -37,7 +37,7 @@ class ModelSertipikat extends CI_Model
         if ($hsl->num_rows() > 0) {
             foreach ($hsl->result() as $data) {
                 $hasil = array(
-                    'no_reg' => $data->no_reg,
+                    'tgl_daftar' => $data->tgl_daftar,
                     'no_sertipikat' => $data->no_sertipikat,
                     'luas' => $data->luas,
                     'dsa' => $data->dsa,

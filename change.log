@@ -1,3 +1,24 @@
+15 Mei 2022 #00015
+    - memperbaiki input tanggal di form input berkas
+    - menghapus data submit sertipikat di Berkas/simpanBer()
+    - menghapus kolom estimasi di tabelBPN
+      - menghapus POST estimasi di ModelBPN
+      - menghapus card estimasi di dashboard
+    - controller BPN
+      - menghapus fungsi penghitung estimasi berkas
+      - menghapus funsgi card estimasi berkas untuk dashboard
+      - optimasi logic untuk POST tgl_masuk
+    - menambah dsa dan menghapus id_proses ke get_berkas
+    - tabelBerkas
+        - mengganti kolom reg_sertipikat menjadi nomor sertipikat di tabelBerkas & modal detail_berkas
+        - mengganti desa pada tabel berkas sesuai dengan desa di tb_sertipikat jika sertipikat ada, jika tidak maka tampilkan desa yang ada di tb_berkas
+        - mengubah link GET data sertipikat ke /sertipikat/get_sertipikat, sebelumnya /berkas/get_berkas
+        - fix POST tanggal masuk berkas pada form input berkas
+        - mengubah kolom no_reg menjadi nomor sertipikat di modal detail_sertipikat
+        - menyesuaikan kolom kecamatan sesuai dengan tb_sertipikat di modal detail_sertipikat
+    - update database
+
+
 14 Mei 2022 #00014
     - Perubahan tabelBerkas
       - menghapus kolom desa di tabelBerkas

@@ -39,7 +39,6 @@
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
                             <th scope="col">Jenis Proses</th>
-                            <th scope="col">Estimasi</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Action</th>
                         </tr>

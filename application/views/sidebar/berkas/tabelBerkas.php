@@ -383,7 +383,6 @@
                                     <tr class="text-center">
                                         <th>#</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Nomor Registrasi</th>
                                         <th>Nomor Sertipikat</th>
                                         <th>Kecamatan</th>
                                         <th>Luas m<sup>2</sup></th>

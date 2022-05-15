@@ -99,19 +99,6 @@
             </div>
         </div>
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Proses BPN</h6>
-            </div>
-            <div class="card-body">
-                <div id="bpn" class="row">
-
-                </div>
-
-            </div>
-        </div>
-
-
         <!-- Content Row -->
 
     </div>
@@ -140,4 +127,3 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-<script type="text/javascript" src="<?php base_url() ?>assets/vendor/custom-js/dashboard.js"></script>
