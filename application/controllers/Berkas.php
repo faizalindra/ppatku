@@ -78,6 +78,12 @@ class Berkas extends CI_Controller
 
     public function index()
     {
+        $data = array(
+            'a' => $this->ModelTest->b_terdaftar(),
+            'b' => $this->ModelTest->b_proses(),
+            'c' =>  $this->ModelTest->b_selesai(),
+            'd' => $this->ModelTest->b_dicabut(),
+        );
         $data['berkas'] = $this->ModelBerkas->getBerkasLeft();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
 
@@ -91,17 +97,17 @@ class Berkas extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['judul'] = "Daftar Berkas";
             $this->load->view('templates/header', $data);
-            if ($this->session->userdata('role_id') == 0) {
+            if ($this->session->userdata('role_id') == 0) { //notaris
                 $this->load->view('templates/sidebarNotaris', $data);
                 $this->load->view('templates/topbar');
                 $this->load->view('sidebar/berkas/tabelBerkas', $data);
                 $this->load->view('templates/footer');
-            } else if ($this->session->userdata('role_id') == 1) {
+            } else if ($this->session->userdata('role_id') == 1) { //admin
                 $this->load->view('templates/sidebarAdmin', $data);
                 $this->load->view('templates/topbar');
                 $this->load->view('sidebar/berkas/tabelBerkas', $data);
                 $this->load->view('templates/footer');
-            } else {
+            } else {//staff
                 $this->load->view('templates/sidebarAdmin');
                 $this->load->view('templates/topbar');
                 $this->load->view('sidebar/berkas/tabelBerkas_staff', $data);

@@ -12,7 +12,7 @@ class Sertipikat extends CI_Controller
 
     public function index()
     {
-
+        $data['a'] = $this->ModelSertipikat->cekSertipikat()->num_rows();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['sertipikat'] = $this->ModelSertipikat->cekSertipikat()->result_array();
         $data['judul'] = "Daftar Sertipikat";

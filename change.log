@@ -1,3 +1,11 @@
+16 Mei 2022 #00016
+    - memasukan data record ke template record
+      - memasukan data ke record dashboard
+      - memasukan data ke record tabelBerkas
+      - memasukan data ke record tabelBPN
+      - memasukan data ke record tabelsertipikat
+    - menambah card proses BPN terdaftar di dashboard
+
 15 Mei 2022 #00015
     - memperbaiki input tanggal di form input berkas
     - menghapus data submit sertipikat di Berkas/simpanBer()

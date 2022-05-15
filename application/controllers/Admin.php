@@ -15,9 +15,17 @@ class Admin extends CI_Controller
 
     public function index()
     {
+        $data = array(
+            'ba' => $this->ModelTest->b_terdaftar(),
+            'bb' => $this->ModelTest->b_proses(),
+            'bc' =>  $this->ModelTest->b_selesai(),
+            'bd' => $this->ModelTest->b_dicabut(),
+            'sa' => $this->ModelSertipikat->cekSertipikat()->num_rows(),
+            'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
+            'bpn_b' => $this->ModelBpn->bpn_proses(),
+        );
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
         $data['berkas'] = $this->ModelBerkas->getBerkasUnfinish();
-        // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
         $data['judul'] = "Dashboard";
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebarAdmin');
@@ -25,13 +33,4 @@ class Admin extends CI_Controller
         $this->load->view('index', $data);
         $this->load->view('templates/footer');
     }
-    // public function manajemenUser(){
-    //     $data['staff'] = $this->db->get('user')->result_array();
-    //     $this->load->view('templates/header');
-    //     $this->load->view('templates/sidebar');
-    //     $this->load->view('templates/topbar');
-    //     // $this->load->view('admin/user/formRegistrasi');
-    //     $this->load->view('admin/user/manajemenUser', $data);
-    //     $this->load->view('templates/footer');
-    // }
 }

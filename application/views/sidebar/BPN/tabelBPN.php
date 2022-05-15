@@ -14,16 +14,16 @@
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
                     <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Proses Terdaftar </div>
-                        <div class="row-md-2 justify-content-end">: 13</div>
+                        <div class="row-md-2 justify-content-end">Terdaftar </div>
+                        <div class="row-md-2 justify-content-end">: <?php echo $a ?></div>
                     </div>
                     <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Proses Berjalan</div>
-                        <div class="row-md-2 justify-content-end">: 12</div>
+                        <div class="row-md-2 justify-content-end">Berjalan</div>
+                        <div class="row-md-2 justify-content-end">: <?php echo $b ?></div>
                     </div>
                     <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Proses Selesai</div>
-                        <div class="row-md-2 justify-content-end">: 31</div>
+                        <div class="row-md-2 justify-content-end">Selesai</div>
+                        <div class="row-md-2 justify-content-end">: <?php echo $a-$b ?></div>
                     </div>
                 </div>
             </div>

@@ -12,15 +12,15 @@
     <div class="col">
 
         <div class="row">
-            <div class="col-xl-6 col-md-4 mb-4">
+            <div class="col-xl-4 col-md-4 mb-4">
                 <div class="card border-left-danger shadow h-100 py-2 bg-primary">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Jumlah Berkas Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?= $this->ModelBerkas->getBerkas()->num_rows(); ?></div>
-                                <div class="text-white">Proses &nbsp; :</div>
-                                <div class="text-white">Selesai &nbsp; :</div>
+                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Berkas Terdaftar</div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $ba ?></div>
+                                <div class="text-white">Proses &nbsp; : <?php echo $bb ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?php echo $bc ?></div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('berkas'); ?>"><i class="fas fa-book fa-3x text-warning"></i></a>
@@ -29,18 +29,35 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-4 mb-4">
+            <div class="col-xl-4 col-md-4 mb-4">
                 <div class="card border-left-danger shadow h-100 py-2 bg-primary">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Jumlah Sertipikat Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?= $this->ModelSertipikat->cekSertipikat()->num_rows() - 1; ?></div>
-                                <div class="text-white">Proses &nbsp; :</div>
-                                <div class="text-white">Selesai &nbsp; :</div>
+                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Sertipikat Terdaftar</div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $sa ?></div>
+                                <div class="text-white">&nbsp;</div>
+                                <div class="text-white">&nbsp;</div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('berkas'); ?>"><i class="fas fa-certificate fa-3x text-warning"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-4 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2 bg-primary">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-md font-weight-bold text-white text-uppercase mb-1">Proses BPN Terdaftar</div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $bpn_a ?></div>
+                                <div class="text-white">Proses &nbsp; : <?php echo $bpn_b ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?php echo $bpn_a-$bpn_b ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-3x text-warning"></i></a>
                             </div>
                         </div>
                     </div>

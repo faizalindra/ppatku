@@ -6,7 +6,16 @@
     </div>
     <div class="card-body">
 
-        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#input_sert">Input Sertipikat</button>
+        <div class="row-auto">
+            <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#input_sert">Input Sertipikat</button>
+        </div>
+        <div class="row-md-8 col-auto"></div>
+        <div class="row-md-4 col-auto">
+            <div class="row justify-content-end">
+                <div class="row-md-2 justify-content-end">Terdaftar </div>
+                <div class="row-md-2 justify-content-end">&nbsp;: <?php echo $a ?> &nbsp;</div>
+            </div>
+        </div>
         <p></p>
 
         <div class="row">

@@ -96,6 +96,23 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
+    public function b_terdaftar(){
+        $hasil = $this->db->query("SELECT * FROM `tb_berkas`")->num_rows();
+        return $hasil;
+    }
+    public function b_proses(){
+        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 0")->num_rows();
+        return $hasil;
+    }
+    public function b_selesai(){
+        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 1")->num_rows();
+        return $hasil;
+    }
+    public function b_dicabut(){
+        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 2")->num_rows();
+        return $hasil;
+    }
+
     function update_berkas($id, $reg, $desa, $kec,  $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket)
     {
         $hasil = $this->db->query("UPDATE tb_berkas SET reg_sertipikat='$reg' ,desa='$desa', kecamatan='$kec', jenis_berkas='$jenis', nama_penjual='$napen', nama_pembeli='$napem', biaya='$biaya', dp='$dp', tot_biaya='$tot_biaya', keterangan='$ket' WHERE id='$id'");
