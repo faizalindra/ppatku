@@ -26,22 +26,25 @@ class Berkas extends CI_Controller
 
     function update_berkas()
     {
-        $jb = $this->input->post('jenis_berkas', True);
-        $jbs = implode(",", $jb);
         $id = $this->input->post('id');
-        // $tgl = $this->input->post('tanggal_masuk');
-        $reg = $this->input->post('reg_sertipikat');
-        $desa = $this->input->post('desa');
-        $kec = $this->input->post('kecamatan');
-        $jenis = $jbs;
-        $napen = $this->input->post('nama_penjual');
-        $napem = $this->input->post('nama_pembeli');
-        $biaya = $this->input->post('biaya');
-        $dp = $this->input->post('dp');
-        $tot_biaya = $this->input->post('tot_biaya');
-        // $berkas_s = $this->input->post('berkas_selesai');
-        $ket = $this->input->post('keterangan');
-        $data = $this->ModelBerkas->update_berkas($id, $reg, $kec, $desa, $jenis, $napen, $napem, $biaya, $dp, $tot_biaya, $ket);
+        $data = array(
+            'desa' => $this->input->post('desa'),
+            'kecamatan' => $this->input->post('kecamatan'),
+            'nama_penjual' => $this->input->post('nama_penjual'),
+            'nama_pembeli' => $this->input->post('nama_pembeli'),
+            'biaya' => $this->input->post('biaya'),
+            'dp' => $this->input->post('dp'),
+            'tot_biaya' => $this->input->post('tot_biaya'),
+            'keterangan' => $this->input->post('keterangan'),
+        );
+
+        if ($this->input->post('jenis_berkas') != null) {
+            $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas', true));
+        }
+        if ($this->input->post('reg_sertipikat') != null) {
+            $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
+        }
+        $this->ModelBerkas->update_berkas($data, $id);
         echo json_encode($data);
         redirect('berkas');
     }

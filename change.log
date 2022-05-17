@@ -1,3 +1,10 @@
+17 Mei 2022 #00017
+    - memperbaiki edit berkas, jenis_berkas terPOST null jika berkas memiliki lebih dari 1 jenis_berkas
+    - menghapus kolom desa di detail_berkas berkas
+    - menambah tempplate kelengkapan berkas di detail_berkas
+    - mengganti kolom Reg Sertipikat menjadi No Sertipikat
+    - fix kolom kecamatan di tabelBerkas, jika berkas memiliki sertipikat tampilkan kecamatan sesuai sertipikat
+
 16 Mei 2022 #00016
     - memasukan data record ke template record
       - memasukan data ke record dashboard

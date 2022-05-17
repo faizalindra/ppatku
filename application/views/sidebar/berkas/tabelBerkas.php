@@ -345,8 +345,7 @@
                                     <tr class="text-center">
                                         <th>No Berkas</th>
                                         <th>Tanggal Masuk</th>
-                                        <th>Reg Sertipikat</th>
-                                        <th>Desa</th>
+                                        <th>No Sertipikat</th>
                                         <th>Kecamatan</th>
                                         <th>Jenis Berkas</th>
                                         <th>Nama Penjual</th>

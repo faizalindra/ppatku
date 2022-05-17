@@ -195,6 +195,14 @@ function sertipikat(val0, val1, val2, val3, val4) {
     }
 }
 
+function kecamatan(val1, val2) {
+    if (val1 != null) {
+        return val1;
+    } else {
+        return val2;
+    }
+}
+
 // fungsi tampil berkas
 function data_berkas() {
     var getUrl = window.location;
@@ -230,7 +238,7 @@ function data_berkas() {
                     '<td>' + data[i].id + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
                     '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].dsa, data[i].desa, data[i].reg_sertipikat) + '</td>' +
-                    '<td>' + data[i].kecamatan + '</td>' +
+                    '<td>' + kecamatan(data[i].kec, data[i].kecamatan) + '</td>' +
                     '<td>' + data[i].jenis_berkas + '</td>' +
                     '<td>' + data[i].nama_penjual + '</td>' +
                     '<td>' + data[i].nama_pembeli + '</td>' +
@@ -278,7 +286,12 @@ $('#show_data').on('click', '.item_detail', function() {
                 '<td>' + antinull(data.dp) + '</td>' +
                 '<td>' + antinull(data.tot_biaya) + '</td>' +
                 '</tr>' +
-                '<tr>' + '<td colspan="14"> Keterangan :' + '<p>' + data.keterangan + '</p>' +
+                '<tr>' + '<td> Keterangan &nbsp;' + '</td>' + '<td colspan=9>: &nbsp;' + data.keterangan + '</td>' +
+                '</td>' + '</tr>' +
+                '<tr>' + '<td> Kelengkapan &nbsp;' + '</td>' +
+                '<td colspan=2>: &nbsp;' + 'Ada' + '</td>' +
+                '<td colspan=2>  &nbsp;' + 'Belum Ada' + '</td>' +
+                '<td colspan=6> &nbsp;' + 'Keterangan' + '</td>' + '</tr>' +
                 '</td>' + '</tr>' +
                 '<tr>' + '<td colspan="14" id="ujtes"> Proses : ' +
                 '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
