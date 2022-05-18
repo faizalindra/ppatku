@@ -15,6 +15,19 @@ class Notaris extends CI_Controller
 
     public function index()
     {
+        $data = array(
+            'ba' => $this->ModelTest->b_terdaftar(),
+            'bb' => $this->ModelTest->b_proses(),
+            'bc' =>  $this->ModelTest->b_selesai(),
+            'bd' => $this->ModelTest->b_dicabut(),
+            'sa' => $this->ModelSertipikat->cekSertipikat()->num_rows(),
+            'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
+            'bpn_b' => $this->ModelBpn->bpn_proses(),
+        );
+        $uid = array(
+            'user_id_catatan' => $this->session->userdata('id'),
+        );
+        $data['catatan'] = $this->ModelCatatan->catatan($uid);
         $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
         $data['berkas'] = $this->ModelBerkas->getBerkasUnfinish();
         $data['judul'] = "Dashboard";

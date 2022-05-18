@@ -16,6 +16,7 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 application/views/test/
+assets/test/
 .Testing.php
 .ModelTest.php
 application/controllers/Testing.php

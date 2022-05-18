@@ -203,6 +203,12 @@ function kecamatan(val1, val2) {
     }
 }
 
+//untuk menjaga line break pada textarea
+function nl2br(str, is_xhtml) {
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
 // fungsi tampil berkas
 function data_berkas() {
     var getUrl = window.location;
@@ -286,12 +292,12 @@ $('#show_data').on('click', '.item_detail', function() {
                 '<td>' + antinull(data.dp) + '</td>' +
                 '<td>' + antinull(data.tot_biaya) + '</td>' +
                 '</tr>' +
-                '<tr>' + '<td> Keterangan &nbsp;' + '</td>' + '<td colspan=9>: &nbsp;' + data.keterangan + '</td>' +
+                '<tr>' + '<td> Keterangan &nbsp;' + '</td>' + '<td colspan=9>' + nl2br(data.keterangan) + '</td>' +
                 '</td>' + '</tr>' +
                 '<tr>' + '<td> Kelengkapan &nbsp;' + '</td>' +
-                '<td colspan=2>: &nbsp;' + 'Ada' + '</td>' +
-                '<td colspan=2>  &nbsp;' + 'Belum Ada' + '</td>' +
-                '<td colspan=6> &nbsp;' + 'Keterangan' + '</td>' + '</tr>' +
+                '<td colspan=2>' + 'Ada' + '</td>' +
+                '<td colspan=2>' + 'Belum Ada' + '</td>' +
+                '<td colspan=6>' + 'Keterangan' + '</td>' + '</tr>' +
                 '</td>' + '</tr>' +
                 '<tr>' + '<td colspan="14" id="ujtes"> Proses : ' +
                 '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
