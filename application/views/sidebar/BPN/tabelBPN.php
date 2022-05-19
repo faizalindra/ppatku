@@ -9,7 +9,7 @@
         <div class="comtainer">
             <div class="row">
                 <div class="col-auto col-md-2">
-                    <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#input_sert">Input SSTD</button>
+                    <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#input_bpn">Input SSTD</button>
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="row justify-content-end">
                         <div class="row-md-2 justify-content-end">Selesai</div>
-                        <div class="row-md-2 justify-content-end">: <?php echo $a-$b ?></div>
+                        <div class="row-md-2 justify-content-end">: <?php echo $a - $b ?></div>
                     </div>
                 </div>
             </div>
@@ -53,11 +53,11 @@
 </div>
 
 <!-- modal input BPN -->
-<div class="modal fade" id="input_sert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="input_bpn" tabindex="-1" role="dialog" aria-labelledby="input_bpnModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Input BPN</h5>
+                <h5 class="modal-title" id="input_bpnModalLabel">Input BPN</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -87,13 +87,20 @@
                             </label>
                             <div class="col-sm-6">
                                 <select type="text" name="jenis_proses" class="form-control" id="jenis_proses" placeholder="Jenis Proses" autocomplete="off" required>
-                                    <option value="">Pilih Jenis Proses</option>
+                                    <option>-</option>
+                                    <option value="Balik Nama">Balik Nama</option>
+                                    <option value="Ganti Blangko">Ganti Blangko</option>
+                                    <option value="Ganti Nama">Ganti Nama</option>
+                                    <option value="IPH">IPH</option>
+                                    <option value="Konversi">Konversi</option>
+                                    <option value="Kutip SU">Kutip SU</option>
+                                    <option value="Pemecahan">Pemecahan</option>
+                                    <option value="Pengeringan">Pengeringan</option>
                                     <option value="Peningkatan Hak">Peningkatan Hak</option>
-                                    <option value="Pengecekan">Pengecekan</option>
-                                    <option value="Pemberian Hak Tanggungan">Pemberian Hak Tanggungan</option>
                                     <option value="Roya">Roya</option>
-                                    <option value="Cek Plot">Cek Plot</option>
-                                    <option value="Pengalihan Hak">Pengalihan Hak</option>
+                                    <option value="Tapak Kapling">Tapak Kapling</option>
+                                    <option value="Ukur">Ukur</option>
+                                    <option value="Waris">Waris</option>
                                 </select>
                             </div>
                         </div>
@@ -111,6 +118,87 @@
                             </label>
                             <div class="col-sm-6">
                                 <textarea name="ket" class="form-control" id="ket" placeholder="" autocomplete="off"></textarea>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary submit_edit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal Edit BPN -->
+<div class="modal fade" id="edit_bpn" tabindex="-1" role="dialog" aria-labelledby="edit_bpnModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit_bpnModalLabel">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formAwesome" method="post" action="<?= base_url('bpn/update_bpn') ?>">
+                    <div class="modal-body">
+                        <input type="number" value="" name="no_proses_bpn_e" id="no_proses_bpn_e" readonly hidden>
+                        <div class="form-group row">
+                            <label for="tgl_masuk_e" class="col-sm-6 col-form-label">
+                                Tanggal Masuk
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="tgl_masuk_e" value="" class="form-control datepicker" id="tgl_masuk_e" placeholder="Tanggal Masuk" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nama_pemohon_e" class="col-sm-6 col-form-label">
+                                Nama Pemohon
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="text" name="nama_pemohon_e" value="" class="form-control" id="nama_pemohon_e" placeholder="Nama Pemohon" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenis_proses_e" class="col-sm-6 col-form-label">
+                                Jenis Proses
+                            </label>
+                            <div class="col-sm-6">
+                                <select type="text" name="jenis_proses_e" value="" class="form-control" id="jenis_proses_e" placeholder="Jenis Proses" autocomplete="off">
+                                    <option>-</option>
+                                    <option value="Balik Nama">Balik Nama</option>
+                                    <option value="Ganti Blangko">Ganti Blangko</option>
+                                    <option value="Ganti Nama">Ganti Nama</option>
+                                    <option value="IPH">IPH</option>
+                                    <option value="Konversi">Konversi</option>
+                                    <option value="Kutip SU">Kutip SU</option>
+                                    <option value="Pemecahan">Pemecahan</option>
+                                    <option value="Pengeringan">Pengeringan</option>
+                                    <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                    <option value="Roya">Roya</option>
+                                    <option value="Tapak Kapling">Tapak Kapling</option>
+                                    <option value="Ukur">Ukur</option>
+                                    <option value="Waris">Waris</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="no_bpn_e" class="col-sm-6 col-form-label">
+                                Nomor BPN
+                            </label>
+                            <div class="col-sm-6">
+                                <input type="number" name="no_bpn_e" value="" class="form-control" id="no_bpn_e" placeholder="Nomor BPN" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ket_e" class="col-sm-6 col-form-label">
+                                Keterangan
+                            </label>
+                            <div class="col-sm-6">
+                                <textarea name="ket_e" class="form-control" value="" id="ket_e" placeholder="" autocomplete="off"></textarea>
                             </div>
                         </div>
                         <!-- </div> -->

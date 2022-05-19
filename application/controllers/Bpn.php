@@ -7,7 +7,6 @@ class Bpn extends CI_Controller
     {
         parent::__construct();
         cek_login();
-
     }
 
     public function index()
@@ -43,6 +42,27 @@ class Bpn extends CI_Controller
         return $data;
     }
 
+    //untuk form edit bpn
+    function get_bpn()
+    {
+        $id = array('no_proses_bpn' => $this->input->get('no_proses_bpn'));
+        $data = $this->ModelBpn->get_bpn($id);
+        echo json_encode($data);
+    }
+
+    //untuk form edit bpn
+    public function update_bpn()
+    {
+        $id = array('no_proses_bpn' => $this->input->post('no_proses_bpn_e'));
+        $data = array(
+            'nama_pemohon' => $this->input->post('nama_pemohon_e'),
+            'no_bpn' => $this->input->post('no_bpn_e'),
+            'jenis_proses' => $this->input->post('jenis_proses_e'),
+            'ket' => $this->input->post('ket_e'),
+        );
+        $this->ModelBpn->update_bpn($data, $id);
+        redirect('bpn');
+    }
 
     public function inputBPN()
     {
@@ -65,11 +85,11 @@ class Bpn extends CI_Controller
         redirect('bpn');
     }
 
+
+    //untuk badge status proses bpn
     public function selesai()
     {
         $id = $this->uri->segment(3);
-        // echo $id;
-        // $data = array('status' => 1);
         $this->ModelBpn->selesai($id);
         redirect('bpn');
     }
