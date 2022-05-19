@@ -64,4 +64,13 @@ class Bpn extends CI_Controller
         echo json_encode($data);
         redirect('bpn');
     }
+
+    public function selesai()
+    {
+        $id = $this->uri->segment(3);
+        // echo $id;
+        // $data = array('status' => 1);
+        $this->ModelBpn->selesai($id);
+        redirect('bpn');
+    }
 }

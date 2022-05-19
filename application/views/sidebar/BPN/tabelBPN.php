@@ -40,6 +40,7 @@
                             <th scope="col">Nomor BPN</th>
                             <th scope="col">Jenis Proses</th>
                             <th scope="col">Keterangan</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>

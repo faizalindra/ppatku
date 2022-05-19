@@ -32,12 +32,20 @@ class ModelBpn extends CI_Model
         }
         return $hasil;
     }
-    public function bpn_terdaftar(){
+    public function bpn_terdaftar()
+    {
         $hasil = $this->db->query("SELECT * FROM `tb_proses_bpn`")->num_rows();
         return $hasil;
     }
-    public function bpn_proses(){
+    public function bpn_proses()
+    {
         $hasil = $this->db->query("SELECT * FROM `tb_proses_bpn` WHERE `status`= 0")->num_rows();
+        return $hasil;
+    }
+
+    public function selesai($id)
+    {
+        $hasil = $this->db->query("UPDATE `tb_proses_bpn` SET `status`= 1 WHERE `no_proses_bpn`='$id'");
         return $hasil;
     }
 }

@@ -1,10 +1,6 @@
 $(document).ready(function() {
     var getUrl = window.location;
     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    const current = new Date();
-    current.setDate(current.getDate() + 2);
-    // $('testing').html(current.toDateString());
-    // alert(current.toDateString());
     data_BPN();
 
 
@@ -13,6 +9,44 @@ $(document).ready(function() {
     $('.proses').select2();
 
     $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+
+    //fungsi badge status proses BPN
+    function status_proses(status, id) {
+        if (status == "0") {
+            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning"> Proses </a>';
+        } else if (status == "1") {
+            return '<span class="badge badge-info">Selesai</span>';
+        }
+    }
+
+    // $('#tabel-BPN').on('click', '.status_proses', function() {
+    //     id = $(this).attr('data');
+    //     alert(id);
+    //     $.ajax({
+    //         method: 'Post',
+    //         url: base_url + '/bpn/selesai/' + id,
+    //         async: true,
+    //         success: function() {
+    //             // alert('success');
+    //             $('#tabel-BPN').dataTable({
+    //                 // stateSave: true,
+    //                 Destroy: true
+    //             });
+    //             data_BPN();
+    //             // $('#table-BPN').DataTable().ajax.reload();
+
+    //         },
+    //         error: function() {
+    //             alert('gagal');
+    //         }
+    //     })
+    // })
+
+    //untuk menjaga line break pada textarea
+    function nl2br(str, is_xhtml) {
+        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+    }
 
     // fungsi tampil proses
     function data_BPN() {
@@ -24,29 +58,22 @@ $(document).ready(function() {
             success: function(data) {
                 var html = '';
                 var i;
-                var c = 0;
                 for (i = 0; i < data.length; i++) {
-                    c++
                     html += '<tr class="text-capitalize text-center">' +
                         '<td>' + data[i].no_proses_bpn + '</td>' +
                         '<td>' + data[i].tgl_masuk + '</td>' +
                         '<td>' + data[i].nama_pemohon + '</td>' +
                         '<td>' + data[i].no_bpn + '</td>' +
                         '<td>' + data[i].jenis_proses + '</td>' +
-                        '<td class="text-left">' + antinull(data[i].ket) + '</td>' +
+                        '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
+                        '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' +
                         '<td style="text-align:center;">' +
-                        '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' +
+                        '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' +
                         '</td>' +
                         '</tr>';
                 }
                 $('#show_data').html(html);
-                var table = $('#tabel-BPN').dataTable({
-                    "columnDefs": [
-                        //     { "width": "1%", "targets": 0 }, //no reg
-                        //     { "width": "10%", "targets": 4 }, //Jenis Peoses
-                        // { "width": "15%", "targets": 6 }, //Keterangan
-                    ]
-                });
+                var table = $('#tabel-BPN').dataTable({});
 
             },
             error: function() {
@@ -77,27 +104,6 @@ $(document).ready(function() {
     //         return hari + " Hari";
     //     }
     // }
-
-    // $('#uji2').on('click', function() {
-    //     var one_day = 1000 * 60 * 60 * 24
-    //     var date1 = new Date('2022-05-08');
-    //     var date2 = new Date();
-    //     var Difference_In_Time = Math.round(date2.getTime() - date1.getTime()) / (one_day);
-    //     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-    //     var Final_Result = Difference_In_Days.toFixed(0);
-    //     // var Result = Math.round(christmas_day.getTime() - present_date.getTime()) / (one_day);
-    //     // alert(Difference_In_Days);
-    //     $('#testing').html(Final_Result);
-    //     // $('#testing').html('ubduab');
-    // });
-
-
-    // $('#uji2').on('click', function() {
-    //     var data = document.getElementById('testing').getAttribute('value');
-    //     data2 = calculate_estimasi(data);
-    //     $('#testing').html(data);
-    //     alert('kfnda');
-    // });
 
     // fungsi edit sertipikat, tombol edit sertipikat
     $('#show_data').on('click', '.edit_sertipikat', function() {
