@@ -12,7 +12,7 @@ class Sertipikat extends CI_Controller
 
     public function index()
     {
-        $data['a'] = $this->ModelSertipikat->cekSertipikat()->num_rows();
+        $data['a'] = $this->ModelSertipikat->s_terdaftar();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['sertipikat'] = $this->ModelSertipikat->cekSertipikat()->result_array();
         $data['judul'] = "Daftar Sertipikat";
@@ -42,13 +42,14 @@ class Sertipikat extends CI_Controller
         echo json_encode($data);
     }
 
-    function data_sertipikat()
+    public function data_sertipikat()
     {
         $data = $this->ModelSertipikat->sertipikat_list();
         echo json_encode($data);
     }
 
-    function inputSertipikat(){
+    public function inputSertipikat()
+    {
         $proses = $this->input->post('proses', true);
         $prosess = implode(",", $proses); //mengubah array menjadi string
         $data = [
@@ -66,20 +67,23 @@ class Sertipikat extends CI_Controller
         redirect('sertipikat');
     }
 
-    function update_sertipikat()
+    public function update_sertipikat()
     {
-        $proses = implode(",", $this->input->post('proses', true));
-        $no_reg = $this->input->post('no_reg_e', true);
-        $jenis_hak = $this->input->post('jenis_hak_e', True);
-        $no_sertipikat = $this->input->post('no_sertipikat_e');
-        $dsa = $this->input->post('dsa_e');
-        $kec = $this->input->post('kec_e');
-        $luas = $this->input->post('luas_e');
-        $pemilik_hak = $this->input->post('pemilik_hak_e');
-        $pembeli_hak = $this->input->post('pembeli_hak_e');
-        $ket = $this->input->post('ket_e');
-        $data = $this->ModelSertipikat->update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $proses, $ket);
-        echo json_encode($data);
+        $no_reg = array('no_reg' => $this->input->post('no_reg_e', true));
+        $data = array(
+            'jenis_hak' => $this->input->post('jenis_hak_e', true),
+            'no_sertipikat' => $this->input->post('no_sertipikat_e', true),
+            'kec' => $this->input->post('kec_e', true),
+            'dsa' => $this->input->post('dsa_e', true),
+            'luas' => $this->input->post('luas_e', true),
+            'pemilik_hak' => $this->input->post('pemilik_hak_e', true),
+            'pembeli_hak' => $this->input->post('pembeli_hak_e', true),
+            'ket' => $this->input->post('ket_e', true),
+        );
+        if ($this->input->post('proses', true) != null) {
+            $data['proses'] = implode(",", $this->input->post('proses[]', true));
+        }
+        $this->ModelSertipikat->update_sertipikat($data, $no_reg);
         redirect('sertipikat');
     }
 }

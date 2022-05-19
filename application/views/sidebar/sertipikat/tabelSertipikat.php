@@ -116,7 +116,7 @@
                                 Penerima Hak
                             </label>
                             <div class="col-sm-6">
-                                <input type="text" name="pembeli_hak" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" autocomplete="off" required>
+                                <input type="text" name="pembeli_hak" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -175,7 +175,7 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <input type="text" name="no_reg_e" class="form-control datepicker" id="id" placeholder="Tanggal Masuk" readonly hidden>
+                                <input type="number" name="no_reg_e" class="form-control" id="no_reg_e" readonly hidden>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -232,7 +232,7 @@
                                 Penerima Hak
                             </label>
                             <div class="col-sm-6">
-                                <input type="text" name="pembeli_hak_e" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" autocomplete="off" required>
+                                <input type="text" name="pembeli_hak_e" class="form-control" id="pembeli_hak" placeholder="" value="<?= set_value('pembeli_hak'); ?>" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -240,7 +240,7 @@
                                 Proses
                             </label>
                             <div class="col-sm-6">
-                                <select name="proses[]_e" class="form-control select2 select2-hidden-accessible" multiple="" id="proses" placeholder="" value="<?= set_value('proses'); ?>" autocomplete="off" style="width: 100%;" required>
+                                <select name="proses[]_e" class="form-control select2 select2-hidden-accessible" multiple="" id="proses" placeholder="" value="<?= set_value('proses'); ?>" autocomplete="off" style="width: 100%;">
                                     <option>AJB</option>
                                     <option>APHT</option>
                                     <option>APHB</option>
@@ -262,7 +262,7 @@
                                 Keterangan
                             </label>
                             <div class="col-sm-6">
-                                <textarea name="ket_e" class="form-control" id="ket" placeholder="" value="<?= set_value('ket'); ?>"></textarea>
+                                <textarea name="ket_e" class="form-control" id="ket" value="<?= set_value('ket'); ?>"></textarea>
                             </div>
                         </div>
                         <!-- </div> -->

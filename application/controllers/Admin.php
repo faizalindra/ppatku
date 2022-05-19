@@ -20,7 +20,7 @@ class Admin extends CI_Controller
             'bb' => $this->ModelTest->b_proses(),
             'bc' =>  $this->ModelTest->b_selesai(),
             'bd' => $this->ModelTest->b_dicabut(),
-            'sa' => $this->ModelSertipikat->cekSertipikat()->num_rows(),
+            'sa' => $this->ModelSertipikat->s_terdaftar(),
             'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
             'bpn_b' => $this->ModelBpn->bpn_proses(),
         );

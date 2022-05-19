@@ -37,6 +37,7 @@ class ModelSertipikat extends CI_Model
         if ($hsl->num_rows() > 0) {
             foreach ($hsl->result() as $data) {
                 $hasil = array(
+                    'no_reg' => $data->no_reg,
                     'tgl_daftar' => $data->tgl_daftar,
                     'no_sertipikat' => $data->no_sertipikat,
                     'luas' => $data->luas,
@@ -53,10 +54,26 @@ class ModelSertipikat extends CI_Model
         return $hasil;
     }
 
+    public function s_terdaftar(){
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_sertipikat")->result();
+        foreach ($hasil as $data) {
+            $hsl = $data->total_record;
+        }
+        return $hsl;
+    } 
+
     //Untuk memperbaharui sertipikat di tb_sertipikat
-    public function update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $proses, $ket)
+    // public function update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $ket)
+    // {
+    //     $hasil = $this->db->query("UPDATE tb_sertipikat SET jenis_hak='$jenis_hak', no_sertipikat='$no_sertipikat', kec='$kec', dsa='$dsa', luas='$luas', pemilik_hak='$pemilik_hak', pembeli_hak='$pembeli_hak',  ket='$ket' WHERE no_reg='$no_reg'");
+    //     return $hasil;
+    // }
+
+    //buat fungsi untuk update sertipikat
+    public function update_sertipikat($data, $no_reg)
     {
-        $hasil = $this->db->query("UPDATE tb_sertipikat SET jenis_hak='$jenis_hak', no_sertipikat='$no_sertipikat', kec='$kec', dsa='$dsa', luas='$luas', pemilik_hak='$pemilik_hak', pembeli_hak='$pembeli_hak', proses='$proses', ket='$ket' WHERE no_reg='$no_reg'");
+        // $this->db->where('no_reg', $data['no_reg']);
+        $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
         return $hasil;
     }
 

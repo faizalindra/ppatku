@@ -97,20 +97,32 @@ class ModelBerkas extends CI_Model
     }
 
     public function b_terdaftar(){
-        $hasil = $this->db->query("SELECT * FROM `tb_berkas`")->num_rows();
-        return $hasil;
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas")->result();
+        foreach ($hasil as $data) {
+            $hsl = $data->total_record;
+        }
+        return $hsl;
     }
     public function b_proses(){
-        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 0")->num_rows();
-        return $hasil;
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 0")->result();
+        foreach ($hasil as $data) {
+            $hsl = $data->total_record;
+        }
+        return $hsl;
     }
     public function b_selesai(){
-        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 1")->num_rows();
-        return $hasil;
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 1")->result();
+        foreach ($hasil as $data) {
+            $hsl = $data->total_record;
+        }
+        return $hsl;
     }
     public function b_dicabut(){
-        $hasil = $this->db->query("SELECT * FROM `tb_berkas` WHERE `berkas_selesai`= 2")->num_rows();
-        return $hasil;
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 2")->result();
+        foreach ($hasil as $data) {
+            $hsl = $data->total_record;
+        }
+        return $hsl;
     }
 
     function update_berkas($data, $id)

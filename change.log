@@ -1,3 +1,8 @@
+19 Mei 2022 #00021
+    - memperbaiki fungsi update sertipikat
+    - memperbaiki form edit sertipikat dan input sertipikat, menghapus readonly beberapa kolom pada form
+    - mengubah metode query untuk mendapat record di ModelBPN, ModelBerkas, & ModelSertipikat 
+
 19 Mei 2022 #00020
     - membuat fitur edit proses bpn
 
