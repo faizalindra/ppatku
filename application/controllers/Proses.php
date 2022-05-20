@@ -10,6 +10,13 @@ class Proses extends CI_Controller
         // get_uri();
     }
 
+    public function proses()
+    {
+        $id = $this->input->get('id');
+        $data = $this->ModelProses->get_proses($id);
+        echo json_encode($data);
+    }
+
     function index()
     {
         $jp = $this->input->post('jp');
@@ -111,7 +118,7 @@ class Proses extends CI_Controller
                 echo json_encode($datas);
                 break;
             case $jp = '17':
-                $data = ['ganti_blangko' =>  $this->input->post('val')];
+                $data = ['kutip_su' =>  $this->input->post('val')];
                 $where = ['no_proses' =>  $this->input->post('id')];
                 $datas = $this->ModelProses->update_proses($data, $where);
                 echo json_encode($datas);
@@ -124,6 +131,12 @@ class Proses extends CI_Controller
                 break;
             case $jp = '19':
                 $data = ['znt' =>  $this->input->post('val')];
+                $where = ['no_proses' =>  $this->input->post('id')];
+                $datas = $this->ModelProses->update_proses($data, $where);
+                echo json_encode($datas);
+                break;
+            case $jp = '20':
+                $data = ['validasi_sert' =>  $this->input->post('val')];
                 $where = ['no_proses' =>  $this->input->post('id')];
                 $datas = $this->ModelProses->update_proses($data, $where);
                 echo json_encode($datas);
@@ -277,10 +290,10 @@ class Proses extends CI_Controller
         $datas = $this->ModelProses->update_proses($data, $where);
         echo json_encode($datas);
     }
-    function ganti_blangko()
+    function kutip_su()
     {
         $data = [
-            'ganti_blangko' =>  $this->input->post('val'),
+            'kutip_su' =>  $this->input->post('val'),
         ];
         $where = ['no_proses' =>  $this->input->post('id')];
         $datas = $this->ModelProses->update_proses($data, $where);
@@ -290,6 +303,15 @@ class Proses extends CI_Controller
     {
         $data = [
             'znt' =>  $this->input->post('val'),
+        ];
+        $where = ['no_proses' =>  $this->input->post('id')];
+        $datas = $this->ModelProses->update_proses($data, $where);
+        echo json_encode($datas);
+    }
+    function validasi_sert()
+    {
+        $data = [
+            'validasi_sert' =>  $this->input->post('val'),
         ];
         $where = ['no_proses' =>  $this->input->post('id')];
         $datas = $this->ModelProses->update_proses($data, $where);

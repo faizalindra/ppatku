@@ -118,17 +118,17 @@
                                             <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" data="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;" required>
                                                 <!-- <option value="" disabled selected>Pilih :</option> -->
                                                 <option>AJB</option>
-                                                <option>APHT</option>
                                                 <option>APHB</option>
-                                                <option>SKMHT</option>
+                                                <option>APHT</option>
+                                                <option>Ganti Blangko</option>
+                                                <option>Ganti Nama</option>
                                                 <option>Hibah</option>
                                                 <option>Konversi</option>
-                                                <option>Ganti Nama</option>
-                                                <option>Waris</option>
-                                                <option>Peningkatan Hak</option>
-                                                <option>Pengeringan</option>
                                                 <option>Pemecahan</option>
-                                                <option>IPH</option>
+                                                <option>Pengeringan</option>
+                                                <option>Peningkatan Hak</option>
+                                                <option>SKMHT</option>
+                                                <option>Waris</option>
                                             </select>
                                         </div>
                                     </div>
@@ -255,16 +255,17 @@
                                 <div class="col-sm-6">
                                     <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
                                         <option>AJB</option>
-                                        <option>APHT</option>
                                         <option>APHB</option>
-                                        <option>SKMHT</option>
+                                        <option>APHT</option>
+                                        <option>Ganti Blangko</option>
+                                        <option>Ganti Nama</option>
                                         <option>Hibah</option>
                                         <option>Konversi</option>
-                                        <option>Ganti Nama</option>
-                                        <option>Waris</option>
-                                        <option>Peningkatan Hak</option>
-                                        <option>Pengeringan</option>
                                         <option>Pemecahan</option>
+                                        <option>Pengeringan</option>
+                                        <option>Peningkatan Hak</option>
+                                        <option>SKMHT</option>
+                                        <option>Waris</option>
                                     </select>
                                     <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                 </div>
