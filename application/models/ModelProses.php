@@ -15,7 +15,8 @@ class ModelProses extends CI_Model {
 
     public function get_proses($id)
     {
-        $hasil = $this->db->query("SELECT * FROM `tb_ket_proses` WHERE `no_proses`='$id'");
+        // $hasil = $this->db->query("SELECT * FROM `tb_ket_proses` WHERE `no_proses`='$id'");
+        $hasil = $this->db->get_where('tb_ket_proses', $id);
         if ($hasil->num_rows() > 0) {
             foreach ($hasil->result() as $data) {
                 $hsl = array(

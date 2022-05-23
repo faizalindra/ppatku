@@ -13,7 +13,7 @@ class Catatan extends CI_Controller
         $uid = array(
             'user_id_catatan' => $this->session->userdata('id'),
         );
-        $data['catatan'] = $this->ModelTest->catatan($uid);
+        $data['catatan'] = $this->ModelCatatan->catatan($uid);
         $data['judul'] = "Catatan";
         $this->load->view('templates/header', $data);
         //jika user adalah notaris load

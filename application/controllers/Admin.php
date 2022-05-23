@@ -16,10 +16,10 @@ class Admin extends CI_Controller
     public function index()
     {
         $data = array(
-            'ba' => $this->ModelTest->b_terdaftar(),
-            'bb' => $this->ModelTest->b_proses(),
-            'bc' =>  $this->ModelTest->b_selesai(),
-            'bd' => $this->ModelTest->b_dicabut(),
+            'ba' => $this->ModelBerkas->b_terdaftar(),
+            'bb' => $this->ModelBerkas->b_proses(),
+            'bc' =>  $this->ModelBerkas->b_selesai(),
+            'bd' => $this->ModelBerkas->b_dicabut(),
             'sa' => $this->ModelSertipikat->s_terdaftar(),
             'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
             'bpn_b' => $this->ModelBpn->bpn_proses(),

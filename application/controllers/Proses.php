@@ -10,9 +10,9 @@ class Proses extends CI_Controller
         // get_uri();
     }
 
-    public function proses()
+    public function get_proses()
     {
-        $id = $this->input->get('id');
+        $id['no_proses'] = $this->input->get('id');
         $data = $this->ModelProses->get_proses($id);
         echo json_encode($data);
     }

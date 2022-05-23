@@ -1,3 +1,19 @@
+24 Mei 2022 #00023
+    - mengubah database menjadi 'ppatku'
+    - mengubah relasi database
+    - mengubah form input berkas dan edit berkas pada 'tabelBerkas' 
+      - mengubah metode input dan update berkas pada controller
+      - menambah kelengkapan berkas pada form input berkas
+    - menghapus fungsi 'conv_kec()' di tabelBerkas.js
+    - mengubah fungsi edit berkas di tabelBerkas.js
+    - mengubah model record berkas pada controller berkas, catatan & notaris
+    - mengubah MySQL Query pada fungsi 'data_berkas' dan 'get_berkas' di 'ModelBerkas'
+    - menambah fungsi simpan berkas & kelengkapan berkas di 'ModelBerkas'
+    - mengubah MySQL Query pada fungsi 'get_proses' di 'ModelProses'
+    - mengubah fungsi 'get_sertipikat' di 'ModelSertipikat'
+    - menambah funsgi 'get_sert_for_select' di 'ModelSertipikat'
+    - 
+
 20 Mei 2022 #00022
     - memperbaiki fitur pemantauan proses
     - menambah pilihan proses di input  & edit tabelBerkas 

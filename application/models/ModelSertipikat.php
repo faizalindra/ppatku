@@ -33,34 +33,41 @@ class ModelSertipikat extends CI_Model
     //untuk mendapatkan sertipikat berdasarkan no_reg
     function get_sertipikat($id)
     {
-        $hsl = $this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$id'");
-        if ($hsl->num_rows() > 0) {
-            foreach ($hsl->result() as $data) {
-                $hasil = array(
-                    'no_reg' => $data->no_reg,
-                    'tgl_daftar' => $data->tgl_daftar,
-                    'no_sertipikat' => $data->no_sertipikat,
-                    'luas' => $data->luas,
-                    'dsa' => $data->dsa,
-                    'kec' => $data->kec,
-                    'jenis_hak' => $data->jenis_hak,
-                    'pemilik_hak' => $data->pemilik_hak,
-                    'pembeli_hak' => $data->pembeli_hak,
-                    'proses' => $data->proses,
-                    'ket' => $data->ket,
-                );
-            }
+        // $hsl = $this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$id'");
+        $hsl = $this->db->select("*, desa.nama as desa, kecamatan.nama as kecamatan")
+            ->from('tb_sertipikat')
+            ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
+            // ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+            ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+            ->where('no_reg', $id)
+            ->get()
+            ->result();
+        foreach ($hsl as $data) {
+            $hasil = array(
+                'no_reg' => $data->no_reg,
+                'tgl_daftar' => $data->tgl_daftar,
+                'no_sertipikat' => $data->no_sertipikat,
+                'luas' => $data->luas,
+                'desa' => $data->desa,
+                'kecamatan' => $data->kecamatan,
+                'jenis_hak' => $data->jenis_hak,
+                'pemilik_hak' => $data->pemilik_hak,
+                'pembeli_hak' => $data->pembeli_hak,
+                'proses' => $data->proses,
+                'ket' => $data->ket,
+            );
         }
         return $hasil;
     }
 
-    public function s_terdaftar(){
+    public function s_terdaftar()
+    {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_sertipikat")->result();
         foreach ($hasil as $data) {
             $hsl = $data->total_record;
         }
         return $hsl;
-    } 
+    }
 
     //Untuk memperbaharui sertipikat di tb_sertipikat
     // public function update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $ket)
@@ -75,6 +82,17 @@ class ModelSertipikat extends CI_Model
         // $this->db->where('no_reg', $data['no_reg']);
         $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
         return $hasil;
+    }
+
+    //untuk selector sertipikat di input berkas
+    public function get_sert_for_select()
+    {
+        $data = $this->db->select('no_reg, dsa, jenis_hak, no_sertipikat, pemilik_hak, desa.nama as desa')
+            ->from('tb_sertipikat')
+            ->join('desa', 'tb_sertipikat.dsa = desa.id')
+            ->get()
+            ->result();
+        return $data;
     }
 
 

@@ -4,8 +4,6 @@ data_berkas(); //pemanggilan fungsi tampil barang.
 var getUrl = window.location;
 const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
-// alert(base_url);
-
 function addCommas(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -40,100 +38,11 @@ function antinull(val) {
     }
 }
 
-//menghitung total biaya
-$('.matik').on('change', function() {
-    var biaya_f = document.getElementsByClassName('biaya_f')[0].value;
-    var dp_f = document.getElementsByClassName('dp_f')[0].value;
-    // var dp_f = document.getElementsByClassName('dp_f')[0].value;
-    var tot_bayar_f = biaya_f - dp_f;
-    $('[name="tot_biaya"]').val(tot_bayar_f);
-});
-
-//convert value input kecamatan menjadi id kecamatan
-function conv_kec(val) {
-    // id = "";
-    switch (val) {
-        case "Banjarmangu":
-            id = 1;
-            break;
-        case "Banjarnegara":
-            id = 2;
-            break;
-        case "Batur":
-            id = 3;
-            break;
-        case "Bawang":
-            id = 4;
-            break;
-        case "Kalibening":
-            id = 5;
-            break;
-        case "Karangkobar":
-            id = 6;
-            break;
-        case "Madukara":
-            id = 7;
-            break;
-        case "Mandiraja":
-            id = 8;
-            break;
-        case "Pagedongan":
-            id = 9;
-            break;
-        case "Pagentan":
-            id = 10;
-            break;
-        case "Padanarum":
-            id = 11;
-            break;
-        case "Pajewaran":
-            id = 12;
-            break;
-        case "Punggelan":
-            id = 13;
-            break;
-        case "Purwanegara":
-            id = 14;
-            break;
-        case "Purworejo Klampok":
-            id = 15;
-            break;
-        case "Rakit":
-            id = 16;
-            break;
-        case "Sigaluh":
-            id = 17;
-            break;
-        case "Susukan":
-            id = 18;
-            break;
-        case "Wanadadi":
-            id = 19;
-            break;
-        case "Wanayasa":
-            id = 20;
-            break;
-    }
-    return id;
-}
-
-//switch untuk disable input sertipikat
-$('.input_sert').prop('disabled', true);
-$('.switch-input-sertipikat').click(function() {
-    if ($(this).is(':checked')) {
-        $('.input_sert').prop('disabled', false);
-    } else {
-        $('.input_sert').prop('disabled', true);
-    }
-});
 
 // dynamic select desa
 //selector for input berkas
-$('#kecamatan').change(function() {
-    var kec1 = $('#kecamatan').val();
-    var id = conv_kec(kec1);
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+$('#kecamatan_i').change(function() {
+    var id = $('#kecamatan_i').val();
     $.ajax({
         url: base_url + "/wilayah/get_desa",
         method: "get",
@@ -143,28 +52,26 @@ $('#kecamatan').change(function() {
         async: true,
         dataType: 'json',
         success: function(data) {
-            var html = '';
+            var html = '<option disabled selected value> -- Desa -- </option>';
             var i;
             for (i = 0; i < data.length; i++) {
-                html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                html += '<option value=' + data[i].id + '>' + data[i].nama + '</option>';
             }
-            $('#desa').html(html);
+            $('#desa_i').html(html);
         },
         error: function(data) {
-            alert(id);
+            alert('Error!!!. Gagal mengambil data desa');
         }
     });
     return false;
 });
 
-//selector for input sertipikat
-$('#kec').change(function() {
-    var kec = $('#kec').val();
-    var id = conv_kec(kec);
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+//selector for edit berkas
+$('#formedit').on('change', '#kecamatan_e', function() {
+    var id = $('#kecamatan_e').val();
+    // alert(id);
     $.ajax({
-        url: base_url + "wilayah/get_desa",
+        url: base_url + "/wilayah/get_desa",
         method: "get",
         data: {
             id: id
@@ -172,23 +79,26 @@ $('#kec').change(function() {
         async: true,
         dataType: 'json',
         success: function(data) {
-            var html = '';
+            var html = '<option disabled selected value> -- Desa -- </option>';
             var i;
             for (i = 0; i < data.length; i++) {
-                html += '<option value=' + data[i].nama + '>' + data[i].nama + '</option>';
+                html += '<option value=' + data[i].id + '>' + data[i].nama + '</option>';
             }
-            $('#dsa').html(html);
-
+            $('#desa_e').html(html);
+        },
+        error: function(data) {
+            alert('Error!!!. Gagal mengambil data desa');
         }
     });
     return false;
 });
 
-function sertipikat(val0, val1, val2, val3, val4) {
+//fungsi untuk menampilkan sertipikat sesuai format M.nomor_sertipikat/Desa. val0 = jenis_hak, val1 = nomor_sertipikat, val2 = desa, val3 = reg_sertipikat
+function sertipikat(val0, val1, val2, val3) {
     c = " ";
-    cond1 = '<href href="javascript:;" class="btn_sertipikat" data="' + val4 + '">'
+    cond1 = '<href href="javascript:;" class="btn_sertipikat" data="' + val3 + '">'
     if (val1 == null) {
-        return c + '/ ' + val3;
+        return c + '/ ' + val2;
     } else {
         sert = val0 + '. ' + val1 + "/" + val2;
         return cond1 + sert;
@@ -239,19 +149,18 @@ function data_berkas() {
             var html = '';
             var i;
             for (i = 0; i < data.length; i++) {
-                // c++
                 html += '<tr class="text-capitalize text-center">' +
-                    '<td>' + data[i].id + '</td>' +
+                    '<td>' + data[i].id_berkas + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
-                    '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].dsa, data[i].desa, data[i].reg_sertipikat) + '</td>' +
-                    '<td>' + kecamatan(data[i].kec, data[i].kecamatan) + '</td>' +
+                    '<td>' + sertipikat(data[i].jenis_hak, data[i].no_sertipikat, data[i].desa, data[i].reg_sertipikat) + '</td>' +
+                    '<td>' + data[i].kecamatan + '</td>' +
                     '<td>' + data[i].jenis_berkas + '</td>' +
                     '<td>' + data[i].nama_penjual + '</td>' +
                     '<td>' + data[i].nama_pembeli + '</td>' +
                     '<td>' + berkasSelesai(data[i].berkas_selesai, data[i].id) + '</td>' +
                     '<td style="text-align:center;">' +
-                    '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id + '"><i class="fa fa-edit" ></i>Edit</button>' +
-                    '<button href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id + '"><i class="fa fa-search" ></i> Detail</button>' +
+                    '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id_berkas + '"><i class="fa fa-edit" ></i>Edit</button>' +
+                    '<button href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id_berkas + '"><i class="fa fa-search" ></i> Detail</button>' +
                     '</td>' + '</tr>';
             }
             $('#show_data').html(html);
@@ -268,8 +177,6 @@ function data_berkas() {
 //tombol detail berkas
 $('#show_data').on('click', '.item_detail', function() {
     var id = $(this).attr('data');
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         method: "GET",
         url: base_url + '/berkas/get_berkas',
@@ -281,15 +188,13 @@ $('#show_data').on('click', '.item_detail', function() {
             $('#ModalDetail').modal('show');
             var html1 = "";
             html1 += '<tr class="text-capitalize text-center">' +
-                '<td id="id_proses_id" data-value="' + data.id + '">' + data.id + '</td>' +
+                '<td id="id_proses_id" data-value="' + data.id_berkas + '">' + data.id_berkas + '</td>' +
                 '<td>' + data.tgl_masuk + '</td>' +
-                '<td>' + sertipikat(data.jenis_hak, data.no_sertipikat, data.dsa, data.desa) + '</td>' +
+                '<td>' + sertipikat(data.jenis_hak, data.no_sertipikat, data.desa) + '</td>' +
                 '<td>' + data.kecamatan + '</td>' +
                 '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
                 '<td>' + data.nama_penjual + '</td>' +
                 '<td>' + data.nama_pembeli + '</td>' +
-                '<td>' + antinull(data.biaya) + '</td>' +
-                '<td>' + antinull(data.dp) + '</td>' +
                 '<td>' + antinull(data.tot_biaya) + '</td>' +
                 '</tr>' +
                 '<tr>' + '<td> Keterangan &nbsp;' + '</td>' + '<td colspan=9>' + nl2br(data.keterangan) + '</td>' +
@@ -312,6 +217,7 @@ $('#show_data').on('click', '.item_detail', function() {
     return false;
 });
 
+//untuk membuat list proses
 function testr() {
     var id = document.getElementById('id_proses_id').getAttribute('data-value');
     var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
@@ -369,21 +275,16 @@ function testr() {
         if (a.indexOf(b) < 0) a.push(b);
         return a;
     }, []);
-
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         method: 'GET',
-        url: base_url + '/proses/proses',
+        url: base_url + '/proses/get_proses',
         async: true,
         dataType: 'json',
         data: {
             id: id
         },
         success: function(data) {
-            // var window.base_url = < ? php echo json_encode(base_url()); ? > ;
             var html = "";
-
             for (i = 0; i < uniq.length; i++) {
                 // summ = summ + i;
                 switch (uniq[i]) {
@@ -584,8 +485,6 @@ function testr() {
 $('#show_data').on('click', '.btn_sertipikat', function() {
     var id = $(this).attr('data');
     // alert(id);
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         method: "GET",
         url: base_url + '/sertipikat/get_sertipikat',
@@ -594,14 +493,14 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
             id: id
         },
         success: function(data) {
-            $.each(data, function(no_sertipikat, tgl_daftar, jenis_hak, luas, dsa, kec, pemilik_hak, pembeli_hak, proses, ket) {
+            $.each(data, function(no_sertipikat, tgl_daftar, jenis_hak, luas, desa, kec, pemilik_hak, pembeli_hak, proses, ket) {
                 $('#ModalSertipikat').modal('show');
                 var html = "";
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + id + '</td>' +
                     '<td>' + data.tgl_daftar + '</td>' +
-                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.dsa + '</td>' +
-                    '<td>' + data.kec + '</td>' +
+                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + '</td>' +
+                    '<td>' + data.kecamatan + '</td>' +
                     '<td>' + antinull(data.luas) + '</td>' +
                     '<td>' + data.pemilik_hak + '</td>' +
                     '<td>' + data.pembeli_hak + '</td>' +
@@ -624,8 +523,6 @@ $('#show_data').on('click', '.btn_sertipikat', function() {
 //edit berkas
 $('#show_data').on('click', '.edit_berkas', function() {
     var id = $(this).attr('data');
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         type: "GET",
         url: base_url + "/berkas/get_berkas",
@@ -634,20 +531,23 @@ $('#show_data').on('click', '.edit_berkas', function() {
             id: id
         },
         success: function(data) {
-            $.each(data, function(id, reg_sertipikat, desa, kecamatan, jenis_berkas, nama_penjual, nama_pembeli, biaya, dp, tot_biaya, keterangan) {
+            $.each(data, function(id_berkas, reg_sertipikat, desa, kecamatan, jenis_berkas, nama_penjual, nama_pembeli, biaya, dp, tot_biaya, keterangan) {
                 $('#formedit').modal('show');
-                $('[name="id"]').val(data.id);
-                $('[name="tgl_masuk"]').val(data.tgl_masuk);
-                $('[name="reg_sertipikat"]').val(data.reg_sertipikat);
-                $('[name="desa"]').val(data.desa);
-                $('[name="kecamatan"]').val(data.kecamatan);
-                $('[name="jenis_berkas[]"]').val(data.jenis_berkas);
-                $('[name="nama_penjual"]').val(data.nama_penjual);
-                $('[name="nama_pembeli"]').val(data.nama_pembeli);
-                $('[name="biaya"]').val(data.biaya);
-                $('[name="dp"]').val(data.dp);
-                $('[name="tot_biaya"]').val(data.tot_biaya);
-                $('[name="keterangan"]').val(data.keterangan);
+                $('[name="id_e"]').val(data.id_berkas);
+                $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
+                $('[name="sertipikat_e"]').val(data.reg_sertipikat);
+                $('[name="desa_e"]').val(data.desa);
+                var alamat = 'Desa ' + data.desa + ', Kec. ' + data.kecamatan;
+                $('[name="alamat_e"]').val(alamat);
+                $('[name="desa_e"]').val(data.desa);
+                $('[name="kecamatan_e"]').val(data.kecamatan);
+                $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
+                $('[name="penjual_e"]').val(data.nama_penjual);
+                $('[name="pembeli_e"]').val(data.nama_pembeli);
+                $('[name="biaya_e"]').val(data.biaya);
+                $('[name="dp_e"]').val(data.dp);
+                $('[name="tot_biaya_e"]').val(data.tot_biaya);
+                $('[name="keterangan_e"]').val(data.keterangan);
                 $(".coment").html("Jenis Berkas : " + data.jenis_berkas);
             });
         },
@@ -731,335 +631,350 @@ $('#ModalDetail').on('click', '.btn-pert_teknis', function() {
 
 //tombol perijinan
 $('#ModalDetail').on('click', '.btn-perijinan', function() {
-        var id = document.getElementById('id_btn-perijinan').getAttribute('data-id');
-        var val = document.getElementById('id_btn-perijinan').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/perijinan',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol pengeringan
+    var id = document.getElementById('id_btn-perijinan').getAttribute('data-id');
+    var val = document.getElementById('id_btn-perijinan').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/perijinan',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol pengeringan
 $('#ModalDetail').on('click', '.btn-pengeringan', function() {
-        var id = document.getElementById('id_btn-pengeringan').getAttribute('data-id');
-        var val = document.getElementById('id_btn-pengeringan').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/pengeringan',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol cek_sertipikat
+    var id = document.getElementById('id_btn-pengeringan').getAttribute('data-id');
+    var val = document.getElementById('id_btn-pengeringan').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/pengeringan',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol cek_sertipikat
 $('#ModalDetail').on('click', '.btn-cek_sertipikat', function() {
-        var id = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-id');
-        var val = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/cek_sertipikat',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol roya
+    var id = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-id');
+    var val = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/cek_sertipikat',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol roya
 $('#ModalDetail').on('click', '.btn-roya', function() {
-        var id = document.getElementById('id_btn-roya').getAttribute('data-id');
-        var val = document.getElementById('id_btn-roya').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/roya',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol ganti_nama
+    var id = document.getElementById('id_btn-roya').getAttribute('data-id');
+    var val = document.getElementById('id_btn-roya').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/roya',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol ganti_nama
 $('#ModalDetail').on('click', '.btn-ganti_nama', function() {
-        var id = document.getElementById('id_btn-ganti_nama').getAttribute('data-id');
-        var val = document.getElementById('id_btn-ganti_nama').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/ganti_nama',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol tapak_kapling
+    var id = document.getElementById('id_btn-ganti_nama').getAttribute('data-id');
+    var val = document.getElementById('id_btn-ganti_nama').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/ganti_nama',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol tapak_kapling
 $('#ModalDetail').on('click', '.btn-tapak_kapling', function() {
-        var id = document.getElementById('id_btn-tapak_kapling').getAttribute('data-id');
-        var val = document.getElementById('id_btn-tapak_kapling').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/tapak_kapling',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol bayar_pajak
+    var id = document.getElementById('id_btn-tapak_kapling').getAttribute('data-id');
+    var val = document.getElementById('id_btn-tapak_kapling').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/tapak_kapling',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol bayar_pajak
 $('#ModalDetail').on('click', '.btn-bayar_pajak', function() {
-        var id = document.getElementById('id_btn-bayar_pajak').getAttribute('data-id');
-        var val = document.getElementById('id_btn-bayar_pajak').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/bayar_pajak',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol konversi
+    var id = document.getElementById('id_btn-bayar_pajak').getAttribute('data-id');
+    var val = document.getElementById('id_btn-bayar_pajak').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/bayar_pajak',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol konversi
 $('#ModalDetail').on('click', '.btn-konversi', function() {
-        var id = document.getElementById('id_btn-konversi').getAttribute('data-id');
-        var val = document.getElementById('id_btn-konversi').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/konversi',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol waris
+    var id = document.getElementById('id_btn-konversi').getAttribute('data-id');
+    var val = document.getElementById('id_btn-konversi').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/konversi',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol waris
 $('#ModalDetail').on('click', '.btn-waris', function() {
-        var id = document.getElementById('id_btn-waris').getAttribute('data-id');
-        var val = document.getElementById('id_btn-waris').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/waris',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol balik_nama
+    var id = document.getElementById('id_btn-waris').getAttribute('data-id');
+    var val = document.getElementById('id_btn-waris').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/waris',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol balik_nama
 $('#ModalDetail').on('click', '.btn-balik_nama', function() {
-        var id = document.getElementById('id_btn-balik_nama').getAttribute('data-id');
-        var val = document.getElementById('id_btn-balik_nama').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/balik_nama',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol peningkatan_hak
+    var id = document.getElementById('id_btn-balik_nama').getAttribute('data-id');
+    var val = document.getElementById('id_btn-balik_nama').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/balik_nama',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol peningkatan_hak
 $('#ModalDetail').on('click', '.btn-peningkatan_hak', function() {
-        var id = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-id');
-        var val = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/peningkatan_hak',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol skmht
+    var id = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-id');
+    var val = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/peningkatan_hak',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol skmht
 $('#ModalDetail').on('click', '.btn-skmht', function() {
-        var id = document.getElementById('id_btn-skmht').getAttribute('data-id');
-        var val = document.getElementById('id_btn-skmht').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/skmht',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol ht
+    var id = document.getElementById('id_btn-skmht').getAttribute('data-id');
+    var val = document.getElementById('id_btn-skmht').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/skmht',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol ht
 $('#ModalDetail').on('click', '.btn-ht', function() {
-        var id = document.getElementById('id_btn-ht').getAttribute('data-id');
-        var val = document.getElementById('id_btn-ht').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/ht',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol kutip_su
+    var id = document.getElementById('id_btn-ht').getAttribute('data-id');
+    var val = document.getElementById('id_btn-ht').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/ht',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol kutip_su
 $('#ModalDetail').on('click', '.btn-kutip_su', function() {
-        var id = document.getElementById('id_btn-kutip_su').getAttribute('data-id');
-        var val = document.getElementById('id_btn-kutip_su').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/kutip_su',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol iph
+    var id = document.getElementById('id_btn-kutip_su').getAttribute('data-id');
+    var val = document.getElementById('id_btn-kutip_su').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/kutip_su',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol iph
 $('#ModalDetail').on('click', '.btn-iph', function() {
-        var id = document.getElementById('id_btn-iph').getAttribute('data-id');
-        var val = document.getElementById('id_btn-iph').getAttribute('data-val');
-        if (confirm("Lanjutkan Proses?")) {
-            $.ajax({
-                type: 'post',
-                url: base_url + '/proses/iph',
-                dataType: 'JSON',
-                data: {
-                    id: id,
-                    val: val
-                },
-                success: function(data) {
-                    testr();
-                },
-                error: function() {
-                    alert('Gagal mengambil data proses');
-                }
-            });
-        }
-    })
-    //tombol znt
+    var id = document.getElementById('id_btn-iph').getAttribute('data-id');
+    var val = document.getElementById('id_btn-iph').getAttribute('data-val');
+    if (confirm("Lanjutkan Proses?")) {
+        $.ajax({
+            type: 'post',
+            url: base_url + '/proses/iph',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                val: val
+            },
+            success: function(data) {
+                testr();
+            },
+            error: function() {
+                alert('Gagal mengambil data proses');
+            }
+        });
+    }
+})
+
+//tombol znt
 $('#ModalDetail').on('click', '.btn-znt', function() {
     var id = document.getElementById('id_btn-znt').getAttribute('data-id');
     var val = document.getElementById('id_btn-znt').getAttribute('data-val');
@@ -1081,6 +996,8 @@ $('#ModalDetail').on('click', '.btn-znt', function() {
         });
     }
 })
+
+//tombol validasi_sert
 $('#ModalDetail').on('click', '.btn-validasi_sert', function() {
     var id = document.getElementById('id_validasi_sert').getAttribute('data-id');
     var val = document.getElementById('id_validasi_sert').getAttribute('data-val');

@@ -13,7 +13,7 @@ class Berkas extends CI_Controller
 
     function data_berkas()
     {
-        $data = $this->ModelBerkas->berkas_list();
+        $data = $this->ModelBerkas->data_berkas();
         echo json_encode($data);
     }
 
@@ -26,18 +26,22 @@ class Berkas extends CI_Controller
 
     function update_berkas()
     {
-        $id = $this->input->post('id');
-        $data = array(
-            'desa' => $this->input->post('desa'),
-            'kecamatan' => $this->input->post('kecamatan'),
-            'nama_penjual' => $this->input->post('nama_penjual'),
-            'nama_pembeli' => $this->input->post('nama_pembeli'),
-            'biaya' => $this->input->post('biaya'),
-            'dp' => $this->input->post('dp'),
-            'tot_biaya' => $this->input->post('tot_biaya'),
-            'keterangan' => $this->input->post('keterangan'),
-        );
-
+        $id = $this->input->post('id_e');
+        if ($this->input->post('penjual_e') != null) {
+            $data['nama_penjual'] = $this->input->post('penjual_e', true);
+        }
+        if ($this->input->post('pembeli_e') != null) {
+            $data['nama_pembeli'] = $this->input->post('pembeli_e', true);
+        }
+        if ($this->input->post('tot_biaya_e') != null) {
+            $data['tot_biaya'] = $this->input->post('tot_biaya_e', true);
+        }
+        if ($this->input->post('keterangan_e') != null) {
+            $data['keterangan'] = $this->input->post('keterangan_e', true);
+        }
+        if ($this->input->post('desa_e') != null) {
+            $data['desa'] = $this->input->post('desa_e', true);
+        }
         if ($this->input->post('jenis_berkas') != null) {
             $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas', true));
         }
@@ -45,49 +49,108 @@ class Berkas extends CI_Controller
             $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
         }
         $this->ModelBerkas->update_berkas($data, $id);
-        echo json_encode($data);
+        // echo json_encode($data);
+        // echo json_encode($id);
         redirect('berkas');
     }
 
 
     function simpanBer()
     {
-        //data input berkas Tabel Berkas
-        $jb = $this->input->post('jenis_berkas', true);
-        $jbs = implode(",", $jb); //mengubah array menjadi string
-        $data = [
-            'desa' => $this->input->post('desa', true),
-            'kecamatan' => $this->input->post('kecamatan', true),
-            'jenis_berkas' => $jbs,
-            'nama_penjual' => $this->input->post('nama_penjual', true),
-            'nama_pembeli' => $this->input->post('nama_pembeli', true),
-            'biaya' => $this->input->post('biaya', true),
-            'dp' => $this->input->post('dp', true),
-            'tot_biaya' => $this->input->post('tot_biaya', true),
-            'keterangan' => $this->input->post('keterangan', true),
-            'berkas_selesai' => 0
-        ];
-        if ($this->input->post('tgl_masuk') != null) {
-            $data['tgl_masuk'] = $this->input->post('tgl_masuk', true);
+        //berkas
+        $data = array(
+            'alamat' => $this->input->post('desa'),
+            'jenis_berkas' => implode(",", $this->input->post('jenis_berkas')),
+            'nama_penjual' => $this->input->post('penjual'),
+            'tot_biaya' => $this->input->post('tot_biaya'),
+            'keterangan' => $this->input->post('keterangan'),
+        );
+        if (!empty($this->input->post('pembeli'))) {
+            $data['nama_pembeli'] = $this->input->post('pembeli');
         }
-        //jika reg_sertipikat tidak kosong maka post data
-        if (!empty($this->input->post('reg_sertipikat'))) {
-            $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
+        if (!empty($this->input->post('sertipikat'))) {
+            $data['reg_sertipikat'] = $this->input->post('sertipikat');
         }
-        //post $data
-        $this->ModelBerkas->simpanBerkas($data);
+        if (!empty($this->input->post('tgl_masuk'))) {
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk');
+        }
+
+
+
+        //kelengkapan
+        if (!empty($this->input->post('ktp_penjual'))) {
+            $data_k['ktp_penjual'] = 1;
+        }
+        if (!empty($this->input->post('ktp_is_penjual'))) {
+            $data_k['ktp_pasangan_penjual'] = 1;
+        }
+        if (!empty($this->input->post('kk_penjual'))) {
+            $data_k['kk_penjual'] = 1;
+        }
+        if (!empty($this->input->post('ktp_pembeli'))) {
+            $data_k['ktp_pembeli'] = 1;
+        }
+        if (!empty($this->input->post('ktp_is_pembeli'))) {
+            $data_k['ktp_pasangan_pembeli'] = 1;
+        }
+        if (!empty($this->input->post('kk_pembeli'))) {
+            $data_k['kk_pembeli'] = 1;
+        }
+        if (!empty($this->input->post('bpjs'))) {
+            $data_k['bpjs'] = 1;
+        }
+        if (!empty($this->input->post('ktp_ahli_waris'))) {
+            $data_k['ktp_ahli_waris'] = 1;
+        }
+        if (!empty($this->input->post('kk_ahli_waris'))) {
+            $data_k['kk_ahli_waris'] = 1;
+        }
+        if (!empty($this->input->post('akta_kematian'))) {
+            $data_k['akta_kematian'] = 1;
+        }
+        if (!empty($this->input->post('shm'))) {
+            $data_k['shm'] = 1;
+        }
+        if (!empty($this->input->post('sppt'))) {
+            $data_k['sppt'] = 1;
+        }
+        if (!empty($this->input->post('order_'))) {
+            $data_k['order_'] = 1;
+        }
+        if (!empty($this->input->post('imb'))) {
+            $data_k['imb'] = 1;
+        }
+        if (!empty($this->input->post('ket_beda_nama'))) {
+            $data_k['ket_beda_nama'] = 1;
+        }
+        if (!empty($this->input->post('persetujuan_hibah'))) {
+            $data_k['persetujuan_hibah'] = 1;
+        }
+        if (!empty($this->input->post('ket_kelengkapan'))) {
+            $data_k['ket_kelengkapan'] = $this->input->post('ket_kelengkapan');
+        }
+
+        if (!empty($data_k)) {
+            $this->ModelBerkas->insert_berkas_kelengkapan($data, $data_k);
+            echo json_encode($data);
+            echo json_encode($data_k);
+        } else {
+            $this->ModelBerkas->simpanBerkas($data);
+            echo json_encode($data);
+        }
         redirect('berkas');
     }
 
     public function index()
     {
         $data = array(
-            'a' => $this->ModelTest->b_terdaftar(),
-            'b' => $this->ModelTest->b_proses(),
-            'c' =>  $this->ModelTest->b_selesai(),
-            'd' => $this->ModelTest->b_dicabut(),
+            'a' => $this->ModelBerkas->b_terdaftar(),
+            'b' => $this->ModelBerkas->b_proses(),
+            'c' =>  $this->ModelBerkas->b_selesai(),
+            'd' => $this->ModelBerkas->b_dicabut(),
         );
-        $data['berkas'] = $this->ModelBerkas->getBerkasLeft();
+        // $data['berkas'] = $this->ModelBerkas->getBerkasLeft();
+        $data['sertipikat'] = $this->ModelSertipikat->get_sert_for_select();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
 
         $this->form_validation->set_rules('jenis_berkas', 'Jenis Berkas', 'required', [
@@ -110,7 +173,7 @@ class Berkas extends CI_Controller
                 $this->load->view('templates/topbar');
                 $this->load->view('sidebar/berkas/tabelBerkas', $data);
                 $this->load->view('templates/footer');
-            } else {//staff
+            } else { //staff
                 $this->load->view('templates/sidebarAdmin');
                 $this->load->view('templates/topbar');
                 $this->load->view('sidebar/berkas/tabelBerkas_staff', $data);
