@@ -114,6 +114,17 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
+    public function get_berkas_for_select()
+    {
+        $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
+            ->from('tb_berkas')
+            ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->get()
+            ->result();
+        return $data;
+    }
+
     //untuk form edit
     // function get_berkas($id)
     // {

@@ -22,9 +22,11 @@ class ModelBpn extends CI_Model
             $hasil = array(
                 'tgl_masuk' => $data->tgl_masuk,
                 'no_proses_bpn' => $data->no_proses_bpn,
+                'id_berkas' => $data->id_berkas,
                 'nama_pemohon' => $data->nama_pemohon,
                 'jenis_proses' => $data->jenis_proses,
                 'no_bpn' => $data->no_bpn,
+                'tahun' => $data->tahun,
                 'ket' => $data->ket,
             );
         }

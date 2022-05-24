@@ -16,7 +16,7 @@ class Bpn extends CI_Controller
             'b' => $this->ModelBpn->bpn_proses(),
         );
         $data['judul'] = "Daftar Proses BPN";
-        $data['sertipikat'] = $this->ModelBpn->get_prosesBPN();
+        $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);
         //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
         if ($this->session->userdata('role_id') == 0) {
@@ -57,11 +57,17 @@ class Bpn extends CI_Controller
         $data = array(
             'nama_pemohon' => $this->input->post('nama_pemohon_e'),
             'no_bpn' => $this->input->post('no_bpn_e'),
+            'tahun' => $this->input->post('tahun_e'),
             'jenis_proses' => $this->input->post('jenis_proses_e'),
             'ket' => $this->input->post('ket_e'),
         );
+        if(!empty($this->input->post('tgl_masuk_e'))){
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk_e');
+        }
         $this->ModelBpn->update_bpn($data, $id);
         redirect('bpn');
+        // echo json_encode($data);
+        // echo json_encode($id);
     }
 
     public function inputBPN()
@@ -69,14 +75,16 @@ class Bpn extends CI_Controller
 
         //mengumpulkan data yang akan dimasukkan ke database
         $data = array(
-            'nama_pemohon' => $this->input->post('nama_pemohon'),
-            'jenis_proses' => $this->input->post('jenis_proses'),
-            'no_bpn' => $this->input->post('nomor_bpn'),
-            'ket' => $this->input->post('ket')
+            'id_berkas' => $this->input->post('no_berkas_i'),
+            'nama_pemohon' => $this->input->post('nama_pemohon_i'),
+            'jenis_proses' => $this->input->post('jenis_proses_i'),
+            'no_bpn' => $this->input->post('no_bpn_i'),
+            'tahun' => $this->input->post('tahun_i'),
+            'ket' => $this->input->post('ket_i')
         );
         //jika tgl_masuk tidak kosong maka akan diisi dengan tanggal yang diinputkan
-        if ($this->input->post('tgl_masuk') != null) {
-            $data['tgl_masuk'] = $this->input->post('tgl_masuk');
+        if ($this->input->post('tgl_masuk_i') != null) {
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk_i');
         }
 
         //post data ke modelBPN

@@ -40,7 +40,7 @@ $(document).ready(function() {
                         '<td>' + data[i].no_proses_bpn + '</td>' +
                         '<td>' + data[i].tgl_masuk + '</td>' +
                         '<td>' + data[i].nama_pemohon + '</td>' +
-                        '<td>' + data[i].no_bpn + '</td>' +
+                        '<td>' + data[i].no_bpn + '/' + data[i].tahun + '</td>' +
                         '<td>' + data[i].jenis_proses + '</td>' +
                         '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
                         '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' +
@@ -71,13 +71,15 @@ $(document).ready(function() {
                 no_proses_bpn: id
             },
             success: function(data) {
-                $.each(data, function(tgl_masuk, no_proses_bpn, nama_pemohon, jenis_proses, no_bpn, ket) {
+                $.each(data, function(tgl_masuk, no_proses_bpn, id_berkas, tahun, nama_pemohon, jenis_proses, no_bpn, ket) {
                     $('#edit_bpn').modal('show');
                     $('[name="no_proses_bpn_e"]').val(data.no_proses_bpn);
                     $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
                     $('[name="nama_pemohon_e"]').val(data.nama_pemohon);
                     $('[name="jenis_proses_e"]').val(data.jenis_proses);
                     $('[name="no_bpn_e"]').val(data.no_bpn);
+                    $('[name="tahun_e"]').val(data.tahun);
+                    $('[name="no_berkas_e"]').val(data.id_berkas);
                     $('[name="ket_e"]').val(data.ket);
                 })
             },

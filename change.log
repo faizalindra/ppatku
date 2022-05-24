@@ -1,4 +1,10 @@
-24 Mei 2002 #00024
+24 Mei 2022 #00025
+    - mengubah form input & edit proses BPN
+    - update database
+    - menambah tahun pada kolom 'no_bpn' di 'tabelBPN'
+
+
+24 Mei 2022 #00024
     - mengubah form input & edit sertipikat pada 'tabelSertipikat'
     - memperbaiki data desa dan kecamatan di 'tabelSertipikat'
     - mengubah MySQL Query untuk menampilkan data sertipikat
