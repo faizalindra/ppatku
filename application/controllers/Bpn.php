@@ -7,18 +7,31 @@ class Bpn extends CI_Controller
     {
         parent::__construct();
         cek_login();
-        // // $this->load->library('form_validation');
-        // $this->load->model('ModelBpn');
     }
 
     public function index()
     {
+        $data = array(
+            'a' => $this->ModelBpn->bpn_terdaftar(),
+            'b' => $this->ModelBpn->bpn_proses(),
+        );
         $data['judul'] = "Daftar Proses BPN";
-        $data['sertipikat'] = $this->ModelBpn->get_prosesBPN();
+        $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarAdmin');
-        $this->load->view('templates/topbar');
-        $this->load->view('sidebar/BPN/tabelBPN');
+        //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
+        if ($this->session->userdata('role_id') == 0) {
+            $this->load->view('templates/sidebarNotaris');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn', $data);
+        } elseif ($this->session->userdata('role_id') == 1) {
+            $this->load->view('templates/sidebarAdmin');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn', $data);
+        } elseif ($this->session->userdata('role_id') == 2) {
+            $this->load->view('templates/sidebarStaff');
+            $this->load->view('templates/topbar');
+            $this->load->view('sidebar/bpn/tabelBpn_staff', $data);
+        }
         $this->load->view('templates/footer');
     }
 
@@ -29,78 +42,63 @@ class Bpn extends CI_Controller
         return $data;
     }
 
-    public function get_BPN_dashboard()
+    //untuk form edit bpn
+    function get_bpn()
     {
-        $data = $this->ModelBpn->get_prosesBPN();
-        foreach ($data as $key => $value) {
-            $d1 = strtotime($value['estimasi']);
-            $est = ceil(($d1 - time()) / 60 / 60 / 24);
-            $est = $est - 1;
-            $value['estimasi'] = $est;
-            if ($est <= '2') {
-                if ($est >= '-7') {
-                    $data2[] = $value;
-                }
-            }
+        $id = array('no_proses_bpn' => $this->input->get('no_proses_bpn'));
+        $data = $this->ModelBpn->get_bpn($id);
+        echo json_encode($data);
+    }
+
+    //untuk form edit bpn
+    public function update_bpn()
+    {
+        $id = array('no_proses_bpn' => $this->input->post('no_proses_bpn_e'));
+        $data = array(
+            'nama_pemohon' => $this->input->post('nama_pemohon_e'),
+            'no_bpn' => $this->input->post('no_bpn_e'),
+            'tahun' => $this->input->post('tahun_e'),
+            'jenis_proses' => $this->input->post('jenis_proses_e'),
+            'ket' => $this->input->post('ket_e'),
+        );
+        if(!empty($this->input->post('tgl_masuk_e'))){
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk_e');
         }
-        echo json_encode($data2);
+        $this->ModelBpn->update_bpn($data, $id);
+        redirect('bpn');
+        // echo json_encode($data);
+        // echo json_encode($id);
     }
 
     public function inputBPN()
     {
 
-        //mengecek nama proses lalu menentukan estimasi waktu berdasarkan nama proses
-        $jp =  $this->input->post('jenis_proses');
-        if ($this->input->post('tgl_masuk') == null) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $this->input->post('tgl_masuk');
-        }
-
-        switch ($jp) {
-            case 'Peningkatan Hak':
-                $est = date('Y-m-d', strtotime($tgl . '+ 3 days'));
-                break;
-            case 'Pengecekan':
-                $est = date('Y-m-d', strtotime($tgl . '+ 3 days'));
-                break;
-            case 'Pemberian Hak Tanggungan':
-                $est = date('Y-m-d', strtotime($tgl . '+ 30 days'));
-                break;
-            case 'Roya':
-                $est = date('Y-m-d', strtotime($tgl . '+ 7 days'));
-                break;
-            case 'Cek Plot':
-                $est = date('Y-m-d', strtotime($tgl . '+ 7 days'));
-                break;
-            case 'Pengalihan Hak':
-                $est = date('Y-m-d', strtotime($tgl . '+ 6 months'));
-                break;
-        }
-
         //mengumpulkan data yang akan dimasukkan ke database
         $data = array(
-            'nama_pemohon' => $this->input->post('nama_pemohon'),
-            'jenis_proses' => $jp,
-            'estimasi' => $est,
-            'no_bpn' => $this->input->post('nomor_bpn'),
-            'ket' => $this->input->post('ket')
+            'id_berkas' => $this->input->post('no_berkas_i'),
+            'nama_pemohon' => $this->input->post('nama_pemohon_i'),
+            'jenis_proses' => $this->input->post('jenis_proses_i'),
+            'no_bpn' => $this->input->post('no_bpn_i'),
+            'tahun' => $this->input->post('tahun_i'),
+            'ket' => $this->input->post('ket_i')
         );
-
-        //jika tgl masuk kosong maka akan mengambil tanggal sekarang
-        if ($this->input->post('tgl_masuk') == null) {
-            $data = $this->ModelBpn->inputBPN($data);
-            echo json_encode($data);
-
-
-            //jika tgl_masuk tidak kosong maka akan mengambil tanggal yang diinputkan
-        } else {
-            $tgl = ['tgl_masuk' => $this->input->post('tgl_masuk')];
-            $data_tgl = array_merge($data, $tgl);
-            $this->ModelBpn->inputBPN($data_tgl);
-            echo json_encode($data_tgl);
+        //jika tgl_masuk tidak kosong maka akan diisi dengan tanggal yang diinputkan
+        if ($this->input->post('tgl_masuk_i') != null) {
+            $data['tgl_masuk'] = $this->input->post('tgl_masuk_i');
         }
-        echo json_encode($tgl);
+
+        //post data ke modelBPN
+        $this->ModelBpn->inputBPN($data);
+        echo json_encode($data);
+        redirect('bpn');
+    }
+
+
+    //untuk badge status proses bpn
+    public function selesai()
+    {
+        $id = $this->uri->segment(3);
+        $this->ModelBpn->selesai($id);
         redirect('bpn');
     }
 }

@@ -1,5 +1,115 @@
-<<<<<<< HEAD
-=======
+24 Mei 2022 #00025
+    - mengubah form input & edit proses BPN
+    - update database
+    - menambah tahun pada kolom 'no_bpn' di 'tabelBPN'
+
+
+24 Mei 2022 #00024
+    - mengubah form input & edit sertipikat pada 'tabelSertipikat'
+    - memperbaiki data desa dan kecamatan di 'tabelSertipikat'
+    - mengubah MySQL Query untuk menampilkan data sertipikat
+    - memperbaiki card berkas pada 'Dashboard'
+    - perbaikan kecil di kolom sertipikat input berkas dan edit berkas pada 'tabelBerkas'
+    
+
+24 Mei 2022 #00023
+    - mengubah database menjadi 'ppatku'
+    - mengubah relasi database
+    - mengubah form input berkas dan edit berkas pada 'tabelBerkas' 
+      - mengubah metode input dan update berkas pada controller
+      - menambah kelengkapan berkas pada form input berkas
+    - menghapus fungsi 'conv_kec()' di tabelBerkas.js
+    - mengubah fungsi edit berkas di tabelBerkas.js
+    - mengubah model record berkas pada controller berkas, catatan & notaris
+    - mengubah MySQL Query pada fungsi 'data_berkas' dan 'get_berkas' di 'ModelBerkas'
+    - menambah fungsi simpan berkas & kelengkapan berkas di 'ModelBerkas'
+    - mengubah MySQL Query pada fungsi 'get_proses' di 'ModelProses'
+    - mengubah fungsi 'get_sertipikat' di 'ModelSertipikat'
+    - menambah funsgi 'get_sert_for_select' di 'ModelSertipikat'
+    - 
+
+20 Mei 2022 #00022
+    - memperbaiki fitur pemantauan proses
+    - menambah pilihan proses di input  & edit tabelBerkas 
+    - update README.md
+
+19 Mei 2022 #00021
+    - memperbaiki fungsi update sertipikat
+    - memperbaiki form edit sertipikat dan input sertipikat, menghapus readonly beberapa kolom pada form
+    - mengubah metode query untuk mendapat record di ModelBPN, ModelBerkas, & ModelSertipikat 
+
+19 Mei 2022 #00020
+    - membuat fitur edit proses bpn
+
+19 Mei 2022 #00019
+    - membuat fitur status proses BPN
+    - menjaga kolom keterangan pada tabelBPN agar dapat mempertahankan line break
+
+18 Mei 2022 #00018
+    - menambah folder assets/test ke gitignore
+    - membuat fitur catatan
+      - membuat ModelCatatan, Controller Catatan & tabelCatatan
+      - menambah link catatan ke sidebarAdmin & sidebarNotaris
+      - menambah card catatan ke dashboard
+    - menambah user.id ke userdata()
+    - memasukan data record ke dashboard notaris
+    - mengubah data.keterangan pada detail_berkas di tabelBerkas agar mempertahankan line break
+    
+
+17 Mei 2022 #00017
+    - memperbaiki edit berkas, jenis_berkas terPOST null jika berkas memiliki lebih dari 1 jenis_berkas
+    - menghapus kolom desa di detail_berkas berkas
+    - menambah tempplate kelengkapan berkas di detail_berkas
+    - mengganti kolom Reg Sertipikat menjadi No Sertipikat
+    - fix kolom kecamatan di tabelBerkas, jika berkas memiliki sertipikat tampilkan kecamatan sesuai sertipikat
+
+16 Mei 2022 #00016
+    - memasukan data record ke template record
+      - memasukan data ke record dashboard
+      - memasukan data ke record tabelBerkas
+      - memasukan data ke record tabelBPN
+      - memasukan data ke record tabelsertipikat
+    - menambah card proses BPN terdaftar di dashboard
+
+15 Mei 2022 #00015
+    - memperbaiki input tanggal di form input berkas
+    - menghapus data submit sertipikat di Berkas/simpanBer()
+    - menghapus kolom estimasi di tabelBPN
+      - menghapus POST estimasi di ModelBPN
+      - menghapus card estimasi di dashboard
+    - controller BPN
+      - menghapus fungsi penghitung estimasi berkas
+      - menghapus funsgi card estimasi berkas untuk dashboard
+      - optimasi logic untuk POST tgl_masuk
+    - menambah dsa dan menghapus id_proses ke get_berkas
+    - tabelBerkas
+        - mengganti kolom reg_sertipikat menjadi nomor sertipikat di tabelBerkas & modal detail_berkas
+        - mengganti desa pada tabel berkas sesuai dengan desa di tb_sertipikat jika sertipikat ada, jika tidak maka tampilkan desa yang ada di tb_berkas
+        - mengubah link GET data sertipikat ke /sertipikat/get_sertipikat, sebelumnya /berkas/get_berkas
+        - fix POST tanggal masuk berkas pada form input berkas
+        - mengubah kolom no_reg menjadi nomor sertipikat di modal detail_sertipikat
+        - menyesuaikan kolom kecamatan sesuai dengan tb_sertipikat di modal detail_sertipikat
+    - update database
+
+
+14 Mei 2022 #00014
+    - Perubahan tabelBerkas
+      - menghapus kolom desa di tabelBerkas
+      - mengubah nomor registrasi menjadi nomor sertipikat pada tabelBerkas
+        - data yang digunakan untuk tabelBerkas sekarang adalah hasil join dari tb_berkas & tb_sertipikat
+      - mengubah tombol reg_sertipikat menjadi nomor sertipikat
+      - menambah badge 'Berkas Dicabut' di tabelBerkas
+      - memperbaiki template berkas terdaftar, proses dan selesai pada tabelBerkas & tabelBPN
+      - menghapus funsgsi sring_to_array() pada tabelBerkas.js
+      - memindah fungsi berkasSelesai() ke dalam fungsi data_berkas() pada tabelBerkas.js
+    - menambah list gitignore(controller/test, model/test & folder test)
+    - memperbaiki bug post nomor reg_sertipikat pada form input berkas
+      - sebelum fix reg_sertipikat di POST dengan value 0, setelah fix jika reg_sertipikat NULL maka tidak usah post reg_sertipikat
+    - menghapus status_proses dari database & file
+    - fix bug sidebarAdmin di load di halaman berkas dan sertipikat pada notaris
+    - menghapus file tabelBerkasv2.php
+    - menambah file tabelBerkas_staff.php(belum di edit)
+
 12 Mei 2022 #00013
     - Menambah user notaris
         - menambah halaman notaris
@@ -40,7 +150,6 @@
       - menghapus comma separation di tot_bayar
       - memperbaiki tombol switch form input sertipikat
 
->>>>>>> tugas-akhir
 26 April 2022 #00005
     - Hapus kode sampah di footer
     - Memperbaiki kolom jenis berkas di form edit tabel berkas, value jenis_berkas akan hilang jika tidak jenis berkas tidak di submit ulang
