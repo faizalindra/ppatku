@@ -10,7 +10,6 @@
                 <div class="row">
                     <div class="col-auto col-md-2">
                         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
-                        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formEditBerkas">Tes</button>
                     </div>
                     <div class="col-md-8"></div>
                     <div class="col-md-2">
@@ -88,10 +87,10 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <select name="sertipikat" id="sertipikat_i" class="custom-select">
+                                                            <select name="sertipikat" id="sertipikat_i" class="custom-select" aria-placeholder="Sertipikat">
                                                                 <option disabled selected value> -- Sertipikat -- </option>
                                                                 <?php foreach ($sertipikat as $row) : ?>
-                                                                    <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->jenis_hak ?>. <?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?></option>
+                                                                    <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                             <div class="input-group-append">
@@ -414,7 +413,7 @@
                                                     <select name="sertipikat_e" id="sertipikat_e" class="custom-select">
                                                         <option disabled selected value> -- Sertipikat -- </option>
                                                         <?php foreach ($sertipikat as $row) : ?>
-                                                            <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->jenis_hak ?>. <?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?></option>
+                                                            <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     <div class="input-group-append">

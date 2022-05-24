@@ -24,20 +24,23 @@ class ModelSertipikat extends CI_Model
     }
 
     //List Sertipikat Tersimpan di tabel tb_sertipikat
-    function sertipikat_list()
+    function tabel_sertipikat()
     {
-        $hasil = $this->db->query("SELECT * FROM tb_sertipikat");
+        // $hasil = $this->db->query("SELECT * FROM tb_sertipikat");
+        $hasil = $this->db->select("*, desa.nama as desa, kecamatan.nama as kecamatan")
+            ->from('tb_sertipikat')
+            ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
+            ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+            ->get();
         return $hasil->result();
     }
 
     //untuk mendapatkan sertipikat berdasarkan no_reg
     function get_sertipikat($id)
     {
-        // $hsl = $this->db->query("SELECT * FROM tb_sertipikat WHERE no_reg='$id'");
         $hsl = $this->db->select("*, desa.nama as desa, kecamatan.nama as kecamatan")
             ->from('tb_sertipikat')
             ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
-            // ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->where('no_reg', $id)
             ->get()
@@ -48,6 +51,7 @@ class ModelSertipikat extends CI_Model
                 'tgl_daftar' => $data->tgl_daftar,
                 'no_sertipikat' => $data->no_sertipikat,
                 'luas' => $data->luas,
+                'dsa' => $data->dsa,
                 'desa' => $data->desa,
                 'kecamatan' => $data->kecamatan,
                 'jenis_hak' => $data->jenis_hak,

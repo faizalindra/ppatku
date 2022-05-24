@@ -1,3 +1,11 @@
+24 Mei 2002 #00024
+    - mengubah form input & edit sertipikat pada 'tabelSertipikat'
+    - memperbaiki data desa dan kecamatan di 'tabelSertipikat'
+    - mengubah MySQL Query untuk menampilkan data sertipikat
+    - memperbaiki card berkas pada 'Dashboard'
+    - perbaikan kecil di kolom sertipikat input berkas dan edit berkas pada 'tabelBerkas'
+    
+
 24 Mei 2022 #00023
     - mengubah database menjadi 'ppatku'
     - mengubah relasi database

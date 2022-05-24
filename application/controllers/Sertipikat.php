@@ -14,7 +14,6 @@ class Sertipikat extends CI_Controller
     {
         $data['a'] = $this->ModelSertipikat->s_terdaftar();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
-        $data['sertipikat'] = $this->ModelSertipikat->cekSertipikat()->result_array();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
         //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
@@ -42,48 +41,56 @@ class Sertipikat extends CI_Controller
         echo json_encode($data);
     }
 
-    public function data_sertipikat()
+    public function tabel_sertipikat()
     {
-        $data = $this->ModelSertipikat->sertipikat_list();
+        $data = $this->ModelSertipikat->tabel_sertipikat();
         echo json_encode($data);
     }
 
     public function inputSertipikat()
     {
-        $proses = $this->input->post('proses', true);
-        $prosess = implode(",", $proses); //mengubah array menjadi string
         $data = [
-            'jenis_hak' => $this->input->post('jenis_hak', true),
-            'no_sertipikat' => $this->input->post('no_sertipikat', true),
-            'kec' => $this->input->post('kec', true),
-            'dsa' => $this->input->post('dsa', true),
-            'luas' => $this->input->post('luas', true),
-            'pemilik_hak' => $this->input->post('pemilik_hak', true),
-            'pembeli_hak' => $this->input->post('pembeli_hak', true),
-            'proses' => $prosess,
-            'ket' => $this->input->post('ket', true),
+            'jenis_hak' => $this->input->post('jenis_hak_i', true),
+            'no_sertipikat' => $this->input->post('nomor_sertipikat_i', true),
+            'dsa' => $this->input->post('desa_i', true),
+            'luas' => $this->input->post('luas_i', true),
+            'pemilik_hak' => $this->input->post('pemilik_hak_i', true),
+            'proses' => implode(",",$this->input->post('jenis_berkas[]_i', true)),
+            'ket' => $this->input->post('keterangan_i', true),
         ];
+        if(!empty($this->input->post('penerima_hak_i', true))){
+            $data['pembeli_hak'] = $this->input->post('penerima_hak_i', true);
+        }
+        if(!empty($this->input->post('tgl_masuk_i', true))){
+            $data['tgl_daftar'] = $this->input->post('tgl_masuk_i', true);
+        }
+        echo json_encode($data);
         $this->ModelSertipikat->simpanSertipikat($data);
         redirect('sertipikat');
     }
 
     public function update_sertipikat()
     {
-        $no_reg = array('no_reg' => $this->input->post('no_reg_e', true));
+        $no_reg = array('no_reg' => $this->input->post('id_e', true));
         $data = array(
             'jenis_hak' => $this->input->post('jenis_hak_e', true),
-            'no_sertipikat' => $this->input->post('no_sertipikat_e', true),
-            'kec' => $this->input->post('kec_e', true),
-            'dsa' => $this->input->post('dsa_e', true),
+            'no_sertipikat' => $this->input->post('nomor_sertipikat_e', true),
             'luas' => $this->input->post('luas_e', true),
             'pemilik_hak' => $this->input->post('pemilik_hak_e', true),
-            'pembeli_hak' => $this->input->post('pembeli_hak_e', true),
-            'ket' => $this->input->post('ket_e', true),
+            'pembeli_hak' => $this->input->post('penerima_hak_e', true),
         );
+        if ($this->input->post('keterangan_e', true) != null) {
+            $data['ket'] = $this->input->post('keterangan_e', true);
+        }
         if ($this->input->post('proses', true) != null) {
             $data['proses'] = implode(",", $this->input->post('proses[]', true));
         }
+        if ($this->input->post('desa_e', true) != null) {
+            $data['dsa'] = $this->input->post('desa_e', true);
+        }
         $this->ModelSertipikat->update_sertipikat($data, $no_reg);
         redirect('sertipikat');
+        echo json_encode($data);
+        echo json_encode($no_reg);
     }
 }

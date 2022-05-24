@@ -82,7 +82,7 @@
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 justify-content-center" align="center"><button class='btn btn-info'><?= $b['id']?></button></div>
+                                            <div class="col-md-12 justify-content-center" align="center"><button class='btn btn-info'><?= $b['id_berkas']?></button></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 text-left">
