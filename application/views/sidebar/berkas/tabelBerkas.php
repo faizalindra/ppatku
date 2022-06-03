@@ -539,6 +539,7 @@
         </div>
         <!-- end model form edit -->
 
+        <!-- modal detail berkas -->
         <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
@@ -782,45 +783,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- modal detail -->
-        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="reload">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>No Berkas</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>No Sertipikat</th>
-                                        <th>Kecamatan</th>
-                                        <th>Jenis Berkas</th>
-                                        <th>Nama Penjual</th>
-                                        <th>Nama Pembeli</th>
-                                        <th>Total Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data_detail">
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal detail -->
+        <!-- end of modal detail berkas -->
 
         <!-- modal sertipikat -->
         <div class="modal fade" id="ModalSertipikat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">

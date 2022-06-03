@@ -239,8 +239,9 @@ $('#show_data').on('click', '.item_detail2', function() {
             $('#pihak_1').html(data.nama_penjual);
             $('#pihak_2').html(data.nama_pembeli);
             $('#ket_berkas').html(data.keterangan);
-            testr(data.id_berkas, data.jenis_berkas);
-            kelengkapan(data.id_berkas);
+            // testr(data.id_berkas, data.jenis_berkas);
+            detail_kelengkapan(data.id_berkas);
+            detail_proses(data.id_berkas);
 
         },
         error: function() {
@@ -251,272 +252,52 @@ $('#show_data').on('click', '.item_detail2', function() {
 });
 
 
-//untuk membuat list proses
-function testr(id, arrjb) {
-    // var id = document.getElementById('id_proses_id').getAttribute('data-value');
-    // var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
-    var array_jb = [];
-    var hasil = arrjb.split(","); //mengubah string menjadi array
-    for (i = 0; i < hasil.length; i++) {
-        switch (hasil[i]) {
-            case "AJB":
-                arrayy = ['5', '7', '8', '10', '13'];
-                break;
-            case "Hibah":
-                arrayy = ['5', '7', '8', '10', '13'];
-                break;
-            case "APHB":
-                arrayy = ['5', '7', '8', '10', '13'];
-                break;
-            case "Pemecahan":
-                arrayy = ['5', '9'];
-                break;
-            case "APHT":
-                arrayy = ['5', '6', '16'];
-                break;
-            case "SKMHT":
-                arrayy = ['15'];
-                break;
-            case "Konversi":
-                arrayy = ['1', '10', '11'];
-                break;
-            case "Ganti Nama":
-                arrayy = ['5', '8'];
-                break;
-            case "Pengeringan":
-                arrayy = ['2', '3', '4'];
-                break;
-            case "Peningkatan Hak":
-                arrayy = ['14'];
-                break;
-            case "Waris":
-                arrayy = ['5', '10', '12'];
-                break;
-            case "Ganti Blangko":
-                arrayy = ['1', '20', '17'];
-                break;
-        }
-        //mengabungkan array
-        array_jb = array_jb.concat(arrayy);
-    }
-    //mengurutkan array dari kecil ke besar
-    array_jb.sort(function(a, b) {
-        return a - b
-    });
-
-    //menghapus duplikat value dari array
-    var uniq = array_jb.reduce(function(a, b) {
-        if (a.indexOf(b) < 0) a.push(b);
-        return a;
-    }, []);
-
+//fungsi untuk menampilkan daftar proses
+function detail_proses(id) {
+    // alert(id);
     $.ajax({
-        method: 'GET',
         url: base_url + '/proses/get_proses',
-        async: true,
+        type: 'get',
         dataType: 'json',
         data: {
             id: id
         },
         success: function(data) {
-            var html = "";
-            for (i = 0; i < uniq.length; i++) {
-                // summ = summ + i;
-                switch (uniq[i]) {
-                    case uniq[i] = '1':
-                        if (data.ukur == 0 || data.ukur == null) {
-                            html += '<a id="id_btn-ukur" class="badge badge-secondary btn-ukur"  href="#" data-id="' + id + '" data-val="1" data-jp="1">Ukur</a>'
-                        } else if (data.ukur == 1) {
-                            html += '<a id="id_btn-ukur" class="badge badge-warning btn-ukur"  href="#" data-id="' + id + '" data-val="2" data-jp="1">Ukur</a>'
-                        } else if (data.ukur == 2) {
-                            html += '<a class="badge badge-success" href="#" >Ukur</a>'
-                        };
-                        break;
-                    case uniq[i] = '2':
-                        if (data.pert_teknis == 0 || data.pert_teknis == null) {
-                            html += '<a id="id_btn-pert_teknis" class="badge badge-secondary btn-pert_teknis"  href="#" data-id="' + id + '" data-val="1"  data-jp="2">Pertimbangan Teknis </a>';
-                        } else if (data.pert_teknis == 1) {
-                            html += '<a id="id_btn-pert_teknis" class="badge badge-warning btn-pert_teknis"  href="#" data-id="' + id + '" data-val="2"  data-jp="2">Pertimbangan Teknis </a>';
-                        } else if (data.pert_teknis == 2) {
-                            html += '<a class="badge badge-success" href="#" >Pertimbangan Teknis </a>';
-                        };
-                        break;
-                    case uniq[i] = '3':
-                        if (data.perijinan == 0 || data.perijinan == null) {
-                            html += '<a id="id_btn-perijinan" class="badge badge-secondary btn-perijinan"  href="#" data-id="' + id + '" data-val="1" data-jp="3">Perijinan </a>';
-                        } else if (data.perijinan == 1) {
-                            html += '<a id="id_btn-perijinan" class="badge badge-warning btn-perijinan"  href="#" data-id="' + id + '" data-val="2" data-jp="3">Perijinan </a>';
-                        } else if (data.perijinan == 2) {
-                            html += '<a class="badge badge-success" href="#" >Perijinan </a>';
-                        };
-                        break;
-                    case uniq[i] = '4':
-                        if (data.pengeringan == 0 || data.pengeringan == null) {
-                            html += '<a id="id_btn-pengeringan" class="badge badge-secondary btn-pengeringan"  href="#" data-id="' + id + '" data-val="1" data-jp="4">Pengeringan </a>';
-                        } else if (data.pengeringan == 1) {
-                            html += '<a id="id_btn-pengeringan" class="badge badge-warning btn-pengeringan"  href="#" data-id="' + id + '" data-val="2" data-jp="4">Pengeringan </a>';
-                        } else if (data.pengeringan == 2) {
-                            html += '<a class="badge badge-success" href="#" >Pengeringan </a>';
-                        }
-                        break;
-                    case uniq[i] = '5':
-                        if (data.cek_plot == 0 || data.cek_plot == null) {
-                            html += '<a id="id_btn-cek_plot" class="badge badge-secondary btn-cek_plot"  href="#" data-id="' + id + '" data-val="1" data-jp="5">Cek Plot </a>';
-                        } else if (data.cek_plot == 1) {
-                            html += '<a id="id_btn-cek_plot" class="badge badge-warning btn-cek_plot"  href="#" data-id="' + id + '" data-val="2" data-jp="5">Cek Plot </a>';
-                        } else if (data.cek_plot == 2) {
-                            html += '<a class="badge badge-success" href="#" >Cek Plot </a>';
-                        };
-                        break;
-                    case uniq[i] = '6':
-                        if (data.cek_sertipikat == 0 || data.cek_sertipikat == null) {
-                            html += '<a id="id_btn-cek_sertipikat" class="badge badge-secondary btn-cek_sertipikat"  href="#" data-id="' + id + '" data-val="1"  data-jp="6">Cek Sertipikat </a>';
-                        } else if (data.cek_sertipikat == 1) {
-                            html += '<a id="id_btn-cek_sertipikat" class="badge badge-warning btn-cek_sertipikat"  href="#" data-id="' + id + '" data-val="2"  data-jp="6">Cek Sertipikat </a>';
-                        } else if (data.cek_sertipikat == 2) {
-                            html += '<a class="badge badge-success" href="#" >Cek Sertipikat </a>';
-                        };
-                        break;
-                    case uniq[i] = '7':
-                        if (data.roya == 0 || data.roya == null) {
-                            html += '<a id="id_btn-roya" class="badge badge-secondary btn-roya"  href="#" data-id="' + id + '" data-val="1" data-jp="7" >Roya </a>';
-                        } else if (data.roya == 1) {
-                            html += '<a id="id_btn-roya" class="badge badge-warning btn-roya"  href="#" data-id="' + id + '" data-val="2" data-jp="7" >Roya </a>';
-                        } else if (data.roya == 2) {
-                            html += '<a class="badge badge-success" href="#" >Roya </a>';
-                        };
-                        break;
-                    case uniq[i] = '8':
-                        if (data.ganti_nama == 0 || data.ganti_nama == null) {
-                            html += '<a id="id_btn-ganti_nama" class="badge badge-secondary btn-ganti_nama"  href="#" data-id="' + id + '" data-val="1" data-jp="8" >Ganti Nama </a>';
-                        } else if (data.ganti_nama == 1) {
-                            html += '<a id="id_btn-ganti_nama" class="badge badge-warning btn-ganti_nama"  href="#" data-id="' + id + '" data-val="2" data-jp="8" >Ganti Nama </a>';
-                        } else if (data.ganti_nama == 2) {
-                            html += '<a class="badge badge-success" href="#" >Ganti Nama </a>';
-                        };
-                        break;
-                    case uniq[i] = '9':
-                        if (data.tapak_kapling == 0 || data.tapak_kapling == null) {
-                            html += '<a id="id_btn-tapak_kapling" class="badge badge-secondary btn-tapak_kapling"  href="#" data-id="' + id + '" data-val="1" data-jp="9" >Tapak Kapling </a>';
-                        } else if (data.tapak_kapling == 1) {
-                            html += '<a id="id_btn-tapak_kapling" class="badge badge-warning btn-tapak_kapling"  href="#" data-id="' + id + '" data-val="2" data-jp="9" >Tapak Kapling </a>';
-                        } else if (data.tapak_kapling == 2) {
-                            html += '<a class="badge badge-success" href="#" >Tapak Kapling </a>';
-                        };
-                        break;
-                    case uniq[i] = '10':
-                        if (data.bayar_pajak == 0 || data.bayar_pajak == null) {
-                            html += '<a id="id_btn-bayar_pajak" class="badge badge-secondary btn-bayar_pajak"  href="#" data-id="' + id + '" data-val="1" data-jp="10" >Validasi Pajak </a>';
-                        } else if (data.bayar_pajak == 1) {
-                            html += '<a id="id_btn-bayar_pajak" class="badge badge-warning btn-bayar_pajak"  href="#" data-id="' + id + '" data-val="2" data-jp="10" >Validasi Pajak </a>';
-                        } else if (data.bayar_pajak == 2) {
-                            html += '<a class="badge badge-success" href="#" >Validasi Pajak</a>';
-                        };
-                        break;
-                    case uniq[i] = '11':
-                        if (data.konversi == 0 || data.konversi == null) {
-                            html += '<a id="id_btn-konversi" class="badge badge-secondary btn-konversi"  href="#" data-id="' + id + '" data-val="1" data-jp="11" >Konversi </a>';
-                        } else if (data.konversi == 1) {
-                            html += '<a id="id_btn-konversi" class="badge badge-warning btn-konversi"  href="#" data-id="' + id + '" data-val="2" data-jp="11" >Konversi </a>';
-                        } else if (data.konversi == 2) {
-                            html += '<a class="badge badge-success" href="#" >Konversi </a>';
-                        };
-                        break;
-                    case uniq[i] = '12':
-                        if (data.waris == 0 || data.waris == null) {
-                            html += '<a id="id_btn-waris" class="badge badge-secondary btn-waris"  href="#" data-id="' + id + '" data-val="1" data-jp="12">Waris </a>';
-                        } else if (data.waris == 1) {
-                            html += '<a id="id_btn-waris" class="badge badge-warning btn-waris"  href="#" data-id="' + id + '" data-val="2" data-jp="12">Wars </a>';
-                        } else if (data.waris == 2) {
-                            html += '<a class="badge badge-success" href="#" >Waris </a>';
-                        };
-                        break;
-                    case uniq[i] = '13':
-                        if (data.balik_nama == 0 || data.balik_nama == null) {
-                            html += '<a id="id_btn-balik_nama" class="badge badge-secondary btn-balik_nama"  href="#" data-id="' + id + '" data-val="1" data-jp="13">Balik Nama </a>';
-                        } else if (data.balik_nama == 1) {
-                            html += '<a id="id_btn-balik_nama" class="badge badge-warning btn-balik_nama"  href="#" data-id="' + id + '" data-val="2" data-jp="13">Balik Nama </a>';
-                        } else if (data.balik_nama == 2) {
-                            html += '<a class="badge badge-success" href="#" >Balik Nama </a>';
-                        };
-                        break;
-                    case uniq[i] = '14':
-                        if (data.peningkatan_hak == 0 || data.peningkatan_hak == null) {
-                            html += '<a id="id_btn-peningkatan_hak" class="badge badge-secondary btn-peningkatan_hak"  href="#" data-id="' + id + '" data-val="1" data-jp="14">Peningkatan Hak </a>';
-                        } else if (data.peningkatan_hak == 1) {
-                            html += '<a id="id_btn-peningkatan_hak" class="badge badge-warning btn-peningkatan_hak"  href="#" data-id="' + id + '" data-val="2" data-jp="14">Peningkatan Hak </a>';
-                        } else if (data.peningkatan_hak == 2) {
-                            html += '<a class="badge badge-success" href="#"  >Peningkatan Hak </a>';
-                        };
-                        break;
-                    case uniq[i] = '15':
-                        if (data.skmht == 0 || data.skmht == null) {
-                            html += '<a id="id_btn-skmht" class="badge badge-secondary btn-skmht"  href="#" data-id="' + id + '" data-val="1" data-jp="15">SKMHT </a>';
-                        } else if (data.skmht == 1) {
-                            html += '<a id="id_btn-skmht" class="badge badge-warning btn-skmht"  href="#" data-id="' + id + '" data-val="2" data-jp="15">SKMHT </a>';
-                        } else if (data.skmht == 2) {
-                            html += '<a class="badge badge-success" href="#" >SKMHT </a>';
-                        };
-                        break;
-                    case uniq[i] = '16':
-                        if (data.ht == 0 || data.ht == null) {
-                            html += '<a id="id_btn-ht" class="badge badge-secondary btn-ht"  href="#" data-id="' + id + '" data-val="1" data-jp="16">HT </a>';
-                        } else if (data.ht == 1) {
-                            html += '<a id="id_btn-ht" class="badge badge-warning btn-ht"  href="#" data-id="' + id + '" data-val="2" data-jp="16">HT </a>';
-                        } else if (data.ht == 2) {
-                            html += '<a class="badge badge-success" href="#"  >HT </a>';
-                        };
-                        break;
-                    case uniq[i] = '17':
-                        if (data.kutip_su == 0 || data.kutip_su == null) {
-                            html += '<a id="id_btn-kutip_su" class="badge badge-secondary btn-kutip_su"  href="#" data-id="' + id + '" data-val="1" data-jp="17">Kutip SU </a>';
-                        } else if (data.kutip_su == 1) {
-                            html += '<a id="id_btn-kutip_su" class="badge badge-warning btn-kutip_su"  href="#" data-id="' + id + '" data-val="2" data-jp="17">Kutip SU </a>';
-                        } else if (data.kutip_su == 2) {
-                            html += '<a class="badge badge-success" href="#"  >Kutip SU</a>';
-                        };
-                        break;
-                    case uniq[i] = '18':
-                        if (data.iph == 0 || data.iph == null) {
-                            html += '<a id="id_btn-iph" class="badge badge-secondary btn-iph"  href="#" data-id="' + id + '" data-val="1" data-jp="18">IPH </a>';
-                        } else if (data.iph == 1) {
-                            html += '<a id="id_btn-iph" class="badge badge-warning btn-iph"  href="#" data-id="' + id + '" data-val="2" data-jp="18">IPH </a>';
-                        } else if (data.iph == 2) {
-                            html += '<a class="badge badge-success" href="#"  >IPH </a>';
-                        };
-                        break;
-                    case uniq[i] = '19':
-                        if (data.znt == 0 || data.znt == null) {
-                            html += '<a id="id_btn-znt" class="badge badge-secondary btn-znt""  href="#" data-id="' + id + '" data-val="1" data-jp="19">ZNT </a>';
-                        } else if (data.znt == 1) {
-                            html += '<a id="id_btn-znt" class="badge badge-warning btn-znt""  href="#" data-id="' + id + '" data-val="2" data-jp="19">ZNT </a>';
-                        } else if (data.znt == 2) {
-                            html += '<a class="badge badge-success" href="#"  >ZNT </a>';
-                        };
-                        break;
-                    case uniq[i] = '20':
-                        if (data.validasi_sert == 0 || data.validasi_sert == null) {
-                            html += '<a id="id_validasi_sert" class="badge badge-secondary btn-validasi_sert""  href="#" data-id="' + id + '" data-val="1" data-jp="20">Validasi Sertipikat </a>';
-                        } else if (data.validasi_sert == 1) {
-                            html += '<a id="id_validasi_sert" class="badge badge-warning btn-validasi_sert""  href="#" data-id="' + id + '" data-val="2" data-jp="20">Validasi Sertipikat </a>';
-                        } else if (data.validasi_sert == 2) {
-                            html += '<a class="badge badge-success" href="#"  >Validasi Sertipikat </a>';
-                        };
-                        break;
-
-                }
-            }
-            $('#proses_').html(html);
-
+            $('#proses_').html(data);
         },
-        error: function() {
-            alert('Gagal megambil tombol proses');
+        error: function(data) {
+            alert('gagal mengambil data proses');
         }
     });
 }
 
+//untuk update status proses
+function proses(id, val, jp) {
+    // alert(id);
+    if (confirm("Kelengkapan ada?")) {
+        $.ajax({
+            url: base_url + '/proses/update_proses',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                id: id,
+                jp: jp,
+                val: val
+            },
+            success: function(data) {
+                // alert(data);
+                detail_proses(id);
+            },
+            error: function(data) {
+                alert('gagal mengupdate proses');
+            }
+        });
+    }
+}
+
+
 //fungsi untuk menampilkan kelengkapan berkas
-function kelengkapan(id) {
+function detail_kelengkapan(id) {
     // var id = 18;
     $.ajax({
         url: base_url + '/Kelengkapan/get_kelengkapan',
@@ -537,10 +318,7 @@ function kelengkapan(id) {
     });
 }
 
-$('#modelDetail2').on('click', '#btn-kelengkapan', function() {
-    var id = document.getElementById('btn-kelengkapan').getAttribute('data-id');
-    var jb = document.getElementById('btn-kelengkapan').getAttribute('data-jb');
-    // alert(id + jb);
+function kelengkapan(id, jb) {
     if (confirm("Kelengkapan ada?")) {
         $.ajax({
             url: base_url + '/kelengkapan/update_kelengkapan',
@@ -552,15 +330,39 @@ $('#modelDetail2').on('click', '#btn-kelengkapan', function() {
             },
             success: function(data) {
                 // alert(data);
-                kelengkapan(id);
+                detail_kelengkapan(id);
             },
             error: function(data) {
                 alert('gagal mengupdate kelengkapan');
             }
         });
     }
+}
 
-})
+// $('#modelDetail2').on('click', '#btn-kelengkapan', function() {
+//     var id = document.getElementById('btn-kelengkapan').getAttribute('data-id');
+//     var jb = document.getElementById('btn-kelengkapan').getAttribute('data-jb');
+//     // alert(id + jb);
+//     if (confirm("Kelengkapan ada?")) {
+//         $.ajax({
+//             url: base_url + '/kelengkapan/update_kelengkapan',
+//             type: 'post',
+//             dataType: 'json',
+//             data: {
+//                 id: id,
+//                 jb: jb
+//             },
+//             success: function(data) {
+//                 // alert(data);
+//                 detail_kelengkapan(id);
+//             },
+//             error: function(data) {
+//                 alert('gagal mengupdate kelengkapan');
+//             }
+//         });
+//     }
+
+// })
 
 
 // tombol detail sertipikat
@@ -640,467 +442,6 @@ $('#show_data').on('click', '.edit_berkas', function() {
     return false;
 });
 
-//tombol ukur
-$('#ModalDetail').on('click', '.btn-ukur', function() {
-    var id = document.getElementById('id_btn-ukur').getAttribute('data-id');
-    var val = document.getElementById('id_btn-ukur').getAttribute('data-val');
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/ukur',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol cek plot
-$('#ModalDetail').on('click', '.btn-cek_plot', function() {
-    var id = document.getElementById('id_btn-cek_plot').getAttribute('data-id');
-    var val = document.getElementById('id_btn-cek_plot').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/cek_plot',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol pert_teknis
-$('#ModalDetail').on('click', '.btn-pert_teknis', function() {
-    var id = document.getElementById('id_btn-pert_teknis').getAttribute('data-id');
-    var val = document.getElementById('id_btn-pert_teknis').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/pert_teknis',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol perijinan
-$('#ModalDetail').on('click', '.btn-perijinan', function() {
-    var id = document.getElementById('id_btn-perijinan').getAttribute('data-id');
-    var val = document.getElementById('id_btn-perijinan').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/perijinan',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol pengeringan
-$('#ModalDetail').on('click', '.btn-pengeringan', function() {
-    var id = document.getElementById('id_btn-pengeringan').getAttribute('data-id');
-    var val = document.getElementById('id_btn-pengeringan').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/pengeringan',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol cek_sertipikat
-$('#ModalDetail').on('click', '.btn-cek_sertipikat', function() {
-    var id = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-id');
-    var val = document.getElementById('id_btn-cek_sertipikat').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/cek_sertipikat',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol roya
-$('#ModalDetail').on('click', '.btn-roya', function() {
-    var id = document.getElementById('id_btn-roya').getAttribute('data-id');
-    var val = document.getElementById('id_btn-roya').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/roya',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol ganti_nama
-$('#ModalDetail').on('click', '.btn-ganti_nama', function() {
-    var id = document.getElementById('id_btn-ganti_nama').getAttribute('data-id');
-    var val = document.getElementById('id_btn-ganti_nama').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/ganti_nama',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol tapak_kapling
-$('#ModalDetail').on('click', '.btn-tapak_kapling', function() {
-    var id = document.getElementById('id_btn-tapak_kapling').getAttribute('data-id');
-    var val = document.getElementById('id_btn-tapak_kapling').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/tapak_kapling',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol bayar_pajak
-$('#ModalDetail').on('click', '.btn-bayar_pajak', function() {
-    var id = document.getElementById('id_btn-bayar_pajak').getAttribute('data-id');
-    var val = document.getElementById('id_btn-bayar_pajak').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/bayar_pajak',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol konversi
-$('#ModalDetail').on('click', '.btn-konversi', function() {
-    var id = document.getElementById('id_btn-konversi').getAttribute('data-id');
-    var val = document.getElementById('id_btn-konversi').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/konversi',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol waris
-$('#ModalDetail').on('click', '.btn-waris', function() {
-    var id = document.getElementById('id_btn-waris').getAttribute('data-id');
-    var val = document.getElementById('id_btn-waris').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/waris',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol balik_nama
-$('#ModalDetail').on('click', '.btn-balik_nama', function() {
-    var id = document.getElementById('id_btn-balik_nama').getAttribute('data-id');
-    var val = document.getElementById('id_btn-balik_nama').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/balik_nama',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol peningkatan_hak
-$('#ModalDetail').on('click', '.btn-peningkatan_hak', function() {
-    var id = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-id');
-    var val = document.getElementById('id_btn-peningkatan_hak').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/peningkatan_hak',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol skmht
-$('#ModalDetail').on('click', '.btn-skmht', function() {
-    var id = document.getElementById('id_btn-skmht').getAttribute('data-id');
-    var val = document.getElementById('id_btn-skmht').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/skmht',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol ht
-$('#ModalDetail').on('click', '.btn-ht', function() {
-    var id = document.getElementById('id_btn-ht').getAttribute('data-id');
-    var val = document.getElementById('id_btn-ht').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/ht',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol kutip_su
-$('#ModalDetail').on('click', '.btn-kutip_su', function() {
-    var id = document.getElementById('id_btn-kutip_su').getAttribute('data-id');
-    var val = document.getElementById('id_btn-kutip_su').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/kutip_su',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol iph
-$('#ModalDetail').on('click', '.btn-iph', function() {
-    var id = document.getElementById('id_btn-iph').getAttribute('data-id');
-    var val = document.getElementById('id_btn-iph').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/iph',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol znt
-$('#ModalDetail').on('click', '.btn-znt', function() {
-    var id = document.getElementById('id_btn-znt').getAttribute('data-id');
-    var val = document.getElementById('id_btn-znt').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/znt',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
-
-//tombol validasi_sert
-$('#ModalDetail').on('click', '.btn-validasi_sert', function() {
-    var id = document.getElementById('id_validasi_sert').getAttribute('data-id');
-    var val = document.getElementById('id_validasi_sert').getAttribute('data-val');
-    if (confirm("Lanjutkan Proses?")) {
-        $.ajax({
-            type: 'post',
-            url: base_url + '/proses/validasi_sert',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                val: val
-            },
-            success: function(data) {
-                testr();
-            },
-            error: function() {
-                alert('Gagal mengambil data proses');
-            }
-        });
-    }
-})
 
 
 // tombol input berkas

@@ -1,3 +1,9 @@
+04 Juni 2022 #00028
+    - perbaikan tombol proses dan kelengkapan
+    - rework fungsi proses berkas pada detail_berkas
+      - mengganti metode get_proses di tabelberkas.js
+      - mengganti metode pengolahan data di controller & model Proses 
+
 03 Juni 2022 #00027
     - fungsi kelengkapan berkas berhasil di gunakan
 
