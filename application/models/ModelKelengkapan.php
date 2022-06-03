@@ -6,7 +6,7 @@ class ModelKelengkapan extends CI_Model
 
     function get_kelengkapan($id2 = null, $id = null)
     {
-        $jb = $this->db->get_where('tb_berkas', array('id' => $id))->result();
+        // $jb = $this->db->get_where('tb_berkas', array('id' => $id))->result();
         $jb = $this->db->select('jenis_berkas')->from('tb_berkas')->where('id', $id)->get()->result();
         foreach ($jb as $j) {
             $jb = $j->jenis_berkas;
@@ -64,7 +64,7 @@ class ModelKelengkapan extends CI_Model
         $data['ada'] = '';
         $data['belum'] = '';
         $keleng_ada = '<li><a class="badge badge-success" href="#">';
-        $keleng_belum = '<li><a class="badge badge-danger" href="#" data-jb="';
+        $keleng_belum = '<li><a id="btn-kelengkapan" class="badge badge-danger" href="#" data-jb="';
         $keleng_ada_b = '</a></li>';
         $kelengkapan = array("", "KTP Penjual", "KTP Suami/Istri Penjual", "KK Penjual", "KTP Pembeli", "KTP Suami/Istri Pembeli", "KK Pembeli", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK");
         $hasil = $this->db->get_where('tb_kelengkapan', $id2)->result();
@@ -200,5 +200,30 @@ class ModelKelengkapan extends CI_Model
     {
         $hasil = $this->db->get('tb_kelengkapan')->result();
         return $hasil;
+    }
+
+    public function update_kelengkapan($a, $b){
+        $id = array('id_kelengkapan' => $a);
+        // $id['id_kelengkapan'] = $id;
+        switch ($b){
+            case 1: $jk['ktp_penjual'] = 1; break;
+            case 2: $jk['ktp_pasangan_penjual'] = 1; break;
+            case 3: $jk['kk_penjual'] = 1; break;
+            case 4: $jk['ktp_pembeli'] = 1; break;
+            case 5: $jk['ktp_pasangan_pembeli'] = 1; break;
+            case 6: $jk['kk_pembeli'] = 1; break;
+            case 7: $jk['bpjs'] = 1; break;
+            case 8: $jk['ktp_ahli_waris'] = 1; break;
+            case 9: $jk['kk_ahli_waris'] = 1; break;
+            case 10: $jk['akta_kematian'] = 1; break;
+            case 11: $jk['shm'] = 1; break;
+            case 12: $jk['sppt'] = 1; break;
+            case 13: $jk['imb'] = 1; break;
+            case 14: $jk['order_'] = 1; break;
+            case 15: $jk['ket_beda_nama'] = 1; break;
+            case 16: $jk['persetujuan_hibah'] = 1; break;
+            case 17: $jk['spk'] = 1; break;
+        }
+        $this->db->update('tb_kelengkapan', $jk, $id);
     }
 }

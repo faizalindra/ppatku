@@ -238,10 +238,8 @@ $('#show_data').on('click', '.item_detail2', function() {
             $('#col_sertipikat').html(sertipikat);
             $('#pihak_1').html(data.nama_penjual);
             $('#pihak_2').html(data.nama_pembeli);
-            // $('#col_sertipikat').html(sertipikat);
             $('#ket_berkas').html(data.keterangan);
             testr(data.id_berkas, data.jenis_berkas);
-            // kelengkapan(data.id_berkas, data.jenis_berkas);
             kelengkapan(data.id_berkas);
 
         },
@@ -252,89 +250,6 @@ $('#show_data').on('click', '.item_detail2', function() {
     return false;
 });
 
-function kelengkapan2(id, jenis_berkas) {
-    var array_kle = [];
-    var hasil = jenis_berkas.split(',');
-    for (i = 0; i < hasil.length; i++) {
-        switch (hasil[i]) {
-            case "AJB":
-                arrayx = [1, 2, 3, 4, 5, 6, 7, 11, 12];
-                break;
-            case "Hibah":
-                arrayx = [1, 2, 3, 4, 5, 6, 7, 11, 12, 16];
-                break;
-            case "APHB":
-                arrayx = [1, 2, 3, 4, 5, 6, 11, 12];
-                break;
-            case "Pemecahan":
-                arrayx = [1, 3, 11, 12];
-                break;
-            case "APHT":
-                arrayx = [1, 2, 3, 4, 5, 6, 11, 12, 14, 17];
-                break;
-            case "SKMHT":
-                arrayx = [1, 2, 3, 4, 5, 6, 11, 12, 14, 17];
-                break;
-            case "Konversi":
-                arrayx = [1, 2, 3, 4, 5, 6, 12];
-                break;
-            case "Ganti Nama":
-                arrayx = [1, 2, 11, 15];
-                break;
-            case "Pengeringan":
-                arrayx = [1, 3, 11, 12];
-                break;
-            case "Peningkatan Hak":
-                arrayx = [1, 2, 11, 13];
-                break;
-            case "Waris":
-                arrayx = [8, 9, 10, 11, 12, ];
-                break;
-            case "Ganti Blangko":
-                arrayx = [1, 3, 11, 12];
-                break;
-        }
-        array_kle = array_kle.concat(arrayx);
-    }
-    //mengurutkan array dari kecil ke besar
-    array_kle.sort(function(a, b) {
-        return a - b
-    });
-
-    //menghapus duplikat value dari array
-    var uniq = array_kle.reduce(function(a, b) {
-        if (a.indexOf(b) < 0) a.push(b);
-        return a;
-    }, []);
-
-    $.ajax({
-        method: 'GET',
-        url: base_url + '/kelengkapan/get_kelengkapan',
-        async: true,
-        dataType: 'json',
-        data: {
-            id: id
-        },
-        success: function(data) {
-            // alert("Berhasil");
-            var html = '';
-            for (i = 0; i < uniq.length; i++) {
-                switch (uniq[i]) {
-                    case 1:
-                        if (uniq[i] == null || uniq[i] == 0) {
-                            html += '<i class="badge badge-secondary btn-ktp_pihak_1" href="#';
-                        } else {
-                            html += '<i class="badge badge-secondary btn-ktp_pihak_2" href="#';
-                        };
-                        break;
-                }
-            }
-        },
-        error: function() {
-            alert('Gagal Mengambil detail berkas');
-        }
-    })
-}
 
 //untuk membuat list proses
 function testr(id, arrjb) {
@@ -621,6 +536,31 @@ function kelengkapan(id) {
         }
     });
 }
+
+$('#modelDetail2').on('click', '#btn-kelengkapan', function() {
+    var id = document.getElementById('btn-kelengkapan').getAttribute('data-id');
+    var jb = document.getElementById('btn-kelengkapan').getAttribute('data-jb');
+    // alert(id + jb);
+    if (confirm("Kelengkapan ada?")) {
+        $.ajax({
+            url: base_url + '/kelengkapan/update_kelengkapan',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                id: id,
+                jb: jb
+            },
+            success: function(data) {
+                // alert(data);
+                kelengkapan(id);
+            },
+            error: function(data) {
+                alert('gagal mengupdate kelengkapan');
+            }
+        });
+    }
+
+})
 
 
 // tombol detail sertipikat
