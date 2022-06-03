@@ -159,8 +159,9 @@ function data_berkas() {
                     '<td>' + data[i].nama_pembeli + '</td>' +
                     '<td>' + berkasSelesai(data[i].berkas_selesai, data[i].id) + '</td>' +
                     '<td style="text-align:center;">' +
-                    '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id_berkas + '"><i class="fa fa-edit" ></i>Edit</button>' +
-                    '<button href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id_berkas + '"><i class="fa fa-search" ></i> Detail</button>' +
+                    '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' + data[i].id_berkas + '"><i class="fa fa-edit" ></i></button>' +
+                    // '<button href="javascript:;"  class="badge badge-primary item_detail" data="' + data[i].id_berkas + '"><i class="fa fa-search" ></i> Detail</button>' +
+                    '<button href="javascript:;"  class="badge badge-primary item_detail2" data="' + data[i].id_berkas + '"><i class="fa fa-search" ></i> Detail</button>' +
                     '</td>' + '</tr>';
             }
             $('#show_data').html(html);
@@ -188,11 +189,11 @@ $('#show_data').on('click', '.item_detail', function() {
             $('#ModalDetail').modal('show');
             var html1 = "";
             html1 += '<tr class="text-capitalize text-center">' +
-                '<td id="id_proses_id" data-value="' + data.id_berkas + '">' + data.id_berkas + '</td>' +
+                '<td>' + data.id_berkas + '</td>' +
                 '<td>' + data.tgl_masuk + '</td>' +
                 '<td>' + sertipikat(data.jenis_hak, data.no_sertipikat, data.desa) + '</td>' +
                 '<td>' + data.kecamatan + '</td>' +
-                '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
+                '<td>' + data.jenis_berkas + '</td>' +
                 '<td>' + data.nama_penjual + '</td>' +
                 '<td>' + data.nama_pembeli + '</td>' +
                 '<td>' + antinull(data.tot_biaya) + '</td>' +
@@ -208,7 +209,7 @@ $('#show_data').on('click', '.item_detail', function() {
                 '</td>' + '<tr >' + '</tr>' + '<div id="tdProses">' + '</div>' + '</tr>';
 
             $('#data_detail').html(html1);
-            testr();
+            testr(data.id_berkas, data.jenis_berkas);
         },
         error: function() {
             alert('Gagal Mengambil detail berkas');
@@ -217,10 +218,128 @@ $('#show_data').on('click', '.item_detail', function() {
     return false;
 });
 
+//tombol detail2 berkas///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$('#show_data').on('click', '.item_detail2', function() {
+    var id = $(this).attr('data');
+    $.ajax({
+        method: "GET",
+        url: base_url + '/berkas/get_berkas',
+        dataType: "JSON",
+        data: {
+            id: id
+        },
+        success: function(data) {
+            $('#modelDetail2').modal('show');
+            $('#id_berkas_').html('No. ' + data.id_berkas);
+            $('#tgl_masuk_berkas_').html(data.tgl_masuk);
+            $('#jenis_berkas_').html(data.jenis_berkas);
+            var sertipikat = data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + ', Kec. ' + data.kecamatan;
+            $('#col_sertipikat').html(sertipikat);
+            $('#pihak_1').html(data.nama_penjual);
+            $('#pihak_2').html(data.nama_pembeli);
+            // $('#col_sertipikat').html(sertipikat);
+            $('#ket_berkas').html(data.keterangan);
+            testr(data.id_berkas, data.jenis_berkas);
+            // kelengkapan(data.id_berkas, data.jenis_berkas);
+            kelengkapan(data.id_berkas);
+
+        },
+        error: function() {
+            alert('Gagal Mengambil detail berkas');
+        }
+    });
+    return false;
+});
+
+function kelengkapan2(id, jenis_berkas) {
+    var array_kle = [];
+    var hasil = jenis_berkas.split(',');
+    for (i = 0; i < hasil.length; i++) {
+        switch (hasil[i]) {
+            case "AJB":
+                arrayx = [1, 2, 3, 4, 5, 6, 7, 11, 12];
+                break;
+            case "Hibah":
+                arrayx = [1, 2, 3, 4, 5, 6, 7, 11, 12, 16];
+                break;
+            case "APHB":
+                arrayx = [1, 2, 3, 4, 5, 6, 11, 12];
+                break;
+            case "Pemecahan":
+                arrayx = [1, 3, 11, 12];
+                break;
+            case "APHT":
+                arrayx = [1, 2, 3, 4, 5, 6, 11, 12, 14, 17];
+                break;
+            case "SKMHT":
+                arrayx = [1, 2, 3, 4, 5, 6, 11, 12, 14, 17];
+                break;
+            case "Konversi":
+                arrayx = [1, 2, 3, 4, 5, 6, 12];
+                break;
+            case "Ganti Nama":
+                arrayx = [1, 2, 11, 15];
+                break;
+            case "Pengeringan":
+                arrayx = [1, 3, 11, 12];
+                break;
+            case "Peningkatan Hak":
+                arrayx = [1, 2, 11, 13];
+                break;
+            case "Waris":
+                arrayx = [8, 9, 10, 11, 12, ];
+                break;
+            case "Ganti Blangko":
+                arrayx = [1, 3, 11, 12];
+                break;
+        }
+        array_kle = array_kle.concat(arrayx);
+    }
+    //mengurutkan array dari kecil ke besar
+    array_kle.sort(function(a, b) {
+        return a - b
+    });
+
+    //menghapus duplikat value dari array
+    var uniq = array_kle.reduce(function(a, b) {
+        if (a.indexOf(b) < 0) a.push(b);
+        return a;
+    }, []);
+
+    $.ajax({
+        method: 'GET',
+        url: base_url + '/kelengkapan/get_kelengkapan',
+        async: true,
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            // alert("Berhasil");
+            var html = '';
+            for (i = 0; i < uniq.length; i++) {
+                switch (uniq[i]) {
+                    case 1:
+                        if (uniq[i] == null || uniq[i] == 0) {
+                            html += '<i class="badge badge-secondary btn-ktp_pihak_1" href="#';
+                        } else {
+                            html += '<i class="badge badge-secondary btn-ktp_pihak_2" href="#';
+                        };
+                        break;
+                }
+            }
+        },
+        error: function() {
+            alert('Gagal Mengambil detail berkas');
+        }
+    })
+}
+
 //untuk membuat list proses
-function testr() {
-    var id = document.getElementById('id_proses_id').getAttribute('data-value');
-    var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
+function testr(id, arrjb) {
+    // var id = document.getElementById('id_proses_id').getAttribute('data-value');
+    // var arrjb = document.getElementById('id_jenis_berkas').getAttribute('data-value');
     var array_jb = [];
     var hasil = arrjb.split(","); //mengubah string menjadi array
     for (i = 0; i < hasil.length; i++) {
@@ -275,6 +394,7 @@ function testr() {
         if (a.indexOf(b) < 0) a.push(b);
         return a;
     }, []);
+
     $.ajax({
         method: 'GET',
         url: base_url + '/proses/get_proses',
@@ -290,192 +410,214 @@ function testr() {
                 switch (uniq[i]) {
                     case uniq[i] = '1':
                         if (data.ukur == 0 || data.ukur == null) {
-                            html += '<a id="id_btn-ukur" class="btn btn-secondary btn-rounded btn-ukur" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="1">Ukur</a>'
+                            html += '<a id="id_btn-ukur" class="badge badge-secondary btn-ukur"  href="#" data-id="' + id + '" data-val="1" data-jp="1">Ukur</a>'
                         } else if (data.ukur == 1) {
-                            html += '<a id="id_btn-ukur" class="btn btn-warning btn-rounded btn-ukur" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="1">Ukur</a>'
+                            html += '<a id="id_btn-ukur" class="badge badge-warning btn-ukur"  href="#" data-id="' + id + '" data-val="2" data-jp="1">Ukur</a>'
                         } else if (data.ukur == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Ukur</a>'
+                            html += '<a class="badge badge-success" href="#" >Ukur</a>'
                         };
                         break;
                     case uniq[i] = '2':
                         if (data.pert_teknis == 0 || data.pert_teknis == null) {
-                            html += '<a id="id_btn-pert_teknis" class="btn btn-secondary btn-rounded btn-pert_teknis" role="button" href="#" data-id="' + id + '" data-val="1"  data-jp="2">Pertimbangan Teknis </a>';
+                            html += '<a id="id_btn-pert_teknis" class="badge badge-secondary btn-pert_teknis"  href="#" data-id="' + id + '" data-val="1"  data-jp="2">Pertimbangan Teknis </a>';
                         } else if (data.pert_teknis == 1) {
-                            html += '<a id="id_btn-pert_teknis" class="btn btn-warning btn-rounded btn-pert_teknis" role="button" href="#" data-id="' + id + '" data-val="2"  data-jp="2">Pertimbangan Teknis </a>';
+                            html += '<a id="id_btn-pert_teknis" class="badge badge-warning btn-pert_teknis"  href="#" data-id="' + id + '" data-val="2"  data-jp="2">Pertimbangan Teknis </a>';
                         } else if (data.pert_teknis == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Pertimbangan Teknis </a>';
+                            html += '<a class="badge badge-success" href="#" >Pertimbangan Teknis </a>';
                         };
                         break;
                     case uniq[i] = '3':
                         if (data.perijinan == 0 || data.perijinan == null) {
-                            html += '<a id="id_btn-perijinan" class="btn btn-secondary btn-rounded btn-perijinan" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="3">Perijinan </a>';
+                            html += '<a id="id_btn-perijinan" class="badge badge-secondary btn-perijinan"  href="#" data-id="' + id + '" data-val="1" data-jp="3">Perijinan </a>';
                         } else if (data.perijinan == 1) {
-                            html += '<a id="id_btn-perijinan" class="btn btn-warning btn-rounded btn-perijinan" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="3">Perijinan </a>';
+                            html += '<a id="id_btn-perijinan" class="badge badge-warning btn-perijinan"  href="#" data-id="' + id + '" data-val="2" data-jp="3">Perijinan </a>';
                         } else if (data.perijinan == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Perijinan </a>';
+                            html += '<a class="badge badge-success" href="#" >Perijinan </a>';
                         };
                         break;
                     case uniq[i] = '4':
                         if (data.pengeringan == 0 || data.pengeringan == null) {
-                            html += '<a id="id_btn-pengeringan" class="btn btn-secondary btn-rounded btn-pengeringan" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="4">Pengeringan </a>';
+                            html += '<a id="id_btn-pengeringan" class="badge badge-secondary btn-pengeringan"  href="#" data-id="' + id + '" data-val="1" data-jp="4">Pengeringan </a>';
                         } else if (data.pengeringan == 1) {
-                            html += '<a id="id_btn-pengeringan" class="btn btn-warning btn-rounded btn-pengeringan" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="4">Pengeringan </a>';
+                            html += '<a id="id_btn-pengeringan" class="badge badge-warning btn-pengeringan"  href="#" data-id="' + id + '" data-val="2" data-jp="4">Pengeringan </a>';
                         } else if (data.pengeringan == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Pengeringan </a>';
+                            html += '<a class="badge badge-success" href="#" >Pengeringan </a>';
                         }
                         break;
                     case uniq[i] = '5':
                         if (data.cek_plot == 0 || data.cek_plot == null) {
-                            html += '<a id="id_btn-cek_plot" class="btn btn-secondary btn-rounded btn-cek_plot" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="5">Cek Plot </a>';
+                            html += '<a id="id_btn-cek_plot" class="badge badge-secondary btn-cek_plot"  href="#" data-id="' + id + '" data-val="1" data-jp="5">Cek Plot </a>';
                         } else if (data.cek_plot == 1) {
-                            html += '<a id="id_btn-cek_plot" class="btn btn-warning btn-rounded btn-cek_plot" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="5">Cek Plot </a>';
+                            html += '<a id="id_btn-cek_plot" class="badge badge-warning btn-cek_plot"  href="#" data-id="' + id + '" data-val="2" data-jp="5">Cek Plot </a>';
                         } else if (data.cek_plot == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Cek Plot </a>';
+                            html += '<a class="badge badge-success" href="#" >Cek Plot </a>';
                         };
                         break;
                     case uniq[i] = '6':
                         if (data.cek_sertipikat == 0 || data.cek_sertipikat == null) {
-                            html += '<a id="id_btn-cek_sertipikat" class="btn btn-secondary btn-rounded btn-cek_sertipikat" role="button" href="#" data-id="' + id + '" data-val="1"  data-jp="6">Cek Sertipikat </a>';
+                            html += '<a id="id_btn-cek_sertipikat" class="badge badge-secondary btn-cek_sertipikat"  href="#" data-id="' + id + '" data-val="1"  data-jp="6">Cek Sertipikat </a>';
                         } else if (data.cek_sertipikat == 1) {
-                            html += '<a id="id_btn-cek_sertipikat" class="btn btn-warning btn-rounded btn-cek_sertipikat" role="button" href="#" data-id="' + id + '" data-val="2"  data-jp="6">Cek Sertipikat </a>';
+                            html += '<a id="id_btn-cek_sertipikat" class="badge badge-warning btn-cek_sertipikat"  href="#" data-id="' + id + '" data-val="2"  data-jp="6">Cek Sertipikat </a>';
                         } else if (data.cek_sertipikat == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Cek Sertipikat </a>';
+                            html += '<a class="badge badge-success" href="#" >Cek Sertipikat </a>';
                         };
                         break;
                     case uniq[i] = '7':
                         if (data.roya == 0 || data.roya == null) {
-                            html += '<a id="id_btn-roya" class="btn btn-secondary btn-rounded btn-roya" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="7" >Roya </a>';
+                            html += '<a id="id_btn-roya" class="badge badge-secondary btn-roya"  href="#" data-id="' + id + '" data-val="1" data-jp="7" >Roya </a>';
                         } else if (data.roya == 1) {
-                            html += '<a id="id_btn-roya" class="btn btn-warning btn-rounded btn-roya" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="7" >Roya </a>';
+                            html += '<a id="id_btn-roya" class="badge badge-warning btn-roya"  href="#" data-id="' + id + '" data-val="2" data-jp="7" >Roya </a>';
                         } else if (data.roya == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Roya </a>';
+                            html += '<a class="badge badge-success" href="#" >Roya </a>';
                         };
                         break;
                     case uniq[i] = '8':
                         if (data.ganti_nama == 0 || data.ganti_nama == null) {
-                            html += '<a id="id_btn-ganti_nama" class="btn btn-secondary btn-rounded btn-ganti_nama" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="8" >Ganti Nama </a>';
+                            html += '<a id="id_btn-ganti_nama" class="badge badge-secondary btn-ganti_nama"  href="#" data-id="' + id + '" data-val="1" data-jp="8" >Ganti Nama </a>';
                         } else if (data.ganti_nama == 1) {
-                            html += '<a id="id_btn-ganti_nama" class="btn btn-warning btn-rounded btn-ganti_nama" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="8" >Ganti Nama </a>';
+                            html += '<a id="id_btn-ganti_nama" class="badge badge-warning btn-ganti_nama"  href="#" data-id="' + id + '" data-val="2" data-jp="8" >Ganti Nama </a>';
                         } else if (data.ganti_nama == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Ganti Nama </a>';
+                            html += '<a class="badge badge-success" href="#" >Ganti Nama </a>';
                         };
                         break;
                     case uniq[i] = '9':
                         if (data.tapak_kapling == 0 || data.tapak_kapling == null) {
-                            html += '<a id="id_btn-tapak_kapling" class="btn btn-secondary btn-rounded btn-tapak_kapling" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="9" >Tapak Kapling </a>';
+                            html += '<a id="id_btn-tapak_kapling" class="badge badge-secondary btn-tapak_kapling"  href="#" data-id="' + id + '" data-val="1" data-jp="9" >Tapak Kapling </a>';
                         } else if (data.tapak_kapling == 1) {
-                            html += '<a id="id_btn-tapak_kapling" class="btn btn-warning btn-rounded btn-tapak_kapling" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="9" >Tapak Kapling </a>';
+                            html += '<a id="id_btn-tapak_kapling" class="badge badge-warning btn-tapak_kapling"  href="#" data-id="' + id + '" data-val="2" data-jp="9" >Tapak Kapling </a>';
                         } else if (data.tapak_kapling == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Tapak Kapling </a>';
+                            html += '<a class="badge badge-success" href="#" >Tapak Kapling </a>';
                         };
                         break;
                     case uniq[i] = '10':
                         if (data.bayar_pajak == 0 || data.bayar_pajak == null) {
-                            html += '<a id="id_btn-bayar_pajak" class="btn btn-secondary btn-rounded btn-bayar_pajak" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="10" >Validasi Pajak </a>';
+                            html += '<a id="id_btn-bayar_pajak" class="badge badge-secondary btn-bayar_pajak"  href="#" data-id="' + id + '" data-val="1" data-jp="10" >Validasi Pajak </a>';
                         } else if (data.bayar_pajak == 1) {
-                            html += '<a id="id_btn-bayar_pajak" class="btn btn-warning btn-rounded btn-bayar_pajak" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="10" >Validasi Pajak </a>';
+                            html += '<a id="id_btn-bayar_pajak" class="badge badge-warning btn-bayar_pajak"  href="#" data-id="' + id + '" data-val="2" data-jp="10" >Validasi Pajak </a>';
                         } else if (data.bayar_pajak == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Validasi Pajak</a>';
+                            html += '<a class="badge badge-success" href="#" >Validasi Pajak</a>';
                         };
                         break;
                     case uniq[i] = '11':
                         if (data.konversi == 0 || data.konversi == null) {
-                            html += '<a id="id_btn-konversi" class="btn btn-secondary btn-rounded btn-konversi" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="11" >Konversi </a>';
+                            html += '<a id="id_btn-konversi" class="badge badge-secondary btn-konversi"  href="#" data-id="' + id + '" data-val="1" data-jp="11" >Konversi </a>';
                         } else if (data.konversi == 1) {
-                            html += '<a id="id_btn-konversi" class="btn btn-warning btn-rounded btn-konversi" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="11" >Konversi </a>';
+                            html += '<a id="id_btn-konversi" class="badge badge-warning btn-konversi"  href="#" data-id="' + id + '" data-val="2" data-jp="11" >Konversi </a>';
                         } else if (data.konversi == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Konversi </a>';
+                            html += '<a class="badge badge-success" href="#" >Konversi </a>';
                         };
                         break;
                     case uniq[i] = '12':
                         if (data.waris == 0 || data.waris == null) {
-                            html += '<a id="id_btn-waris" class="btn btn-secondary btn-rounded btn-waris" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="12">Waris </a>';
+                            html += '<a id="id_btn-waris" class="badge badge-secondary btn-waris"  href="#" data-id="' + id + '" data-val="1" data-jp="12">Waris </a>';
                         } else if (data.waris == 1) {
-                            html += '<a id="id_btn-waris" class="btn btn-warning btn-rounded btn-waris" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="12">Wars </a>';
+                            html += '<a id="id_btn-waris" class="badge badge-warning btn-waris"  href="#" data-id="' + id + '" data-val="2" data-jp="12">Wars </a>';
                         } else if (data.waris == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Waris </a>';
+                            html += '<a class="badge badge-success" href="#" >Waris </a>';
                         };
                         break;
                     case uniq[i] = '13':
                         if (data.balik_nama == 0 || data.balik_nama == null) {
-                            html += '<a id="id_btn-balik_nama" class="btn btn-secondary btn-rounded btn-balik_nama" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="13">Balik Nama </a>';
+                            html += '<a id="id_btn-balik_nama" class="badge badge-secondary btn-balik_nama"  href="#" data-id="' + id + '" data-val="1" data-jp="13">Balik Nama </a>';
                         } else if (data.balik_nama == 1) {
-                            html += '<a id="id_btn-balik_nama" class="btn btn-warning btn-rounded btn-balik_nama" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="13">Balik Nama </a>';
+                            html += '<a id="id_btn-balik_nama" class="badge badge-warning btn-balik_nama"  href="#" data-id="' + id + '" data-val="2" data-jp="13">Balik Nama </a>';
                         } else if (data.balik_nama == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">Balik Nama </a>';
+                            html += '<a class="badge badge-success" href="#" >Balik Nama </a>';
                         };
                         break;
                     case uniq[i] = '14':
                         if (data.peningkatan_hak == 0 || data.peningkatan_hak == null) {
-                            html += '<a id="id_btn-peningkatan_hak" class="btn btn-secondary btn-rounded btn-peningkatan_hak" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="14">Peningkatan Hak </a>';
+                            html += '<a id="id_btn-peningkatan_hak" class="badge badge-secondary btn-peningkatan_hak"  href="#" data-id="' + id + '" data-val="1" data-jp="14">Peningkatan Hak </a>';
                         } else if (data.peningkatan_hak == 1) {
-                            html += '<a id="id_btn-peningkatan_hak" class="btn btn-warning btn-rounded btn-peningkatan_hak" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="14">Peningkatan Hak </a>';
+                            html += '<a id="id_btn-peningkatan_hak" class="badge badge-warning btn-peningkatan_hak"  href="#" data-id="' + id + '" data-val="2" data-jp="14">Peningkatan Hak </a>';
                         } else if (data.peningkatan_hak == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >Peningkatan Hak </a>';
+                            html += '<a class="badge badge-success" href="#"  >Peningkatan Hak </a>';
                         };
                         break;
                     case uniq[i] = '15':
                         if (data.skmht == 0 || data.skmht == null) {
-                            html += '<a id="id_btn-skmht" class="btn btn-secondary btn-rounded btn-skmht" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="15">SKMHT </a>';
+                            html += '<a id="id_btn-skmht" class="badge badge-secondary btn-skmht"  href="#" data-id="' + id + '" data-val="1" data-jp="15">SKMHT </a>';
                         } else if (data.skmht == 1) {
-                            html += '<a id="id_btn-skmht" class="btn btn-warning btn-rounded btn-skmht" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="15">SKMHT </a>';
+                            html += '<a id="id_btn-skmht" class="badge badge-warning btn-skmht"  href="#" data-id="' + id + '" data-val="2" data-jp="15">SKMHT </a>';
                         } else if (data.skmht == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button">SKMHT </a>';
+                            html += '<a class="badge badge-success" href="#" >SKMHT </a>';
                         };
                         break;
                     case uniq[i] = '16':
                         if (data.ht == 0 || data.ht == null) {
-                            html += '<a id="id_btn-ht" class="btn btn-secondary btn-rounded btn-ht" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="16">HT </a>';
+                            html += '<a id="id_btn-ht" class="badge badge-secondary btn-ht"  href="#" data-id="' + id + '" data-val="1" data-jp="16">HT </a>';
                         } else if (data.ht == 1) {
-                            html += '<a id="id_btn-ht" class="btn btn-warning btn-rounded btn-ht" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="16">HT </a>';
+                            html += '<a id="id_btn-ht" class="badge badge-warning btn-ht"  href="#" data-id="' + id + '" data-val="2" data-jp="16">HT </a>';
                         } else if (data.ht == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >HT </a>';
+                            html += '<a class="badge badge-success" href="#"  >HT </a>';
                         };
                         break;
                     case uniq[i] = '17':
                         if (data.kutip_su == 0 || data.kutip_su == null) {
-                            html += '<a id="id_btn-kutip_su" class="btn btn-secondary btn-rounded btn-kutip_su" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="19">Kutip SU </a>';
+                            html += '<a id="id_btn-kutip_su" class="badge badge-secondary btn-kutip_su"  href="#" data-id="' + id + '" data-val="1" data-jp="17">Kutip SU </a>';
                         } else if (data.kutip_su == 1) {
-                            html += '<a id="id_btn-kutip_su" class="btn btn-warning btn-rounded btn-kutip_su" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="19">Kutip SU </a>';
+                            html += '<a id="id_btn-kutip_su" class="badge badge-warning btn-kutip_su"  href="#" data-id="' + id + '" data-val="2" data-jp="17">Kutip SU </a>';
                         } else if (data.kutip_su == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >Kutip SU</a>';
+                            html += '<a class="badge badge-success" href="#"  >Kutip SU</a>';
                         };
                         break;
                     case uniq[i] = '18':
                         if (data.iph == 0 || data.iph == null) {
-                            html += '<a id="id_btn-iph" class="btn btn-secondary btn-rounded btn-iph" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="18">IPH </a>';
+                            html += '<a id="id_btn-iph" class="badge badge-secondary btn-iph"  href="#" data-id="' + id + '" data-val="1" data-jp="18">IPH </a>';
                         } else if (data.iph == 1) {
-                            html += '<a id="id_btn-iph" class="btn btn-warning btn-rounded btn-iph" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="18">IPH </a>';
+                            html += '<a id="id_btn-iph" class="badge badge-warning btn-iph"  href="#" data-id="' + id + '" data-val="2" data-jp="18">IPH </a>';
                         } else if (data.iph == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >IPH </a>';
+                            html += '<a class="badge badge-success" href="#"  >IPH </a>';
                         };
                         break;
                     case uniq[i] = '19':
                         if (data.znt == 0 || data.znt == null) {
-                            html += '<a id="id_btn-znt" class="btn btn-secondary btn-rounded btn-znt"" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="19">ZNT </a>';
+                            html += '<a id="id_btn-znt" class="badge badge-secondary btn-znt""  href="#" data-id="' + id + '" data-val="1" data-jp="19">ZNT </a>';
                         } else if (data.znt == 1) {
-                            html += '<a id="id_btn-znt" class="btn btn-warning btn-rounded btn-znt"" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="19">ZNT </a>';
+                            html += '<a id="id_btn-znt" class="badge badge-warning btn-znt""  href="#" data-id="' + id + '" data-val="2" data-jp="19">ZNT </a>';
                         } else if (data.znt == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >ZNT </a>';
+                            html += '<a class="badge badge-success" href="#"  >ZNT </a>';
                         };
                         break;
                     case uniq[i] = '20':
                         if (data.validasi_sert == 0 || data.validasi_sert == null) {
-                            html += '<a id="id_validasi_sert" class="btn btn-secondary btn-rounded btn-validasi_sert"" role="button" href="#" data-id="' + id + '" data-val="1" data-jp="19">Validasi Sertipikat </a>';
+                            html += '<a id="id_validasi_sert" class="badge badge-secondary btn-validasi_sert""  href="#" data-id="' + id + '" data-val="1" data-jp="20">Validasi Sertipikat </a>';
                         } else if (data.validasi_sert == 1) {
-                            html += '<a id="id_validasi_sert" class="btn btn-warning btn-rounded btn-validasi_sert"" role="button" href="#" data-id="' + id + '" data-val="2" data-jp="19">Validasi Sertipikat </a>';
+                            html += '<a id="id_validasi_sert" class="badge badge-warning btn-validasi_sert""  href="#" data-id="' + id + '" data-val="2" data-jp="20">Validasi Sertipikat </a>';
                         } else if (data.validasi_sert == 2) {
-                            html += '<a class="btn btn-success btn-rounded" href="#" role="button" >Validasi Sertipikat </a>';
+                            html += '<a class="badge badge-success" href="#"  >Validasi Sertipikat </a>';
                         };
                         break;
 
                 }
             }
-            $('#ujtes').html(html);
+            $('#proses_').html(html);
 
         },
         error: function() {
             alert('Gagal megambil tombol proses');
+        }
+    });
+}
+
+//fungsi untuk menampilkan kelengkapan berkas
+function kelengkapan(id) {
+    // var id = 18;
+    $.ajax({
+        url: base_url + '/Kelengkapan/get_kelengkapan',
+        type: 'get',
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        success: function(data) {
+            html_ada = '';
+            html_belum = '';
+            $('#kelengkapan_ada').html(data.ada);
+            $('#kelengkapan_belum_ada').html(data.belum);
+        },
+        error: function(data) {
+            alert('gagal mengambil kelengkapan');
         }
     });
 }

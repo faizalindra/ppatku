@@ -539,6 +539,249 @@
         </div>
         <!-- end model form edit -->
 
+        <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header p-1" style="background-color:#9efff4;">
+                        <h4 class="modal-title" id="id_berkas_"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 p-1">
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                                <div class="card border-dark">
+                                                    <div class="card-header p-1" style="background-color:#9efff4;">
+                                                        <div class="row">
+                                                            <div class="col-md-6 text-left">
+                                                                <h6><strong>
+                                                                        <div id="tgl_masuk_berkas_"></div>
+                                                                    </strong></h6>
+                                                            </div>
+                                                            <div class="col-md-6 text-right">
+                                                                <h6><strong>
+                                                                        <div id="jenis_berkas_"></div>
+                                                                    </strong></h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body p-1">
+                                                        <div class="row text-left ml-0">
+                                                            <div class="col-md-12 text-muted">
+                                                                <div id="col_sertipikat">Sertipikat : M. 3424/Mandiraja Wetan, Kec. Mandiraja</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6 text-center p-2">
+                                                                <div class="card-title">Pihak 1</div>
+                                                                <h5 class="card-text" id="pihak_1"></h5>
+                                                            </div>
+
+                                                            <div class="col-md-6 text-center p-2">
+                                                                <div class="card-title">Pihak 2</div>
+                                                                <h5 class="card-text" id="pihak_2"></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-muted" id="ket_berkas">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                                <div class="card border-dark">
+                                                    <div class="card-header p-1" style="background-color:#9efff4;">
+                                                        <h6>Kelengkapan</h6>
+                                                    </div>
+                                                    <div class="card-body p-1 text-left">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div>
+                                                                    <ul id="kelengkapan_ada">
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div>
+                                                                    <ul id="kelengkapan_belum_ada">
+                                                                        <!-- <li><i class="badge badge-danger">SHM</i></li> -->
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer text-muted" id="ket_kelengkapan">
+                                                        Keterangan
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                                <div class="card border-dark">
+                                                    <div class="card-header p-1" style="background-color:#9efff4;">
+                                                        <h6>Proses</h6>
+                                                    </div>
+                                                    <div id="proses_" class="card-body p-1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="shadow p-2 mb-2 bg-white rounded">
+                                        <div class="card border-dark" style=" height: 555px;">
+                                            <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <h6>Proses BPN</h6>
+                                            </div>
+                                            <div class="card-body p-1">
+                                                <div class="card border-dark bg-warning ">
+                                                    <div class="card-body p-1">
+                                                        <div class="row" style="font-size: 12px;">
+                                                            <div class="col-md-6 text-left mb-1">
+                                                                2022-04-05
+                                                            </div>
+                                                            <div class="col-md-6 text-right mb-1">
+                                                                144122/2022
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h5 class="text-center">Balik Nama</h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="shadow p-2 mb-2 bg-white rounded">
+                                        <div class="card border-dark" style=" height: 555px;">
+                                            <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                        Total Biaya
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <h5>Rp. 5.000.000</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 p-1">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <div class="card border-dark p-0 bg-success" style="color:white;">
+                                                                    <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
+                                                                    <div class="card-body p-0">
+                                                                        <div class="row" style="font-size: 12px;">
+                                                                            <div class="col-md-6 text-left mb-1 ml-1">
+                                                                                2022-03-30
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h5 class="text-center">Rp. 2.200.000</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 p-1 ">
+                                                        <div class="row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-9">
+                                                                <div class="card border-dark p-0 bg-danger" style="color:white;">
+                                                                    <div class="card-body p-0">
+                                                                        <div class="row" style="font-size: 12px;">
+                                                                            <div class="col-md-6 text-left mb-1 ml-1">
+                                                                                2022-04-01
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h5 class="text-center">Rp. 200.000</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 text-left" style="font-size: 12px;">- Suket Desa</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 p-1">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <div class="card border-dark p-0 bg-success" style="color:white;">
+                                                                    <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
+                                                                    <div class="card-body p-0">
+                                                                        <div class="row" style="font-size: 12px;">
+                                                                            <div class="col-md-6 text-left mb-1 ml-1">
+                                                                                2022-04-02
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h5 class="text-center">Rp. 1.000.000</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer p-1" style="background-color:#9efff4;">
+                                                <div class="row">
+                                                    <div class="col-md-12 text-left" style="font-size: 12px;">Kurang</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 text-center">
+                                                        <h5>Rp. 3.000.000</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- modal detail -->
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">

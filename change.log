@@ -1,3 +1,8 @@
+03 Juni 2022 #00026
+    - mengganti tambilan detail_berkas di tabelBerkas
+    - menambah kelengkapan di detail_berkas tabelBerkas
+      - menambah model ModelKelengkapan dan Controller Kelengkapan
+
 24 Mei 2022 #00025
     - mengubah form input & edit proses BPN
     - update database
