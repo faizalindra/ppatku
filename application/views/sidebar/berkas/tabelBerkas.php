@@ -1,6 +1,6 @@
     <script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery-ui.min.js"></script>
     <link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
-    <div class="card shadow mb-4">
+    <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
         </div>
@@ -552,10 +552,10 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-6 p-1">
+                                <div class="col-md-6 pr-3">
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                                 <div class="card border-dark">
                                                     <div class="card-header p-1" style="background-color:#9efff4;">
                                                         <div class="row">
@@ -574,7 +574,7 @@
                                                     <div class="card-body p-1">
                                                         <div class="row text-left ml-0">
                                                             <div class="col-md-12 text-muted">
-                                                                <div id="col_sertipikat">Sertipikat : M. 3424/Mandiraja Wetan, Kec. Mandiraja</div>
+                                                                <div id="col_sertipikat"></div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -592,12 +592,12 @@
                                                     <div class="card-footer text-muted" id="ket_berkas">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                                 <div class="card border-dark">
                                                     <div class="card-header p-1" style="background-color:#9efff4;">
                                                         <h6>Kelengkapan</h6>
@@ -613,66 +613,64 @@
                                                             <div class="col-md-6">
                                                                 <div>
                                                                     <ul id="kelengkapan_belum_ada">
-                                                                        <!-- <li><i class="badge badge-danger">SHM</i></li> -->
+
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="row p-0">
+                                                            <div class="col-md-11 pl-3">
+                                                                <p id="ket_keleng" class="text-muted" contenteditable="true"></p>
+                                                            </div>
+                                                            <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-footer text-muted" id="ket_kelengkapan">
-                                                        Keterangan
-                                                    </div>
+                                                    <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
+
+                                                    </div> -->
                                                 </div>
-                                            </div>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <div class="shadow p-2 mb-2 bg-white rounded">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                                 <div class="card border-dark">
                                                     <div class="card-header p-1" style="background-color:#9efff4;">
                                                         <h6>Proses</h6>
                                                     </div>
-                                                    <div id="proses_" class="card-body p-1">
+                                                    <div class="card-body p-1">
+                                                        <div id="proses_"></div>
+                                                        <div class="row pl-3 pt-1">
+                                                            <div class="col-md-11 p-0">
+                                                                <p id="ket_proses" class="text-muted" contenteditable="true"></p>
+                                                            </div>
+                                                            <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
+                                                        </div>
                                                     </div>
+                                                    <!-- <div class="card-footer text-muted p-2 m-2">
+
+                                                    </div> -->
                                                 </div>
-                                            </div>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <div class="shadow p-2 mb-2 bg-white rounded">
-                                        <div class="card border-dark" style=" height: 555px;">
+                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                        <div class="card border-dark" style=" min-height: 555px;">
                                             <div class="card-header p-1" style="background-color:#9efff4;">
                                                 <h6>Proses BPN</h6>
                                             </div>
                                             <div class="card-body p-1">
-                                                <div class="card border-dark bg-warning ">
-                                                    <div class="card-body p-1">
-                                                        <div class="row" style="font-size: 12px;">
-                                                            <div class="col-md-6 text-left mb-1">
-                                                                2022-04-05
-                                                            </div>
-                                                            <div class="col-md-6 text-right mb-1">
-                                                                144122/2022
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <h5 class="text-center">Balik Nama</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
-                                                        </div>
-                                                    </div>
+                                                <div id="bpn_">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <div class="shadow p-2 mb-2 bg-white rounded">
+                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                         <div class="card border-dark" style=" height: 555px;">
                                             <div class="card-header p-1" style="background-color:#9efff4;">
                                                 <div class="row">
@@ -775,7 +773,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>

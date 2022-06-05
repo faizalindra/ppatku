@@ -34,4 +34,11 @@ class Proses extends CI_Controller
         echo json_encode($datas);
         redirect('berkas');
     }
+
+    function update_keterangan(){
+        $id = array('no_proses'=>$this->input->post('id'));
+        $ket = array('ket_proses'=>$this->input->post('ket'));
+        $this->ModelProses->update_keterangan($ket,$id);
+        echo json_encode($ket);
+    }
 }

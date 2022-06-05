@@ -71,125 +71,126 @@ class ModelKelengkapan extends CI_Model
         $kelengkapan = array("", "KTP Penjual", "KTP Suami/Istri Penjual", "KK Penjual", "KTP Pembeli", "KTP Suami/Istri Pembeli", "KK Pembeli", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK");
         $hasil = $this->db->get_where('tb_kelengkapan', $id2)->result();
         foreach ($hasil as $hasil) {
+            $data['ket'] = $hasil->ket_kelengkapan;
             foreach ($jb_hasil as $b) {
                 switch ($b) {
                     case 1:
                         if ($hasil->ktp_penjual != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',1)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',1)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 2:
                         if ($hasil->ktp_pasangan_penjual != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',2)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',2)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 3:
                         if ($hasil->kk_penjual != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',3)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',3)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 4:
                         if ($hasil->ktp_pembeli != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',4)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',4)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 5:
                         if ($hasil->ktp_pasangan_pembeli != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',5)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',5)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 6:
                         if ($hasil->kk_pembeli != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',6)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',6)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 7:
                         if ($hasil->bpjs != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',7)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',7)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 8:
                         if ($hasil->ktp_ahli_waris != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',8)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',8)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 9:
                         if ($hasil->kk_ahli_waris != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',9)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',9)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 10:
                         if ($hasil->akta_kematian != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',10)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',10)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 11:
                         if ($hasil->shm != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',11)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',11)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 12:
                         if ($hasil->sppt != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',12)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',12)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 13:
                         if ($hasil->imb != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',13)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',13)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 14:
                         if ($hasil->order_ != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',14)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',14)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 15:
                         if ($hasil->ket_beda_nama != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',15)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',15)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 16:
                         if ($hasil->persetujuan_hibah != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',16)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',16)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                     case 17:
                         if ($hasil->spk != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
-                            $data['belum'] .=  $b_keleng . $id. ',17)">' . $kelengkapan[$b] . $c_keleng;
+                            $data['belum'] .=  $b_keleng . $id . ',17)">' . $kelengkapan[$b] . $c_keleng;
                         };
                         break;
                 }
@@ -198,28 +199,68 @@ class ModelKelengkapan extends CI_Model
         return $data;
     }
 
-    public function update_kelengkapan($a, $b){
+    function update_kelengkapan($a, $b)
+    {
         $id = array('id_kelengkapan' => $a);
         // $id['id_kelengkapan'] = $id;
-        switch ($b){
-            case 1: $jk['ktp_penjual'] = 1; break;
-            case 2: $jk['ktp_pasangan_penjual'] = 1; break;
-            case 3: $jk['kk_penjual'] = 1; break;
-            case 4: $jk['ktp_pembeli'] = 1; break;
-            case 5: $jk['ktp_pasangan_pembeli'] = 1; break;
-            case 6: $jk['kk_pembeli'] = 1; break;
-            case 7: $jk['bpjs'] = 1; break;
-            case 8: $jk['ktp_ahli_waris'] = 1; break;
-            case 9: $jk['kk_ahli_waris'] = 1; break;
-            case 10: $jk['akta_kematian'] = 1; break;
-            case 11: $jk['shm'] = 1; break;
-            case 12: $jk['sppt'] = 1; break;
-            case 13: $jk['imb'] = 1; break;
-            case 14: $jk['order_'] = 1; break;
-            case 15: $jk['ket_beda_nama'] = 1; break;
-            case 16: $jk['persetujuan_hibah'] = 1; break;
-            case 17: $jk['spk'] = 1; break;
+        switch ($b) {
+            case 1:
+                $jk['ktp_penjual'] = 1;
+                break;
+            case 2:
+                $jk['ktp_pasangan_penjual'] = 1;
+                break;
+            case 3:
+                $jk['kk_penjual'] = 1;
+                break;
+            case 4:
+                $jk['ktp_pembeli'] = 1;
+                break;
+            case 5:
+                $jk['ktp_pasangan_pembeli'] = 1;
+                break;
+            case 6:
+                $jk['kk_pembeli'] = 1;
+                break;
+            case 7:
+                $jk['bpjs'] = 1;
+                break;
+            case 8:
+                $jk['ktp_ahli_waris'] = 1;
+                break;
+            case 9:
+                $jk['kk_ahli_waris'] = 1;
+                break;
+            case 10:
+                $jk['akta_kematian'] = 1;
+                break;
+            case 11:
+                $jk['shm'] = 1;
+                break;
+            case 12:
+                $jk['sppt'] = 1;
+                break;
+            case 13:
+                $jk['imb'] = 1;
+                break;
+            case 14:
+                $jk['order_'] = 1;
+                break;
+            case 15:
+                $jk['ket_beda_nama'] = 1;
+                break;
+            case 16:
+                $jk['persetujuan_hibah'] = 1;
+                break;
+            case 17:
+                $jk['spk'] = 1;
+                break;
         }
         $this->db->update('tb_kelengkapan', $jk, $id);
+    }
+
+    function update_keterangan($ket, $id)
+    {
+        $this->db->update('tb_kelengkapan', $ket, $id);
     }
 }

@@ -1,3 +1,11 @@
+06 Juni 2022 #00029
+    - menampilkan card proses BPN di detail_berkas pada tabelBerkas
+    - menampilkan keterangan proses & kelengkapan
+    - keterangan proses dan kelengkapan dapat di edit secara langsung
+    - memperbaiki tampilan card di detail_berkas
+      - menghapus shadow di detail_berkas
+    - memperbaiki tampilan text sertipikat di detail_berkas
+
 04 Juni 2022 #00028
     - perbaikan tombol proses dan kelengkapan
     - rework fungsi proses berkas pada detail_berkas

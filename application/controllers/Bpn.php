@@ -35,6 +35,7 @@ class Bpn extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    //untuk tabel bpn
     public function get_prosesBPN()
     {
         $data = $this->ModelBpn->get_prosesBPN();
@@ -50,6 +51,13 @@ class Bpn extends CI_Controller
         echo json_encode($data);
     }
 
+    function get_bpn_for_detail()
+    {
+        $id = array('id_berkas' => $this->input->get('id'));
+        $data = $this->ModelBpn->get_bpn_for_detail($id);
+        echo json_encode($data);
+    }
+
     //untuk form edit bpn
     public function update_bpn()
     {
@@ -61,7 +69,7 @@ class Bpn extends CI_Controller
             'jenis_proses' => $this->input->post('jenis_proses_e'),
             'ket' => $this->input->post('ket_e'),
         );
-        if(!empty($this->input->post('tgl_masuk_e'))){
+        if (!empty($this->input->post('tgl_masuk_e'))) {
             $data['tgl_masuk'] = $this->input->post('tgl_masuk_e');
         }
         $this->ModelBpn->update_bpn($data, $id);

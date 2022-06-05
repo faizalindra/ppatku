@@ -32,4 +32,11 @@ class Kelengkapan extends CI_Controller
         $data = $this->ModelKelengkapan->update_kelengkapan($id, $jb);
         echo json_encode('berhasil');
     }
+
+    public function update_keterangan(){
+        $id = array('id_kelengkapan'=>$this->input->post('id'));
+        $ket = array('ket_kelengkapan'=>$this->input->post('ket'));
+        $this->ModelKelengkapan->update_keterangan($ket,$id);
+        // echo json_encode($ket);
+    }
 }
