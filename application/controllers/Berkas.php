@@ -42,11 +42,11 @@ class Berkas extends CI_Controller
         if ($this->input->post('desa_e') != null) {
             $data['desa'] = $this->input->post('desa_e', true);
         }
-        if ($this->input->post('jenis_berkas') != null) {
-            $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas', true));
+        if ($this->input->post('jenis_berkas[]_e') != null) {
+            $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas[]_e', true));
         }
-        if ($this->input->post('reg_sertipikat') != null) {
-            $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
+        if ($this->input->post('sertipikat_e') != null) {
+            $data['reg_sertipikat'] = $this->input->post('sertipikat_e', true);
         }
         $this->ModelBerkas->update_berkas($data, $id);
         // echo json_encode($data);

@@ -173,15 +173,6 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text">Rp.
-                                                                </div>
-                                                            </div>
-                                                            <input type="text" class="form-control" name="bayar" id="bayar_i" aria-describedby="helpId" placeholder="Bayar/DP">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
                                                             <textarea id="keterangan_i" name="keterangan" cols="40" rows="3" class="form-control"></textarea>
                                                         </div>
                                                     </div>
@@ -512,15 +503,6 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">Rp.
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="bayar_e" id="bayar_e" aria-describedby="helpId" placeholder="Bayar/DP">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="input-group">
                                                     <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control"></textarea>
                                                 </div>
                                             </div>
@@ -556,223 +538,255 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                                                <div class="card border-dark">
-                                                    <div class="card-header p-1" style="background-color:#9efff4;">
-                                                        <div class="row">
-                                                            <div class="col-md-6 text-left">
-                                                                <h6><strong>
-                                                                        <div id="tgl_masuk_berkas_"></div>
-                                                                    </strong></h6>
-                                                            </div>
-                                                            <div class="col-md-6 text-right">
-                                                                <h6><strong>
-                                                                        <div id="jenis_berkas_"></div>
-                                                                    </strong></h6>
-                                                            </div>
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-left">
+                                                            <h6><strong>
+                                                                    <div id="tgl_masuk_berkas_"></div>
+                                                                </strong></h6>
                                                         </div>
-                                                    </div>
-                                                    <div class="card-body p-1">
-                                                        <div class="row text-left ml-0">
-                                                            <div class="col-md-12 text-muted">
-                                                                <div id="col_sertipikat"></div>
-                                                            </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <h6><strong>
+                                                                    <div id="jenis_berkas_"></div>
+                                                                </strong></h6>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6 text-center p-2">
-                                                                <div class="card-title">Pihak 1</div>
-                                                                <h5 class="card-text" id="pihak_1"></h5>
-                                                            </div>
-
-                                                            <div class="col-md-6 text-center p-2">
-                                                                <div class="card-title">Pihak 2</div>
-                                                                <h5 class="card-text" id="pihak_2"></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-footer text-muted" id="ket_berkas">
                                                     </div>
                                                 </div>
+                                                <div class="card-body p-1">
+                                                    <div class="row text-left ml-0">
+                                                        <div class="col-md-12 text-muted">
+                                                            <div id="col_sertipikat"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 1</div>
+                                                            <h5 class="card-text" id="pihak_1"></h5>
+                                                        </div>
+
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 2</div>
+                                                            <h5 class="card-text" id="pihak_2"></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-muted" id="ket_berkas">
+                                                </div>
+                                            </div>
                                             <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                                                <div class="card border-dark">
-                                                    <div class="card-header p-1" style="background-color:#9efff4;">
-                                                        <h6>Kelengkapan</h6>
-                                                    </div>
-                                                    <div class="card-body p-1 text-left">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div>
-                                                                    <ul id="kelengkapan_ada">
-                                                                    </ul>
-                                                                </div>
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Kelengkapan</h6>
+                                                </div>
+                                                <div class="card-body p-1 text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_ada">
+                                                                </ul>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div>
-                                                                    <ul id="kelengkapan_belum_ada">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_belum_ada">
 
-                                                                    </ul>
-                                                                </div>
+                                                                </ul>
                                                             </div>
-                                                        </div>
-                                                        <div class="row p-0">
-                                                            <div class="col-md-11 pl-3">
-                                                                <p id="ket_keleng" class="text-muted" contenteditable="true"></p>
-                                                            </div>
-                                                            <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
+                                                    <div class="row p-0">
+                                                        <div class="col-md-11 pl-3">
+                                                            <p id="ket_keleng" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
 
                                                     </div> -->
-                                                </div>
+                                            </div>
                                             <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                                                <div class="card border-dark">
-                                                    <div class="card-header p-1" style="background-color:#9efff4;">
-                                                        <h6>Proses</h6>
-                                                    </div>
-                                                    <div class="card-body p-1">
-                                                        <div id="proses_"></div>
-                                                        <div class="row pl-3 pt-1">
-                                                            <div class="col-md-11 p-0">
-                                                                <p id="ket_proses" class="text-muted" contenteditable="true"></p>
-                                                            </div>
-                                                            <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Proses</h6>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div id="proses_"></div>
+                                                    <div class="row pl-3 pt-1">
+                                                        <div class="col-md-11 p-0">
+                                                            <p id="ket_proses" class="text-muted" contenteditable="true"></p>
                                                         </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
                                                     </div>
-                                                    <!-- <div class="card-footer text-muted p-2 m-2">
+                                                </div>
+                                                <!-- <div class="card-footer text-muted p-2 m-2">
 
                                                     </div> -->
-                                                </div>
+                                            </div>
                                             <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                                        <div class="card border-dark" style=" min-height: 555px;">
-                                            <div class="card-header p-1" style="background-color:#9efff4;">
-                                                <h6>Proses BPN</h6>
-                                            </div>
-                                            <div class="card-body p-1">
-                                                <div id="bpn_">
-                                                </div>
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <h6>Proses BPN</h6>
+                                        </div>
+                                        <div class="card-body p-1">
+                                            <div id="bpn_">
                                             </div>
                                         </div>
+                                    </div>
                                     <!-- </div> -->
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                                        <div class="card border-dark" style=" height: 555px;">
-                                            <div class="card-header p-1" style="background-color:#9efff4;">
-                                                <div class="row">
-                                                    <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
-                                                        Total Biaya
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <div class="row">
+                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                    Total Biaya
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5 id="total_biaya_">Rp. 5.000.000</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12 p-1">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="card border-dark p-0 bg-success" style="color:white;">
+                                                                <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
+                                                                <div class="card-body p-0">
+                                                                    <div class="row" style="font-size: 12px;">
+                                                                        <div class="col-md-6 text-left mb-1 ml-1">
+                                                                            2022-03-30
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <h5 class="text-center">Rp. 2.200.000</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3"></div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 text-center">
-                                                        <h5>Rp. 5.000.000</h5>
+                                                <div class="col-md-12 p-1 ">
+                                                    <div class="row">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col-md-9">
+                                                            <div class="card border-dark p-0 bg-danger" style="color:white;">
+                                                                <div class="card-body p-0">
+                                                                    <div class="row" style="font-size: 12px;">
+                                                                        <div class="col-md-6 text-left mb-1 ml-1">
+                                                                            2022-04-01
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <h5 class="text-center">Rp. 200.000</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 text-left" style="font-size: 12px;">- Suket Desa</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 p-1">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="card border-dark p-0 bg-success" style="color:white;">
+                                                                <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
+                                                                <div class="card-body p-0">
+                                                                    <div class="row" style="font-size: 12px;">
+                                                                        <div class="col-md-6 text-left mb-1 ml-1">
+                                                                            2022-04-02
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <h5 class="text-center">Rp. 1.000.000</h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3"></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12 p-1">
-                                                        <div class="row">
-                                                            <div class="col-md-9">
-                                                                <div class="card border-dark p-0 bg-success" style="color:white;">
-                                                                    <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-                                                                    <div class="card-body p-0">
-                                                                        <div class="row" style="font-size: 12px;">
-                                                                            <div class="col-md-6 text-left mb-1 ml-1">
-                                                                                2022-03-30
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <h5 class="text-center">Rp. 2.200.000</h5>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
-                                                                        </div>
+                                            <div class="row">
+                                                <br>
+                                                <div class="col-md-12 text-center"><button id="tambah_biaya" data-toggle="collapse" data-target="#collapse_biaya" class="badge badge-success rounded-circle border border-white"><i class="fa fa-plus"></i></button></div>
+                                                <div class="col-md-12">
+                                                    <div id="collapse_biaya" class="collapse">
+                                                        <form action="#" onsubmit="input_biaya();return false" autocomplete="off" id="form-biaya">
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center text-muted">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="pembayaran" name="bayar_" value="0" required>
+                                                                        <label class="form-check-label" for="pembayaran">Bayar/DP</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="penambahan" name="bayar_" value="1" required>
+                                                                        <label class="form-check-label" for="penambahan">Tambah</label>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
+                                                                <div class="col-md-12"><input type="number" class="form-control" name="jum_bayar" id="jum_bayar" placeholder="Rp. Biaya" required></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" required></div>
+                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:"></textarea></div>
                                                             </div>
-                                                            <div class="col-md-3"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 p-1 ">
-                                                        <div class="row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-md-9">
-                                                                <div class="card border-dark p-0 bg-danger" style="color:white;">
-                                                                    <div class="card-body p-0">
-                                                                        <div class="row" style="font-size: 12px;">
-                                                                            <div class="col-md-6 text-left mb-1 ml-1">
-                                                                                2022-04-01
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <h5 class="text-center">Rp. 200.000</h5>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12 text-left" style="font-size: 12px;">- Suket Desa</div>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center">
+                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Cancel</button>
+                                                                    <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 p-1">
-                                                        <div class="row">
-                                                            <div class="col-md-9">
-                                                                <div class="card border-dark p-0 bg-success" style="color:white;">
-                                                                    <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-                                                                    <div class="card-body p-0">
-                                                                        <div class="row" style="font-size: 12px;">
-                                                                            <div class="col-md-6 text-left mb-1 ml-1">
-                                                                                2022-04-02
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <h5 class="text-center">Rp. 1.000.000</h5>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer p-1" style="background-color:#9efff4;">
-                                                <div class="row">
-                                                    <div class="col-md-12 text-left" style="font-size: 12px;">Kurang</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12 text-center">
-                                                        <h5>Rp. 3.000.000</h5>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="card-footer p-1" style="background-color:#9efff4;">
+                                            <div class="row">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">Kurang</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5>Rp. 3.000.000</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- </div> -->
                                 </div>
                             </div>

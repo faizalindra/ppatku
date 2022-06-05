@@ -245,6 +245,7 @@ $('#show_data').on('click', '.item_detail2', function() {
             $('#pihak_1').html(data.nama_penjual);
             $('#pihak_2').html(data.nama_pembeli);
             $('#ket_berkas').html(nl2br(data.keterangan));
+            $('#total_biaya_').html('Rp. ' + addCommas(data.tot_biaya));
             detail_kelengkapan(data.id_berkas);
             detail_proses(data.id_berkas);
             bpn(data.id_berkas);
@@ -258,6 +259,9 @@ $('#show_data').on('click', '.item_detail2', function() {
 });
 
 
+
+
+//////////////////////////////////////////////////////- Card Kelengkapan -///////////////////////////////////////////////
 //fungsi untuk menampilkan kelengkapan berkas
 function detail_kelengkapan(id) {
     $.ajax({
@@ -297,14 +301,13 @@ function kelengkapan(id, jb) {
         });
     }
 }
-
-//////////////////////////////////////////////////////- Card Kelengkapan -///////////////////////////////////////////////
 //contenteditable keterangan kelengkapan
 $('#modelDetail2').on('click', '#save_ket_keleng', function() {
     var ket = document.getElementById('ket_keleng').innerHTML;
     var id = berkas_id_detail;
     if (ket != '') {
         ket = remove_div_in_ket(ket);
+        console.log(ket);
         $.ajax({
             type: 'POST',
             url: base_url + '/kelengkapan/update_keterangan',
@@ -412,13 +415,50 @@ function bpn(id) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////// - Card Biaya /////////////////////////////////////////////
+
+$("#modelDetail2").on('change', ".bayar_", function() {
+    var val = $('input[name="bayar_"]:checked').val();
+    if (val == 1) {
+        console.log('berhasil');
+        document.getElementById("penyetor").disabled = true;
+    } else {
+        document.getElementById("penyetor").disabled = false;
+    }
+})
+
+function input_biaya() {
+    var id = berkas_id_detail;
+    var bayar_ = $('input[name="bayar_"]:checked').val();
+    var tgl_bayar = $('[name="tgl_bayar"]').val();
+    var jum_bayar = $('[name="jum_bayar"]').val();
+    var penyetor = $('[name="penyetor"]').val();
+    var ket_bayar = $('[name="ket_bayar"]').val();
+    $.post(base_url + '/biaya/input_biaya', {
+        id: id,
+        bayar: bayar_,
+        tgl_bayar: tgl_bayar,
+        jum_bayar: jum_bayar,
+        penyetor: penyetor,
+        ket_bayar: ket_bayar
+    }, function(data) {
+        console.log(data);
+    }, 'json').fail(function() { console.log('Gagal') })
+    $('#form-biaya').find('input').val('')
+    $('#form-biaya').find('textarea').val('')
+    $('#collapse_biaya').collapse('hide');
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 //untuk menghapus div di contenteditable
 function remove_div_in_ket(val) {
     var split1 = val.split("</div><div>").join("\n")
     var split2 = split1.split("<div>").join("\n")
     var split3 = split2.split("</div>").join("\n")
     var split4 = split3.split("&nbsp;").join(" ")
-    return split4;
+    var split5 = split4.split("<br>").join("")
+    return split5;
 }
 
 

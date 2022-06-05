@@ -1,3 +1,8 @@
+06 Juni 2022 #00030
+    - menambah form input biaya di card biaya pada detail_berkas
+      - membuat controller dan model biaya
+    - memperbaiki kolom sertipikat dan jenis_berkas tidak terPOST
+
 06 Juni 2022 #00029
     - menampilkan card proses BPN di detail_berkas pada tabelBerkas
     - menampilkan keterangan proses & kelengkapan
