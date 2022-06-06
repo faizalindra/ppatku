@@ -31,8 +31,11 @@ class ModelSertipikat extends CI_Model
             ->from('tb_sertipikat')
             ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
-            ->get();
-        return $hasil->result();
+            ->get()->result();
+        for ($i = 0; $i < count($hasil); $i++) {
+            $hasil[$i]->tgl_daftar = date_format(date_create($hasil[$i]->tgl_daftar), 'd M Y');
+        }
+        return $hasil;
     }
 
     //untuk mendapatkan sertipikat berdasarkan no_reg

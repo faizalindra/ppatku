@@ -74,6 +74,9 @@ class ModelBerkas extends CI_Model
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->get()
             ->result();
+        for ($i=0; $i<count($data); $i++) {
+            $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
+        }
         return $data;
     }
 
@@ -90,7 +93,7 @@ class ModelBerkas extends CI_Model
         foreach ($hsl as $data) {
             $hasil = array(
                 'id_berkas' => $data->id_berkas,
-                'tgl_masuk' => $data->tgl_masuk,
+                'tgl_masuk' => date_format(date_create($data->tgl_masuk), 'd M Y'),
                 'reg_sertipikat' => $data->reg_sertipikat,
                 'desa' => $data->desa,
                 'kecamatan' => $data->kecamatan,

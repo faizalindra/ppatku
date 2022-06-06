@@ -7,9 +7,7 @@ $(document).ready(function() {
     $('.select2').select2();
     // $('.proses').select2();
 
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd'
-    });
+    $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
 
     // fungsi tampil berkas
     function data_sertipikat() {

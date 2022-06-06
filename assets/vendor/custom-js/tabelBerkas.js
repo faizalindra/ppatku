@@ -16,7 +16,7 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
 $('.select2').select2();
 $('.proses').select2();
 
@@ -129,8 +129,8 @@ function data_berkas() {
         success: function(data) {
 
             function berkasSelesai(val, vall) {
-                var getUrl = window.location;
-                var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+                // var getUrl = window.location;
+                // var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
                 condi0 = '<a href=' + base_url + '/proses/berkas_selesai/' + vall + '/1/ onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-warning"> Proses </a>';
                 condi1 = '<i class="badge badge-info"> Selesai </i>';
                 condi2 = '<a href="#"  class="badge badge-danger"> Berkas Dicabut </a>';
