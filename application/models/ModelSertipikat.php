@@ -53,7 +53,6 @@ class ModelSertipikat extends CI_Model
                 'no_reg' => $data->no_reg,
                 'tgl_daftar' => $data->tgl_daftar,
                 'no_sertipikat' => $data->no_sertipikat,
-                'luas' => $data->luas,
                 'dsa' => $data->dsa,
                 'desa' => $data->desa,
                 'kecamatan' => $data->kecamatan,
@@ -61,8 +60,17 @@ class ModelSertipikat extends CI_Model
                 'pemilik_hak' => $data->pemilik_hak,
                 'pembeli_hak' => $data->pembeli_hak,
                 'proses' => $data->proses,
-                'ket' => $data->ket,
             );
+            if(!empty($data->luas)){
+                $hasil['luas'] = $data->luas;
+            }else{
+                $hasil['luas'] = "";
+            }
+            if(!empty( $data->ket)){
+                $hasil['ket'] = $data->ket;
+            }else{
+                $hasil['ket'] = "";
+            }
         }
         return $hasil;
     }

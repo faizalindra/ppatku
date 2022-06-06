@@ -43,8 +43,8 @@
                                 <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
                                 <th>Jenis Berkas</th>
-                                <th>Nama Penjual</th>
-                                <th>Nama Pembeli</th>
+                                <th>Pihak 1</th>
+                                <th>Pihak 2</th>
                                 <th>Berkas Selesai</th>
                                 <th></th>
                             </tr>
@@ -148,7 +148,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" required>
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text">Penjual
+                                                                <div class="input-group-text">Pihak 1
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -157,7 +157,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on">
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text">Pembeli
+                                                                <div class="input-group-text">Pihak 2
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -316,19 +316,35 @@
                                                     <div class="row">
                                                         <span id="checkboxHelpBlock" class="form-text text-muted"><u>Lainnya</u> :</span>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
-                                                                <label class="custom-control-label" for="order_i">Order</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
+                                                                        <label class="custom-control-label" for="order_i">Order</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
-                                                                <label class="custom-control-label" for="imb_i">IMB</label>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
+                                                                        <label class="custom-control-label" for="imb_i">IMB</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="spk_i" name="spk">
+                                                                        <label class="custom-control-label" for="spk_i">SPK</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -761,6 +777,43 @@
         </div>
         <!-- end modal sertipikat -->
 
+        <!-- modal detail untuk berkas dicabut -->
+        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="reload">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No Berkas</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>No Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Jenis Berkas</th>
+                                        <th>Nama Penjual</th>
+                                        <th>Nama Pembeli</th>
+                                        <th>Total Biaya</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data_detail">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>

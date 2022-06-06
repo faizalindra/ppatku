@@ -1,4 +1,12 @@
-06 Juni 2022 #00031
+06 Juni 2022 #00033
+    - menambah kelengkapan SPK pada input berkas
+    - kolom sertipikat, berkas_selesai dan aksi sekarang diproses melalui ModelBerkas
+    - memperbaiki card biaya tidak tampil sesuai berkas yang ditentukan
+    - mengganti nama kolom penjual dan pembeli menjadi pihak 1 dan pihak 2
+    - menambah modal detail_berkas untuk menampilkan berkas dicabut
+    - menghapus beberapa fungsi yang tidak diperlukan pad tabelBerkas.js
+
+06 Juni 2022 #00032
     - mengubah tampilan tanggal pada aplikasi
     - menambah tanggal dan jam pada topbar
 

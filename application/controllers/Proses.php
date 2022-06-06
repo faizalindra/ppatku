@@ -28,7 +28,7 @@ class Proses extends CI_Controller
 
     function berkas_selesai()
     {
-        $data = ['berkas_selesai' =>  $this->uri->segment(4)];
+        $data = ['berkas_selesai' =>  1];
         $where = ['id' => $this->uri->segment(3)];
         $datas = $this->ModelProses->berkas_selesai($data, $where);
         echo json_encode($datas);

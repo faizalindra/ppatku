@@ -126,9 +126,13 @@ class Berkas extends CI_Controller
         if (!empty($this->input->post('persetujuan_hibah'))) {
             $data_k['persetujuan_hibah'] = 1;
         }
+        if (!empty($this->input->post('spk'))) {
+            $data_k['spk'] = 1;
+        }
         if (!empty($this->input->post('ket_kelengkapan'))) {
             $data_k['ket_kelengkapan'] = $this->input->post('ket_kelengkapan');
         }
+
 
         if (!empty($data_k)) {
             $this->ModelBerkas->insert_berkas_kelengkapan($data, $data_k);
