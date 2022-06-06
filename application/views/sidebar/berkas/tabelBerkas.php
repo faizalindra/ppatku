@@ -662,86 +662,12 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 text-center">
-                                                    <h5 id="total_biaya_">Rp. 5.000.000</h5>
+                                                    <h5 id="total_biaya_"></h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12 p-1">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <div class="card border-dark p-0 bg-success" style="color:white;">
-                                                                <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-                                                                <div class="card-body p-0">
-                                                                    <div class="row" style="font-size: 12px;">
-                                                                        <div class="col-md-6 text-left mb-1 ml-1">
-                                                                            2022-03-30
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <h5 class="text-center">Rp. 2.200.000</h5>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 p-1 ">
-                                                    <div class="row">
-                                                        <div class="col-md-3"></div>
-                                                        <div class="col-md-9">
-                                                            <div class="card border-dark p-0 bg-danger" style="color:white;">
-                                                                <div class="card-body p-0">
-                                                                    <div class="row" style="font-size: 12px;">
-                                                                        <div class="col-md-6 text-left mb-1 ml-1">
-                                                                            2022-04-01
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <h5 class="text-center">Rp. 200.000</h5>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 text-left" style="font-size: 12px;">- Suket Desa</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 p-1">
-                                                    <div class="row">
-                                                        <div class="col-md-9">
-                                                            <div class="card border-dark p-0 bg-success" style="color:white;">
-                                                                <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-                                                                <div class="card-body p-0">
-                                                                    <div class="row" style="font-size: 12px;">
-                                                                        <div class="col-md-6 text-left mb-1 ml-1">
-                                                                            2022-04-02
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <h5 class="text-center">Rp. 1.000.000</h5>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 text-right" style="font-size: 12px;">@ Rini Rohmi</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3"></div>
-                                                    </div>
-                                                </div>
+                                            <div class="row" id="row_biaya">
                                             </div>
                                             <div class="row">
                                                 <br>
@@ -776,13 +702,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer p-1" style="background-color:#9efff4;">
+                                        <div class="card-footer p-1" id="footer_biaya">
                                             <div class="row">
-                                                <div class="col-md-12 text-left" style="font-size: 12px;">Kurang</div>
+                                                <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 text-center">
-                                                    <h5>Rp. 3.000.000</h5>
+                                                    <h4 class="" id="status_bayar"></h4>
                                                 </div>
                                             </div>
                                         </div>

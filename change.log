@@ -1,3 +1,6 @@
+06 Juni 2022 #00031
+    - menambah fitur card biaya pada detail_berkas
+
 06 Juni 2022 #00030
     - menambah form input biaya di card biaya pada detail_berkas
       - membuat controller dan model biaya

@@ -3,11 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Biaya extends CI_Controller
 {
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    //     // cek_login();
-    // }
 
     function input_biaya()
     {
@@ -26,5 +21,14 @@ class Biaya extends CI_Controller
         }
         $hasil = $this->ModelBiaya->input_biaya($data);
         echo json_encode($hasil);
+    }
+
+    function get_biaya()
+    {
+        $idb = array('id' => $this->input->get('id'));
+        $id = array('id_berkas' => $this->input->get('id'));
+        $hasil = $this->ModelBiaya->get_biaya($id,$idb);
+        echo json_encode($hasil);
+        // print_r($hasil);
     }
 }

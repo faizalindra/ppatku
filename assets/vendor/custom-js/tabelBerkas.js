@@ -249,6 +249,7 @@ $('#show_data').on('click', '.item_detail2', function() {
             detail_kelengkapan(data.id_berkas);
             detail_proses(data.id_berkas);
             bpn(data.id_berkas);
+            biaya(data.id_berkas);
 
         },
         error: function() {
@@ -417,16 +418,30 @@ function bpn(id) {
 
 ////////////////////////////////////// - Card Biaya /////////////////////////////////////////////
 
-$("#modelDetail2").on('change', ".bayar_", function() {
+$("#modelDetail2").on('click', ".bayar_", function() {
     var val = $('input[name="bayar_"]:checked').val();
     if (val == 1) {
-        console.log('berhasil');
         document.getElementById("penyetor").disabled = true;
     } else {
         document.getElementById("penyetor").disabled = false;
     }
 })
 
+//fungsi untuk menampilkan card biaya
+function biaya(id) {
+    $.get(base_url + '/biaya/get_biaya', {
+        id: id
+    }, function(data) {
+        $('#row_biaya').html(data.card);
+        console.log(data);
+        $('#footer_biaya').css(data.color[1], data.color[2]);
+        $('#status_bayar').html(data.status);
+        $('#ket_bayar_').html(data.ket);
+
+    }, 'json').fail(function() { console.log('gagal mengambil data biaya') });
+}
+
+//fungsi untuk input biaya
 function input_biaya() {
     var id = berkas_id_detail;
     var bayar_ = $('input[name="bayar_"]:checked').val();
@@ -441,10 +456,10 @@ function input_biaya() {
         jum_bayar: jum_bayar,
         penyetor: penyetor,
         ket_bayar: ket_bayar
-    }, function(data) {
-        console.log(data);
+    }, function() {
+        biaya(id);
     }, 'json').fail(function() { console.log('Gagal') })
-    $('#form-biaya').find('input').val('')
+    $('#form-biaya').find('input[type=text]').val('')
     $('#form-biaya').find('textarea').val('')
     $('#collapse_biaya').collapse('hide');
 }
