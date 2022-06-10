@@ -1,3 +1,9 @@
+11 Juni 2022 #00034
+    - menghapus ModelTest dari autoload
+    - menambah nav-item Admin di navbar
+    - menu user dipindah ke nav-item Admin
+    - membuat sidebar kecil secara default
+
 06 Juni 2022 #00033
     - menambah kelengkapan SPK pada input berkas
     - kolom sertipikat, berkas_selesai dan aksi sekarang diproses melalui ModelBerkas

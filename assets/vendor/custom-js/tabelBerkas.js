@@ -223,7 +223,7 @@ $('#modelDetail2').on('click', '#save_ket_keleng', function() {
     var id = berkas_id_detail;
     if (ket != '') {
         ket = remove_div_in_ket(ket);
-        console.log(ket);
+        // console.log(ket);
         $.ajax({
             type: 'POST',
             url: base_url + '/kelengkapan/update_keterangan',
@@ -298,7 +298,7 @@ $('#modelDetail2').on('click', '#save_ket_proses', function() {
                     ket: ket
                 },
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                 },
                 error: function() {
                     console.log('Error: tidak bisa update keterangan proses')

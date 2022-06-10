@@ -1,7 +1,6 @@
 //document ready
 $(document).ready(function() {
     currentTime();
-
     hari();
 
     function hari() {
@@ -41,4 +40,37 @@ $(document).ready(function() {
         var t = setTimeout(function() { currentTime() }, 1000);
 
     }
+
+    // $('#accordionSidebar').hover(function() {
+    //     $('#page-top').removeClass('sidebar-toggled');
+    //     $('#accordionSidebar').removeClass('toggled');
+    //     console.log('remove');
+    // }, function() {
+    //     $('#page-top').addClass('sidebar-toggled');
+    //     $('#accordionSidebar').addClass('toggled');
+    //     console.log('add');
+    // });
+
 });
+// var toggle = false;
+// $('#sidebarToggle').on('click', function() {
+//     var test = document.getElementById("page-top");
+//     var hasil = test.classList.contains('sidebar-toggled');
+//     if (hasil == false) {
+//         $('#testingcol').attr("aria-toggle", 'collapse');
+//         $('#testingcol').attr("data-target", "#collapseUtilities2");
+//         $('#testingcol').attr("aria-expanded", true);
+//         $('#testingcol').attr("aria-controls", 'collapseUtilities');
+//         // $('#collapseUtilities2').show();
+//         console.log('elemen berada di sini');
+//     } else {
+//         // $('#testingcol').hide();
+//         $('#testingcol').removeAttr("data-target", "#collapseUtilities2");
+//         $('#testingcol').removeAttr("aria-expanded", true);
+//         $('#testingcol').removeAttr("aria-toggle", 'collapse');
+//         $('#testingcol').removeAttr("aria-controls", 'collapseUtilities');
+//         $('#testingcol').attr("href", "<?= base_url('Berkas'); ?>");
+//         // $('#collapseUtilities2').hide();
+//         console.log('elemen tidak berada di sini');
+//     }
+// });
