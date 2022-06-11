@@ -2,13 +2,10 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-            <!-- <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div> -->
             <div class="sidebar-brand-text mx-3">Notaris</div>
         </a>
 
@@ -66,11 +63,29 @@
                 <i class="fas fa-fw fa-bookmark"></i>
                 <span>Catatan</span></a>
         </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Admin
+        </div>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/user'); ?>">
-                <i class="fas fa-fw fa-user"></i>
-                <span>User</span></a>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Lainnya</span>
+            </a>
+            <div id="collapseUtilities" class="collapse border border-black" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header bg-primary" style="color:white ">Menu:</h6>
+                    <a class="collapse-item" href="<?= base_url('berkas/cabut_berkas'); ?>">Pencabutan Berkas</a>
+                    <a class="collapse-item" href="<?= base_url('user/user'); ?>">User</a>
+                </div>
+            </div>
         </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

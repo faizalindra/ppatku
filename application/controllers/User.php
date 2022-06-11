@@ -24,9 +24,30 @@ class User extends CI_Controller
 
     public function hapusUser()
     {
-        $where = ['id' => $this->uri->segment(3)];
+        // $where = ['id' => $this->input->post('id')];
+        $where['id'] = $this->input->post('id');
+        $this->input->post('kode');
         $this->ModelUser->hapusUser($where);
-        redirect('user/manajemenUser');
+        // return 'berhasil';
+        echo json_encode($where);
+        // redirect('user/manajemenUser');
+    }
+
+    public function active_deactive()
+    {
+        if (!empty($this->input->post('kode'))) {
+            $where = ['id' => $this->input->post('id')];
+            if ($this->input->post('status') == '1') {
+                $data = ['is_active' => '0'];
+            } else {
+                $data = ['is_active' => '1'];
+            }
+            $this->ModelUser->active_deactive($where, $data);
+            echo json_encode($where);
+        }
+
+
+        // redirect('user/manajemenUser');
     }
 
     public function ubahProfil()
@@ -58,7 +79,8 @@ class User extends CI_Controller
         }
     }
 
-    public function user(){
+    public function user()
+    {
         $data['staff'] = $this->db->get('user')->result_array();
         $data['judul'] = 'Registrasi';
         $this->load->view('templates/header', $data);
@@ -69,7 +91,8 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function inputUser(){
+    public function inputUser()
+    {
         $username = $this->input->post('username', true);
         $data = [
             'nama' => htmlspecialchars($this->input->post('nama', true)),
@@ -130,5 +153,4 @@ class User extends CI_Controller
             redirect('user/manajemenUser');
         }
     }
-
 }
