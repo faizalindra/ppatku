@@ -31,8 +31,11 @@ class ModelSertipikat extends CI_Model
             ->from('tb_sertipikat')
             ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
-            ->get();
-        return $hasil->result();
+            ->get()->result();
+        for ($i = 0; $i < count($hasil); $i++) {
+            $hasil[$i]->tgl_daftar = date_format(date_create($hasil[$i]->tgl_daftar), 'd M Y');
+        }
+        return $hasil;
     }
 
     //untuk mendapatkan sertipikat berdasarkan no_reg
@@ -50,7 +53,6 @@ class ModelSertipikat extends CI_Model
                 'no_reg' => $data->no_reg,
                 'tgl_daftar' => $data->tgl_daftar,
                 'no_sertipikat' => $data->no_sertipikat,
-                'luas' => $data->luas,
                 'dsa' => $data->dsa,
                 'desa' => $data->desa,
                 'kecamatan' => $data->kecamatan,
@@ -58,8 +60,17 @@ class ModelSertipikat extends CI_Model
                 'pemilik_hak' => $data->pemilik_hak,
                 'pembeli_hak' => $data->pembeli_hak,
                 'proses' => $data->proses,
-                'ket' => $data->ket,
             );
+            if (!empty($data->luas)) {
+                $hasil['luas'] = $data->luas;
+            } else {
+                $hasil['luas'] = "";
+            }
+            if (!empty($data->ket)) {
+                $hasil['ket'] = $data->ket;
+            } else {
+                $hasil['ket'] = "";
+            }
         }
         return $hasil;
     }
@@ -91,12 +102,15 @@ class ModelSertipikat extends CI_Model
     //untuk selector sertipikat di input berkas
     public function get_sert_for_select()
     {
-        $data = $this->db->select('no_reg, dsa, jenis_hak, no_sertipikat, pemilik_hak, desa.nama as desa')
+        $data = $this->db->select('no_reg, dsa, proses, jenis_hak, no_sertipikat, pemilik_hak, desa.nama as desa')
             ->from('tb_sertipikat')
             ->join('desa', 'tb_sertipikat.dsa = desa.id')
             ->get()
             ->result();
-        return $data;
+        foreach ($data as $item) {
+            $hasil[] = '<option value="' . $item->no_reg . '">' . $item->no_reg . '. ' . $item->jenis_hak  . ". " . $item->no_sertipikat . "/" . $item->desa . ' A.n.  ' . $item->pemilik_hak . ' | ' . $item->proses . '</option>';
+        }
+        return $hasil;
     }
 
 

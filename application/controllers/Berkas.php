@@ -40,13 +40,13 @@ class Berkas extends CI_Controller
             $data['keterangan'] = $this->input->post('keterangan_e', true);
         }
         if ($this->input->post('desa_e') != null) {
-            $data['desa'] = $this->input->post('desa_e', true);
+            $data['alamat'] = $this->input->post('desa_e', true);
         }
-        if ($this->input->post('jenis_berkas') != null) {
-            $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas', true));
+        if ($this->input->post('jenis_berkas[]_e') != null) {
+            $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas[]_e', true));
         }
-        if ($this->input->post('reg_sertipikat') != null) {
-            $data['reg_sertipikat'] = $this->input->post('reg_sertipikat', true);
+        if ($this->input->post('sertipikat_e') != null) {
+            $data['reg_sertipikat'] = $this->input->post('sertipikat_e', true);
         }
         $this->ModelBerkas->update_berkas($data, $id);
         // echo json_encode($data);
@@ -126,9 +126,13 @@ class Berkas extends CI_Controller
         if (!empty($this->input->post('persetujuan_hibah'))) {
             $data_k['persetujuan_hibah'] = 1;
         }
+        if (!empty($this->input->post('spk'))) {
+            $data_k['spk'] = 1;
+        }
         if (!empty($this->input->post('ket_kelengkapan'))) {
             $data_k['ket_kelengkapan'] = $this->input->post('ket_kelengkapan');
         }
+
 
         if (!empty($data_k)) {
             $this->ModelBerkas->insert_berkas_kelengkapan($data, $data_k);
@@ -202,6 +206,23 @@ class Berkas extends CI_Controller
             // echo json_encode($data1);
             redirect('berkas');
         }
+    }
+
+    function cabut_berkas()
+    {
+        $b = array('berkas_selesai' => 0);
+        $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
+        // $data['judul'] = 'Cabut Berkas';
+        $judul['judul'] = "Cabut Berkas";
+        $this->load->view('templates/header',$judul);
+        if ($this->session->userdata('role_id') == 0) { //notaris
+            $this->load->view('templates/sidebarNotaris');
+        } else if ($this->session->userdata('role_id') == 1) { //admin
+            $this->load->view('templates/sidebarAdmin');
+        }
+        $this->load->view('templates/topbar');
+        $this->load->view('sidebar/berkas/cabutBerkas', $data);
+        $this->load->view('templates/footer');
     }
 
     // function simpan_berkas()

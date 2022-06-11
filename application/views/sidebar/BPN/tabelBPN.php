@@ -82,9 +82,9 @@
                                         <div class="input-group">
                                             <select name="no_berkas_i" id="no_berkas_i" class="custom-select" required>
                                                 <option disabled selected value> -- Nomor Berkas -- </option>
-                                                <?php foreach ($berkas as $row) : ?>
-                                                    <option value="<?php echo $row->id_berkas; ?>" data-value="<?php echo $row->id_berkas ?>"><?= $row->id_berkas ?>. <?= $row->jenis_hak ?> <?= $row->no_sertipikat ?> <?= $row->desa ?> | <?= $row->nama_penjual ?> => <?= $row->nama_pembeli ?></option>
-                                                <?php endforeach; ?>
+                                                <?php foreach ($berkas as $row) :
+                                                    echo $row;
+                                                endforeach; ?>
                                             </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text"><i class="fa fa-book"></i>
@@ -208,9 +208,9 @@
                                         <div class="input-group">
                                             <select name="no_berkas_e" id="no_berkas_e" class="custom-select">
                                                 <option disabled selected value> -- Nomor Berkas -- </option>
-                                                <?php foreach ($berkas as $row) : ?>
-                                                    <option value="<?php echo $row->id_berkas; ?>" data-value="<?php echo $row->id_berkas ?>"><?= $row->id_berkas ?>. <?= $row->jenis_hak ?> <?= $row->no_sertipikat ?> <?= $row->desa ?> | <?= $row->nama_penjual ?> => <?= $row->nama_pembeli ?></option>
-                                                <?php endforeach; ?>
+                                                <?php foreach ($berkas as $row) :
+                                                    echo $row;
+                                                endforeach; ?>
                                             </select>
                                             <div class="input-group-append">
                                                 <div class="input-group-text"><i class="fa fa-book"></i>

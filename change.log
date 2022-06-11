@@ -1,3 +1,78 @@
+11 Juni 2022 #00039
+    - bug fix
+      - mengatasi input desa bermasalah di edit_berkas
+      - mengatasi proses sertipikat tidak berubah setelah edit sertipikat
+      - mengatasi jumlah berkas dicabut tidak muncul di record berkas
+      - mengatasi list proses berkas tidak muncul seluruhnya di detail berkas
+    - mengubah metode untuk mendapat list sertipikat di field input berkas
+    - mengubah tambilan tanggal card catatan di dashboard
+
+
+11 Juni 2022 #00038
+    - redisign tabelUser
+    - menambah nav-item Admin di navbar Notaris
+    - menu user dipindah ke nav-item Admin
+
+11 Juni 2022 #00037
+    - redisign card berkas belum selesai di dashboard
+
+11 Juni 2022 #00036
+    - menambah preview cabut berkas
+
+11 Juni 2022 #00035
+    - membuat halaman cabut berkas
+    - membuat fitur cabut berkas
+    - mengubah fungsi get_berkas_for_select() di ModelBerkas
+    - memperbaiki icon profil tidak tampil di halaman tertentu
+
+11 Juni 2022 #00034
+    - menghapus ModelTest dari autoload
+    - menambah nav-item Admin di navbar
+    - menu user dipindah ke nav-item Admin
+    - membuat sidebar kecil secara default
+
+06 Juni 2022 #00033
+    - menambah kelengkapan SPK pada input berkas
+    - kolom sertipikat, berkas_selesai dan aksi sekarang diproses melalui ModelBerkas
+    - memperbaiki card biaya tidak tampil sesuai berkas yang ditentukan
+    - mengganti nama kolom penjual dan pembeli menjadi pihak 1 dan pihak 2
+    - menambah modal detail_berkas untuk menampilkan berkas dicabut
+    - menghapus beberapa fungsi yang tidak diperlukan pad tabelBerkas.js
+
+06 Juni 2022 #00032
+    - mengubah tampilan tanggal pada aplikasi
+    - menambah tanggal dan jam pada topbar
+
+06 Juni 2022 #00031
+    - menambah fitur card biaya pada detail_berkas
+
+06 Juni 2022 #00030
+    - menambah form input biaya di card biaya pada detail_berkas
+      - membuat controller dan model biaya
+    - memperbaiki kolom sertipikat dan jenis_berkas tidak terPOST
+
+06 Juni 2022 #00029
+    - menampilkan card proses BPN di detail_berkas pada tabelBerkas
+    - menampilkan keterangan proses & kelengkapan
+    - keterangan proses dan kelengkapan dapat di edit secara langsung
+    - memperbaiki tampilan card di detail_berkas
+      - menghapus shadow di detail_berkas
+    - memperbaiki tampilan text sertipikat di detail_berkas
+
+04 Juni 2022 #00028
+    - perbaikan tombol proses dan kelengkapan
+    - rework fungsi proses berkas pada detail_berkas
+      - mengganti metode get_proses di tabelberkas.js
+      - mengganti metode pengolahan data di controller & model Proses 
+
+03 Juni 2022 #00027
+    - fungsi kelengkapan berkas berhasil di gunakan
+
+03 Juni 2022 #00026
+    - mengganti tambilan detail_berkas di tabelBerkas
+    - menambah kelengkapan di detail_berkas tabelBerkas
+      - menambah model ModelKelengkapan dan Controller Kelengkapan
+
 24 Mei 2022 #00025
     - mengubah form input & edit proses BPN
     - update database
