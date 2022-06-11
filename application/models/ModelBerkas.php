@@ -20,38 +20,38 @@ class ModelBerkas extends CI_Model
     }
 
     //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
-    public function getBerkasUnfinish()
-    {
-        // $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='0'");
-        $hsl = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan, tb_berkas.id as id_berkas')
-            ->from('tb_berkas')
-            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-            ->join('desa', 'desa.id = tb_berkas.alamat', 'left')
-            ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
-            ->where('berkas_selesai', 0)
-            ->get();
-        return $hsl->result_array();
-    }
+    // public function getBerkasUnfinish()
+    // {
+    //     // $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='0'");
+    //     $hsl = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan, tb_berkas.id as id_berkas')
+    //         ->from('tb_berkas')
+    //         ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+    //         ->join('desa', 'desa.id = tb_berkas.alamat', 'left')
+    //         ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+    //         ->where('berkas_selesai', 0)
+    //         ->get();
+    //     return $hsl->result_array();
+    // }
 
     //left join berkas untuk tabelBerkas
-    public function getBerkasLeft()
-    {
-        $this->db->select('*');
-        $this->db->from('tb_berkas'); // this is first table name
-        $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left'); // this is second table name with both table ids
-        $query = $this->db->get();
-        return $query->result_array();
-    }
+    // public function getBerkasLeft()
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('tb_berkas'); // this is first table name
+    //     $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left'); // this is second table name with both table ids
+    //     $query = $this->db->get();
+    //     return $query->result_array();
+    // }
 
     //inner join untuk tabel berkasProses dan berkasSelesai
-    public function getBerkasQuery()
-    {
-        $this->db->select('*');
-        $this->db->from('tb_berkas');
-        $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
+    // public function getBerkasQuery()
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('tb_berkas');
+    //     $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat');
+    //     $query = $this->db->get();
+    //     return $query->result_array();
+    // }
 
     //menghitung total berkas
     public function totBerkas($field, $where)
@@ -143,15 +143,42 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    public function get_berkas_for_select()
+    public function get_berkas_for_select($where = null)
     {
-        $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
-            ->from('tb_berkas')
-            ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
-            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-            ->get()
-            ->result();
-        return $data;
+        if (!empty($where)) {
+            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
+                ->from('tb_berkas')
+                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+                ->where($where)
+                ->get()
+                ->result();
+        } else {
+            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
+                ->from('tb_berkas')
+                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+                ->get()
+                ->result();
+        }
+        foreach ($data as $item) {
+            // $data[$i]->desa = $item->desa;
+            if (!empty($item->no_sertipikat)) {
+                if (!empty($item->nama_penjual)) {
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                } else {
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                }
+            } else {
+                if ($item->nama_penjual == '' && $item->nama_pembeli == ' ') {
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                } else {
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' .  $item->id_berkas . '. ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                }
+            }
+        }
+
+        return $hasil;
     }
 
     //untuk form edit

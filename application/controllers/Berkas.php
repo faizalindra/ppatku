@@ -208,6 +208,23 @@ class Berkas extends CI_Controller
         }
     }
 
+    function cabut_berkas()
+    {
+        $b = array('berkas_selesai' => 0);
+        $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
+        // $data['judul'] = 'Cabut Berkas';
+        $judul['judul'] = "Cabut Berkas";
+        $this->load->view('templates/header',$judul);
+        if ($this->session->userdata('role_id') == 0) { //notaris
+            $this->load->view('templates/sidebarNotaris');
+        } else if ($this->session->userdata('role_id') == 1) { //admin
+            $this->load->view('templates/sidebarAdmin');
+        }
+        $this->load->view('templates/topbar');
+        $this->load->view('sidebar/berkas/cabutBerkas', $data);
+        $this->load->view('templates/footer');
+    }
+
     // function simpan_berkas()
     // {
     //     $id = $this->input->post('id');

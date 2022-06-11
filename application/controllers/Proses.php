@@ -10,7 +10,8 @@ class Proses extends CI_Controller
         // get_uri();
     }
 
-    public function get_proses(){
+    public function get_proses()
+    {
         $id = $this->input->get('id');
         $ids['no_proses'] = $id;
         $data = $this->ModelProses->get_proses($id, $ids);
@@ -18,7 +19,8 @@ class Proses extends CI_Controller
         // print_r($data);
     }
 
-    public function update_proses(){
+    public function update_proses()
+    {
         $id = $this->input->post('id');
         $val = $this->input->post('val');
         $jp = $this->input->post('jp');
@@ -28,17 +30,25 @@ class Proses extends CI_Controller
 
     function berkas_selesai()
     {
-        $data = ['berkas_selesai' =>  1];
-        $where = ['id' => $this->uri->segment(3)];
-        $datas = $this->ModelProses->berkas_selesai($data, $where);
-        echo json_encode($datas);
-        redirect('berkas');
+        // $a = $this->input->post('id');
+        if (!empty($this->input->post('kode'))) {
+            $data = array('berkas_selesai' => 3);
+            $where = array('id' => $this->input->post('id'));
+            $datas = $this->ModelProses->berkas_selesai($data, $where);
+            echo json_encode('berhasil');
+        } else {
+            $data = ['berkas_selesai' =>  1];
+            $where = ['id' => $this->uri->segment(3)];
+            $datas = $this->ModelProses->berkas_selesai($data, $where);
+            redirect('berkas');
+        }
     }
 
-    function update_keterangan(){
-        $id = array('no_proses'=>$this->input->post('id'));
-        $ket = array('ket_proses'=>$this->input->post('ket'));
-        $this->ModelProses->update_keterangan($ket,$id);
+    function update_keterangan()
+    {
+        $id = array('no_proses' => $this->input->post('id'));
+        $ket = array('ket_proses' => $this->input->post('ket'));
+        $this->ModelProses->update_keterangan($ket, $id);
         echo json_encode($ket);
     }
 }

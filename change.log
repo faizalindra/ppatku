@@ -1,3 +1,9 @@
+11 Juni 2022 #00035
+    - membuat halaman cabut berkas
+    - membuat fitur cabut berkas
+    - mengubah fungsi get_berkas_for_select() di ModelBerkas
+    - memperbaiki icon profil tidak tampil di halaman tertentu
+
 11 Juni 2022 #00034
     - menghapus ModelTest dari autoload
     - menambah nav-item Admin di navbar
