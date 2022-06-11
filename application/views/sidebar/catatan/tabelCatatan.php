@@ -28,7 +28,7 @@
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div align='left' class="col-md-6 text-white-50 small font-weight-bold">
-                                                            <?= $r['tgl']; ?>
+                                                            <?= date_format(date_create($r['tgl']), 'd M Y'); ?>
                                                         </div>
                                                         <div class="col-md-6 text-right">
                                                             <a href='<?= base_url('catatan/hapus_catatan/') . $r['id_catatan'] ?>' align='right'>

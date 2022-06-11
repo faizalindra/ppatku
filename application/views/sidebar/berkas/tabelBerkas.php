@@ -1,6 +1,6 @@
     <script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery-ui.min.js"></script>
     <link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
-    <div class="card shadow mb-4">
+    <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
         </div>
@@ -43,8 +43,8 @@
                                 <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
                                 <th>Jenis Berkas</th>
-                                <th>Nama Penjual</th>
-                                <th>Nama Pembeli</th>
+                                <th>Pihak 1</th>
+                                <th>Pihak 2</th>
                                 <th>Berkas Selesai</th>
                                 <th></th>
                             </tr>
@@ -89,9 +89,9 @@
                                                         <div class="input-group">
                                                             <select name="sertipikat" id="sertipikat_i" class="custom-select" aria-placeholder="Sertipikat">
                                                                 <option disabled selected value> -- Sertipikat -- </option>
-                                                                <?php foreach ($sertipikat as $row) : ?>
-                                                                    <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
-                                                                <?php endforeach; ?>
+                                                                <?php foreach ($sertipikat as $row) :
+                                                                    echo $row;
+                                                                endforeach; ?>
                                                             </select>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">
@@ -148,7 +148,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" required>
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text">Penjual
+                                                                <div class="input-group-text">Pihak 1
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -157,7 +157,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on">
                                                             <div class="input-group-append">
-                                                                <div class="input-group-text">Pembeli
+                                                                <div class="input-group-text">Pihak 2
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -168,16 +168,7 @@
                                                                 <div class="input-group-text">Rp.
                                                                 </div>
                                                             </div>
-                                                            <input type="text" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text">Rp.
-                                                                </div>
-                                                            </div>
-                                                            <input type="text" class="form-control" name="bayar" id="bayar_i" aria-describedby="helpId" placeholder="Bayar/DP">
+                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -325,19 +316,35 @@
                                                     <div class="row">
                                                         <span id="checkboxHelpBlock" class="form-text text-muted"><u>Lainnya</u> :</span>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
-                                                                <label class="custom-control-label" for="order_i">Order</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
+                                                                        <label class="custom-control-label" for="order_i">Order</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
-                                                                <label class="custom-control-label" for="imb_i">IMB</label>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
+                                                                        <label class="custom-control-label" for="imb_i">IMB</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="spk_i" name="spk">
+                                                                        <label class="custom-control-label" for="spk_i">SPK</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -412,9 +419,9 @@
                                                 <div class="input-group">
                                                     <select name="sertipikat_e" id="sertipikat_e" class="custom-select">
                                                         <option disabled selected value> -- Sertipikat -- </option>
-                                                        <?php foreach ($sertipikat as $row) : ?>
-                                                            <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
-                                                        <?php endforeach; ?>
+                                                        <?php foreach ($sertipikat as $row) :
+                                                            echo $row;
+                                                        endforeach; ?>
                                                     </select>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
@@ -507,16 +514,7 @@
                                                         <div class="input-group-text">Rp.
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">Rp.
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="bayar_e" id="bayar_e" aria-describedby="helpId" placeholder="Bayar/DP">
+                                                    <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -539,45 +537,207 @@
         </div>
         <!-- end model form edit -->
 
-
-        <!-- modal detail -->
-        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
+        <!-- modal detail berkas -->
+        <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <div class="modal-header p-1" style="background-color:#9efff4;">
+                        <h4 class="modal-title" id="id_berkas_"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="reload">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>No Berkas</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>No Sertipikat</th>
-                                        <th>Kecamatan</th>
-                                        <th>Jenis Berkas</th>
-                                        <th>Nama Penjual</th>
-                                        <th>Nama Pembeli</th>
-                                        <th>Total Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data_detail">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 pr-3">
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-left">
+                                                            <h6><strong>
+                                                                    <div id="tgl_masuk_berkas_"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <h6><strong>
+                                                                    <div id="jenis_berkas_"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div class="row text-left ml-0">
+                                                        <div class="col-md-12 text-muted">
+                                                            <div id="col_sertipikat"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 1</div>
+                                                            <h5 class="card-text" id="pihak_1"></h5>
+                                                        </div>
 
-                                </tbody>
-                            </table>
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 2</div>
+                                                            <h5 class="card-text" id="pihak_2"></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-muted" id="ket_berkas">
+                                                </div>
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Kelengkapan</h6>
+                                                </div>
+                                                <div class="card-body p-1 text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_ada">
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_belum_ada">
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-0">
+                                                        <div class="col-md-11 pl-3">
+                                                            <p id="ket_keleng" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
+
+                                                    </div> -->
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Proses</h6>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div id="proses_"></div>
+                                                    <div class="row pl-3 pt-1">
+                                                        <div class="col-md-11 p-0">
+                                                            <p id="ket_proses" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="card-footer text-muted p-2 m-2">
+
+                                                    </div> -->
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <h6>Proses BPN</h6>
+                                        </div>
+                                        <div class="card-body p-1">
+                                            <div id="bpn_">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <div class="row">
+                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                    Total Biaya
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5 id="total_biaya_"></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" id="row_biaya">
+                                            </div>
+                                            <div class="row">
+                                                <br>
+                                                <div class="col-md-12 text-center"><button id="tambah_biaya" data-toggle="collapse" data-target="#collapse_biaya" class="badge badge-success rounded-circle border border-white"><i class="fa fa-plus"></i></button></div>
+                                                <div class="col-md-12">
+                                                    <div id="collapse_biaya" class="collapse">
+                                                        <form action="#" onsubmit="input_biaya();return false" autocomplete="off" id="form-biaya">
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center text-muted">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="pembayaran" name="bayar_" value="0" required>
+                                                                        <label class="form-check-label" for="pembayaran">Bayar/DP</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="penambahan" name="bayar_" value="1" required>
+                                                                        <label class="form-check-label" for="penambahan">Tambah</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
+                                                                <div class="col-md-12"><input type="number" class="form-control" name="jum_bayar" id="jum_bayar" placeholder="Rp. Biaya" required></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" required></div>
+                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:"></textarea></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center">
+                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Reset</button>
+                                                                    <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-1" id="footer_biaya">
+                                            <div class="row">
+                                                <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h4 class="" id="status_bayar"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end modal detail -->
+        <!-- end of modal detail berkas -->
 
         <!-- modal sertipikat -->
         <div class="modal fade" id="ModalSertipikat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
@@ -617,6 +777,43 @@
         </div>
         <!-- end modal sertipikat -->
 
+        <!-- modal detail untuk berkas dicabut -->
+        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="reload">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No Berkas</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>No Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Jenis Berkas</th>
+                                        <th>Nama Penjual</th>
+                                        <th>Nama Pembeli</th>
+                                        <th>Total Biaya</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data_detail">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
         <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
