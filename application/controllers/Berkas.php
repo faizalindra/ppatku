@@ -40,7 +40,7 @@ class Berkas extends CI_Controller
             $data['keterangan'] = $this->input->post('keterangan_e', true);
         }
         if ($this->input->post('desa_e') != null) {
-            $data['desa'] = $this->input->post('desa_e', true);
+            $data['alamat'] = $this->input->post('desa_e', true);
         }
         if ($this->input->post('jenis_berkas[]_e') != null) {
             $data['jenis_berkas'] = implode(",", $this->input->post('jenis_berkas[]_e', true));

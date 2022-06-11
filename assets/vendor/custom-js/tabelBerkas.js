@@ -142,7 +142,7 @@ $('#show_data').on('click', '.item_detail2', function() {
     return false;
 });
 
-//tombol detail berkas
+//tombol detail berkas dicabut
 $('#show_data').on('click', '.item_detail', function() {
     var id = $(this).attr('data');
     $.ajax({
@@ -454,7 +454,9 @@ $('#show_data').on('click', '.edit_berkas', function() {
                 $('[name="pembeli_e"]').val(data.nama_pembeli);
                 $('[name="biaya_e"]').val(data.biaya);
                 $('[name="dp_e"]').val(data.dp);
-                $('[name="tot_biaya_e"]').val(data.tot_biaya);
+                var tot_biaya = data.tot_biaya;
+                tot_biaya = tot_biaya.replace(/[a-z A-Z._,-]/g, "");
+                $('[name="tot_biaya_e"]').val(tot_biaya);
                 $('[name="keterangan_e"]').val(data.keterangan);
                 $(".coment").html("Jenis Berkas : " + data.jenis_berkas);
             });

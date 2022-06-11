@@ -244,7 +244,7 @@ class ModelBerkas extends CI_Model
     }
     public function b_dicabut()
     {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 2")->result();
+        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 3")->result();
         foreach ($hasil as $data) {
             $hsl = $data->total_record;
         }

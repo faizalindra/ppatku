@@ -89,9 +89,9 @@
                                                         <div class="input-group">
                                                             <select name="sertipikat" id="sertipikat_i" class="custom-select" aria-placeholder="Sertipikat">
                                                                 <option disabled selected value> -- Sertipikat -- </option>
-                                                                <?php foreach ($sertipikat as $row) : ?>
-                                                                    <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
-                                                                <?php endforeach; ?>
+                                                                <?php foreach ($sertipikat as $row) :
+                                                                    echo $row;
+                                                                endforeach; ?>
                                                             </select>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">
@@ -168,7 +168,7 @@
                                                                 <div class="input-group-text">Rp.
                                                                 </div>
                                                             </div>
-                                                            <input type="text" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
+                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -419,9 +419,9 @@
                                                 <div class="input-group">
                                                     <select name="sertipikat_e" id="sertipikat_e" class="custom-select">
                                                         <option disabled selected value> -- Sertipikat -- </option>
-                                                        <?php foreach ($sertipikat as $row) : ?>
-                                                            <option value="<?php echo $row->no_reg; ?>" data-value="<?php echo $row->no_reg ?>" data-desa="<?= $row->dsa ?>"><?= $row->no_sertipikat ?>/<?= $row->desa ?> A.n <?= $row->pemilik_hak ?> | <?= $row->jenis_hak ?></option>
-                                                        <?php endforeach; ?>
+                                                        <?php foreach ($sertipikat as $row) :
+                                                            echo $row;
+                                                        endforeach; ?>
                                                     </select>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
@@ -514,7 +514,7 @@
                                                         <div class="input-group-text">Rp.
                                                         </div>
                                                     </div>
-                                                    <input type="text" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
+                                                    <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -709,7 +709,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-12 text-center">
-                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Cancel</button>
+                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Reset</button>
                                                                     <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
                                                                 </div>
                                                             </div>

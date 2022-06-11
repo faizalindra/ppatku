@@ -1,3 +1,13 @@
+11 Juni 2022 #00039
+    - bug fix
+      - mengatasi input desa bermasalah di edit_berkas
+      - mengatasi proses sertipikat tidak berubah setelah edit sertipikat
+      - mengatasi jumlah berkas dicabut tidak muncul di record berkas
+      - mengatasi list proses berkas tidak muncul seluruhnya di detail berkas
+    - mengubah metode untuk mendapat list sertipikat di field input berkas
+    - mengubah tambilan tanggal card catatan di dashboard
+
+
 11 Juni 2022 #00038
     - redisign tabelUser
     - menambah nav-item Admin di navbar Notaris
