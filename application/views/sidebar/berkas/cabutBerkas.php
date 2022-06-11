@@ -136,13 +136,13 @@
                     <div class="row" id="row_biaya">
                     </div>
                 </div>
-                <div class="card-footer p-1" id="footer_biaya">
+                <div class="card-footer p-1" id="footer_biaya" style="color:aliceblue">
                     <div class="row">
                         <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <h4 class="" id="status_bayar"></h4>
+                            <h4><strong id="status_bayar"></strong></h4>
                         </div>
                     </div>
                 </div>
