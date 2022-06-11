@@ -79,28 +79,37 @@
                         foreach ($berkas as $b) {
                             $a++; ?>
                             <div class="col-md-4 mb-4">
-                                <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline">
+                                <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline" style="min-height: 210px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 justify-content-center" align="center"><button class='btn btn-info'><?= $b['id_berkas']?></button></div>
+                                            <div class="col-md-12 justify-content-center" align="center"><button class='btn btn-info'><?= $b['id_berkas'] ?></button></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center"><?= $b['jenis_berkas']; ?></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 text-left">
-                                                <?= $b['nama_penjual']; ?>
-                                                <div class="text-white-50 small font-weight-bold">
-                                                    <?= $b['no_sertipikat']; ?> / <?= $b['desa']; ?><br>
-                                                    <?= $b['kecamatan']; ?>
+                                                <div class="text-uppercase"><strong><u><?= $b['nama_penjual']; ?></u></strong></div>
+                                                <div class=" small font-weight-bold">
+                                                    <?php
+                                                    if ($b['no_sertipikat'] = null) {
+                                                        $hsl = $b['jenis_hak'] . '. ' . $b['no_sertipikat'] . '/' . $b['desa'];
+                                                    } else {
+                                                        $hsl = 'Desa ' . $b['desa'];
+                                                    }
+                                                    ?>
+                                                    <?= $hsl ?><br>
+                                                    Kec. <?= $b['kecamatan']; ?>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 text-right">
-                                                <?= $b['jenis_berkas']; ?>
-                                                <p><?= $b['nama_pembeli']; ?></p>
+                                                <p class="text-uppercase"><strong><u><?= $b['nama_pembeli']; ?></u></strong></p>
                                                 <div class="text-white-50 font-weight-bold"></div>
                                             </div>
                                         </div>
-                                        <p></p>
-                                        <div> Ket :
-                                            <div class="small font-weight-bold"><?= nl2br($b['keterangan']); ?></div>
+                                        <div class="row">
+                                            <div class="col-auto"><u>Ket :</u> </div>
+                                            <div class="col-auto font-weight-bold p-0"><?= nl2br($b['keterangan']); ?></div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +167,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Indra Faizal Amri <?= $year=date('Y')?></span>
+            <span>Copyright &copy; Indra Faizal Amri <?= $year = date('Y') ?></span>
         </div>
     </div>
 </footer>

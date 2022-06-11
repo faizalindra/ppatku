@@ -20,18 +20,18 @@ class ModelBerkas extends CI_Model
     }
 
     //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
-    // public function getBerkasUnfinish()
-    // {
-    //     // $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='0'");
-    //     $hsl = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan, tb_berkas.id as id_berkas')
-    //         ->from('tb_berkas')
-    //         ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-    //         ->join('desa', 'desa.id = tb_berkas.alamat', 'left')
-    //         ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
-    //         ->where('berkas_selesai', 0)
-    //         ->get();
-    //     return $hsl->result_array();
-    // }
+    public function getBerkasUnfinish()
+    {
+        // $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='0'");
+        $hsl = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan, tb_berkas.id as id_berkas')
+            ->from('tb_berkas')
+            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->join('desa', 'desa.id = tb_berkas.alamat', 'left')
+            ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+            ->where('berkas_selesai', 0)
+            ->get();
+        return $hsl->result_array();
+    }
 
     //left join berkas untuk tabelBerkas
     // public function getBerkasLeft()
