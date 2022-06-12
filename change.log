@@ -1,3 +1,7 @@
+13 Juni 2022 #00043
+    - hapus file view, model & controller yang tidak diperlukan
+    - memindah base_url Javascript ke lain.js
+
 12 Juni 2022 #00042
     - penyesuaian tabelBPN & tabelSertipikat untuk user Staff
 

@@ -1,3 +1,8 @@
+var getUrl = window.location;
+const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+const user_role = document.getElementById('roleid').getAttribute('data');
+console.log(base_url);
+console.log(user_role);
 //document ready
 $(document).ready(function() {
     currentTime();

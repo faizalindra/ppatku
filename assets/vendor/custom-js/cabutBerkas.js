@@ -1,6 +1,3 @@
-var getUrl = window.location;
-const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
 $('#cabut_berkas_').on('click', function() {
     var id_cabut = $('#select_cabut').val();
     // console.log(id_cabut);
