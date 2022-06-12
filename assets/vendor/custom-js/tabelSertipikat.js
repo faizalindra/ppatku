@@ -27,7 +27,7 @@ $(document).ready(function() {
                         '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + ' / ' + data[i].desa + '</td>' +
                         '<td>' + data[i].kecamatan + '</td>' +
                         '<td class="text-lowercase">' + luas_null(data[i].luas) + '</td>' +
-                        '<td>' + data[i].pemilik_hak + '</td>' +
+                        '<td>' + nl2br(data[i].pemilik_hak) + '</td>' +
                         '<td>' + data[i].pembeli_hak + '</td>' +
                         '<td>' + data[i].proses + '</td>' +
                         '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +

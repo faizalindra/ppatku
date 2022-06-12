@@ -90,7 +90,7 @@ function data_berkas() {
                     '<td>' + data[i].sertipikat + '</td>' +
                     '<td>' + data[i].kecamatan + '</td>' +
                     '<td>' + data[i].jenis_berkas + '</td>' +
-                    '<td>' + data[i].nama_penjual + '</td>' +
+                    '<td>' + nl2br(data[i].nama_penjual) + '</td>' +
                     '<td>' + data[i].nama_pembeli + '</td>' +
                     '<td>' + data[i].status_berkas + '</td>' +
                     '<td style="text-align:center;">' + data[i].aksi + '</td>' + '</tr>';
@@ -125,7 +125,7 @@ $('#show_data').on('click', '.item_detail2', function() {
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
             $('#jenis_berkas_').html(data.jenis_berkas);
             $('#col_sertipikat').html(data.sertipikat);
-            $('#pihak_1').html(data.nama_penjual);
+            $('#pihak_1').html(nl2br(data.nama_penjual));
             $('#pihak_2').html(data.nama_pembeli);
             $('#ket_berkas').html(nl2br(data.keterangan));
             $('#total_biaya_').html(data.tot_biaya);

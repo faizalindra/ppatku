@@ -75,9 +75,10 @@ class ModelBerkas extends CI_Model
             ->get()
             ->result();
         for ($i = 0; $i < count($data); $i++) {
+            $data[$i]->nama_penjual = str_replace(":", ": \n", $data[$i]->nama_penjual);
             //membuat field sertipikat
             if (!empty($data[$i]->jenis_hak)) {
-                $data[$i]->sertipikat = '<href href="javascript:;" class="btn_sertipikat" data="' . $data[$i]->reg_sertipikat . '">' . $data[$i]->jenis_hak . '. ' . $data[$i]->no_sertipikat . ' / ' . $data[$i]->desa;
+                $data[$i]->sertipikat = '<href href="javascript:;" class="btn_sertipikat" data="' . $data[$i]->reg_sertipikat . '">' . $data[$i]->jenis_hak . '. ' . $data[$i]->no_sertipikat . '/' . $data[$i]->desa;
             } else {
                 $data[$i]->sertipikat = $data[$i]->desa;
             }
@@ -119,7 +120,7 @@ class ModelBerkas extends CI_Model
                 'desa' => $data->desa,
                 'kecamatan' => $data->kecamatan,
                 'jenis_berkas' => $data->jenis_berkas,
-                'nama_penjual' => $data->nama_penjual,
+                'nama_penjual' => str_replace(":", ": \n", $data->nama_penjual),
                 'nama_pembeli' => $data->nama_pembeli,
                 'tot_biaya' => 'Rp. ' . number_format($data->tot_biaya),
                 'keterangan' => $data->keterangan,

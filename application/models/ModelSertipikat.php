@@ -33,6 +33,7 @@ class ModelSertipikat extends CI_Model
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->get()->result();
         for ($i = 0; $i < count($hasil); $i++) {
+            $hasil[$i]->pemilik_hak = str_replace(":", ": \n", $hasil[$i]->pemilik_hak);
             $hasil[$i]->tgl_daftar = date_format(date_create($hasil[$i]->tgl_daftar), 'd M Y');
         }
         return $hasil;
