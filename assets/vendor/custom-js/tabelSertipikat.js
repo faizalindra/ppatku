@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var getUrl = window.location;
     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    const user_role = document.getElementById('roleid').getAttribute('data');
     data_sertipikat();
 
     //select2 for proses
@@ -20,24 +21,28 @@ $(document).ready(function() {
             success: function(data) {
                 var html = '';
                 var i;
+                var aksi = '';
                 for (i = 0; i < data.length; i++) {
+                    if (user_role != 2 || user_role != '2') {
+                        aksi = '<td style="text-align:center;">' +
+                            '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_reg + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>'
+                    }
                     html += '<tr class="text-capitalize text-center">' +
                         '<td>' + data[i].no_reg + '</td>' +
                         '<td>' + data[i].tgl_daftar + '</td>' +
-                        '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + ' / ' + data[i].desa + '</td>' +
+                        '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + '/' + data[i].desa + '</td>' +
                         '<td>' + data[i].kecamatan + '</td>' +
                         '<td class="text-lowercase">' + luas_null(data[i].luas) + '</td>' +
                         '<td>' + nl2br(data[i].pemilik_hak) + '</td>' +
                         '<td>' + data[i].pembeli_hak + '</td>' +
                         '<td>' + data[i].proses + '</td>' +
-                        '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
-                        '<td style="text-align:center;">' +
-                        '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_reg + '"><i class="fa fa-edit" ></i>Edit</button>' +
-                        '</td>' +
-                        '</tr>';
+                        '<td class="text-left">' + nl2br(data[i].ket) + '</td>' + aksi + '</tr>';
                 }
                 $('#show_data').html(html);
                 var table = $('#tabel-sertipikat').dataTable({});
+                if (user_role == 2 || user_role == '2') {
+                    $('.edit_sertipikat').removeAttr('href').removeAttr('data');
+                }
 
             },
             error: function() {

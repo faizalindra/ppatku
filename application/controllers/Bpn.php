@@ -20,11 +20,7 @@ class Bpn extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-        if ($this->session->userdata('role_id') == 2) {
-            $this->load->view('sidebar/bpn/tabelBpn_staff', $data);
-        } else {
-            $this->load->view('sidebar/bpn/tabelBpn', $data);
-        }
+        $this->load->view('sidebar/bpn/tabelBpn', $data);
         $this->load->view('templates/footer');
     }
 
