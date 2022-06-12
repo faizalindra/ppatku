@@ -33,7 +33,9 @@
                             <th scope="col">Penerima Hak</th>
                             <th scope="col">Proses</th>
                             <th scope="col">Keterangan</th>
-                            <th scope="col">Aksi</th>
+                            <?php if ($this->session->userdata('role_id') != 2) {
+                                echo '<th scope="col">Aksi</th>';
+                            } ?>
                         </tr>
                     </thead>
                     <tbody id="show_data">
@@ -188,149 +190,152 @@
 </div>
 <!-- end model form input -->
 
-<!-- model edit -->
-<div class="modal fade" id="edit_sert" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title"><strong>Edit Sertipikat</strong></h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <form id="formAwesome" method="post" action="<?= base_url() ?>sertipikat/update_sertipikat" autocomplete="off">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="container-fluid">
-                                    <input type="text" name="id_e" id="id_e" hidden readonly>
-                                    <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <select name="jenis_hak_e" id="jenis_hak_e" class="custom-select">
-                                                <option disabled selected value> -- Jenis Hak -- </option>
-                                                <option value="M"> Hak Milik </option>
-                                                <option value="GB"> Guna Banggunan </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <input type="number" name="nomor_sertipikat_e" class="form-control" id="nomor_sertipikat_e" placeholder="-- Nomor Sertipikat --" autocomplete="off">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-book"></i>
-                                                </div>
+<?php if ($this->session->userdata('role_id') != 2) { ?>
+    <!-- model edit -->
+    <div class="modal fade" id="edit_sert" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"><strong>Edit Sertipikat</strong></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form id="formAwesome" method="post" action="<?= base_url() ?>sertipikat/update_sertipikat" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="container-fluid">
+                                        <input type="text" name="id_e" id="id_e" hidden readonly>
+                                        <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <select name="jenis_hak_e" id="jenis_hak_e" class="custom-select">
+                                                    <option disabled selected value> -- Jenis Hak -- </option>
+                                                    <option value="M"> Hak Milik </option>
+                                                    <option value="GB"> Guna Banggunan </option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Alamat
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-auto">
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">Kec</div>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <input type="number" name="nomor_sertipikat_e" class="form-control" id="nomor_sertipikat_e" placeholder="-- Nomor Sertipikat --" autocomplete="off">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-book"></i>
                                                     </div>
-                                                    <select name="kecamatan_e" id="kecamatan_e" class="custom-select">
-                                                        <option disabled selected value> -- Kecamatan -- </option>
-                                                        <?php foreach ($kecamatan as $row) : ?>
-                                                            <option value="<?php echo $row->id; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">Desa</div>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Alamat
                                                     </div>
-                                                    <select id="desa_e" name="desa_e" class="custom-select" placeholder="-- Desa --">
-                                                        <option disabled selected value> -- Desa -- </option>
-                                                    </select>
+                                                </div>
+                                                <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <div class="form-group row">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Kec</div>
+                                                        </div>
+                                                        <select name="kecamatan_e" id="kecamatan_e" class="custom-select">
+                                                            <option disabled selected value> -- Kecamatan -- </option>
+                                                            <?php foreach ($kecamatan as $row) : ?>
+                                                                <option value="<?php echo $row->id; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group row">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">Desa</div>
+                                                        </div>
+                                                        <select id="desa_e" name="desa_e" class="custom-select" placeholder="-- Desa --">
+                                                            <option disabled selected value> -- Desa -- </option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Luas
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Luas
+                                                    </div>
                                                 </div>
+                                                <input type="text" class="form-control" name="luas_e" id="luas_e" aria-describedby="helpId" autocapitalize="on" placeholder="m²">
                                             </div>
-                                            <input type="text" class="form-control" name="luas_e" id="luas_e" aria-describedby="helpId" autocapitalize="on" placeholder="m²">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">Proses</div>
-                                            </div>
-                                            <select name="jenis_berkas[]_e" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_e" tabindex="-1" style="width: 83%;">
-                                                <option value="AJB">AJB</option>
-                                                <option value="APHB">APHB</option>
-                                                <option value="APHT">APHT</option>
-                                                <option value="Ganti Blangko">Ganti Blangko</option>
-                                                <option value="Ganti Nama">Ganti Nama</option>
-                                                <option value="Hibah">Hibah</option>
-                                                <option value="Konversi">Konversi</option>
-                                                <option value="Pemecahan">Pemecahan</option>
-                                                <option value="Pengeringan">Pengeringan</option>
-                                                <option value="Peningkatan Hak">Peningkatan Hak</option>
-                                                <option value="SKMHT">SKMHT</option>
-                                                <option value="Waris">Waris</option>
-                                            </select>
-                                            <span id="textHelpBlock" class="form-text text-muted coment"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">Pemilik
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Proses</div>
                                                 </div>
+                                                <select name="jenis_berkas[]_e" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_e" tabindex="-1" style="width: 83%;">
+                                                    <option value="AJB">AJB</option>
+                                                    <option value="APHB">APHB</option>
+                                                    <option value="APHT">APHT</option>
+                                                    <option value="Ganti Blangko">Ganti Blangko</option>
+                                                    <option value="Ganti Nama">Ganti Nama</option>
+                                                    <option value="Hibah">Hibah</option>
+                                                    <option value="Konversi">Konversi</option>
+                                                    <option value="Pemecahan">Pemecahan</option>
+                                                    <option value="Pengeringan">Pengeringan</option>
+                                                    <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                    <option value="SKMHT">SKMHT</option>
+                                                    <option value="Waris">Waris</option>
+                                                </select>
+                                                <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="penerima_hak_e" id="penerima_hak_e" aria-describedby="helpId" autocapitalize="on">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">Penerima
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">Pemilik
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control"></textarea>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="penerima_hak_e" id="penerima_hak_e" aria-describedby="helpId" autocapitalize="on">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">Penerima
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="input-group">
+                                                <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button name="submit" type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end model edit -->
+    <!-- end model edit -->
+<?php } ?>
+
 
 <!-- modal edit sertipikat -->
 <div class="modal fade" id="edit_sert2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -470,4 +475,3 @@
         border-collapse: collapse;
     } */
 </style>
-

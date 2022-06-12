@@ -578,12 +578,12 @@
                                                     <div class="row">
                                                         <div class="col-md-6 text-center p-2">
                                                             <div class="card-title">Pihak 1</div>
-                                                            <h5 class="card-text" id="pihak_1"></h5>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_1"></h5>
                                                         </div>
 
                                                         <div class="col-md-6 text-center p-2">
                                                             <div class="card-title">Pihak 2</div>
-                                                            <h5 class="card-text" id="pihak_2"></h5>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_2"></h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -646,9 +646,6 @@
                                                         <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="card-footer text-muted p-2 m-2">
-
-                                                    </div> -->
                                             </div>
                                             <!-- </div> -->
                                         </div>

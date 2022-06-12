@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var getUrl = window.location;
     const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    const user_role = document.getElementById('roleid').getAttribute('data');
     data_BPN();
 
 
@@ -13,7 +14,7 @@ $(document).ready(function() {
     //fungsi badge status proses BPN
     function status_proses(status, id) {
         if (status == "0") {
-            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning"> Proses </a>';
+            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning status_bpn"> Proses </a>';
         } else if (status == "1") {
             return '<span class="badge badge-info">Selesai</span>';
         }
@@ -35,7 +36,12 @@ $(document).ready(function() {
             success: function(data) {
                 var html = '';
                 var i;
+                var aksi = '';
                 for (i = 0; i < data.length; i++) {
+                    if (user_role != 2 || user_role != '2') {
+                        var aksi = '<td style="text-align:center;">' +
+                            '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>';
+                    }
                     html += '<tr class="text-capitalize text-center">' +
                         '<td>' + data[i].no_proses_bpn + '</td>' +
                         '<td>' + data[i].tgl_masuk + '</td>' +
@@ -43,14 +49,13 @@ $(document).ready(function() {
                         '<td>' + data[i].no_bpn + '/' + data[i].tahun + '</td>' +
                         '<td>' + data[i].jenis_proses + '</td>' +
                         '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
-                        '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' +
-                        '<td style="text-align:center;">' +
-                        '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' +
-                        '</td>' +
-                        '</tr>';
+                        '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' + aksi + '</tr>';
                 }
                 $('#show_data').html(html);
                 var table = $('#tabel-BPN').dataTable({});
+                if (user_role == 2 || user_role == '2') {
+                    $('.status_bpn').removeAttr('href').removeAttr('onclick');
+                }
 
             },
             error: function() {

@@ -1,3 +1,23 @@
+12 Juni 2022 #00042
+    - penyesuaian tabelBPN & tabelSertipikat untuk user Staff
+
+12 Juni 2022 #00041
+    - membuat halaman dashboard & berkas untuk staff
+    - semua user sekarang menggunakan 1 sidebar
+    - semua controller halaman disesuaikan dengan sidebar baru
+    - menghapus kode form_validation dari controller berkas
+    - menghapus beberapa fungsi yang tidak diperlukan di controller user
+    - menyesuaikan input user untuk admin dan notaris
+    - penyesuaian ModelBerkas data_berkas() untuk user staff
+    - admin dan notaris sekarang memiliki tabelUser yang sama
+    - menambah elemen di topbar
+    - membuat sidebar baru
+    - penyesuaian tabelBerkas.js untuk user staff 
+
+12 Juni 2022 #00040
+    - memperbaiki tampilan nama_penjual di detail_berkas
+    - minor fix
+
 11 Juni 2022 #00039
     - bug fix
       - mengatasi input desa bermasalah di edit_berkas

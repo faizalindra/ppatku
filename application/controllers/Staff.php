@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Notaris extends CI_Controller
+class Staff extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         cek_login();
-        if ($this->session->userdata('role_id') != 0) {
-            //jika bukan notaris arahkan ke autentifikasi/acc_block (blocked)
+        if ($this->session->userdata('role_id') != 2) {
+            //jika bukan staff arahkan ke autentifikasi/acc_block
             redirect('autentifikasi/acc_block');
         }
     }
@@ -20,7 +20,7 @@ class Notaris extends CI_Controller
             'bb' => $this->ModelBerkas->b_proses(),
             'bc' =>  $this->ModelBerkas->b_selesai(),
             'bd' => $this->ModelBerkas->b_dicabut(),
-            'sa' => $this->ModelSertipikat->cekSertipikat()->num_rows(),
+            'sa' => $this->ModelSertipikat->s_terdaftar(),
             'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
             'bpn_b' => $this->ModelBpn->bpn_proses(),
         );

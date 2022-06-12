@@ -1,405 +1,719 @@
 <script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery-ui.min.js"></script>
-<link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
-    </div>
-    <div class="card-body">
+    <link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <div class="card mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
+        </div>
+        <div class="card-body">
 
-        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
+            <div class="comtainer">
+                <div class="row">
+                    <div class="col-auto col-md-2">
+                        <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Terdaftar </div>
+                            <div class="row-md-2 justify-content-end">: <?php echo $a ?></div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Berjalan</div>
+                            <div class="row-md-2 justify-content-end">: <?php echo $b ?></div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Selesai</div>
+                            <div class="row-md-2 justify-content-end">: <?php echo $c ?></div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="row-md-2 justify-content-end">Dicabut</div>
+                            <div class="row-md-2 justify-content-end">: <?php echo $d ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <p></p>
-        <div class="row">
-            <div class="col-auto">
-                <table class="table table-striped" id="tabel-berkas">
-                    <thead>
-                        <tr class="text-center">
-                            <th>#</th>
-                            <th>Tanggal Masuk</th>
-                            <th>Reg Sertipikat</th>
-                            <th>Desa</th>
-                            <th>Kecamatan</th>
-                            <th>Jenis Berkas</th>
-                            <th>Nama Penjual</th>
-                            <th>Nama Pembeli</th>
-                            <th>Berkas Selesai</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="show_data">
-                    </tbody>
-                </table>
+            <div class="row">
+                <div class="col-lg-12 col-auto">
+                    <table class="table table-striped" id="tabel-berkas">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Tanggal Masuk</th>
+                                <th>No Sertipikat</th>
+                                <th>Kecamatan</th>
+                                <th>Jenis Berkas</th>
+                                <th>Pihak 1</th>
+                                <th>Pihak 2</th>
+                                <th>Berkas Selesai</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="show_data">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- model form input -->
-        <div class="modal fade" id="formInputBerkas" tabindex="-1" role="dialog" aria-labelledby="formInputBerkasLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade" id="formInputBerkas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="formInputBerkasLabel">Input Berkas</h3>
+                        <h6 class="modal-title"><strong>INPUT BERKAS</strong></h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer" autocomplete="off" style="font-weight: 400 !important">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h6><u>Berkas</u></h6>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="container-fluid">
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <select name="sertipikat" id="sertipikat_i" class="custom-select" aria-placeholder="Sertipikat">
+                                                                <option disabled selected value> -- Sertipikat -- </option>
+                                                                <?php foreach ($sertipikat as $row) :
+                                                                    echo $row;
+                                                                endforeach; ?>
+                                                            </select>
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa fa-book"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">Kec</div>
+                                                            </div>
+                                                            <select name="kecamatan" id="kecamatan_i" class="custom-select" required>
+                                                                <option disabled selected value> -- Kecamatan -- </option>
+                                                                <?php foreach ($kecamatan as $row) : ?>
+                                                                    <option value="<?php echo $row->id; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">Desa</div>
+                                                            </div>
+                                                            <select id="desa_i" name="desa" class="custom-select" required>
+                                                                <option disabled selected value> -- Desa -- </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">Proses</div>
+                                                            </div>
+                                                            <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
+                                                                <option>AJB</option>
+                                                                <option>APHB</option>
+                                                                <option>APHT</option>
+                                                                <option>Ganti Blangko</option>
+                                                                <option>Ganti Nama</option>
+                                                                <option>Hibah</option>
+                                                                <option>Konversi</option>
+                                                                <option>Pemecahan</option>
+                                                                <option>Pengeringan</option>
+                                                                <option>Peningkatan Hak</option>
+                                                                <option>SKMHT</option>
+                                                                <option>Waris</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" required>
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">Pihak 1
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on">
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">Pihak 2
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">Rp.
+                                                                </div>
+                                                            </div>
+                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <textarea id="keterangan_i" name="keterangan" cols="40" rows="3" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6><u>Kelengkapan</u></h6>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Penjual</u> :</span>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="row">
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="ktp_penjual_i" name="ktp_penjual">
+                                                                        <label class="custom-control-label" for="ktp_penjual_i">KTP</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="kk_penjual_i" name="kk_penjual">
+                                                                        <label class="custom-control-label" for="kk_penjual_i">KK</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="ktp_is_penjual_i" name="ktp_is_penjual">
+                                                                        <label class="custom-control-label" for="ktp_is_penjual_i">KTP Suami/Istri</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mt-1 mb-1" />
+                                                    <div class="row">
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pembeli</u> :</span>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="row">
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="ktp_pembeli_i" name="ktp_pembeli">
+                                                                        <label class="custom-control-label" for="ktp_pembeli_i">KTP</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="kk_pembeli" name="kk_pembeli">
+                                                                        <label class="custom-control-label" for="kk_pembeli">KK</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="ktp_is_pembeli_i" name="ktp_is_pembeli">
+                                                                        <label class="custom-control-label" for="ktp_is_pembeli_i">KTP Suami/Istri</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="bpjs_i" name="bpjs">
+                                                                        <label class="custom-control-label" for="bpjs_i">BPJS</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mt-1 mb-1" />
+                                                    <div class="row">
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Ahli Waris</u> :</span>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="row">
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="ktp_ahli_waris_i" name="ktp_ahli_waris">
+                                                                        <label class="custom-control-label" for="ktp_ahli_waris_i">KTP</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="kk_ahli_waris_i" name="kk_ahli_waris">
+                                                                        <label class="custom-control-label" for="kk_ahli_waris_i">KK</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="akta_kematian_i" name="akta_kematian">
+                                                                        <label class="custom-control-label" for="akta_kematian_i">Akta Kematian</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mt-1 mb-1" />
+                                                    <div class="row">
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Tanah</u> :</span>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="shm_i" name="shm">
+                                                                        <label class="custom-control-label" for="shm_i">SHM</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="sppt_i" name="sppt">
+                                                                        <label class="custom-control-label" for="sppt_i">SPPT</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mt-1 mb-1" />
+                                                    <div class="row">
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Lainnya</u> :</span>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
+                                                                        <label class="custom-control-label" for="order_i">Order</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
+                                                                        <label class="custom-control-label" for="imb_i">IMB</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="spk_i" name="spk">
+                                                                        <label class="custom-control-label" for="spk_i">SPK</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="ket_beda_nama" name="ket_beda_nama">
+                                                                <label class="custom-control-label" for="ket_beda_nama">Pernyataan Beda Nama</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="persetujuan_hibah_i" name="persetujuan_hibah">
+                                                                <label class="custom-control-label" for="persetujuan_hibah_i">Persetujuan Hibah</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="reset" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end model form input -->
+
+        <!-- model form edit -->
+        <div class="modal fade" id="formedit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title"><strong>Edit Berkas</strong></h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/update_berkas" autocomplete="off">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="container-fluid">
+                                            <input type="text" name="id_e" id="id_e" hidden readonly>
+                                            <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <select name="sertipikat_e" id="sertipikat_e" class="custom-select">
+                                                        <option disabled selected value> -- Sertipikat -- </option>
+                                                        <?php foreach ($sertipikat as $row) :
+                                                            echo $row;
+                                                        endforeach; ?>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-book"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">Penjual
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="pembeli_e" id="pembeli_e" aria-describedby="helpId" autocapitalize="on">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">Pembeli
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">Rp.
+                                                        </div>
+                                                    </div>
+                                                    <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end model form edit -->
+
+        <!-- modal detail berkas -->
+        <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header p-1" style="background-color:#9efff4;">
+                        <h4 class="modal-title" id="id_berkas_"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 pr-3">
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-left">
+                                                            <h6><strong>
+                                                                    <div id="tgl_masuk_berkas_"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <h6><strong>
+                                                                    <div id="jenis_berkas_"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div class="row text-left ml-0">
+                                                        <div class="col-md-12 text-muted">
+                                                            <div id="col_sertipikat"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 1</div>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_1"></h5>
+                                                        </div>
+
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 2</div>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_2"></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-muted" id="ket_berkas">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Kelengkapan</h6>
+                                                </div>
+                                                <div class="card-body p-1 text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_ada">
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_belum_ada">
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-0">
+                                                        <div class="col-md-11 pl-3">
+                                                            <p id="ket_keleng" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                    <h6>Proses</h6>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div id="proses_"></div>
+                                                    <div class="row pl-3 pt-1">
+                                                        <div class="col-md-11 p-0">
+                                                            <p id="ket_proses" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                        <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_proses"><i class="fa fa-save"></i></button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <h6>Proses BPN</h6>
+                                        </div>
+                                        <div class="card-body p-1">
+                                            <div id="bpn_">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                            <div class="row">
+                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                    Total Biaya
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5 id="total_biaya_"></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" id="row_biaya">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-1" id="footer_biaya">
+                                            <div class="row">
+                                                <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h4 class="" id="status_bayar"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of modal detail berkas -->
+
+        <!-- modal sertipikat -->
+        <div class="modal fade" id="ModalSertipikat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Detai Sertipikat</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer">
-                        <!-- <form id="formAwesome"> -->
-                        <div class="modal-body">
-
-                            <!-- Input Berkas -->
-                            <div class="tab-pane fade show active" id="berkas-just" role="tabpanel" aria-labelledby="berkas-tab-just">
-                                <div class="form-group row">
-                                    <label for="tgl_masuk" class="col-sm-6 col-form-label">
-                                        Tanggal Masuk
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" autocomplete="off" value="<?= set_value('tgl_masuk'); ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="reg_sertipikat" class="col-sm-6 col-form-label">
-                                        Nomor Registrasi Sertipikat
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat" autocomplete="off" value="<?= set_value('reg_sertipikat'); ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="kecamatan" class="col-sm-6 col-form-label">
-                                        Kecamatan
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <select name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan" autocomplete="off" value="<?= set_value('kecamatan'); ?>" required>
-                                            <option value="">No Selected</option>
-                                            <?php foreach ($kecamatan as $row) : ?>
-                                                <option id="kecamatan1" value="<?php echo $row->nama; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="desa" class="col-sm-6 col-form-label">
-                                        Desa
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <select name="desa" class="form-control" id="desa" placeholder="Desa" autocomplete="off" value="<?= set_value('desa'); ?>">
-                                            <option value="">No Selected</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="jenis_berkas" class="col-sm-6 col-form-label">
-                                        Proses
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" data="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;" required>
-                                            <!-- <option value="" disabled selected>Pilih :</option> -->
-                                            <option>AJB</option>
-                                            <option>APHT</option>
-                                            <option>APHB</option>
-                                            <option>SKMHT</option>
-                                            <option>Hibah</option>
-                                            <option>Konversi</option>
-                                            <option>Ganti Nama</option>
-                                            <option>Waris</option>
-                                            <option>Peningkatan Hak</option>
-                                            <option>Pengeringan</option>
-                                            <option>Pemecahan</option>
-                                            <option>IPH</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="nama_penjual" class="col-sm-6 col-form-label">
-                                        Nama Penjual
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" autocomplete="off" placeholder="Nama Penjual" value="<?= set_value('nama_penjual'); ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="nama_pembeli" class="col-sm-6 col-form-label">
-                                        Nama Pembeli
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" autocomplete="off" placeholder="Nama Pembeli" value="<?= set_value('nama_pembeli'); ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="biaya" class="col-sm-6 col-form-label">
-                                        Biaya
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="biaya" class="form-control matik biaya_f" id="biaya" autocomplete="off" placeholder="Rp.">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="dp" class="col-sm-6 col-form-label">
-                                        DP
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="dp" class="form-control matik dp_f" id="dp" autocomplete="off" placeholder="Rp. ">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="tot_biaya" class="col-sm-6 col-form-label">
-                                        Total Bayar
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="tot_biaya" class="form-control tot-bayar_f" id="tot_biaya" autocomplete="off" placeholder="Rp. ">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="keterangan" class="col-sm-6 col-form-label">
-                                        Keterangan
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <textarea cols="40" rows="5" name="keterangan" class="form-control" id="keterangan" autocomplete="off" placeholder="Keterangan" value="<?= set_value('keterangan'); ?>"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button id="btn_simpan" type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-    <!-- end model form input -->
-
-    <!-- model form edit -->
-    <div class="modal fade" id="formedit" tabindex="-1" role="dialog" aria-labelledby="formeditLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="formedit">Form Edit</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/update_berkas">
-                    <!-- <form id="formAwesome"> -->
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <input type="text" name="id" class="form-control datepicker" id="id" placeholder="Tanggal Masuk" readonly hidden>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="tgl_masuk" class="col-sm-6 col-form-label">
-                                Tanggal Masuk
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="reg_sertipikat" class="col-sm-6 col-form-label">
-                                Nomor Registrasi Sertipikat
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="reg_sertipikat" class="form-control" id="reg_sertipikat" placeholder="Nomor Registrasi Sertipikat">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="kecamatan" class="col-sm-6 col-form-label">
-                                Kecamatan
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="kecamatan" class="form-control" id="kecamatan" placeholder="Kecamatan">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="desa" class="col-sm-6 col-form-label">
-                                Desa
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="desa" class="form-control" id="desa" placeholder="Desa">
-                                </input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="jenis_berkas" class="col-sm-6 col-form-label">
-                                Jenis Berkas
-                            </label>
-                            <div class="col-sm-6">
-                                <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas" tabindex="-1" value="<?= set_value('jenis_berkas'); ?>" data-placeholder="Jenis Berkas" style="width: 100%;">
-                                    <option>AJB</option>
-                                    <option>APHT</option>
-                                    <option>APHB</option>
-                                    <option>SKMHT</option>
-                                    <option>Hibah</option>
-                                    <option>Konversi</option>
-                                    <option>Ganti Nama</option>
-                                    <option>Waris</option>
-                                    <option>Peningkatan Hak</option>
-                                    <option>Pengeringan</option>
-                                    <option>Pemecahan</option>
-                                </select>
-                                <span id="textHelpBlock" class="form-text text-muted coment"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="nama_penjual" class="col-sm-6 col-form-label">
-                                Nama Penjual
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="nama_penjual" class="form-control" id="nama_penjual" autocomplete="off" placeholder="Nama Penjual">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="nama_pembeli" class="col-sm-6 col-form-label">
-                                Nama Pembeli
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="nama_pembeli" class="form-control" id="nama_pembeli" autocomplete="off" placeholder="Nama Pembeli">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="biaya" class="col-sm-6 col-form-label">
-                                Biaya
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="biaya" class="form-control matik biaya_f" id="biaya" autocomplete="off" placeholder="Rp. ">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="dp" class="col-sm-6 col-form-label">
-                                DP
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="dp" class="form-control matik fp_f" id="dp" autocomplete="off" placeholder="Rp. ">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="tot_biaya" class="col-sm-6 col-form-label">
-                                Total Biaya
-                            </label>
-                            <div class="col-sm-6">
-                                <input type="text" name="tot_biaya" class="form-control" id="tot_biaya" autocomplete="off" placeholder="Rp. ">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="keterangan" class="col-sm-6 col-form-label">
-                                Keterangan
-                            </label>
-                            <div class="col-sm-6">
-                                <textarea name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan : "></textarea>
-                            </div>
+                        <div id="reload">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Nomor Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Luas m<sup>2</sup></th>
+                                        <th>Atas Nama</th>
+                                        <th>Penerima Hak</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="detail_sertipikat">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="btn_simpan" type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- end model form edit -->
-
-    <!-- modal detail -->
-    <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="reload">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>No Berkas</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Reg Sertipikat</th>
-                                    <th>Desa</th>
-                                    <th>Kecamatan</th>
-                                    <th>Jenis Berkas</th>
-                                    <th>Nama Penjual</th>
-                                    <th>Nama Pembeli</th>
-                                    <th>Biaya</th>
-                                    <th>DP</th>
-                                    <th>Total Biaya</th>
-                                </tr>
-                            </thead>
-                            <tbody id="data_detail">
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end modal detail -->
+        <!-- end modal sertipikat -->
 
-    <!-- modal sertipikat -->
-    <div class="modal fade" id="ModalSertipikat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Detai Sertipikat</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="reload">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr class="text-center">
-                                    <th>#</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Nomor Registrasi</th>
-                                    <th>Nomor Sertipikat</th>
-                                    <th>Kecamatan</th>
-                                    <th>Luas m<sup>2</sup></th>
-                                    <th>Atas Nama</th>
-                                    <th>Penerima Hak</th>
-                                </tr>
-                            </thead>
-                            <tbody id="detail_sertipikat">
-
-                            </tbody>
-                        </table>
+        <!-- modal detail untuk berkas dicabut -->
+        <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="modal-body">
+                        <div id="reload">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No Berkas</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>No Sertipikat</th>
+                                        <th>Kecamatan</th>
+                                        <th>Jenis Berkas</th>
+                                        <th>Nama Penjual</th>
+                                        <th>Nama Pembeli</th>
+                                        <th>Total Biaya</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data_detail">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end modal sertipikat -->
 
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
+        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/custom-js/tabelBerkas.js"></script>
+        <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+        <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/custom-js/tabelBerkas.js"></script>
-    <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+        <style>
+            #ui-datepicker-div {
+                z-index: 10000 !important;
+            }
 
-    <!-- <style>
-                table,
-                th,
-                td {
-                    border: 1px solid black;
-                    border-collapse: collapse;
-                }
-            </style> -->
+            /* table,
+            th,
+            td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            } */
+        </style>

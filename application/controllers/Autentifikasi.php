@@ -54,7 +54,7 @@ class Autentifikasi extends CI_Controller{
                         redirect('admin');
                     }else{
                         //arahkan ke controller user
-                        redirect('user');
+                        redirect('staff');
                     }
                     // redirect('test1');
                 //jika password yang dimasukan salah munculkan peringatan salah password dan arahkan ke controller autentifikasi lagi

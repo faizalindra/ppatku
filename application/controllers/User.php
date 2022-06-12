@@ -9,28 +9,25 @@ class User extends CI_Controller
         cek_login();
     }
 
-    public function index()
-    {
-        $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-        $data['berkas'] = $this->ModelBerkas->getBerkasQuery();
-        // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
-        $data['judul'] = "Dashboard";
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarStaff');
-        $this->load->view('templates/topbar');
-        $this->load->view('index', $data);
-        $this->load->view('templates/footer');
-    }
+    // public function index()
+    // {
+    //     $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
+    //     $data['berkas'] = $this->ModelBerkas->getBerkasQuery();
+    //     // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
+    //     $data['judul'] = "Dashboard";
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/sidebarStaff');
+    //     $this->load->view('templates/topbar');
+    //     $this->load->view('index', $data);
+    //     $this->load->view('templates/footer');
+    // }
 
     public function hapusUser()
     {
-        // $where = ['id' => $this->input->post('id')];
         $where['id'] = $this->input->post('id');
         $this->input->post('kode');
         $this->ModelUser->hapusUser($where);
-        // return 'berhasil';
         echo json_encode($where);
-        // redirect('user/manajemenUser');
     }
 
     public function active_deactive()
@@ -45,9 +42,6 @@ class User extends CI_Controller
             $this->ModelUser->active_deactive($where, $data);
             echo json_encode($where);
         }
-
-
-        // redirect('user/manajemenUser');
     }
 
     public function ubahProfil()
@@ -73,42 +67,38 @@ class User extends CI_Controller
             $this->db->set('nama', $nama);
             $this->db->where('username', $username);
             $this->db->update('user');
-
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Profil Berhasil diubah </div>');
             redirect('user');
         }
     }
 
-    public function user()
-    {
-        $data['staff'] = $this->db->get('user')->result_array();
-        $data['judul'] = 'Registrasi';
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebarNotaris');
-        $this->load->view('templates/topbar');
-        $this->load->view('notaris/formRegistrasi');
-        $this->load->view('notaris/tabelUser', $data);
-        $this->load->view('templates/footer');
-    }
+    // public function user()
+    // {
+    //     $data['staff'] = $this->db->get('user')->result_array();
+    //     $data['judul'] = 'Registrasi';
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/sidebarNotaris');
+    //     $this->load->view('templates/topbar');
+    //     $this->load->view('notaris/formRegistrasi');
+    //     $this->load->view('notaris/tabelUser', $data);
+    //     $this->load->view('templates/footer');
+    // }
 
-    public function inputUser()
-    {
-        $username = $this->input->post('username', true);
-        $data = [
-            'nama' => htmlspecialchars($this->input->post('nama', true)),
-            'username' => htmlspecialchars($username),
-            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-            'role_id' => 2,
-            'is_active' => 1,
-        ];
-        $this->ModelUser->simpanData($data);
-    }
+    // public function inputUser()
+    // {
+    //     $username = $this->input->post('username', true);
+    //     $data = [
+    //         'nama' => htmlspecialchars($this->input->post('nama', true)),
+    //         'username' => htmlspecialchars($username),
+    //         'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+    //         'role_id' => 2,
+    //         'is_active' => 1,
+    //     ];
+    //     $this->ModelUser->simpanData($data);
+    // }
 
     public function manajemenUser()
     {
-        // if ($this->session->userdata('username')) {
-        //     redirect('user');
-        // }
         // Rule, nama harus di isi, jika belum muncul peringatan 'Nama Belum Diisi'
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', [
             'required' => 'Nama Belum diis!!'
@@ -131,25 +121,27 @@ class User extends CI_Controller
             $data['staff'] = $this->db->get('user')->result_array();
             $data['judul'] = 'Registrasi';
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebarAdmin');
+            $this->load->view('templates/sidebar');
             $this->load->view('templates/topbar');
-            $this->load->view('admin/user/formRegistrasi');
-            $this->load->view('admin/user/tabelUser', $data);
+            $this->load->view('sidebar/user/tabelUser', $data);
             $this->load->view('templates/footer');
-            // $this->load->view('autentifikasi/registrasi');
         } else {
             $username = $this->input->post('username', true);
             $data = [
                 'nama' => htmlspecialchars($this->input->post('nama', true)),
                 'username' => htmlspecialchars($username),
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 1,
+                'is_active' => 0,
             ];
+            if($this->session->userdata('role_id') == 1){
+                $data['role_id'] = '2';
+            } else{
+                $data['role_id'] = $this->input->post('role');
+            }
 
             $this->ModelUser->simpanData($data); //menggunakan model
 
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Selamat!! akun member anda sudah dibuat. Silahkan Aktivasi Akun anda</div>');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">User '. $username .' berhasil dibuat</div>');
             redirect('user/manajemenUser');
         }
     }
