@@ -1,4 +1,8 @@
-13 Juni 2022 #00043
+12 Juni 2022 #00044
+    - fix cabut berkas tidak tampil
+    - minor fix di cabutBerkas
+
+12 Juni 2022 #00043
     - hapus file view, model & controller yang tidak diperlukan
     - memindah base_url Javascript ke lain.js
 

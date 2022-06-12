@@ -171,14 +171,9 @@ class Berkas extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
         $judul['judul'] = "Cabut Berkas";
         $this->load->view('templates/header', $judul);
-        if ($this->session->userdata('role_id') == 0) { //notaris
-            $this->load->view('templates/sidebarNotaris');
-        } else if ($this->session->userdata('role_id') == 1) { //admin
-            $this->load->view('templates/sidebarAdmin');
-        }
+        $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
     }
-
 }

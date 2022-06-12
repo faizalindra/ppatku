@@ -68,13 +68,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div>
-                                        <ul id="kelengkapan_ada">
+                                        <ul id="kelengkapan_ada" style="color: white;">
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div>
-                                        <ul id="kelengkapan_belum_ada">
+                                        <ul id="kelengkapan_belum_ada" style="color: white;">
 
                                         </ul>
                                     </div>
@@ -96,7 +96,7 @@
                             <h6>Proses</h6>
                         </div>
                         <div class="card-body p-1">
-                            <div id="proses_"></div>
+                            <div id="proses_" style="color: white;"></div>
                             <div class="row pl-3 pt-1">
                                 <div class="col-md-11 p-0">
                                     <p id="ket_proses" class="text-muted"></p>
