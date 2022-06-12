@@ -1,6 +1,3 @@
-var getUrl = window.location;
-const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
 $('#cabut_berkas_').on('click', function() {
     var id_cabut = $('#select_cabut').val();
     // console.log(id_cabut);
@@ -86,6 +83,7 @@ function detail_kelengkapan(id) {
             $('#kelengkapan_ada').html(data.ada);
             $('#kelengkapan_belum_ada').html(data.belum);
             $('#ket_keleng').html(nl2br(data.ket));
+            $('.badge').removeAttr('onclick').removeAttr('href');
         },
         error: function(data) {
             alert('gagal mengambil kelengkapan');
@@ -104,6 +102,7 @@ function detail_proses(id) {
         success: function(data) {
             $('#proses_').html(data.proses);
             $('#ket_proses').html(nl2br(data.ket));
+            $('.badge').removeAttr('onclick').removeAttr('href');
         },
         error: function(data) {
             alert('gagal mengambil data proses');

@@ -1,11 +1,5 @@
-// uji();
 var berkas_id_detail = 0;
-const user_role = document.getElementById('roleid').getAttribute('data');
-var getUrl = window.location;
-const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 data_berkas(); //pemanggilan fungsi tampil barang.
-
-
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
 $('.select2').select2();

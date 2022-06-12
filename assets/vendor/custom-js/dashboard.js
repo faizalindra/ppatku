@@ -1,7 +1,4 @@
 $(document).ready(function() {
-    var getUrl = window.location;
-    const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    const current = new Date();
     get_bpn();
     // alert('Selamat Datang');
 

@@ -19,4 +19,5 @@
     <link href="<?= base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
     <script src="<?= base_url() ?>assets/vendor/jquery/jquery.js"></script>
     <div id="roleid" data="<?= $this->session->userdata('role_id') ?>"></div>
+    <script src="<?= base_url() ?>assets/vendor/custom-js/lain.js"></script>
 </head>
