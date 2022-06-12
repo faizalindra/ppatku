@@ -78,22 +78,22 @@ class ModelBerkas extends CI_Model
             $data[$i]->nama_penjual = str_replace(":", ": \n", $data[$i]->nama_penjual);
             //membuat field sertipikat
             if (!empty($data[$i]->jenis_hak)) {
-                $data[$i]->sertipikat = '<href href="javascript:;" class="btn_sertipikat" data="' . $data[$i]->reg_sertipikat . '">' . $data[$i]->jenis_hak . '. ' . $data[$i]->no_sertipikat . '/' . $data[$i]->desa;
+                $data[$i]->sertipikat = '<href class="btn_sertipikat" data="' . $data[$i]->reg_sertipikat . '">' . $data[$i]->jenis_hak . '. ' . $data[$i]->no_sertipikat . '/' . $data[$i]->desa;
             } else {
                 $data[$i]->sertipikat = $data[$i]->desa;
             }
             //membuat field tombol status berkas
             if ($data[$i]->berkas_selesai == 0) {
-                $data[$i]->status_berkas = '<a href="' . base_url('/proses/berkas_selesai/') . $data[$i]->id_berkas . '" onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-warning">Proses</a>';
-                $data[$i]->aksi = '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
-                                   <button href="javascript:;"  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                $data[$i]->status_berkas = '<a href="' . base_url('/proses/berkas_selesai/') . $data[$i]->id_berkas . '" onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-warning status_berkas">Proses</a>';
+                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas status_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                                   <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else if ($data[$i]->berkas_selesai == 1) {
                 $data[$i]->status_berkas = '<a href="#" class="badge badge-success"> Selesai </a>';
-                $data[$i]->aksi = '<button href="javascript:;"  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
-                                   <button href="javascript:;"  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas status_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                                   <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else {
-                $data[$i]->status_berkas = '<a href="#"  class="badge badge-danger"> Berkas Dicabut </a>';
-                $data[$i]->aksi = '<button href="javascript:;"  class="badge badge-primary item_detail" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                $data[$i]->status_berkas = '<a href="#"  class="badge badge-danger status_berkas"> Berkas Dicabut </a>';
+                $data[$i]->aksi = '<button  class="badge badge-primary item_detail" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             }
 
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');

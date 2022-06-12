@@ -16,21 +16,13 @@ class Sertipikat extends CI_Controller
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
-        //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
-        if ($this->session->userdata('role_id') == 0) {
-            $this->load->view('templates/sidebarNotaris');
-            $this->load->view('templates/topbar');
-            $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
-        } elseif ($this->session->userdata('role_id') == 1) {
-            $this->load->view('templates/sidebarAdmin');
-            $this->load->view('templates/topbar');
-            $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
-        } elseif ($this->session->userdata('role_id') == 2) {
-            $this->load->view('templates/sidebarStaff');
-            $this->load->view('templates/topbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        if ($this->session->userdata('role_id') == 2) {
             $this->load->view('sidebar/sertipikat/tabelSertipikat_staff', $data);
+        } else {
+            $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
         }
-
         $this->load->view('templates/footer');
     }
 
@@ -55,13 +47,13 @@ class Sertipikat extends CI_Controller
             'dsa' => $this->input->post('desa_i', true),
             'luas' => $this->input->post('luas_i', true),
             'pemilik_hak' => $this->input->post('pemilik_hak_i', true),
-            'proses' => implode(",",$this->input->post('jenis_berkas[]_i', true)),
+            'proses' => implode(",", $this->input->post('jenis_berkas[]_i', true)),
             'ket' => $this->input->post('keterangan_i', true),
         ];
-        if(!empty($this->input->post('penerima_hak_i', true))){
+        if (!empty($this->input->post('penerima_hak_i', true))) {
             $data['pembeli_hak'] = $this->input->post('penerima_hak_i', true);
         }
-        if(!empty($this->input->post('tgl_masuk_i', true))){
+        if (!empty($this->input->post('tgl_masuk_i', true))) {
             $data['tgl_daftar'] = $this->input->post('tgl_masuk_i', true);
         }
         echo json_encode($data);

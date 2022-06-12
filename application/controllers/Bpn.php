@@ -18,19 +18,12 @@ class Bpn extends CI_Controller
         $data['judul'] = "Daftar Proses BPN";
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);
-        //jika role_id = 0 (notaris), jika role_id = 1 (admin), jika role_id = 2 (staff)
-        if ($this->session->userdata('role_id') == 0) {
-            $this->load->view('templates/sidebarNotaris');
-            $this->load->view('templates/topbar');
-            $this->load->view('sidebar/bpn/tabelBpn', $data);
-        } elseif ($this->session->userdata('role_id') == 1) {
-            $this->load->view('templates/sidebarAdmin');
-            $this->load->view('templates/topbar');
-            $this->load->view('sidebar/bpn/tabelBpn', $data);
-        } elseif ($this->session->userdata('role_id') == 2) {
-            $this->load->view('templates/sidebarStaff');
-            $this->load->view('templates/topbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        if ($this->session->userdata('role_id') == 2) {
             $this->load->view('sidebar/bpn/tabelBpn_staff', $data);
+        } else {
+            $this->load->view('sidebar/bpn/tabelBpn', $data);
         }
         $this->load->view('templates/footer');
     }

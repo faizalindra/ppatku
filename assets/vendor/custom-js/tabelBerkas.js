@@ -1,8 +1,10 @@
-data_berkas(); //pemanggilan fungsi tampil barang.
 // uji();
 var berkas_id_detail = 0;
+const user_role = document.getElementById('roleid').getAttribute('data');
 var getUrl = window.location;
 const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+data_berkas(); //pemanggilan fungsi tampil barang.
+
 
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
@@ -72,8 +74,6 @@ function nl2br(str, is_xhtml) {
 
 // fungsi tampil berkas
 function data_berkas() {
-    var getUrl = window.location;
-    var base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     $.ajax({
         method: 'GET',
         url: base_url + '/berkas/data_berkas',
@@ -97,7 +97,9 @@ function data_berkas() {
             }
             $('#show_data').html(html);
             var table = $('#tabel-berkas').dataTable({});
-
+            if (user_role === 2 || user_role === '2') {
+                $('.status_berkas').removeAttr('href').removeAttr('onclick');
+            }
         },
         error: function() {
             alert('Gagal mengambil data tabel');
@@ -264,23 +266,25 @@ function detail_proses(id) {
 
 //untuk update status proses
 function proses(id, val, jp) {
-    if (confirm("Proses sudah selesai?")) {
-        $.ajax({
-            url: base_url + '/proses/update_proses',
-            type: 'post',
-            dataType: 'json',
-            data: {
-                id: id,
-                jp: jp,
-                val: val
-            },
-            success: function(data) {
-                detail_proses(id);
-            },
-            error: function(data) {
-                alert('gagal mengupdate proses');
-            }
-        });
+    if (user_role != '2' || user_role != 2) {
+        if (confirm("Proses sudah selesai?")) {
+            $.ajax({
+                url: base_url + '/proses/update_proses',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    jp: jp,
+                    val: val
+                },
+                success: function(data) {
+                    detail_proses(id);
+                },
+                error: function(data) {
+                    alert('gagal mengupdate proses');
+                }
+            });
+        }
     }
 }
 //contenteditable keterangan proses
