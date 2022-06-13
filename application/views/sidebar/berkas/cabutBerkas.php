@@ -42,12 +42,12 @@
                             <div class="row">
                                 <div class="col-md-6 text-center p-2">
                                     <div class="card-title">Pihak 1</div>
-                                    <h5 class="card-text" id="pihak_1"></h5>
+                                    <h5 class="card-text" id="pihak_1" style="text-transform:capitalize"></h5>
                                 </div>
 
                                 <div class="col-md-6 text-center p-2">
                                     <div class="card-title">Pihak 2</div>
-                                    <h5 class="card-text" id="pihak_2"></h5>
+                                    <h5 class="card-text" id="pihak_2" style="text-transform:capitalize"></h5>
                                 </div>
                             </div>
                         </div>

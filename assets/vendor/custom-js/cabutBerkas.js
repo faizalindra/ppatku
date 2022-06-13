@@ -42,7 +42,7 @@ $('#select_cabut').on('change', function() {
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
             $('#jenis_berkas_').html(data.jenis_berkas);
             $('#col_sertipikat').html(data.sertipikat);
-            $('#pihak_1').html(data.nama_penjual);
+            $('#pihak_1').html(nl2br(data.nama_penjual));
             $('#pihak_2').html(data.nama_pembeli);
             $('#ket_berkas').html(nl2br(data.keterangan));
             $('#total_biaya_').html(data.tot_biaya);
