@@ -190,8 +190,6 @@
         </div>
 
         <script>
-            var getUrl = window.location;
-            const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
             var modal_switch = 0;
             var u_id = 0;
             var s_id = 0;
