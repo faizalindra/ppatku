@@ -4,6 +4,9 @@
 --
 -- Host: 127.0.0.1
 -- Generation Time: Jun 21, 2022 at 02:59 PM
+
+
+
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -383,6 +386,7 @@ INSERT INTO `tb_bayar` (`id_bayar`, `tgl_bayar`, `jum_bayar`, `jenis_bayar`, `ke
 (11, '2022-06-21', 500000, 1, '- Biaya Ukur', 'Tamu', 4),
 (12, '2022-06-21', 500000, 0, '', 'Suhadi', 4);
 
+
 -- --------------------------------------------------------
 
 --
@@ -407,12 +411,14 @@ CREATE TABLE `tb_berkas` (
 --
 
 INSERT INTO `tb_berkas` (`id`, `tgl_masuk`, `reg_sertipikat`, `alamat`, `jenis_berkas`, `nama_penjual`, `nama_pembeli`, `tot_biaya`, `keterangan`, `berkas_selesai`) VALUES
+
 (1, '2022-06-21', 2, 2, 'APHB,APHT', 'uafhua uadubaudsd', ' ', 0, '', 0),
 (2, '2022-06-21', NULL, 45, 'APHB,Ganti Blangko', 'Gunawan', ' ', 0, '', 0),
 (4, '2022-06-21', NULL, 19, 'APHB', 'Wahyu:  Amin, Rusdin', ' ', 0, '', 0),
 (9, '2022-05-23', 7, 23, 'APHB', 'Hamid:  abdullah, suwastri', 'Midun', 6000000, 'test biaya & ket', 1),
 (10, '2022-05-23', 3, 121, 'AJB', 'Indra', 'Amri', 0, '', 1),
 (12, '2022-06-21', 2, 33, 'Ganti Blangko', 'Indra; Gopan', ' ', 0, '', 0),
+
 (13, '2022-05-23', NULL, 19, 'Ganti Blangko', 'Muhammad', ' ', 0, '', 0),
 (14, '2022-05-23', 2, 111, 'AJB,Konversi', 'Indra Faizal', 'Amrul', 0, '', 1),
 (15, '2022-05-23', 1, 116, 'AJB', 'Indra Faizal', 'Amri', 0, '- bibad', 0),
@@ -426,6 +432,7 @@ INSERT INTO `tb_berkas` (`id`, `tgl_masuk`, `reg_sertipikat`, `alamat`, `jenis_b
 (111, '2022-06-13', 1, 2, 'AJB', 'qwqe', ' ', 0, '', 0),
 (112, '2022-06-21', 3, 2, 'APHB', 'adadad', ' ', 0, '', 0),
 (113, '2022-06-21', NULL, 32, 'APHB', 'uabnd; uadb', ' ', 0, '', 0);
+
 
 --
 -- Triggers `tb_berkas`
@@ -513,6 +520,7 @@ INSERT INTO `tb_kelengkapan` (`id_kelengkapan`, `ktp_penjual`, `ktp_pasangan_pen
 (112, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (113, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
+
 -- --------------------------------------------------------
 
 --
@@ -550,6 +558,7 @@ CREATE TABLE `tb_ket_proses` (
 --
 
 INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `pengeringan`, `cek_plot`, `cek_sertipikat`, `roya`, `ganti_nama`, `tapak_kapling`, `bayar_pajak`, `konversi`, `waris`, `balik_nama`, `peningkatan_hak`, `skmht`, `ht`, `ganti_blangko`, `znt`, `iph`, `kutip_su`, `validasi_sert`, `ket_proses`) VALUES
+
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
@@ -569,6 +578,7 @@ INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `p
 (111, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (112, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (113, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+
 
 -- --------------------------------------------------------
 
@@ -598,6 +608,7 @@ INSERT INTO `tb_proses_bpn` (`no_proses_bpn`, `tgl_masuk`, `no_bpn`, `tahun`, `n
 (3, '2022-05-04', '1212', 2022, 'faizl', 'Ganti Blangko', 10, 'ttttttttt', 1),
 (4, '2022-06-11', '518351', 2022, 'Gunawa', 'Konversi', 22, '- ugduag\r\nkadnbd', 1),
 (5, '2022-06-12', '671431', 2022, 'aeadad', 'Ganti Nama', 10, 'd', 0);
+
 
 -- --------------------------------------------------------
 
@@ -643,6 +654,7 @@ CREATE TABLE `tb_sertipikat` (
 --
 
 INSERT INTO `tb_sertipikat` (`no_reg`, `tgl_daftar`, `no_sertipikat`, `jenis_hak`, `dsa`, `luas`, `pemilik_hak`, `pembeli_hak`, `proses`, `ket`) VALUES
+
 (1, '2022-05-22', 1111, 'M', 116, 100, 'Indra Faizal: Muhammad Irfan, Munwar Hamid', ' amri', 'APHT', 'bfububud'),
 (2, '2022-05-22', 2222, 'M', 111, NULL, 'Irfan', ' ', 'AJB', ' '),
 (3, '2022-05-22', 3333, 'M', 121, NULL, 'Hamid', ' ', 'AJB', ' '),
@@ -675,6 +687,7 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `role_id`, `is_active`
 (1, 'Indra', 'admin', '$2y$10$bRDio3SJA/kf2dsCwl5RP.9uWusCWgFPQrmmj98LhN0fT7XlI9c22', 1, 1),
 (40, 'Erma', 'ermar', '$2y$10$wTHPREaSzpLQmHybxKz3L.Uo2n.J84l0.hFZBkOITEktI6ssF.iQq', 2, 0),
 (42, 'Faizal', 'faizala', '$2y$10$Tap85J2WER9bAmGFFNm9C.pntVgjTrtd9E69UIGbLnyOZlRj4rm/i', 1, 0);
+
 
 --
 -- Indexes for dumped tables
@@ -777,11 +790,13 @@ ALTER TABLE `kecamatan`
 ALTER TABLE `tb_bayar`
   MODIFY `id_bayar` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
+
 --
 -- AUTO_INCREMENT for table `tb_berkas`
 --
 ALTER TABLE `tb_berkas`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+
 
 --
 -- AUTO_INCREMENT for table `tb_catatan`
@@ -789,17 +804,20 @@ ALTER TABLE `tb_berkas`
 ALTER TABLE `tb_catatan`
   MODIFY `id_catatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
+
 --
 -- AUTO_INCREMENT for table `tb_kelengkapan`
 --
 ALTER TABLE `tb_kelengkapan`
   MODIFY `id_kelengkapan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
+
 --
 -- AUTO_INCREMENT for table `tb_proses_bpn`
 --
 ALTER TABLE `tb_proses_bpn`
   MODIFY `no_proses_bpn` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -811,6 +829,7 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_sertipikat`
 --
 ALTER TABLE `tb_sertipikat`
+
   MODIFY `no_reg` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
@@ -818,6 +837,7 @@ ALTER TABLE `tb_sertipikat`
 --
 ALTER TABLE `user`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
 
 --
 -- Constraints for dumped tables
