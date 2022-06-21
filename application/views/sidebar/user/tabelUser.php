@@ -111,7 +111,7 @@
                                                 // echo "Staff";
                                                 echo '<a href="#" id="user_role" class="badge badge-info" data="' . $b['id'] . '" data-s="' . $b['role_id'] .  '">Staff</a>';
                                             } else {
-                                                echo '<a href="#" id="user_role" class="badge badge-primary" data="' . $b['id'] . '" data-s="' . $b['role_id'] .  '">Notaris</a>';
+                                                echo '<a href="#" id="user_role" class="badge badge-primary" data="' . $b['id'] . '" data-s="' . $b['role_id'] .  '">Admin</a>';
                                             }
                                             ?></td>
                                         <td>
@@ -194,6 +194,7 @@
             var modal_switch = 0;
             var u_id = 0;
             var s_id = 0;
+            var r_id;
             $(document).ready(function() {
 
                 // Hapus User
@@ -232,8 +233,8 @@
                     if (modal_switch === 1) {
                         var url_ = '/user/hapusUser';
                     } else if (modal_switch === 2) {
-                        var url_ = '/user/active_deactive';
-                    } else {
+                        var url_ = '/user/update_user';
+                    } else if (modal_switch === 3) {
                         var url_ = '/user/ubah_role';
                     }
                     $.post(base_url + url_, {

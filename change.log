@@ -1,4 +1,8 @@
-22 Juni 2022 #00047
+21 Juni 2022 #00048
+    - membuat halaman ubah username dan password
+    - minor fix fungsi get_berkas_for_select
+
+21 Juni 2022 #00047
     - menambah tombol ubah role di tabelUser
 
 21 Juni 2022 #00046
