@@ -1,6 +1,6 @@
 <!-- Begin Page Content -->
-<script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery-ui.min.js"></script>
-<link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<?php base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
+<link href="<?= base_url('assets/vendor/jquery/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css">
 <div class="container-fluid">
 
     <!-- Page Heading -->

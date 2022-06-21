@@ -1,21 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function () {
     data_sertipikat();
-
-    //select2 for proses
     $('.select2').select2();
-    // $('.proses').select2();
-
     $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
 
     // fungsi tampil berkas
     function data_sertipikat() {
-
         $.ajax({
             method: 'GET',
             url: base_url + '/sertipikat/tabel_sertipikat',
             async: true,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var html = '';
                 var i;
                 var aksi = '';
@@ -42,7 +37,7 @@ $(document).ready(function() {
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert("gagal");
             }
 
@@ -50,7 +45,7 @@ $(document).ready(function() {
     }
 
     // fungsi edit sertipikat, tombol edit sertipikat
-    $('#show_data').on('click', '.edit_sertipikat', function() {
+    $('#show_data').on('click', '.edit_sertipikat', function () {
         var id = $(this).attr('data');
         $.ajax({
             type: "GET",
@@ -59,8 +54,8 @@ $(document).ready(function() {
             data: {
                 id: id
             },
-            success: function(data) {
-                $.each(data, function(no_reg, jenis_hak, no_sertipikat, dsa, desa, kecamatan, proses, pemilik_hak, pembeli_hak, ket) {
+            success: function (data) {
+                $.each(data, function (no_reg, jenis_hak, no_sertipikat, dsa, desa, kecamatan, proses, pemilik_hak, pembeli_hak, ket) {
                     $('#edit_sert').modal('show');
                     $('[name="id_e"]').val(data.no_reg);
                     $('[name="jenis_hak_e"]').val(data.jenis_hak);
@@ -76,7 +71,7 @@ $(document).ready(function() {
                     $(".coment").html("Jenis Berkas : " + data.proses);
                 });
             },
-            error: function(data) {
+            error: function (data) {
                 alert('Gagal mengambil data sertipikat');
             }
         });
@@ -95,7 +90,7 @@ $(document).ready(function() {
             },
             async: true,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var html = '<option disabled selected value> -- Desa -- </option>';
                 var i;
                 for (i = 0; i < data.length; i++) {
@@ -104,7 +99,7 @@ $(document).ready(function() {
                 $('#desa_i').html(html);
 
             },
-            error: function() {
+            error: function () {
                 alert("gagal mengambil data desa");
             }
         });
@@ -122,7 +117,7 @@ $(document).ready(function() {
             },
             async: true,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var html = '<option disabled selected value> -- Desa -- </option>';
                 var i;
                 for (i = 0; i < data.length; i++) {
@@ -131,7 +126,7 @@ $(document).ready(function() {
                 $('#desa_e').html(html);
 
             },
-            error: function() {
+            error: function () {
                 alert("gagal mengambil data desa");
             }
         });

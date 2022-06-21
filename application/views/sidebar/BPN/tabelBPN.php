@@ -12,7 +12,7 @@
                     <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#inputbpn">Input STTD</button>
                 </div>
                 <div class="col-md-8">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="col-md-3">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body p-1">

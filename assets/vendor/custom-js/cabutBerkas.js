@@ -1,6 +1,5 @@
-$('#cabut_berkas_').on('click', function() {
+$('#cabut_berkas_').on('click', function () {
     var id_cabut = $('#select_cabut').val();
-    // console.log(id_cabut);
     if (id_cabut === null) {
         alert("Pilih Cabut Berkas");
     } else {
@@ -10,13 +9,13 @@ $('#cabut_berkas_').on('click', function() {
 
 });
 
-$('#submit_cabut').on('click', function() {
+$('#submit_cabut').on('click', function () {
     var kode = document.getElementById("kode_konfirmasi").innerHTML;
     var i_kode = $("#input_konfirmasi").val();
     if (kode === i_kode) {
         var id = $("#select_cabut").val();
         $.post(base_url + '/proses/berkas_selesai', { id: id, kode: kode },
-            function() {
+            function () {
                 alert('Berkas No. ' + id + ' Dicabut');
                 $(location).attr('href', base_url + '/berkas');
             },
@@ -26,8 +25,7 @@ $('#submit_cabut').on('click', function() {
     }
 });
 
-$('#select_cabut').on('change', function() {
-    // var id = $(this).attr('data');
+$('#select_cabut').on('change', function () {
     var id = $("#select_cabut").val();
     $.ajax({
         method: "GET",
@@ -36,7 +34,7 @@ $('#select_cabut').on('change', function() {
         data: {
             id: id
         },
-        success: function(data) {
+        success: function (data) {
             berkas_id_detail = data.id_berkas
             $('#modelDetail2').modal('show');
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
@@ -52,7 +50,7 @@ $('#select_cabut').on('change', function() {
             biaya(data.id_berkas);
 
         },
-        error: function() {
+        error: function () {
             alert('Gagal Mengambil detail berkas');
         }
     });
@@ -79,13 +77,13 @@ function detail_kelengkapan(id) {
         data: {
             id: id
         },
-        success: function(data) {
+        success: function (data) {
             $('#kelengkapan_ada').html(data.ada);
             $('#kelengkapan_belum_ada').html(data.belum);
             $('#ket_keleng').html(nl2br(data.ket));
             $('.badge').removeAttr('onclick').removeAttr('href');
         },
-        error: function(data) {
+        error: function (data) {
             alert('gagal mengambil kelengkapan');
         }
     });
@@ -99,12 +97,12 @@ function detail_proses(id) {
         data: {
             id: id
         },
-        success: function(data) {
+        success: function (data) {
             $('#proses_').html(data.proses);
             $('#ket_proses').html(nl2br(data.ket));
             $('.badge').removeAttr('onclick').removeAttr('href');
         },
-        error: function(data) {
+        error: function (data) {
             alert('gagal mengambil data proses');
         }
     });
@@ -118,14 +116,14 @@ function bpn(id) {
         data: {
             id: id
         },
-        success: function(data) {
+        success: function (data) {
             html = '';
             for (i = 0; i < data.length; i++) {
                 html += data[i];
             }
             $('#bpn_').html(html);
         },
-        error: function(data) {
+        error: function (data) {
             alert('gagal mengambil data bpn');
         }
     });
@@ -133,20 +131,16 @@ function bpn(id) {
 
 function biaya(id) {
     $.get(base_url + '/biaya/get_biaya', { id: id },
-        function(data) {
+        function (data) {
             $('#row_biaya').remove('.card-biaya');
             $('#row_biaya').html(data.card);
             $('#footer_biaya').css(data.color[1], data.color[2]);
             $('#status_bayar').html(data.status);
             $('#ket_bayar_').html(data.ket);
-        }, 'json').fail(function() { console.log('gagal mengambil data biaya') });
+        }, 'json').fail(function () { console.log('gagal mengambil data biaya') });
 }
 
 function nl2br(str, is_xhtml) {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-}
-
-function kelengkapan(val, val2) {
-    return false;
 }

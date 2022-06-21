@@ -1,9 +1,6 @@
 var getUrl = window.location;
 const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 const user_role = document.getElementById('roleid').getAttribute('data');
-console.log(base_url);
-console.log(user_role);
-//document ready
 $(document).ready(function() {
     currentTime();
     hari();
@@ -46,6 +43,7 @@ $(document).ready(function() {
 
     }
 
+    // hover sidebar
     // $('#accordionSidebar').hover(function() {
     //     $('#page-top').removeClass('sidebar-toggled');
     //     $('#accordionSidebar').removeClass('toggled');
@@ -57,25 +55,3 @@ $(document).ready(function() {
     // });
 
 });
-// var toggle = false;
-// $('#sidebarToggle').on('click', function() {
-//     var test = document.getElementById("page-top");
-//     var hasil = test.classList.contains('sidebar-toggled');
-//     if (hasil == false) {
-//         $('#testingcol').attr("aria-toggle", 'collapse');
-//         $('#testingcol').attr("data-target", "#collapseUtilities2");
-//         $('#testingcol').attr("aria-expanded", true);
-//         $('#testingcol').attr("aria-controls", 'collapseUtilities');
-//         // $('#collapseUtilities2').show();
-//         console.log('elemen berada di sini');
-//     } else {
-//         // $('#testingcol').hide();
-//         $('#testingcol').removeAttr("data-target", "#collapseUtilities2");
-//         $('#testingcol').removeAttr("aria-expanded", true);
-//         $('#testingcol').removeAttr("aria-toggle", 'collapse');
-//         $('#testingcol').removeAttr("aria-controls", 'collapseUtilities');
-//         $('#testingcol').attr("href", "<?= base_url('Berkas'); ?>");
-//         // $('#collapseUtilities2').hide();
-//         console.log('elemen tidak berada di sini');
-//     }
-// });
