@@ -33,37 +33,6 @@ class ModelBerkas extends CI_Model
         return $hsl->result_array();
     }
 
-    //left join berkas untuk tabelBerkas
-    // public function getBerkasLeft()
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('tb_berkas'); // this is first table name
-    //     $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left'); // this is second table name with both table ids
-    //     $query = $this->db->get();
-    //     return $query->result_array();
-    // }
-
-    //inner join untuk tabel berkasProses dan berkasSelesai
-    // public function getBerkasQuery()
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('tb_berkas');
-    //     $this->db->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat');
-    //     $query = $this->db->get();
-    //     return $query->result_array();
-    // }
-
-    //menghitung total berkas
-    public function totBerkas($field, $where)
-    {
-        $this->db->select_sum($field);
-        if (!empty($where) && count($where) > 0) {
-            $this->db->where($where);
-        }
-        $this->db->from('tb_berkas');
-        return $this->db->get()->row($field);
-    }
-
     //untuk tabelBerkas
     function data_berkas()
     {
@@ -163,7 +132,6 @@ class ModelBerkas extends CI_Model
                 ->result();
         }
         foreach ($data as $item) {
-            // $data[$i]->desa = $item->desa;
             if (!empty($item->no_sertipikat)) {
                 if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
                     $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
@@ -182,72 +150,22 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    //untuk form edit
-    // function get_berkas($id)
-    // {
-    //     $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE id='$id'");
-    //     if ($hsl->num_rows() > 0) {
-    //         foreach ($hsl->result() as $data) {
-    //             $hasil = array(
-    //                 'id' => $data->id,
-    //                 'tgl_masuk' => $data->tgl_masuk,
-    //                 'reg_sertipikat' => $data->reg_sertipikat,
-    //                 'desa' => $data->desa,
-    //                 'kecamatan' => $data->kecamatan,
-    //                 'jenis_berkas' => $data->jenis_berkas,
-    //                 // 'id_proses' => $data->id_proses,
-    //                 'nama_penjual' => $data->nama_penjual,
-    //                 'nama_pembeli' => $data->nama_pembeli,
-    //                 'biaya' => $data->biaya,
-    //                 'dp' => $data->dp,
-    //                 'tot_biaya' => $data->tot_biaya,
-    //                 'berkas_selesai' => $data->berkas_selesai,
-    //                 'keterangan' => $data->keterangan,
-    //                 'dsa' => $data->dsa,
-    //                 'no_reg' => $data->no_reg,
-    //                 'no_sertipikat' => $data->no_sertipikat,
-    //                 'luas' => $data->luas,
-    //                 'tgl_daftar' => $data->tgl_daftar,
-    //                 'jenis_hak' => $data->jenis_hak,
-    //                 'pemilik_hak' => $data->pemilik_hak,
-    //                 'pembeli_hak' => $data->pembeli_hak,
-    //                 'proses' => $data->proses,
-    //                 'ket' => $data->ket,
-    //             );
-    //         }
-    //     }
-    //     return $hasil;
-    // }
-
-    public function b_terdaftar()
-    {
+    public function record_b(){
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas")->result();
         foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+            $hsl['b_terdaftar'] = $data->total_record;
         }
-        return $hsl;
-    }
-    public function b_proses()
-    {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 0")->result();
-        foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+        $hasil2 =  $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 0")->result();
+        foreach ($hasil2 as $data) {
+            $hsl['b_proses'] = $data->total_record;
         }
-        return $hsl;
-    }
-    public function b_selesai()
-    {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 1")->result();
-        foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+        $hasil3 =  $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 1")->result();
+        foreach ($hasil3 as $data) {
+            $hsl['b_selesai'] = $data->total_record;
         }
-        return $hsl;
-    }
-    public function b_dicabut()
-    {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`= 3")->result();
-        foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+        $hasil4 =  $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas WHERE `berkas_selesai`>= 2")->result();
+        foreach ($hasil4 as $data) {
+            $hsl['b_dicabut'] = $data->total_record;
         }
         return $hsl;
     }

@@ -70,19 +70,14 @@ class ModelBpn extends CI_Model
         return $data;
     }
 
-    public function bpn_terdaftar()
-    {
+    public function record_bpn(){
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn")->result();
         foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+            $hsl['bb_terdaftar'] = $data->total_record;
         }
-        return $hsl;
-    }
-    public function bpn_proses()
-    {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
-        foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+        $hasil1 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
+        foreach ($hasil1 as $data) {
+            $hsl['bb_proses'] = $data->total_record;
         }
         return $hsl;
     }

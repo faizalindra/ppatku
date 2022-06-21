@@ -21,7 +21,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Terdaftar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_terdaftar'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -38,7 +38,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Dalam Proses</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cogs fa-2x text-gray-300"></i>
@@ -55,7 +55,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Selesai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $c ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_selesai'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-check-square fa-2x text-gray-300"></i>
@@ -72,7 +72,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Dicabut</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $d ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_dicabut'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-unlink fa-2x text-gray-300"></i>
@@ -734,13 +734,13 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/custom-js/tabelBerkas.js"></script>
-    <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/vendor/select2/select2.min.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/vendor/custom-js/tabelBerkas.js') ?>"></script>
+    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
 
     <style>
         #ui-datepicker-div {

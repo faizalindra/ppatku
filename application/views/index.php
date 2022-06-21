@@ -17,9 +17,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Berkas Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $ba ?></div>
-                                <div class="text-white">Proses &nbsp; : <?php echo $bb ?></div>
-                                <div class="text-white">Selesai &nbsp; : <?php echo $bc ?></div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?=  $b['b_terdaftar'] ?></div>
+                                <div class="text-white">Proses &nbsp; : <?= $b['b_proses'] ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?= $b['b_selesai'] ?></div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('berkas'); ?>"><i class="fas fa-book fa-3x text-warning"></i></a>
@@ -34,7 +34,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Sertipikat Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $sa ?></div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?= $s ?></div>
                                 <div class="text-white">&nbsp;</div>
                                 <div class="text-white">&nbsp;</div>
                             </div>
@@ -51,9 +51,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Proses BPN Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?php echo $bpn_a ?></div>
-                                <div class="text-white">Proses &nbsp; : <?php echo $bpn_b ?></div>
-                                <div class="text-white">Selesai &nbsp; : <?php echo $bpn_a - $bpn_b ?></div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?= $bb['bb_terdaftar'] ?></div>
+                                <div class="text-white">Proses &nbsp; : <?= $bb['bb_proses'] ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?= $bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-3x text-warning"></i></a>
@@ -82,14 +82,15 @@
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline" style="min-height: 210px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 justify-content-center" align="center"><button class='btn btn-info'><?= $b['id_berkas'] ?></button></div>
+                                            <div class="col-md-12 justify-content-left" ><h5><u><?= $b['id_berkas'] ?></u></h5></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 text-center"><?= $b['jenis_berkas']; ?></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 text-left">
-                                                <div class="text-uppercase"><strong><u><?= $b['nama_penjual']; ?></u></strong></div>
+                                                <?php $napen = str_replace(":", ": \n", $b['nama_penjual'])  ?>
+                                                <div class="text-capitalize"><strong><u><?= nl2br($napen) ?></u></strong></div>
                                                 <div class=" small font-weight-bold">
                                                     <?php
                                                     if ($b['no_sertipikat'] = null) {

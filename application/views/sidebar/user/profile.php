@@ -28,7 +28,7 @@
             <!-- <br> -->
             <div class="row">
                 <div class="col md-12">
-                    <form onsubmit="return false" method="POST" autocomplete="false">
+                    <form onsubmit="return false" method="POST" autocomplete="off">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <div class="input-group">

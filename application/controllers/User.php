@@ -41,7 +41,7 @@ class User extends CI_Controller
                 $data = ['role_id' => '2'];
             }
             $this->ModelUser->update_user($where, $data);
-            // echo json_encode($where);
+            echo json_encode($where);
         }
     }
 

@@ -85,13 +85,6 @@ class ModelSertipikat extends CI_Model
         return $hsl;
     }
 
-    //Untuk memperbaharui sertipikat di tb_sertipikat
-    // public function update_sertipikat($no_reg, $jenis_hak, $no_sertipikat, $kec, $dsa, $luas, $pemilik_hak, $pembeli_hak, $ket)
-    // {
-    //     $hasil = $this->db->query("UPDATE tb_sertipikat SET jenis_hak='$jenis_hak', no_sertipikat='$no_sertipikat', kec='$kec', dsa='$dsa', luas='$luas', pemilik_hak='$pemilik_hak', pembeli_hak='$pembeli_hak',  ket='$ket' WHERE no_reg='$no_reg'");
-    //     return $hasil;
-    // }
-
     //buat fungsi untuk update sertipikat
     public function update_sertipikat($data, $no_reg)
     {
@@ -115,14 +108,4 @@ class ModelSertipikat extends CI_Model
     }
 
 
-    //Untuk mengurutkan dan menghitung sertipikat?, fungsi belum diketahui
-    public function total($field, $where)
-    {
-        $this->db->select_sum($field);
-        if (!empty($where) && count($where) > 0) {
-            $this->db->where($where);
-        }
-        $this->db->form('tb_sertipikat');
-        return $this->db->get()->row($field);
-    }
 }

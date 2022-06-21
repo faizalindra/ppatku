@@ -11,10 +11,7 @@ class Bpn extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'a' => $this->ModelBpn->bpn_terdaftar(),
-            'b' => $this->ModelBpn->bpn_proses(),
-        );
+        $data['bb'] = $this->ModelBpn->record_bpn();
         $data['judul'] = "Daftar Proses BPN";
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);

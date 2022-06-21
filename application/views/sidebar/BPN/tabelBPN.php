@@ -20,7 +20,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Terdaftar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_terdaftar'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -37,7 +37,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Dalam Proses</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cogs fa-2x text-gray-300"></i>
@@ -54,7 +54,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Selesai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a - $b ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-check-square fa-2x text-gray-300"></i>

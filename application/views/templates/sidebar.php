@@ -93,7 +93,7 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Lainnya</span>
                 </a>
-                <div id="collapseUtilities" class="collapse border border-black" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header bg-primary" style="color:white ">Menu:</h6>
                         <a class="collapse-item" href="<?= base_url('berkas/cabut_berkas'); ?>">Pencabutan Berkas</a>
