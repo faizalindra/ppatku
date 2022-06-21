@@ -1,3 +1,7 @@
+21 Juni 2022 #00049
+    - update database
+    - membuat script auto backup database
+
 21 Juni 2022 #00048
     - membuat halaman ubah username dan password
     - minor fix fungsi get_berkas_for_select

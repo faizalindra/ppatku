@@ -1,0 +1,5 @@
+1. Opem Windows Task Scheduler
+2. Click Task Scheduler Library > Create Task....
+3. Create a name for the MySQL automatic backup in General tab.
+4. Click New... in Triggers tab, select On a schedule in Begin the task section, and then choose Daily, and hit OK.
+5. Tap New... in Actions tab, choose Start a program in Action, click Browse... to select the mysqlbackup.bat file and hit OK > OK.
