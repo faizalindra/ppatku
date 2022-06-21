@@ -11,7 +11,20 @@
 <body>
     <div class="row">
         <!-- buat heading 1 dan 2, text akses ditolak -->
-        <div class="col-md-12"> <h1>Akses Ditolak</h1> </div>
+        <div class="col-md-12">
+            <h1>Akses Ditolak</h1>
+        </div>
+        <div class="row">
+            <?php
+            if ($this->session->userdata('role_id') == '0') {
+                echo '<a href="' . base_url('notaris') . '">Kembali ke Dashboard</a>';
+            } else if ($this->session->userdata('role_id') == '1') {
+                echo '<a href="' . base_url('admin') . '">Kembali ke Dashboard</a>';
+            } else {
+                echo '<a href="' . base_url('staff') . '">Kembali ke Dashboard</a>';
+            }
+            ?>
+        </div>
     </div>
 </body>
 
