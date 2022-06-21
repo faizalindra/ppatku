@@ -23,7 +23,7 @@
                                     Nama Staff
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Staff" value="<?= set_value('nama'); ?>">
+                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Staff" value="<?= set_value('nama'); ?>" pattern="\s*(?:[\w\.]\s*){5,20}$" maxlength="20">
                                     <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                                     Username
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?= set_value('username'); ?>">
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?= set_value('username'); ?>" minlength="5">
                                     <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                     Password
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="password1" placeholder="Password" name="password1">
+                                    <input type="password" class="form-control" id="password1" placeholder="Password" name="password1" minlength="5">
                                     <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                     Password
                                 </label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="password2" placeholder="Ulangi Password" name="password2">
+                                    <input type="password" class="form-control" id="password2" placeholder="Ulangi Password" name="password2" minlength="5">
                                     <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>

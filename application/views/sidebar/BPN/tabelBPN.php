@@ -11,21 +11,61 @@
                 <div class="col-auto col-md-2">
                     <button id="btnStart" type="button" class="btn btn-primary col-auto row-auto" data-toggle="modal" data-target="#inputbpn">Input STTD</button>
                 </div>
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Terdaftar </div>
-                        <div class="row-md-2 justify-content-end">: <?php echo $a ?></div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Berjalan</div>
-                        <div class="row-md-2 justify-content-end">: <?php echo $b ?></div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="row-md-2 justify-content-end">Selesai</div>
-                        <div class="row-md-2 justify-content-end">: <?php echo $a - $b ?></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body p-1">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col p-1">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Terdaftar</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dalam Proses -->
+                        <div class="col-md-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body p-1">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col p-1">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Dalam Proses</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-cogs fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Selesai -->
+                        <div class="col-md-3">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body p-1">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col p-1">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Selesai</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a - $b ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-check-square fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-2"> </div>
             </div>
         </div>
 
@@ -67,7 +107,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="formAwesome" method="post" action="<?= base_url() ?>bpn/inputbpn" autocomplete="off">
+                    <form id="formAwesome" method="post" action="<?= base_url('bpn/inputbpn') ?>" autocomplete="off">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="container-fluid">
@@ -127,7 +167,7 @@
                                                         <div class="input-group-text">No BPN
                                                         </div>
                                                     </div>
-                                                    <input type="number" class="form-control" name="no_bpn_i" id="no_bpn_i" aria-describedby="helpId" autocapitalize="on" required>
+                                                    <input type="number" class="form-control" name="no_bpn_i" id="no_bpn_i" aria-describedby="helpId" autocapitalize="on" max="999999" title="Angka maksimal 999999" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,12 +197,12 @@
                                                 <div class="input-group-text">Pemohon
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" name="nama_pemohon_i" id="nama_pemohon_i" aria-describedby="helpId" autocapitalize="on" required>
+                                            <input type="text" class="form-control" name="nama_pemohon_i" id="nama_pemohon_i" aria-describedby="helpId" autocapitalize="on" required pattern="\s*(?:[\w:,\.]\s*){5,25}$" maxlength="25">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <textarea id="ket_i" name="ket_i" cols="40" rows="3" class="form-control"></textarea>
+                                            <textarea id="ket_i" name="ket_i" cols="40" rows="3" class="form-control" maxlength="30"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +294,7 @@
                                                             <div class="input-group-text">No BPN
                                                             </div>
                                                         </div>
-                                                        <input type="number" class="form-control" name="no_bpn_e" id="no_bpn_e" aria-describedby="helpId" autocapitalize="on">
+                                                        <input type="number" class="form-control" name="no_bpn_e" id="no_bpn_e" aria-describedby="helpId" autocapitalize="on" max="999999" title="Angka maksimal 999999">
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,12 +324,12 @@
                                                     <div class="input-group-text">Pemohon
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control" name="nama_pemohon_e" id="nama_pemohon_e" aria-describedby="helpId" autocapitalize="on">
+                                                <input type="text" class="form-control" name="nama_pemohon_e" id="nama_pemohon_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,25}$" maxlength="25">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="input-group">
-                                                <textarea id="ket_e" name="ket_e" cols="40" rows="3" class="form-control"></textarea>
+                                                <textarea id="ket_e" name="ket_e" cols="40" rows="3" class="form-control" maxlength="30"></textarea>
                                             </div>
                                         </div>
                                     </div>
