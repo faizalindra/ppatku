@@ -108,9 +108,10 @@
                                         <td><?= $b['username']; ?></td>
                                         <td>
                                             <?php if ($b['role_id'] == 2) {
-                                                echo "Staff";
+                                                // echo "Staff";
+                                                echo '<a href="#" id="user_role" class="badge badge-info" data="' . $b['id'] . '" data-s="' . $b['role_id'] .  '">Staff</a>';
                                             } else {
-                                                echo "Admin";
+                                                echo '<a href="#" id="user_role" class="badge badge-primary" data="' . $b['id'] . '" data-s="' . $b['role_id'] .  '">Notaris</a>';
                                             }
                                             ?></td>
                                         <td>
@@ -213,7 +214,15 @@
                     modal_switch = 2;
                     $("#kode_konfirmasi").html(random_word());
                 });
-                // console.log('aktif');
+
+                //ubah role user
+                $('.table').on('click', '#user_role', function() {
+                    u_id = $(this).attr('data');
+                    r_id = $(this).attr('data-s');
+                    $('#modal_hapus').modal('show');
+                    modal_switch = 3;
+                    $("#kode_konfirmasi").html(random_word());
+                });
             });
 
             $('#submit_data').on('click', function() {
@@ -222,13 +231,16 @@
                 if (kode === i_kode) {
                     if (modal_switch === 1) {
                         var url_ = '/user/hapusUser';
-                    } else {
+                    } else if (modal_switch === 2) {
                         var url_ = '/user/active_deactive';
+                    } else {
+                        var url_ = '/user/ubah_role';
                     }
                     $.post(base_url + url_, {
                             id: u_id,
                             kode: kode,
-                            status: s_id
+                            status: s_id,
+                            role: r_id
                         },
                         function(data) {
                             window.location.reload(true);

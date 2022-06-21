@@ -28,7 +28,22 @@ class User extends CI_Controller
                 $data = ['is_active' => '1'];
             }
             $this->ModelUser->active_deactive($where, $data);
+            // echo json_encode($where);
+        }
+    }
+
+    public function ubah_role(){
+        if (!empty($this->input->post('kode'))) {
+            $where = ['id' => $this->input->post('id')];
+            if ($this->input->post('role') == '2') {
+                $data = ['role_id' => '1'];
+            } else {
+                $data = ['role_id' => '2'];
+            }
+            $this->ModelUser->active_deactive($where, $data);
             echo json_encode($where);
+            // echo '<br>';
+            // echo json_encode($data);
         }
     }
 
