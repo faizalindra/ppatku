@@ -1,5 +1,5 @@
-    <script type="text/javascript" src="<?php base_url() ?>assets/vendor/jquery/jquery-ui.min.js"></script>
-    <link href="<?= base_url() ?>assets/vendor/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
+    <link href="<?= base_url('assets/vendor/jquery/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css">
     <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
@@ -11,24 +11,79 @@
                     <div class="col-auto col-md-2">
                         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formInputBerkas">Input Berkas</button>
                     </div>
-                    <div class="col-md-8"></div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <!-- Terdaftar -->
+                            <div class="col-md-3">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body p-1">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col p-1">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Terdaftar</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-book fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Dalam Proses -->
+                            <div class="col-md-3">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body p-1">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col p-1">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Dalam Proses</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-cogs fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Selesai -->
+                            <div class="col-md-3">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body p-1">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col p-1">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Selesai</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $c ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-check-square fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Dicabut -->
+                            <div class="col-md-3">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body p-1">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col p-1">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Dicabut</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $d ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-unlink fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-2">
-                        <div class="row justify-content-end">
-                            <div class="row-md-2 justify-content-end">Terdaftar </div>
-                            <div class="row-md-2 justify-content-end">: <?php echo $a ?></div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="row-md-2 justify-content-end">Berjalan</div>
-                            <div class="row-md-2 justify-content-end">: <?php echo $b ?></div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="row-md-2 justify-content-end">Selesai</div>
-                            <div class="row-md-2 justify-content-end">: <?php echo $c ?></div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="row-md-2 justify-content-end">Dicabut</div>
-                            <div class="row-md-2 justify-content-end">: <?php echo $d ?></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -68,19 +123,34 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/simpanBer" autocomplete="off" style="font-weight: 400 !important">
+                            <form id="formAwesome" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
                                 <div class="row">
                                     <div class="col-md-7">
                                         <h6><u>Berkas</u></h6>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="container-fluid">
-                                                    <div class="form-group row">
-                                                        <div class="input-group">
-                                                            <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text">
-                                                                    <i class="fa fa-calendar"></i>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">No.
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" autocapitalize="on" pattern="[0-9]{1,5}" maxlength="5" title="Nomor berkas harus menggunakan Angka">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
+                                                                    <div class="input-group-append">
+                                                                        <div class="input-group-text">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -146,7 +216,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" required>
+                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50" required>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 1
                                                                 </div>
@@ -155,7 +225,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on">
+                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 2
                                                                 </div>
@@ -168,12 +238,12 @@
                                                                 <div class="input-group-text">Rp.
                                                                 </div>
                                                             </div>
-                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya">
+                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya" max="99999999">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <textarea id="keterangan_i" name="keterangan" cols="40" rows="3" class="form-control"></textarea>
+                                                            <textarea id="keterangan_i" name="keterangan" cols="40" rows="3" class="form-control" maxlength="50"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,7 +436,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control"></textarea>
+                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="30"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -404,7 +474,6 @@
                                     <div class="col-md-12">
                                         <div class="container-fluid">
                                             <input type="text" name="id_e" id="id_e" hidden readonly>
-                                            <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <input type="text" name="tgl_masuk_e" class="form-control datepicker" id="tgl_masuk" placeholder="Tanggal Masuk" autocomplete="off">
@@ -492,7 +561,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on">
+                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">Penjual
                                                         </div>
@@ -501,7 +570,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="pembeli_e" id="pembeli_e" aria-describedby="helpId" autocapitalize="on">
+                                                    <input type="text" class="form-control" name="pembeli_e" id="pembeli_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">Pembeli
                                                         </div>
@@ -514,12 +583,12 @@
                                                         <div class="input-group-text">Rp.
                                                         </div>
                                                     </div>
-                                                    <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya">
+                                                    <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya" max="99999999">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control"></textarea>
+                                                    <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control" maxlength="50"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -700,9 +769,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
-                                                                <div class="col-md-12"><input type="number" class="form-control" name="jum_bayar" id="jum_bayar" placeholder="Rp. Biaya" required></div>
-                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" required></div>
-                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:"></textarea></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="jum_bayar" id="jum_bayar" pattern="[0-9]{3,7}" maxlength="7" title="Masukan Angka antara Rp. 1.000 ~ Rp. 99.999.999" placeholder="Rp." required></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" maxlength="20" required></div>
+                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:" maxlength="30"></textarea></div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-12 text-center">
@@ -812,13 +881,13 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/select2/select2.min.js"></script>
-        <script type="text/javascript" src="<?php base_url() ?>assets/vendor/custom-js/tabelBerkas.js"></script>
-        <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
-        <link href="<?= base_url() ?>assets/vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
+        <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= base_url('assets/vendor/select2/select2.min.js') ?>"></script>
+        <script type="text/javascript" src="<?= base_url('assets/vendor/custom-js/tabelBerkas.js') ?>"></script>
+        <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+        <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
+        <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
 
         <style>
             #ui-datepicker-div {

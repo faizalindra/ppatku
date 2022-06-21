@@ -165,16 +165,16 @@ class ModelBerkas extends CI_Model
         foreach ($data as $item) {
             // $data[$i]->desa = $item->desa;
             if (!empty($item->no_sertipikat)) {
-                if (!empty($item->nama_penjual)) {
+                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
                     $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
                 } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
                 }
             } else {
-                if ($item->nama_penjual == '' && $item->nama_pembeli == ' ') {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
                 } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' .  $item->id_berkas . '. ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
                 }
             }
         }

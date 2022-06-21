@@ -24,7 +24,7 @@ class ModelUser extends CI_Model {
         $this->db->delete('user', $where);
     }
 
-    public function active_deactive($where, $data){
+    public function update_user($where, $data){
         $this->db->update('user', $data, $where);
     }
 

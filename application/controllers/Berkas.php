@@ -94,6 +94,9 @@ class Berkas extends CI_Controller
         if (!empty($this->input->post('tgl_masuk'))) {
             $data['tgl_masuk'] = $this->input->post('tgl_masuk');
         }
+        if (!empty($this->input->post('no_berkas'))) {
+            $data['id'] = $this->input->post('no_berkas');
+        }
 
 
 

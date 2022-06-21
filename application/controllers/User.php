@@ -9,18 +9,6 @@ class User extends CI_Controller
         cek_login();
     }
 
-    // public function index()
-    // {
-    //     $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-    //     $data['berkas'] = $this->ModelBerkas->getBerkasQuery();
-    //     // $data['berkas2'] = $this->ModelBerkas->getBerkasQuery()->result_array();
-    //     $data['judul'] = "Dashboard";
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/sidebarStaff');
-    //     $this->load->view('templates/topbar');
-    //     $this->load->view('index', $data);
-    //     $this->load->view('templates/footer');
-    // }
 
     public function hapusUser()
     {
@@ -30,7 +18,7 @@ class User extends CI_Controller
         echo json_encode($where);
     }
 
-    public function active_deactive()
+    public function update_user()
     {
         if (!empty($this->input->post('kode'))) {
             $where = ['id' => $this->input->post('id')];
@@ -39,63 +27,48 @@ class User extends CI_Controller
             } else {
                 $data = ['is_active' => '1'];
             }
-            $this->ModelUser->active_deactive($where, $data);
+            $this->ModelUser->update_user($where, $data);
             echo json_encode($where);
         }
     }
 
-    public function ubahProfil()
-    {
-        $data['judul'] = 'Ubah Profil';
-        $data['user'] = $this->ModelUser->cekData(['username' => $this->session->userdata('username')])->row_array();
-
-        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim', [
-            'required' => 'Nama tidak Boleh Kosong'
-        ]);
-
-
-        if ($this->form_validation->run() == false) {
-            $data['judul'] = "Daftar Berkas";
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('user/ubah-profile', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $nama = $this->input->post('nama', true);
-            $username = $this->input->post('username', true);
-            $this->db->set('nama', $nama);
-            $this->db->where('username', $username);
-            $this->db->update('user');
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Profil Berhasil diubah </div>');
-            redirect('user');
+    public function ubah_role(){
+        if (!empty($this->input->post('kode'))) {
+            $where = ['id' => $this->input->post('id')];
+            if ($this->input->post('role') == '2') {
+                $data = ['role_id' => '1'];
+            } else {
+                $data = ['role_id' => '2'];
+            }
+            $this->ModelUser->update_user($where, $data);
+            // echo json_encode($where);
         }
     }
 
-    // public function user()
-    // {
-    //     $data['staff'] = $this->db->get('user')->result_array();
-    //     $data['judul'] = 'Registrasi';
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/sidebarNotaris');
-    //     $this->load->view('templates/topbar');
-    //     $this->load->view('notaris/formRegistrasi');
-    //     $this->load->view('notaris/tabelUser', $data);
-    //     $this->load->view('templates/footer');
-    // }
+    public function update_profile(){
+        $where['id'] = $this->input->post('id');
+        if(!empty($this->input->post('username'))){
+            $data['username'] = $this->input->post('username');
+        }
+        if(!empty($this->input->post('password'))){
+            $data['password'] =  password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+        }
+        $this->ModelUser->update_user($where, $data);
+        echo json_encode('berhasil');
+    }
 
-    // public function inputUser()
-    // {
-    //     $username = $this->input->post('username', true);
-    //     $data = [
-    //         'nama' => htmlspecialchars($this->input->post('nama', true)),
-    //         'username' => htmlspecialchars($username),
-    //         'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-    //         'role_id' => 2,
-    //         'is_active' => 1,
-    //     ];
-    //     $this->ModelUser->simpanData($data);
-    // }
+    public function profile(){
+        $data['judul'] = 'Profile';
+        $data['id'] = $this->session->userdata('id');
+        $data['nama'] = $this->session->userdata('nama');
+        $data['username'] = $this->session->userdata('username');
+        $data['role_id'] = $this->session->userdata('role_id');
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('sidebar/user/profile', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function manajemenUser()
     {

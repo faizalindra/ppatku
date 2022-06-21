@@ -1,27 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
     data_BPN();
-
-
     //select2 for proses
     $('.select2').select2();
-    $('.proses').select2();
-
     $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
-
-    //fungsi badge status proses BPN
-    function status_proses(status, id) {
-        if (status == "0") {
-            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning status_bpn"> Proses </a>';
-        } else if (status == "1") {
-            return '<span class="badge badge-info">Selesai</span>';
-        }
-    }
-
-    //untuk menjaga line break pada textarea
-    function nl2br(str, is_xhtml) {
-        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-    }
 
     // fungsi tampil proses
     function data_BPN() {
@@ -30,7 +11,7 @@ $(document).ready(function() {
             url: base_url + '/bpn/get_prosesBPN',
             async: true,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 var html = '';
                 var i;
                 var aksi = '';
@@ -53,9 +34,8 @@ $(document).ready(function() {
                 if (user_role == 2 || user_role == '2') {
                     $('.status_bpn').removeAttr('href').removeAttr('onclick');
                 }
-
             },
-            error: function() {
+            error: function () {
                 alert("gagal");
             }
 
@@ -63,7 +43,7 @@ $(document).ready(function() {
     }
 
     // fungsi edit proses BPN, tombol edit proses BPN
-    $('#show_data').on('click', '.edit_bpn', function() {
+    $('#show_data').on('click', '.edit_bpn', function () {
         var id = $(this).attr('data');
         $.ajax({
             type: "GET",
@@ -72,8 +52,8 @@ $(document).ready(function() {
             data: {
                 no_proses_bpn: id
             },
-            success: function(data) {
-                $.each(data, function(tgl_masuk, no_proses_bpn, id_berkas, tahun, nama_pemohon, jenis_proses, no_bpn, ket) {
+            success: function (data) {
+                $.each(data, function (tgl_masuk, no_proses_bpn, id_berkas, tahun, nama_pemohon, jenis_proses, no_bpn, ket) {
                     $('#edit_bpn').modal('show');
                     $('[name="no_proses_bpn_e"]').val(data.no_proses_bpn);
                     $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
@@ -85,88 +65,26 @@ $(document).ready(function() {
                     $('[name="ket_e"]').val(data.ket);
                 })
             },
-            error: function() {
+            error: function () {
                 alert('Gagal mengambil data');
             }
         });
         return false;
     });
 
-    // $('#tabel-BPN').on('click', '.status_proses', function() {
-    //     id = $(this).attr('data');
-    //     alert(id);
-    //     $.ajax({
-    //         method: 'Post',
-    //         url: base_url + '/bpn/selesai/' + id,
-    //         async: true,
-    //         success: function() {
-    //             // alert('success');
-    //             $('#tabel-BPN').dataTable({
-    //                 // stateSave: true,
-    //                 Destroy: true
-    //             });
-    //             data_BPN();
-    //             // $('#table-BPN').DataTable().ajax.reload();
-
-    //         },
-    //         error: function() {
-    //             alert('gagal');
-    //         }
-    //     })
-    // })
-    // $('#jenis_proses').on('change', function() {
-    //     val = document.getElementById('jenis_proses').getAttribute('value');
-    //     switch (val) {
-    //         case 'Peningkatan Hak':
-    //             jp = '1', est = 30;
-    //             break;
-    //         case 'Pengecekan':
-    //             jp = '2', est = 7;
-    //             break;
-    //         case 'Pemberian Hak Tanggungan':
-    //             jp = '3', est = 30;
-    //             break;
-    //         case 'Roya':
-    //             jp = '4', est = 14;
-    //             break;
-    //         case 'Cek Plot':
-    //             jp = '5', est = 7;
-    //             break;
-    //         case 'Pengalihan Hak':
-    //             jp = '6', est = 180;
-    //             break;
-    //     }
-    // });
-
-    // function estimasi(tgl) {
-    //     var date1 = new Date(tgl);
-    //     var date2 = new Date();
-
-    //     // To calculate the time difference of two dates
-    //     var Difference_In_Time = date1.getTime() - date2.getTime();
-
-    //     // To calculate the no. of days between two dates
-    //     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-    //     hari = Difference_In_Days.toFixed(0);
-    //     var bulan = 0;
-    //     if (hari >= 30) {
-    //         while (hari >= 30) {
-    //             hari = hari - 30;
-    //             bulan = bulan + 1;
-    //         }
-    //         return bulan + " Bulan " + hari + " Hari";
-    //     } else {
-    //         return hari + " Hari";
-    //     }
-    // }
-
-    //mengubah null di kolom keterangan menjadi whitespace
-    function antinull(val) {
-        if (val == null) {
-            return val = " ";
-        } else {
-            return val;
+    //fungsi badge status proses BPN
+    function status_proses(status, id) {
+        if (status == "0") {
+            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning status_bpn"> Proses </a>';
+        } else if (status == "1") {
+            return '<span class="badge badge-info">Selesai</span>';
         }
+    }
+
+    //untuk menjaga line break pada textarea
+    function nl2br(str, is_xhtml) {
+        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 
 });
