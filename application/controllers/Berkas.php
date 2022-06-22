@@ -13,12 +13,7 @@ class Berkas extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'a' => $this->ModelBerkas->b_terdaftar(),
-            'b' => $this->ModelBerkas->b_proses(),
-            'c' =>  $this->ModelBerkas->b_selesai(),
-            'd' => $this->ModelBerkas->b_dicabut(),
-        );
+        $data['b'] = $this->ModelBerkas->record_b();
         $data['sertipikat'] = $this->ModelSertipikat->get_sert_for_select();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Berkas";

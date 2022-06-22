@@ -16,7 +16,7 @@
                         </button>
                     </div>
                     <!-- <?= $this->session->flashdata('pesan'); ?> -->
-                    <form id="formAwesome" method="post" action="<?= base_url('user/manajemenUser') ?>">
+                    <form id="formAwesome" method="post" action="<?= base_url('user/manajemenUser') ?>" autocomplete="off">
                         <div class="modal-body">
                             <div class="form-group row">
                                 <label for="nama" class="col-sm-6 col-form-label">
@@ -33,7 +33,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?= set_value('username'); ?>" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <?= form_error('username', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -42,7 +42,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="password1" placeholder="Password" name="password1" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <?= form_error('password1', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -51,7 +51,7 @@
                                 </label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="password2" placeholder="Ulangi Password" name="password2" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
+                                    <?= form_error('password2', '<small class="text-danger pl-3">', '</small>') ?>
                                 </div>
                             </div>
                             <?php if ($this->session->userdata('role_id') == 0) {
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <?= $this->session->flashdata('pesan'); ?>
+        <!-- <?= $this->session->flashdata('pesan'); ?> -->
         <div class="row">
             <div class="col-lg-12">
                 <?php if (validation_errors()) { ?>

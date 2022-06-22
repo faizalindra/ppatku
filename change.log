@@ -1,3 +1,12 @@
+22 Juni 2022 #00053
+
+22 Juni 2022 #00052
+    - assets url adjustment
+    - redisign record berkas & proses_bpn
+    - fix bug, setelah ubah role halaman tidak reload
+    - small cleaning
+    - mematikan autocomplete pada form edit profil
+
 21 Juni 2022 #00051
     - membuat link kembali ke dashboard di halaman acc_block
 
