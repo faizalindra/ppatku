@@ -29,22 +29,19 @@ class Proses extends CI_Controller
     }
 
     function berkas_selesai()
-    {
+    {        
+        $id = $this->input->post('id');
+        $where = ['id' => $id];
         //cabut berkas
         if (!empty($this->input->post('kode'))) {
-            $data = array('berkas_selesai' => 3);
-            $where = array('id' => $this->input->post('id'));
-            $id = $this->input->post('id');
+            $data = ['berkas_selesai' =>  3];
             $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
-            echo json_encode('berhasil');
+            echo json_encode('berhasil update status berkas');
         //berkas selesai    
         } else {
             $data = ['berkas_selesai' =>  1];
-            $where = ['id' => $this->uri->segment(3)];
-            $id = $this->uri->segment(3);
             $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
-            echo json_encode('berhasil');
-            redirect('berkas');
+            echo json_encode('berhasil update status berkas');
         }
     }
 

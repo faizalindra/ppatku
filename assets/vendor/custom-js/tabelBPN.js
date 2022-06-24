@@ -75,11 +75,25 @@ $(document).ready(function () {
     //fungsi badge status proses BPN
     function status_proses(status, id) {
         if (status == "0") {
-            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning status_bpn"> Proses </a>';
+            return '<span data="' + id + '" class="badge badge-warning status_bpn"> Proses </span>';
         } else if (status == "1") {
-            return '<span class="badge badge-info">Selesai</span>';
+            return '<span class="badge badge-success">Selesai</span>';
         }
     }
+
+    $('#show_data').on('click', '.status_bpn', function () {
+        if (confirm('Pastikan proses telah selesai !!!!')) {
+            var id = $(this).attr('data');
+            $(this).toggleClass('badge-warning badge-success');
+            $(this).html('selesai');
+            // console.log(id)
+            $.post(base_url + '/proses/berkas_selesai', { id: id },
+                function (data) {
+                    console.log(data)
+                }, "json").fail(function () { console.log('gagal') });
+        }
+
+    });
 
     //untuk menjaga line break pada textarea
     function nl2br(str, is_xhtml) {

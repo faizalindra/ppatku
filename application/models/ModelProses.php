@@ -3,17 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelProses extends CI_Model
 {
-    // public function update_proses($data, $where)
-    // {
-    // return $this->db->query("UPDATE * FROM `tb_ket_proses` set 'ukur'='$uji[0]' WHERE `no_proses`='$uji[1]'");
-    // $this->db->update('tb_ket_proses', $data, $where);////////
-    // return $hasil->result_array();
-    // }
     function berkas_selesai($data, $where, $id = null)
     {
-        // return $this->db->query("UPDATE * FROM `tb_ket_proses` set 'ukur'='$uji[0]' WHERE `no_proses`='$uji[1]'");
-        //get no_sertipikat from tb berkas
-        $this->db->update('tb_berkas', $data, $where);
         if (!empty($id)) {
             $datas = $this->db->select('reg_sertipikat')
                 ->from('tb_berkas')
@@ -26,8 +17,7 @@ class ModelProses extends CI_Model
             $target = ['is_used' => 0];
             $this->db->update('tb_sertipikat', $target, $hsl);
         }
-
-        // return $hasil->result_array();
+        $this->db->update('tb_berkas', $data, $where);
     }
 
 

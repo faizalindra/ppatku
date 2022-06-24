@@ -6,7 +6,7 @@ $('.select2').select2();
 $('.proses').select2();
 
 /////////////////////////////////////////////////// -- Tabel Berkas -- //////////////////////////////////////////////////
-// fungsi tampil berkas
+// fungsi tampil tabel berkas
 function data_berkas() {
     $.ajax({
         method: 'GET',
@@ -185,6 +185,21 @@ $('#show_data').on('click', '.item_detail', function () {
         }
     });
     return false;
+});
+
+//tombol status berkas
+$('#show_data').on('click', '.status_berkas', function () {
+    if (confirm('Pastikan proses telah selesai !!!!')) {
+        var id = $(this).attr('data');
+        $(this).toggleClass('badge-warning badge-success');
+        $(this).html('selesai');
+        console.log(id)
+        $.post(base_url + '/proses/berkas_selesai', { id: id },
+            function (data) {
+                console.log(data)
+            }, "json").fail(function () { console.log('gagal') });
+    }
+
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

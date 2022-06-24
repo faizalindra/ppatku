@@ -1,3 +1,7 @@
+25 Juni 2022 #00056
+    - tombol berkas_selesai dan proses selesai tidak lagi mereload halaman
+    - penyesuaian footer card biaya pada detail_berkas
+
 25 Juni 2022 #00055
     - update database
     - get_sert_for_select sekarang hanya menampilkan sertipikat yang tidak dalam proses atau selesai proses

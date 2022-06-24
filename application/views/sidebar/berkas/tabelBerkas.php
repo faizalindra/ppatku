@@ -622,7 +622,6 @@
                                 <div class="col-md-6 pr-3">
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
                                                 <div class="card-header p-1" style="background-color:#9efff4;">
                                                     <div class="row">
@@ -659,12 +658,10 @@
                                                 <div class="card-footer text-muted" id="ket_berkas">
                                                 </div>
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
                                                 <div class="card-header p-1" style="background-color:#9efff4;">
                                                     <h6>Kelengkapan</h6>
@@ -692,16 +689,11 @@
                                                         <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
-
-                                                    </div> -->
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
                                                 <div class="card-header p-1" style="background-color:#9efff4;">
                                                     <h6>Proses</h6>
@@ -716,12 +708,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                     <div class="card border-dark" style=" min-height: 555px;">
                                         <div class="card-header p-1" style="background-color:#9efff4;">
                                             <h6>Proses BPN</h6>
@@ -731,10 +721,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- </div> -->
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                     <div class="card border-dark" style=" min-height: 555px;">
                                         <div class="card-header p-1" style="background-color:#9efff4;">
                                             <div class="row">
@@ -784,7 +772,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer p-1" id="footer_biaya">
+                                        <div class="card-footer p-1 text-white" id="footer_biaya">
                                             <div class="row">
                                                 <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
                                             </div>
@@ -795,7 +783,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>

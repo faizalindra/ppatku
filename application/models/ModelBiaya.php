@@ -64,8 +64,13 @@ class ModelBiaya extends CI_Model
             $kurang = $total_biaya - $bayar;
             $data['status'] = 'Rp. ' . number_format($kurang);
             $data['color'][1] = 'background-color';
-            $data['color'][2] = '#ffc107';
-            $data['ket'] = 'Kurang';
+            if ($kurang < 0) {
+                $data['ket'] = 'Kembali';
+                $data['color'][2] = '#17A2B8';
+            } else {
+                $data['color'][2] = '#ffc107';
+                $data['ket'] = 'Kurang';
+            }
         }
         return $data;
     }
