@@ -30,16 +30,20 @@ class Proses extends CI_Controller
 
     function berkas_selesai()
     {
-        // $a = $this->input->post('id');
+        //cabut berkas
         if (!empty($this->input->post('kode'))) {
             $data = array('berkas_selesai' => 3);
             $where = array('id' => $this->input->post('id'));
-            $datas = $this->ModelProses->berkas_selesai($data, $where);
+            $id = $this->input->post('id');
+            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
             echo json_encode('berhasil');
+        //berkas selesai    
         } else {
             $data = ['berkas_selesai' =>  1];
             $where = ['id' => $this->uri->segment(3)];
-            $datas = $this->ModelProses->berkas_selesai($data, $where);
+            $id = $this->uri->segment(3);
+            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
+            echo json_encode('berhasil');
             redirect('berkas');
         }
     }

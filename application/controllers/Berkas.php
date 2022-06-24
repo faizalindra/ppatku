@@ -66,6 +66,10 @@ class Berkas extends CI_Controller
         }
         if ($this->input->post('sertipikat_e') != null) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat_e', true);
+            $no_reg['no_reg'] = $this->input->post('sertipikat_e');
+            $sert['is_used'] = "1";
+            $id_berkas = $this->input->post('id_e');
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg, $id_berkas);
         }
         $this->ModelBerkas->update_berkas($data, $id);
         redirect('berkas');
@@ -87,6 +91,9 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('sertipikat'))) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat');
+            $no_reg['no_reg'] = $this->input->post('sertipikat');
+            $sert['is_used'] = "1";
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg);
         }
         if (!empty($this->input->post('tgl_masuk'))) {
             $data['tgl_masuk'] = $this->input->post('tgl_masuk');
