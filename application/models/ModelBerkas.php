@@ -113,36 +113,31 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    public function get_berkas_for_select($where = null)
+    public function get_berkas_for_select()
     {
-        if (!empty($where)) {
-            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
-                ->from('tb_berkas')
-                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
-                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-                ->where($where)
-                ->get()
-                ->result();
-        } else {
-            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
-                ->from('tb_berkas')
-                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
-                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-                ->get()
-                ->result();
-        }
+        $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak, berkas_selesai')
+            ->from('tb_berkas')
+            ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->get()
+            ->result();
+
         foreach ($data as $item) {
-            if (!empty($item->no_sertipikat)) {
-                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+            //cek apakah berkas sudah selesai atau berkas dicabut
+            if ($item->berkas_selesai < 1) {
+                //cek apakah berkas memiliki sertipikat atau tidak
+                if (!empty($item->no_sertipikat)) {
+                    if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                    } else {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    }
                 } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
-                }
-            } else {
-                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
-                } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                    } else {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    }
                 }
             }
         }
@@ -150,7 +145,8 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    public function record_b(){
+    public function record_b()
+    {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas")->result();
         foreach ($hasil as $data) {
             $hsl['b_terdaftar'] = $data->total_record;
@@ -174,5 +170,20 @@ class ModelBerkas extends CI_Model
     {
         $hasil = $this->db->update('tb_berkas', $data, array('id' => $id));
         return $hasil;
+    }
+
+    // untuk mendapatkan id dari berkas yang terakhir diinputkan
+    public function get_last_id()
+    {
+        $data = $this->db->select('id')
+            ->from('tb_berkas')
+            ->order_by('id', 'desc')
+            ->limit(1)
+            ->get()
+            ->result_array();
+        foreach ($data as $key) {
+            $hsl = $key['id'];
+        }
+        return $hsl;
     }
 }

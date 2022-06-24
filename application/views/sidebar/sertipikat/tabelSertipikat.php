@@ -73,17 +73,31 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="formAwesome" method="post" action="<?= base_url() ?>sertipikat/inputSertipikat" autocomplete="off">
+                    <form id="formAwesome" method="post" action="<?= base_url('sertipikat/inputSertipikat') ?>" autocomplete="off">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="container-fluid">
                                     <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <input type="text" name="tgl_masuk_i" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-calendar"></i>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">No. </div>
+                                                    </div>
+                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="2222">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <input type="text" name="tgl_masuk_i" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,7 +126,7 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Kec</div>
+                                                        <div class="input-group-text">Kec. *</div>
                                                     </div>
                                                     <select name="kecamatan_i" id="kecamatan_i" class="custom-select">
                                                         <option disabled selected value> -- Kecamatan -- </option>
@@ -127,7 +141,7 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Desa</div>
+                                                        <div class="input-group-text">Desa. *</div>
                                                     </div>
                                                     <select id="desa_i" name="desa_i" class="custom-select">
                                                         <option disabled selected value> -- Desa -- </option>
@@ -161,6 +175,7 @@
                                                 <option value="Pemecahan">Pemecahan</option>
                                                 <option value="Pengeringan">Pengeringan</option>
                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                <option value="Roya">Roya</option>
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
                                             </select>

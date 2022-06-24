@@ -1,3 +1,13 @@
+24 Juni 2022 #00054
+    - update database
+    - menambah input 'no_reg' sertipikat
+    - penyesuaian max input No 'id' berkas
+    - penyesuaian fungsi 'get_berkas_for_select'
+    - penyesuaian fungsi 'get_sert_for_select'
+    - fix tampilan input sertipikat
+    - staff dapat memasukan nomor berkas di input berkas
+    - menambah kolom input 'no_reg' di input sertipikat
+
 22 Juni 2022 #00053
 
 22 Juni 2022 #00052

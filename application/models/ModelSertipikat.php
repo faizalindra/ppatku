@@ -96,14 +96,18 @@ class ModelSertipikat extends CI_Model
     //untuk selector sertipikat di input berkas
     public function get_sert_for_select()
     {
-        $data = $this->db->select('no_reg, dsa, proses, jenis_hak, no_sertipikat, pemilik_hak, desa.nama as desa')
+        $data = $this->db->select('no_reg, dsa, proses, jenis_hak, no_sertipikat, pemilik_hak, desa.nama as desa, berkas_selesai')
             ->from('tb_sertipikat')
             ->join('desa', 'tb_sertipikat.dsa = desa.id')
+            ->join('tb_berkas', 'tb_berkas.reg_sertipikat = tb_sertipikat.no_reg', 'left')
+            ->where('berkas_selesai', null)
+            ->or_where('berkas_selesai', '1')
             ->get()
             ->result();
         foreach ($data as $item) {
             $hasil[] = '<option value="' . $item->no_reg . '">' . $item->no_reg . '. ' . $item->jenis_hak  . ". " . $item->no_sertipikat . "/" . $item->desa . ' A.n.  ' . $item->pemilik_hak . ' | ' . $item->proses . '</option>';
         }
+        $hasil = array_unique($hasil);
         return $hasil;
     }
 

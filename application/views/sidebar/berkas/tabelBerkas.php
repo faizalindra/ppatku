@@ -138,7 +138,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" autocapitalize="on" pattern="[0-9]{1,5}" maxlength="5" title="Nomor berkas harus menggunakan Angka">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
