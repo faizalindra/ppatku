@@ -54,7 +54,7 @@ class ModelBerkas extends CI_Model
             //membuat field tombol status berkas
             if ($data[$i]->berkas_selesai == 0) {
                 $data[$i]->status_berkas = '<span data="' . $data[$i]->id_berkas . '" class="badge badge-warning status_berkas">Proses</span>';
-                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas status_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
                                    <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else if ($data[$i]->berkas_selesai == 1) {
                 $data[$i]->status_berkas = '<span class="badge badge-success"> Selesai </span>';

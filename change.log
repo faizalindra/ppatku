@@ -1,3 +1,7 @@
+26 Juni 2022 #00057
+    - memperbarui tampilan detail_berkas dicabut
+    - mengganti metode update kelengkapan & ket_proses
+
 25 Juni 2022 #00056
     - tombol berkas_selesai dan proses selesai tidak lagi mereload halaman
     - penyesuaian footer card biaya pada detail_berkas

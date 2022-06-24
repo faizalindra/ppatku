@@ -7,7 +7,6 @@ class Proses extends CI_Controller
     {
         parent::__construct();
         cek_login();
-        // get_uri();
     }
 
     public function get_proses()
@@ -16,7 +15,6 @@ class Proses extends CI_Controller
         $ids['no_proses'] = $id;
         $data = $this->ModelProses->get_proses($id, $ids);
         echo json_encode($data);
-        // print_r($data);
     }
 
     public function update_proses()
@@ -25,7 +23,7 @@ class Proses extends CI_Controller
         $val = $this->input->post('val');
         $jp = $this->input->post('jp');
         $data = $this->ModelProses->update_proses($id, $val, $jp);
-        echo json_encode($data);
+        echo json_encode('berhasil');
     }
 
     function berkas_selesai()

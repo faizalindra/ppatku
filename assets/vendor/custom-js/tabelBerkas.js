@@ -1,4 +1,5 @@
 var berkas_id_detail = 0;
+var jenis_modal = 0; // 0 = modal berkas, 1 = modal berkas cabut
 data_berkas(); //pemanggilan fungsi tampil barang.
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
@@ -45,6 +46,7 @@ function data_berkas() {
 // tombol detail berkas
 $('#show_data').on('click', '.item_detail2', function () {
     var id = $(this).attr('data');
+    jenis_modal = 0;
     $.ajax({
         method: "GET",
         url: base_url + '/berkas/get_berkas',
@@ -156,6 +158,7 @@ $('#show_data').on('click', '.edit_berkas', function () {
 //tombol detail berkas dicabut
 $('#show_data').on('click', '.item_detail', function () {
     var id = $(this).attr('data');
+    jenis_modal = 1;
     $.ajax({
         method: "GET",
         url: base_url + '/berkas/get_berkas',
@@ -165,20 +168,18 @@ $('#show_data').on('click', '.item_detail', function () {
         },
         success: function (data) {
             $('#ModalDetail').modal('show');
-            var html1 = "";
-            html1 += '<tr class="text-capitalize text-center">' +
-                '<td>' + data.id_berkas + '</td>' +
-                '<td>' + data.tgl_masuk + '</td>' +
-                '<td>' + data.desa + '</td>' +
-                '<td>' + data.kecamatan + '</td>' +
-                '<td id="id_jenis_berkas" data-value="' + data.jenis_berkas + '" >' + data.jenis_berkas + '</td>' +
-                '<td>' + data.nama_penjual + '</td>' +
-                '<td>' + data.nama_pembeli + '</td>' +
-                '<td>' + data.tot_biaya + '</td>' +
-                '</tr>' +
-                '<tr class="text-muted">' + '<td>Ket : &nbsp;' + '</td>' + '<td colspan=9>' + nl2br(data.keterangan) + '</td>' +
-                '</td>' + '</tr>';
-            $('#data_detail').html(html1);
+            $('#id_berkas_2').html('No. ' + data.id_berkas);
+            $('#tgl_masuk_berkas_2').html(data.tgl_masuk);
+            $('#jenis_berkas_2').html(data.jenis_berkas);
+            $('#col_sertipikat_2').html(data.sertipikat);
+            $('#pihak_1_2').html(nl2br(data.nama_penjual));
+            $('#pihak_2_2').html(data.nama_pembeli);
+            $('#ket_berkas_2').html(nl2br(data.keterangan));
+            $('#total_biaya_2').html(data.tot_biaya);
+            detail_kelengkapan(data.id_berkas, 1);
+            detail_proses(data.id_berkas, 1);
+            bpn(data.id_berkas, 1);
+            biaya(data.id_berkas, 1);
         },
         error: function () {
             alert('Gagal Mengambil detail berkas');
@@ -186,6 +187,7 @@ $('#show_data').on('click', '.item_detail', function () {
     });
     return false;
 });
+
 
 //tombol status berkas
 $('#show_data').on('click', '.status_berkas', function () {
@@ -262,7 +264,7 @@ $('#formedit').on('change', '#kecamatan_e', function () {
 
 //////////////////////////////////////////////////////- Card Kelengkapan -///////////////////////////////////////////////
 //fungsi untuk menampilkan kelengkapan berkas
-function detail_kelengkapan(id) {
+function detail_kelengkapan(id, opt) {
     $.ajax({
         url: base_url + '/Kelengkapan/get_kelengkapan',
         type: 'get',
@@ -271,9 +273,17 @@ function detail_kelengkapan(id) {
             id: id
         },
         success: function (data) {
-            $('#kelengkapan_ada').html(data.ada);
-            $('#kelengkapan_belum_ada').html(data.belum);
-            $('#ket_keleng').html(nl2br(data.ket));
+            if (opt == null) {
+                $('#kelengkapan_ada').html(data.ada);
+                $('#kelengkapan_belum_ada').html(data.belum);
+                $('#ket_keleng').html(nl2br(data.ket));
+            } else {
+                $('#kelengkapan_ada_2').html(data.ada);
+                $('#kelengkapan_belum_ada_2').html(data.belum);
+                $('#ket_keleng_2').html(nl2br(data.ket));
+            }
+
+
         },
         error: function (data) {
             alert('gagal mengambil kelengkapan');
@@ -282,25 +292,19 @@ function detail_kelengkapan(id) {
 }
 
 // tombol kelengkapan
-function kelengkapan(id, jb) {
-    if (confirm("Kelengkapan ada?")) {
-        $.ajax({
-            url: base_url + '/kelengkapan/update_kelengkapan',
-            type: 'post',
-            dataType: 'json',
-            data: {
-                id: id,
-                jb: jb
-            },
-            success: function (data) {
-                detail_kelengkapan(id);
-            },
-            error: function (data) {
-                alert('gagal mengupdate kelengkapan');
-            }
-        });
+$('#modelDetail2').on('click', '.tbl_keleng', function () {
+    var id = $(this).attr('data');
+    var jb = $(this).attr('data_s');
+    if (jenis_modal == 0) {
+        if (confirm('Kelengkapan ada?')) {
+            $.post(base_url + '/kelengkapan/update_kelengkapan', { id: id, jb: jb },
+                function (data) {
+                    detail_kelengkapan(id);
+                }, "json").fail(function () { console.log('gagal') });
+        }
     }
-}
+});
+
 
 //contenteditable keterangan kelengkapan
 $('#modelDetail2').on('click', '#save_ket_keleng', function () {
@@ -329,7 +333,7 @@ $('#modelDetail2').on('click', '#save_ket_keleng', function () {
 
 ///////////////////////////////////////////////- Card Proses -///////////////////////////////////
 //fungsi untuk menampilkan daftar proses
-function detail_proses(id) {
+function detail_proses(id, opt) {
     $.ajax({
         url: base_url + '/proses/get_proses',
         type: 'get',
@@ -338,8 +342,14 @@ function detail_proses(id) {
             id: id
         },
         success: function (data) {
-            $('#proses_').html(data.proses);
-            $('#ket_proses').html(nl2br(data.ket));
+            if (opt == null) {
+                $('#proses_').html(data.proses);
+                $('#ket_proses').html(nl2br(data.ket));
+            } else {
+                $('#proses_2').html(data.proses);
+                $('#ket_proses_2').html(nl2br(data.ket));
+            }
+
         },
         error: function (data) {
             alert('gagal mengambil data proses');
@@ -347,29 +357,24 @@ function detail_proses(id) {
     });
 }
 
-//untuk update status proses
-function proses(id, val, jp) {
-    if (user_role != '2' || user_role != 2) {
-        if (confirm("Proses sudah selesai?")) {
-            $.ajax({
-                url: base_url + '/proses/update_proses',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    id: id,
-                    jp: jp,
-                    val: val
-                },
-                success: function (data) {
-                    detail_proses(id);
-                },
-                error: function (data) {
-                    alert('gagal mengupdate proses');
-                }
-            });
+$('#modelDetail2').on('click', '.tbl_proses', function () {
+    var id = $(this).attr('data');
+    var val = $(this).attr('datas');
+    var jp = $(this).attr('datat');
+    console.log(id + "-" + jp + "-" + val);
+    if (jenis_modal == 0) {
+        if (user_role != 2 || user_role != 3) {
+            if (confirm('Kelengkapan ada?')) {
+                $.post(base_url + '/proses/update_proses', { id: id, jp: jp, val: val },
+                    function (data) {
+                        console.log(data);
+                        detail_proses(id);
+                    }, "json").fail(function () { console.log('gagal mengupdate proses') });
+            }
         }
     }
-}
+});
+
 
 //contenteditable keterangan proses
 $('#modelDetail2').on('click', '#save_ket_proses', function () {
@@ -400,7 +405,7 @@ $('#modelDetail2').on('click', '#save_ket_proses', function () {
 
 //////////////////////////////////////// - Card BPN - ////////////////////////////////////////////
 //fungsi menampilkan proses bpn
-function bpn(id) {
+function bpn(id, opt) {
     $.ajax({
         url: base_url + '/bpn/get_bpn_for_detail',
         type: 'get',
@@ -413,7 +418,11 @@ function bpn(id) {
             for (i = 0; i < data.length; i++) {
                 html += data[i];
             }
-            $('#bpn_').html(html);
+            if (opt == null) {
+                $('#bpn_').html(html);
+            } else {
+                $('#bpn_2').html(html)
+            }
         },
         error: function (data) {
             alert('gagal mengambil data bpn');
@@ -426,14 +435,23 @@ function bpn(id) {
 
 ////////////////////////////////////// - Card Biaya- /////////////////////////////////////////////
 //fungsi untuk menampilkan card biaya
-function biaya(id) {
+function biaya(id, opt) {
     $.get(base_url + '/biaya/get_biaya', { id: id },
         function (data) {
-            $('#row_biaya').remove('.card-biaya');
-            $('#row_biaya').html(data.card);
-            $('#footer_biaya').css(data.color[1], data.color[2]);
-            $('#status_bayar').html(data.status);
-            $('#ket_bayar_').html(data.ket);
+            if (opt == null) {
+                $('#row_biaya').remove('.card-biaya');
+                $('#row_biaya').html(data.card);
+                $('#footer_biaya').css(data.color[1], data.color[2]);
+                $('#status_bayar').html(data.status);
+                $('#ket_bayar_').html(data.ket);
+            } else {
+                $('#row_biaya_2').remove('.card-biaya');
+                $('#row_biaya_2').html(data.card);
+                $('#footer_biaya_2').css(data.color[1], data.color[2]);
+                $('#status_bayar_2').html(data.status);
+                $('#ket_bayar_2').html(data.ket);
+                _
+            }
         }, 'json').fail(function () { console.log('gagal mengambil data biaya') });
 }
 
