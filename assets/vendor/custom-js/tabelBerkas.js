@@ -89,7 +89,6 @@ $('#show_data').on('click', '.btn_sertipikat', function () {
             id: id
         },
         success: function (data) {
-            $.each(data, function () {
                 $('#ModalSertipikat').modal('show');
                 var html = "";
                 html += '<tr class="text-capitalize text-center">' +
@@ -105,7 +104,6 @@ $('#show_data').on('click', '.btn_sertipikat', function () {
                     '</td>' + '</tr>';
 
                 $('#detail_sertipikat').html(html);
-            });
         },
         error: function () {
             alert('gagal mengambil data sertipikat');
@@ -126,27 +124,20 @@ $('#show_data').on('click', '.edit_berkas', function () {
             id: id
         },
         success: function (data) {
-            $.each(data, function () {
                 $('#formedit').modal('show');
                 $('[name="id_e"]').val(data.id_berkas);
                 $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
                 $('[name="sertipikat_e"]').val(data.reg_sertipikat);
-                $('[name="desa_e"]').val(data.desa);
-                var alamat = 'Desa ' + data.desa + ', Kec. ' + data.kecamatan;
-                $('[name="alamat_e"]').val(alamat);
-                $('[name="desa_e"]').val(data.desa);
-                $('[name="kecamatan_e"]').val(data.kecamatan);
+                $('[name="kecamatan_e"]').val(data.id_kecamatan);
+                var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
+                $('[name="desa_e"]').html(html);
+                $('[name="desa_e"]').val(data.id_desa);
                 $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
+                $('[name="jenis_berkas[]_e"]').trigger('change');
                 $('[name="penjual_e"]').val(data.nama_penjual);
                 $('[name="pembeli_e"]').val(data.nama_pembeli);
-                $('[name="biaya_e"]').val(data.biaya);
-                $('[name="dp_e"]').val(data.dp);
-                var tot_biaya = data.tot_biaya;
-                tot_biaya = tot_biaya.replace(/[a-z A-Z._,-]/g, "");
-                $('[name="tot_biaya_e"]').val(tot_biaya);
+                $('[name="tot_biaya_e"]').val(data.biaya);
                 $('[name="keterangan_e"]').val(data.keterangan);
-                $(".coment").html("Jenis Berkas : " + data.jenis_berkas);
-            });
         },
         error: function (data) {
             alert('Gagal mengambil data (modal.edit_berkas');
@@ -188,7 +179,6 @@ $('#show_data').on('click', '.item_detail', function () {
     return false;
 });
 
-
 //tombol status berkas
 $('#show_data').on('click', '.status_berkas', function () {
     if (confirm('Pastikan proses telah selesai !!!!')) {
@@ -201,6 +191,25 @@ $('#show_data').on('click', '.status_berkas', function () {
                 console.log(data)
             }, "json").fail(function () { console.log('gagal') });
     }
+
+});
+
+//auto select when sertipikat is inputed
+$('#formInputBerkas').on('change', '#sertipikat_i', function () {
+    var id = $(this).val();
+    $.post(base_url + '/berkas/get_sert_for_auto', { id: id },
+        function (data) {
+
+            $('#kecamatan_i').val(data.id_kecamatan);
+            var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
+            $('#desa_i').html(html);
+            $('#desa_i').val(data.id_desa);
+            $('#jenis_berkas_i').val(data.proses);
+            $('#jenis_berkas_i').trigger('change');
+            $('#penjual_i').val(data.pemilik_hak);
+            $('#pembeli_i').val(data.pembeli_hak);
+
+        }, "json").fail(function () { console.log('gagal') });
 
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,7 +314,6 @@ $('#modelDetail2').on('click', '.tbl_keleng', function () {
     }
 });
 
-
 //contenteditable keterangan kelengkapan
 $('#modelDetail2').on('click', '#save_ket_keleng', function () {
     var ket = document.getElementById('ket_keleng').innerHTML;
@@ -374,7 +382,6 @@ $('#modelDetail2').on('click', '.tbl_proses', function () {
         }
     }
 });
-
 
 //contenteditable keterangan proses
 $('#modelDetail2').on('click', '#save_ket_proses', function () {
@@ -450,7 +457,6 @@ function biaya(id, opt) {
                 $('#footer_biaya_2').css(data.color[1], data.color[2]);
                 $('#status_bayar_2').html(data.status);
                 $('#ket_bayar_2').html(data.ket);
-                _
             }
         }, 'json').fail(function () { console.log('gagal mengambil data biaya') });
 }
@@ -466,7 +472,6 @@ $("#modelDetail2").on('click', ".bayar_", function () {
         document.getElementById("ket_bayar").disabled = true;
     }
 })
-
 
 //fungsi untuk input biaya
 function input_biaya() {
@@ -490,7 +495,6 @@ function input_biaya() {
     $('#form-biaya').find('textarea').val('')
     $('#collapse_biaya').collapse('hide');
 }
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 //untuk menghapus div di contenteditable

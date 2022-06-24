@@ -199,18 +199,18 @@
                                                                 <div class="input-group-text">Proses</div>
                                                             </div>
                                                             <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
-                                                                <option>AJB</option>
-                                                                <option>APHB</option>
-                                                                <option>APHT</option>
-                                                                <option>Ganti Blangko</option>
-                                                                <option>Ganti Nama</option>
-                                                                <option>Hibah</option>
-                                                                <option>Konversi</option>
-                                                                <option>Pemecahan</option>
-                                                                <option>Pengeringan</option>
-                                                                <option>Peningkatan Hak</option>
-                                                                <option>SKMHT</option>
-                                                                <option>Waris</option>
+                                                                <option value="AJB">AJB</option>
+                                                                <option value="APHB">APHB</option>
+                                                                <option value="APHT">APHT</option>
+                                                                <option value="Ganti Blangko">Ganti Blangko</option>
+                                                                <option value="Ganti Nama">Ganti Nama</option>
+                                                                <option value="Hibah">Hibah</option>
+                                                                <option value="Konversi">Konversi</option>
+                                                                <option value="Pemecahan">Pemecahan</option>
+                                                                <option value="Pengeringan">Pengeringan</option>
+                                                                <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                                <option value="SKMHT">SKMHT</option>
+                                                                <option value="Waris">Waris</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -499,15 +499,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">Alamat
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
-                                                </div>
-                                            </div>
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <div class="form-group row">
@@ -556,7 +547,6 @@
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
                                                     </select>
-                                                    <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -835,7 +825,9 @@
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel"><div id="id_berkas_2"></div> </h3>
+                        <h3 class="modal-title" id="myModalLabel">
+                            <div id="id_berkas_2"></div>
+                        </h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close">
                             <span aria-hidden="true">&times;</span>
                         </button>

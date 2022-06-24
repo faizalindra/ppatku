@@ -55,21 +55,20 @@ $(document).ready(function () {
                 id: id
             },
             success: function (data) {
-                $.each(data, function (no_reg, jenis_hak, no_sertipikat, dsa, desa, kecamatan, proses, pemilik_hak, pembeli_hak, ket) {
-                    $('#edit_sert').modal('show');
-                    $('[name="id_e"]').val(data.no_reg);
-                    $('[name="jenis_hak_e"]').val(data.jenis_hak);
-                    $('[name="nomor_sertipikat_e"]').val(data.no_sertipikat);
-                    var alamat = "Desa " + data.desa + ' , Kec. ' + data.kecamatan;
-                    $('[name="alamat_e"]').val(alamat);
-                    $('[name="desa_e"]').val(data.dsa);
-                    $('[name="luas_e"]').val(data.luas);
-                    $('[name="proses[]_e').val(data.proses);
-                    $('[name="pemilik_hak_e"]').val(data.pemilik_hak);
-                    $('[name="penerima_hak_e"]').val(data.pembeli_hak);
-                    $('[name="keterangan_e"]').val(data.ket);
-                    $(".coment").html("Jenis Berkas : " + data.proses);
-                });
+                $('#edit_sert').modal('show');
+                $('[name="id_e"]').val(data.no_reg);
+                $('[name="jenis_hak_e"]').val(data.jenis_hak);
+                $('[name="nomor_sertipikat_e"]').val(data.no_sertipikat);
+                $('[name="kecamatan_e"]').val(data.id_kecamatan);
+                var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
+                $('[name="desa_e"]').html(html);
+                $('[name="desa_e"]').val(data.id_desa);
+                $('[name="luas_e"]').val(data.luas);
+                $('#jenis_berkas_e').val(data.proses);
+                $('#jenis_berkas_e').trigger('change');
+                $('[name="pemilik_hak_e"]').val(data.pemilik_hak);
+                $('[name="penerima_hak_e"]').val(data.pembeli_hak);
+                $('[name="keterangan_e"]').val(data.ket);
             },
             error: function (data) {
                 alert('Gagal mengambil data sertipikat');

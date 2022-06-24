@@ -258,15 +258,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">Alamat
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-auto">
                                                 <div class="form-group row">

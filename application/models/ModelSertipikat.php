@@ -42,7 +42,7 @@ class ModelSertipikat extends CI_Model
     //untuk mendapatkan sertipikat berdasarkan no_reg
     function get_sertipikat($id)
     {
-        $hsl = $this->db->select("*, desa.nama as desa, kecamatan.nama as kecamatan")
+        $hsl = $this->db->select("*, desa.nama as desa, kecamatan.nama as kecamatan, desa.id as id_desa, kecamatan.id as id_kecamatan")
             ->from('tb_sertipikat')
             ->join('desa', 'desa.id = tb_sertipikat.dsa', 'left')
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
@@ -50,17 +50,20 @@ class ModelSertipikat extends CI_Model
             ->get()
             ->result();
         foreach ($hsl as $data) {
+
             $hasil = array(
                 'no_reg' => $data->no_reg,
                 'tgl_daftar' => $data->tgl_daftar,
                 'no_sertipikat' => $data->no_sertipikat,
                 'dsa' => $data->dsa,
                 'desa' => $data->desa,
+                'id_desa' => $data->id_desa,
+                'id_kecamatan' => $data->id_kecamatan,
                 'kecamatan' => $data->kecamatan,
                 'jenis_hak' => $data->jenis_hak,
                 'pemilik_hak' => $data->pemilik_hak,
                 'pembeli_hak' => $data->pembeli_hak,
-                'proses' => $data->proses,
+                'proses' => explode(',', $data->proses)
             );
             if (!empty($data->luas)) {
                 $hasil['luas'] = $data->luas;
@@ -111,7 +114,7 @@ class ModelSertipikat extends CI_Model
                 // update status is_used seetipikat baru menjadi 1
                 $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
             }
-        } else{
+        } else {
             // digunakan untuk update sertipikat di edit sertipikat tabelSertipikat
             $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
         }
@@ -131,5 +134,18 @@ class ModelSertipikat extends CI_Model
             $hasil[] = '<option value="' . $item->no_reg . '">' . $item->no_reg . '. ' . $item->jenis_hak  . ". " . $item->no_sertipikat . "/" . $item->desa . ' A.n.  ' . $item->pemilik_hak . ' | ' . $item->proses . '</option>';
         }
         return $hasil;
+    }
+
+    public function get_sert_for_auto($id)
+    {
+        $data = $this->db->select('kecamatan.id as id_kecamatan, desa.id as id_desa, desa.nama as desa, proses, pemilik_hak, pembeli_hak')
+            ->from('tb_sertipikat')
+            ->join('desa', 'tb_sertipikat.dsa = desa.id', 'left')
+            ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
+            ->where('no_reg', $id)
+            ->get()
+            ->row_array();
+        $data['proses'] = explode(',', $data['proses']);
+        return $data;
     }
 }

@@ -183,4 +183,10 @@ class Berkas extends CI_Controller
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
     }
+
+    function get_sert_for_auto(){
+        $id = $this->input->post('id');
+        $sert = $this->ModelSertipikat->get_sert_for_auto($id);
+        echo json_encode($sert);
+    }
 }

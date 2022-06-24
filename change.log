@@ -1,3 +1,9 @@
+27 Juni 2022 #00058
+    - setelah memilih sertipikat di input berkas, beberapa form input akan terisi otomatis berdasarkan sertipikat yang di pilih
+    - memperbaiki tampilan kecamatan & desa di form input & edit
+    - memperbaiki tampilan jenis_berkas & proses di form input & edit
+    - optimasi script tabelBerkas.js
+
 26 Juni 2022 #00057
     - memperbarui tampilan detail_berkas dicabut
     - mengganti metode update kelengkapan & ket_proses

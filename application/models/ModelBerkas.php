@@ -72,7 +72,7 @@ class ModelBerkas extends CI_Model
 
     function get_berkas($id)
     {
-        $hsl = $this->db->select('*, tb_berkas.id as id_berkas, desa.nama as desa, kecamatan.nama as kecamatan')
+        $hsl = $this->db->select('*, tb_berkas.id as id_berkas, desa.nama as desa, desa.id as id_desa,kecamatan.nama as kecamatan, kecamatan.id as id_kecamatan')
             ->from('tb_berkas')
             ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
             ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
@@ -87,11 +87,14 @@ class ModelBerkas extends CI_Model
                 'tgl_masuk' => date_format(date_create($data->tgl_masuk), 'd M Y'),
                 'reg_sertipikat' => $data->reg_sertipikat,
                 'desa' => $data->desa,
+                'id_desa' => $data->id_desa,
+                'id_kecamatan' => $data->id_kecamatan,
                 'kecamatan' => $data->kecamatan,
-                'jenis_berkas' => $data->jenis_berkas,
+                'jenis_berkas' => explode(',', $data->jenis_berkas),
                 'nama_penjual' => str_replace(":", ": \n", $data->nama_penjual),
                 'nama_pembeli' => $data->nama_pembeli,
                 'tot_biaya' => 'Rp. ' . number_format($data->tot_biaya),
+                'biaya' => $data->tot_biaya,
                 'keterangan' => $data->keterangan,
                 'dsa' => $data->dsa,
                 'no_reg' => $data->no_reg,
