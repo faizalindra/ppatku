@@ -53,15 +53,15 @@ class ModelBerkas extends CI_Model
             }
             //membuat field tombol status berkas
             if ($data[$i]->berkas_selesai == 0) {
-                $data[$i]->status_berkas = '<a href="' . base_url('/proses/berkas_selesai/') . $data[$i]->id_berkas . '" onclick="return confirm(\'Pastikan semua proses sudah selesai?\');" class="badge badge-warning status_berkas">Proses</a>';
-                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas status_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                $data[$i]->status_berkas = '<span data="' . $data[$i]->id_berkas . '" class="badge badge-warning status_berkas">Proses</span>';
+                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
                                    <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else if ($data[$i]->berkas_selesai == 1) {
-                $data[$i]->status_berkas = '<a href="#" class="badge badge-success"> Selesai </a>';
-                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas status_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                $data[$i]->status_berkas = '<span class="badge badge-success"> Selesai </span>';
+                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
                                    <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else {
-                $data[$i]->status_berkas = '<a href="#"  class="badge badge-danger status_berkas"> Berkas Dicabut </a>';
+                $data[$i]->status_berkas = '<span class="badge badge-danger"> Berkas Dicabut </span>';
                 $data[$i]->aksi = '<button  class="badge badge-primary item_detail" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             }
 
@@ -72,7 +72,7 @@ class ModelBerkas extends CI_Model
 
     function get_berkas($id)
     {
-        $hsl = $this->db->select('*, tb_berkas.id as id_berkas, desa.nama as desa, kecamatan.nama as kecamatan')
+        $hsl = $this->db->select('*, tb_berkas.id as id_berkas, desa.nama as desa, desa.id as id_desa,kecamatan.nama as kecamatan, kecamatan.id as id_kecamatan')
             ->from('tb_berkas')
             ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
             ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
@@ -87,11 +87,14 @@ class ModelBerkas extends CI_Model
                 'tgl_masuk' => date_format(date_create($data->tgl_masuk), 'd M Y'),
                 'reg_sertipikat' => $data->reg_sertipikat,
                 'desa' => $data->desa,
+                'id_desa' => $data->id_desa,
+                'id_kecamatan' => $data->id_kecamatan,
                 'kecamatan' => $data->kecamatan,
-                'jenis_berkas' => $data->jenis_berkas,
+                'jenis_berkas' => explode(',', $data->jenis_berkas),
                 'nama_penjual' => str_replace(":", ": \n", $data->nama_penjual),
                 'nama_pembeli' => $data->nama_pembeli,
                 'tot_biaya' => 'Rp. ' . number_format($data->tot_biaya),
+                'biaya' => $data->tot_biaya,
                 'keterangan' => $data->keterangan,
                 'dsa' => $data->dsa,
                 'no_reg' => $data->no_reg,
@@ -113,36 +116,31 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    public function get_berkas_for_select($where = null)
+    public function get_berkas_for_select()
     {
-        if (!empty($where)) {
-            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
-                ->from('tb_berkas')
-                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
-                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-                ->where($where)
-                ->get()
-                ->result();
-        } else {
-            $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak')
-                ->from('tb_berkas')
-                ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
-                ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
-                ->get()
-                ->result();
-        }
+        $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak, berkas_selesai')
+            ->from('tb_berkas')
+            ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+            ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->get()
+            ->result();
+
         foreach ($data as $item) {
-            if (!empty($item->no_sertipikat)) {
-                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+            //cek apakah berkas sudah selesai atau berkas dicabut
+            if ($item->berkas_selesai < 1) {
+                //cek apakah berkas memiliki sertipikat atau tidak
+                if (!empty($item->no_sertipikat)) {
+                    if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                    } else {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    }
                 } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. ' . $item->jenis_hak . '. ' . $item->no_sertipikat . '/' . $item->desa . ', ' . $item->nama_penjual . '</option>';
-                }
-            } else {
-                if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
-                } else {
-                    $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . ' => ' . $item->nama_pembeli . '</option>';
+                    } else {
+                        $hasil[] = '<option value="' . $item->id_berkas . '">' . $item->id_berkas . '. Desa ' . $item->desa . ', ' . $item->nama_penjual . '</option>';
+                    }
                 }
             }
         }
@@ -150,7 +148,8 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
-    public function record_b(){
+    public function record_b()
+    {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas")->result();
         foreach ($hasil as $data) {
             $hsl['b_terdaftar'] = $data->total_record;
@@ -174,5 +173,20 @@ class ModelBerkas extends CI_Model
     {
         $hasil = $this->db->update('tb_berkas', $data, array('id' => $id));
         return $hasil;
+    }
+
+    // untuk mendapatkan id dari berkas yang terakhir diinputkan
+    public function get_last_id()
+    {
+        $data = $this->db->select('id')
+            ->from('tb_berkas')
+            ->order_by('id', 'desc')
+            ->limit(1)
+            ->get()
+            ->result_array();
+        foreach ($data as $key) {
+            $hsl = $key['id'];
+        }
+        return $hsl;
     }
 }

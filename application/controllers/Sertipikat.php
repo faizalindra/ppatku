@@ -46,6 +46,9 @@ class Sertipikat extends CI_Controller
             'proses' => implode(",", $this->input->post('jenis_berkas[]_i', true)),
             'ket' => $this->input->post('keterangan_i', true),
         ];
+        if (!empty($this->input->post('id_i', true))) {
+            $data['no_reg'] = $this->input->post('id_i', true);
+        }
         if (!empty($this->input->post('penerima_hak_i', true))) {
             $data['pembeli_hak'] = $this->input->post('penerima_hak_i', true);
         }

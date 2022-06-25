@@ -130,12 +130,27 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="container-fluid">
-                                                <div class="form-group row">
-                                                    <div class="input-group">
-                                                        <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">
-                                                                <i class="fa fa-calendar"></i>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">No.
+                                                                    </div>
+                                                                </div>
+                                                                <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas ?>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <div class="input-group">
+                                                                <input type="text" name="tgl_masuk" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
+                                                                <div class="input-group-append">
+                                                                    <div class="input-group-text">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

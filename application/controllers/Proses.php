@@ -7,7 +7,6 @@ class Proses extends CI_Controller
     {
         parent::__construct();
         cek_login();
-        // get_uri();
     }
 
     public function get_proses()
@@ -16,7 +15,6 @@ class Proses extends CI_Controller
         $ids['no_proses'] = $id;
         $data = $this->ModelProses->get_proses($id, $ids);
         echo json_encode($data);
-        // print_r($data);
     }
 
     public function update_proses()
@@ -25,22 +23,23 @@ class Proses extends CI_Controller
         $val = $this->input->post('val');
         $jp = $this->input->post('jp');
         $data = $this->ModelProses->update_proses($id, $val, $jp);
-        echo json_encode($data);
+        echo json_encode('berhasil');
     }
 
     function berkas_selesai()
-    {
-        // $a = $this->input->post('id');
+    {        
+        $id = $this->input->post('id');
+        $where = ['id' => $id];
+        //cabut berkas
         if (!empty($this->input->post('kode'))) {
-            $data = array('berkas_selesai' => 3);
-            $where = array('id' => $this->input->post('id'));
-            $datas = $this->ModelProses->berkas_selesai($data, $where);
-            echo json_encode('berhasil');
+            $data = ['berkas_selesai' =>  3];
+            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
+            echo json_encode('berhasil update status berkas');
+        //berkas selesai    
         } else {
             $data = ['berkas_selesai' =>  1];
-            $where = ['id' => $this->uri->segment(3)];
-            $datas = $this->ModelProses->berkas_selesai($data, $where);
-            redirect('berkas');
+            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
+            echo json_encode('berhasil update status berkas');
         }
     }
 

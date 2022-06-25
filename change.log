@@ -1,3 +1,31 @@
+27 Juni 2022 #00058
+    - setelah memilih sertipikat di input berkas, beberapa form input akan terisi otomatis berdasarkan sertipikat yang di pilih
+    - memperbaiki tampilan kecamatan & desa di form input & edit
+    - memperbaiki tampilan jenis_berkas & proses di form input & edit
+    - optimasi script tabelBerkas.js
+
+26 Juni 2022 #00057
+    - memperbarui tampilan detail_berkas dicabut
+    - mengganti metode update kelengkapan & ket_proses
+
+25 Juni 2022 #00056
+    - tombol berkas_selesai dan proses selesai tidak lagi mereload halaman
+    - penyesuaian footer card biaya pada detail_berkas
+
+25 Juni 2022 #00055
+    - update database
+    - get_sert_for_select sekarang hanya menampilkan sertipikat yang tidak dalam proses atau selesai proses
+
+24 Juni 2022 #00054
+    - update database
+    - menambah input 'no_reg' sertipikat
+    - penyesuaian max input No 'id' berkas
+    - penyesuaian fungsi 'get_berkas_for_select'
+    - penyesuaian fungsi 'get_sert_for_select'
+    - fix tampilan input sertipikat
+    - staff dapat memasukan nomor berkas di input berkas
+    - menambah kolom input 'no_reg' di input sertipikat
+
 22 Juni 2022 #00053
 
 22 Juni 2022 #00052

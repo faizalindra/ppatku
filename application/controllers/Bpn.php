@@ -91,8 +91,8 @@ class Bpn extends CI_Controller
     //untuk badge status proses bpn
     public function selesai()
     {
-        $id = $this->uri->segment(3);
+        $id = $this->input->post('id');
         $this->ModelBpn->selesai($id);
-        redirect('bpn');
+        echo json_encode('berhasil');
     }
 }

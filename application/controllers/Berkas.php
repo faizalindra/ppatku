@@ -13,6 +13,8 @@ class Berkas extends CI_Controller
 
     public function index()
     {
+
+        $data['max_berkas'] = $this->ModelBerkas->get_last_id();
         $data['b'] = $this->ModelBerkas->record_b();
         $data['sertipikat'] = $this->ModelSertipikat->get_sert_for_select();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
@@ -64,6 +66,10 @@ class Berkas extends CI_Controller
         }
         if ($this->input->post('sertipikat_e') != null) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat_e', true);
+            $no_reg['no_reg'] = $this->input->post('sertipikat_e');
+            $sert['is_used'] = "1";
+            $id_berkas = $this->input->post('id_e');
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg, $id_berkas);
         }
         $this->ModelBerkas->update_berkas($data, $id);
         redirect('berkas');
@@ -85,6 +91,9 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('sertipikat'))) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat');
+            $no_reg['no_reg'] = $this->input->post('sertipikat');
+            $sert['is_used'] = "1";
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg);
         }
         if (!empty($this->input->post('tgl_masuk'))) {
             $data['tgl_masuk'] = $this->input->post('tgl_masuk');
@@ -173,5 +182,11 @@ class Berkas extends CI_Controller
         $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
+    }
+
+    function get_sert_for_auto(){
+        $id = $this->input->post('id');
+        $sert = $this->ModelSertipikat->get_sert_for_auto($id);
+        echo json_encode($sert);
     }
 }

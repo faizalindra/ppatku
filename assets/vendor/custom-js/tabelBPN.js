@@ -53,7 +53,6 @@ $(document).ready(function () {
                 no_proses_bpn: id
             },
             success: function (data) {
-                $.each(data, function (tgl_masuk, no_proses_bpn, id_berkas, tahun, nama_pemohon, jenis_proses, no_bpn, ket) {
                     $('#edit_bpn').modal('show');
                     $('[name="no_proses_bpn_e"]').val(data.no_proses_bpn);
                     $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
@@ -63,7 +62,6 @@ $(document).ready(function () {
                     $('[name="tahun_e"]').val(data.tahun);
                     $('[name="no_berkas_e"]').val(data.id_berkas);
                     $('[name="ket_e"]').val(data.ket);
-                })
             },
             error: function () {
                 alert('Gagal mengambil data');
@@ -75,11 +73,25 @@ $(document).ready(function () {
     //fungsi badge status proses BPN
     function status_proses(status, id) {
         if (status == "0") {
-            return '<a href="' + base_url + '/bpn/selesai/' + id + '"' + 'onclick="return confirm(\'Pastikan proses sudah selesai?\');" class="badge badge-warning status_bpn"> Proses </a>';
+            return '<span data="' + id + '" class="badge badge-warning status_bpn"> Proses </span>';
         } else if (status == "1") {
-            return '<span class="badge badge-info">Selesai</span>';
+            return '<span class="badge badge-success">Selesai</span>';
         }
     }
+
+    $('#show_data').on('click', '.status_bpn', function () {
+        if (confirm('Pastikan proses telah selesai !!!!')) {
+            var id = $(this).attr('data');
+            $(this).toggleClass('badge-warning badge-success');
+            $(this).html('selesai');
+            // console.log(id)
+            $.post(base_url + '/proses/berkas_selesai', { id: id },
+                function (data) {
+                    console.log(data)
+                }, "json").fail(function () { console.log('gagal') });
+        }
+
+    });
 
     //untuk menjaga line break pada textarea
     function nl2br(str, is_xhtml) {
