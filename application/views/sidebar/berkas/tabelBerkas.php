@@ -600,9 +600,9 @@
         <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header p-1" style="background-color:#9efff4;">
-                        <h4 class="modal-title" id="id_berkas_"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="modal-header p-1 bg-primary text-white rounded">
+                        <h4 class="modal-title pl-3" id="id_berkas_"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -613,7 +613,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <div class="row">
                                                         <div class="col-md-6 text-left">
                                                             <h6><strong>
@@ -653,7 +653,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Kelengkapan</h6>
                                                 </div>
                                                 <div class="card-body p-1 text-left">
@@ -685,7 +685,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Proses</h6>
                                                 </div>
                                                 <div class="card-body p-1">
@@ -703,7 +703,7 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
                                         <div class="card-body p-1">
@@ -714,9 +714,9 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
-                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
                                                     Total Biaya
                                                 </div>
                                             </div>
@@ -824,22 +824,25 @@
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">
-                            <div id="id_berkas_2"></div>
-                        </h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <div class="modal-header p-1 bg-primary text-white">
+                        <h4 class="modal-title pl-3" id="id_berkas_2"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="text-center ">
+                                    <h4 class="text-center text-dark">Berkas Dicabut</h4>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6 pr-3">
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <div class="row">
                                                         <div class="col-md-6 text-left">
                                                             <h6><strong>
@@ -879,7 +882,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Kelengkapan</h6>
                                                 </div>
                                                 <div class="card-body p-1 text-left">
@@ -909,7 +912,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Proses</h6>
                                                 </div>
                                                 <div class="card-body p-1">
@@ -926,7 +929,7 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
                                         <div class="card-body p-1">
@@ -937,9 +940,9 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
-                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
                                                     Total Biaya
                                                 </div>
                                             </div>

@@ -89,21 +89,21 @@ $('#show_data').on('click', '.btn_sertipikat', function () {
             id: id
         },
         success: function (data) {
-                $('#ModalSertipikat').modal('show');
-                var html = "";
-                html += '<tr class="text-capitalize text-center">' +
-                    '<td>' + id + '</td>' +
-                    '<td>' + data.tgl_daftar + '</td>' +
-                    '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + '</td>' +
-                    '<td>' + data.kecamatan + '</td>' +
-                    '<td>' + data.luas + '</td>' +
-                    '<td>' + data.pemilik_hak + '</td>' +
-                    '<td>' + data.pembeli_hak + '</td>' +
-                    '</tr>' +
-                    '<tr>' + '<td colspan="8"> Keterangan :' + '<p>' + data.ket + '</p>' +
-                    '</td>' + '</tr>';
+            $('#ModalSertipikat').modal('show');
+            var html = "";
+            html += '<tr class="text-capitalize text-center">' +
+                '<td>' + id + '</td>' +
+                '<td>' + data.tgl_daftar + '</td>' +
+                '<td>' + data.jenis_hak + '. ' + data.no_sertipikat + '/' + data.desa + '</td>' +
+                '<td>' + data.kecamatan + '</td>' +
+                '<td>' + data.luas + '</td>' +
+                '<td>' + data.pemilik_hak + '</td>' +
+                '<td>' + data.pembeli_hak + '</td>' +
+                '</tr>' +
+                '<tr>' + '<td colspan="8"> Keterangan :' + '<p>' + data.ket + '</p>' +
+                '</td>' + '</tr>';
 
-                $('#detail_sertipikat').html(html);
+            $('#detail_sertipikat').html(html);
         },
         error: function () {
             alert('gagal mengambil data sertipikat');
@@ -124,20 +124,20 @@ $('#show_data').on('click', '.edit_berkas', function () {
             id: id
         },
         success: function (data) {
-                $('#formedit').modal('show');
-                $('[name="id_e"]').val(data.id_berkas);
-                $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
-                $('[name="sertipikat_e"]').val(data.reg_sertipikat);
-                $('[name="kecamatan_e"]').val(data.id_kecamatan);
-                var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
-                $('[name="desa_e"]').html(html);
-                $('[name="desa_e"]').val(data.id_desa);
-                $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
-                $('[name="jenis_berkas[]_e"]').trigger('change');
-                $('[name="penjual_e"]').val(data.nama_penjual);
-                $('[name="pembeli_e"]').val(data.nama_pembeli);
-                $('[name="tot_biaya_e"]').val(data.biaya);
-                $('[name="keterangan_e"]').val(data.keterangan);
+            $('#formedit').modal('show');
+            $('[name="id_e"]').val(data.id_berkas);
+            $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
+            $('[name="sertipikat_e"]').val(data.reg_sertipikat);
+            $('[name="kecamatan_e"]').val(data.id_kecamatan);
+            var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
+            $('[name="desa_e"]').html(html);
+            $('[name="desa_e"]').val(data.id_desa);
+            $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
+            $('[name="jenis_berkas[]_e"]').trigger('change');
+            $('[name="penjual_e"]').val(data.nama_penjual);
+            $('[name="pembeli_e"]').val(data.nama_pembeli);
+            $('[name="tot_biaya_e"]').val(data.biaya);
+            $('[name="keterangan_e"]').val(data.keterangan);
         },
         error: function (data) {
             alert('Gagal mengambil data (modal.edit_berkas');

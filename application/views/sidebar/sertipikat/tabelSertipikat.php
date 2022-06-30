@@ -172,12 +172,14 @@
                                                 <option value="Ganti Nama">Ganti Nama</option>
                                                 <option value="Hibah">Hibah</option>
                                                 <option value="Konversi">Konversi</option>
+                                                <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                 <option value="Pemecahan">Pemecahan</option>
                                                 <option value="Pengeringan">Pengeringan</option>
                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
                                                 <option value="Roya">Roya</option>
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
+                                                <option value="Wasiat">Wasiat</option>
                                             </select>
                                         </div>
                                     </div>
@@ -309,11 +311,13 @@
                                                     <option value="Ganti Nama">Ganti Nama</option>
                                                     <option value="Hibah">Hibah</option>
                                                     <option value="Konversi">Konversi</option>
+                                                    <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                     <option value="Pemecahan">Pemecahan</option>
                                                     <option value="Pengeringan">Pengeringan</option>
                                                     <option value="Peningkatan Hak">Peningkatan Hak</option>
                                                     <option value="SKMHT">SKMHT</option>
                                                     <option value="Waris">Waris</option>
+                                                    <option value="Wasiat">Wasiat</option>
                                                 </select>
                                                 <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>

@@ -22,7 +22,7 @@
                                 <div class="text-white">Selesai &nbsp; : <?= $b['b_selesai'] ?></div>
                             </div>
                             <div class="col-auto">
-                                <a href="<?= base_url('berkas'); ?>"><i class="fas fa-book fa-3x text-warning"></i></a>
+                                <a href="<?= base_url('berkas'); ?>"><i class="fas fa-book fa-5x text-warning"></i></a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <div class="text-white">&nbsp;</div>
                             </div>
                             <div class="col-auto">
-                                <a href="<?= base_url('berkas'); ?>"><i class="fas fa-certificate fa-3x text-warning"></i></a>
+                                <a href="<?= base_url('berkas'); ?>"><i class="fas fa-certificate fa-5x text-warning"></i></a>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                 <div class="text-white">Selesai &nbsp; : <?= $bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
                             </div>
                             <div class="col-auto">
-                                <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-3x text-warning"></i></a>
+                                <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-5x text-warning"></i></a>
                             </div>
                         </div>
                     </div>

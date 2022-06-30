@@ -1,3 +1,7 @@
+30 Juni 2022 #00059
+    - small fix
+    - menambah proses baru di field 'proses[]' pada input & edit sertipikat
+
 27 Juni 2022 #00058
     - setelah memilih sertipikat di input berkas, beberapa form input akan terisi otomatis berdasarkan sertipikat yang di pilih
     - memperbaiki tampilan kecamatan & desa di form input & edit
