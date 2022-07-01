@@ -225,7 +225,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50" autocapitalize="on">
+                                                        <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50" autocapitalize="on">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">Pihak 2
                                                             </div>

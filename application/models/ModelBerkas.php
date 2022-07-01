@@ -90,7 +90,7 @@ class ModelBerkas extends CI_Model
                 'id_desa' => $data->id_desa,
                 'id_kecamatan' => $data->id_kecamatan,
                 'kecamatan' => $data->kecamatan,
-                'jenis_berkas' => explode(',', $data->jenis_berkas),
+                'jenis_berkas' => $data->jenis_berkas,
                 'nama_penjual' => str_replace(":", ": \n", $data->nama_penjual),
                 'nama_pembeli' => $data->nama_pembeli,
                 'tot_biaya' => 'Rp. ' . number_format($data->tot_biaya),

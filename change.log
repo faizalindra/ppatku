@@ -1,3 +1,11 @@
+1 Juli 2022 #00060
+    - menambah proses roya
+    - menambah kelengkapan roya & HT
+    - mengganti kolom database 'tb_kelengkapan' : 'ktp_pasangan_penjual' ke 'ktp_p_penjual', 'ktp_pasangan_pembeli' ke 'ktp_p_pembeli'
+    - fix 'jenis_berkas' tidak tampil sebagaimana mestinya di 'detail_berkas'
+    - fix input pembeli tidak bisa diisi kosong
+    - update database 
+
 30 Juni 2022 #00059
     - small fix
     - menambah proses baru di field 'proses[]' pada input & edit sertipikat

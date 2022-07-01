@@ -109,7 +109,7 @@ class Berkas extends CI_Controller
             $data_k['ktp_penjual'] = 1;
         }
         if (!empty($this->input->post('ktp_is_penjual'))) {
-            $data_k['ktp_pasangan_penjual'] = 1;
+            $data_k['ktp_p_penjual'] = 1;
         }
         if (!empty($this->input->post('kk_penjual'))) {
             $data_k['kk_penjual'] = 1;
@@ -118,7 +118,7 @@ class Berkas extends CI_Controller
             $data_k['ktp_pembeli'] = 1;
         }
         if (!empty($this->input->post('ktp_is_pembeli'))) {
-            $data_k['ktp_pasangan_pembeli'] = 1;
+            $data_k['ktp_p_pembeli'] = 1;
         }
         if (!empty($this->input->post('kk_pembeli'))) {
             $data_k['kk_pembeli'] = 1;

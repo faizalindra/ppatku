@@ -209,6 +209,7 @@
                                                                 <option value="Pemecahan">Pemecahan</option>
                                                                 <option value="Pengeringan">Pengeringan</option>
                                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                                <option value="Roya">Roya</option>
                                                                 <option value="SKMHT">SKMHT</option>
                                                                 <option value="Waris">Waris</option>
                                                             </select>
@@ -225,7 +226,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 2
                                                                 </div>
@@ -544,6 +545,7 @@
                                                         <option value="Pemecahan">Pemecahan</option>
                                                         <option value="Pengeringan">Pengeringan</option>
                                                         <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                        <option value="Roya">Roya</option>
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
                                                     </select>

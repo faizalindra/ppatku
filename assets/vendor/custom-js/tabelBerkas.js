@@ -371,15 +371,15 @@ $('#modelDetail2').on('click', '.tbl_proses', function () {
     var jp = $(this).attr('datat');
     console.log(id + "-" + jp + "-" + val);
     if (jenis_modal == 0) {
-        if (user_role != 2 || user_role != 3) {
-            if (confirm('Kelengkapan ada?')) {
+        // if (user_role != 2 || user_role != 3) {
+            if (confirm('Konfirmasi proses?')) {
                 $.post(base_url + '/proses/update_proses', { id: id, jp: jp, val: val },
                     function (data) {
                         console.log(data);
                         detail_proses(id);
                     }, "json").fail(function () { console.log('gagal mengupdate proses') });
             }
-        }
+        // }
     }
 });
 
