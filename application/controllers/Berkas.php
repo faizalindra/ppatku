@@ -32,7 +32,7 @@ class Berkas extends CI_Controller
 
     function data_berkas()
     {
-        $data = $this->ModelBerkas->data_berkas();
+        $data['data'] = $this->ModelBerkas->data_berkas();
         echo json_encode($data);
     }
 
@@ -184,9 +184,23 @@ class Berkas extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    function get_sert_for_auto(){
+    function get_sert_for_auto()
+    {
         $id = $this->input->post('id');
         $sert = $this->ModelSertipikat->get_sert_for_auto($id);
         echo json_encode($sert);
+    }
+
+    function print_berkas()
+    {
+        $id = $this->uri->segment(3);
+        if ($id == null) {
+            $data['heading']= 'Error 404';
+            $data['message']= 'Halaman tidak ditemukan';
+            $this->load->view('errors/html/error_404', $data);
+        } else {
+            $data['berkas'] = $this->ModelBerkas->get_berkas($id);
+            $this->load->view('sidebar/berkas/print', $data);
+        }
     }
 }

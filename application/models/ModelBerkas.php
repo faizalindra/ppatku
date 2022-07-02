@@ -14,10 +14,10 @@ class ModelBerkas extends CI_Model
         $this->db->update('tb_kelengkapan', $datas, $id);
     }
 
-    public function getBerkas()
-    {
-        return $this->db->get('tb_berkas');
-    }
+    // public function getBerkas()
+    // {
+    //     return $this->db->get('tb_berkas');
+    // }
 
     //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
     public function getBerkasUnfinish()
@@ -100,7 +100,7 @@ class ModelBerkas extends CI_Model
                 'no_reg' => $data->no_reg,
                 'no_sertipikat' => $data->no_sertipikat,
                 'luas' => $data->luas,
-                'tgl_daftar' => $data->tgl_daftar,
+                'tgl_daftar' => date_format(date_create($data->tgl_daftar), 'd M Y'),
                 'jenis_hak' => $data->jenis_hak,
                 'pemilik_hak' => $data->pemilik_hak,
                 'pembeli_hak' => $data->pembeli_hak,
@@ -109,8 +109,10 @@ class ModelBerkas extends CI_Model
             );
             if (!empty($data->jenis_hak && !empty($data->no_sertipikat))) {
                 $hasil['sertipikat'] = $data->jenis_hak . '. ' . $data->no_sertipikat . ' / ' . $data->desa . ', Kec. ' . $data->kecamatan;
+                $hasil['sertipikat2'] = $data->jenis_hak . '. ' . $data->no_sertipikat . '/' . $data->desa;
             } else {
                 $hasil['sertipikat'] = 'Desa ' . $data->desa . ', Kec. ' . $data->kecamatan;
+                $hasil['sertipikat2'] = 'Desa ' . $data->desa;
             }
         }
         return $hasil;
@@ -188,5 +190,35 @@ class ModelBerkas extends CI_Model
             $hsl = $key['id'];
         }
         return $hsl;
+    }
+
+    function get_berkas_for_print($id)
+    {
+        $data = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan')
+            ->from('tb_berkas')
+            ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
+            ->join('kecamatan', 'desa.kecamatan = kecamatan.id', 'left')
+            ->where('id', $id)
+            ->get()
+            ->result();
+        foreach ($data as $item) {
+            if($item->reg_sertipikat == null || $item->reg_sertipikat == ''){
+                $hasil['sertipikat'] = 'Desa ' . $item->desa . ', Kec. ' . $item->kecamatan;
+            }
+            $hasil = array(
+                'id' => $item->id,
+                'reg_sertipikat' => $item->reg_sertipikat,
+                'desa' => $item->desa,
+                'kecamatan' => $item->kecamatan,
+                'alamat' => $item->alamat,
+                'tgl_daftar' => $item->tgl_daftar,
+                'jenis_hak' => $item->jenis_hak,
+                'pemilik_hak' => $item->pemilik_hak,
+                'pembeli_hak' => $item->pembeli_hak,
+                'proses' => $item->proses,
+                'ket' => $item->ket,
+            );
+        }
+        return $hasil;
     }
 }

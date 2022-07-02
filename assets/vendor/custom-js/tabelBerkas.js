@@ -1,5 +1,6 @@
 var berkas_id_detail = 0;
-var jenis_modal = 0; // 0 = modal berkas, 1 = modal berkas cabut
+var jenis_modal = 0;
+// var table; // 0 = modal berkas, 1 = modal berkas cabut
 data_berkas(); //pemanggilan fungsi tampil barang.
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
@@ -9,38 +10,62 @@ $('.proses').select2();
 /////////////////////////////////////////////////// -- Tabel Berkas -- //////////////////////////////////////////////////
 // fungsi tampil tabel berkas
 function data_berkas() {
-    $.ajax({
-        method: 'GET',
-        url: base_url + '/berkas/data_berkas',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-
-            var html = '';
-            var i;
-            for (i = 0; i < data.length; i++) {
-                html += '<tr class="text-capitalize text-center">' +
-                    '<td>' + data[i].id_berkas + '</td>' +
-                    '<td>' + data[i].tgl_masuk + '</td>' +
-                    '<td>' + data[i].sertipikat + '</td>' +
-                    '<td>' + data[i].kecamatan + '</td>' +
-                    '<td>' + data[i].jenis_berkas + '</td>' +
-                    '<td>' + nl2br(data[i].nama_penjual) + '</td>' +
-                    '<td>' + data[i].nama_pembeli + '</td>' +
-                    '<td>' + data[i].status_berkas + '</td>' +
-                    '<td style="text-align:center;">' + data[i].aksi + '</td>' + '</tr>';
-            }
-            $('#show_data').html(html);
-            var table = $('#tabel-berkas').dataTable({});
-            if (user_role === 2 || user_role === '2') {
-                $('.status_berkas').removeAttr('href').removeAttr('onclick');
-            }
+    // $('#tabel-berkas').DataTable().clear().destroy();
+    var table = $('#tabel-berkas').dataTable({
+        "ajax": {
+            "url": base_url + "/berkas/data_berkas",
+            "type": "post",
+            // "dataSrc": "data",
         },
-        error: function () {
-            alert('Gagal mengambil data tabel');
-        }
-
-    });
+        columns: [{
+            data: 'id_berkas'
+        },
+        {
+            data: 'tgl_masuk'
+        },
+        {
+            data: 'sertipikat'
+        },
+        {
+            data: 'kecamatan'
+        },
+        {
+            data: 'jenis_berkas'
+        },
+        {
+            data: 'nama_penjual'
+        },
+        {
+            data: 'nama_pembeli'
+        },
+        {
+            data: 'status_berkas'
+        },
+        {
+            data: 'aksi'
+        },
+        ],
+        'columnDefs': [
+            {
+                "targets": 5,
+                "className": "text-center",
+            },
+            {
+                "targets": 6,
+                "className": "text-center",
+            },
+            {
+                "targets": 7,
+                "className": "text-center",
+            },
+            {
+                "targets": 8,
+                "className": "text-center",
+            },
+        ]
+    }
+    );
+    // $('#tabel-berkas').dataTable().fnFilter('mandiraja');
 }
 
 // tombol detail berkas
@@ -77,6 +102,12 @@ $('#show_data').on('click', '.item_detail2', function () {
     });
     return false;
 });
+
+//tombol print nomor berkas
+$('#print_b').click(function(){
+    var idb = berkas_id_detail;
+    window.open(base_url + '/berkas/print_berkas/' + idb, '_blank');
+})
 
 // tombol detail sertipikat
 $('#show_data').on('click', '.btn_sertipikat', function () {
@@ -372,13 +403,13 @@ $('#modelDetail2').on('click', '.tbl_proses', function () {
     console.log(id + "-" + jp + "-" + val);
     if (jenis_modal == 0) {
         // if (user_role != 2 || user_role != 3) {
-            if (confirm('Konfirmasi proses?')) {
-                $.post(base_url + '/proses/update_proses', { id: id, jp: jp, val: val },
-                    function (data) {
-                        console.log(data);
-                        detail_proses(id);
-                    }, "json").fail(function () { console.log('gagal mengupdate proses') });
-            }
+        if (confirm('Konfirmasi proses?')) {
+            $.post(base_url + '/proses/update_proses', { id: id, jp: jp, val: val },
+                function (data) {
+                    console.log(data);
+                    detail_proses(id);
+                }, "json").fail(function () { console.log('gagal mengupdate proses') });
+        }
         // }
     }
 });

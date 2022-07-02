@@ -32,13 +32,13 @@ class ModelProses extends CI_Model
         foreach ($jb as $j) {
             switch ($j) {
                 case "AJB":
-                    $jenis_berkas = array(5, 8, 10, 13);
+                    $jenis_berkas = array(5, 10, 13);
                     break;
                 case "Hibah":
-                    $jenis_berkas = array(5, 8, 10, 13);
+                    $jenis_berkas = array(5, 10, 13);
                     break;
                 case "APHB":
-                    $jenis_berkas = array(5, 8, 10, 13);
+                    $jenis_berkas = array(5, 10, 13);
                     break;
                 case "Pemecahan":
                     $jenis_berkas = array(5, 9);

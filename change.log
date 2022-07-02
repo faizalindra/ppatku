@@ -1,3 +1,10 @@
+2 Juli 2022 #00061
+    - menambah fungsi print nomor berkas
+    - merombak fungsi 'data_berkas' di tabelBerkas
+    - penyesuaian jenis_berkas dan proses berkas
+    - pemilik hak sekarang dapat menginput minimal 4 karakter
+    - fix penerima_hak tidak bisa kosong di input sertipikat
+
 1 Juli 2022 #00060
     - menambah proses roya
     - menambah kelengkapan roya & HT

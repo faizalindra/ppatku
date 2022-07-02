@@ -185,7 +185,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Pemilik
                                                 </div>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Penerima
                                                 </div>
@@ -324,7 +324,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">Pemilik
                                                     </div>

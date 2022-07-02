@@ -216,7 +216,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50" required>
+                                                        <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">Pihak 1
                                                             </div>
@@ -667,6 +667,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer p-0">
+                    <button type="button" class="btn btn-lg btn-white border" data-dismiss="modal"><a id="print_b" href="" class="fa fa-print p-0 m-0"></a></button>
                 </div>
             </div>
         </div>
