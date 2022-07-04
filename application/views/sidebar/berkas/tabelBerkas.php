@@ -92,10 +92,11 @@
 
             <div class="row">
                 <div class="col-lg-12 col-auto">
-                    <table class="table table-striped" id="tabel-berkas">
+                    <table class="table table-striped" id="tabel-berkas" style="width: flex !important;;">
                         <thead>
                             <tr class="text-center">
                                 <th>#</th>
+                                <th>Kode</th>
                                 <th>Tanggal Masuk</th>
                                 <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
@@ -140,7 +141,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas ?>">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+2 ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -995,7 +996,9 @@
             #ui-datepicker-div {
                 z-index: 10000 !important;
             }
-
+            #tabel-berkas {
+                width: flex !important;
+            }
             /* table,
             th,
             td {

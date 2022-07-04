@@ -30,9 +30,9 @@ class Berkas extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    function data_berkas()
+    function tabel_berkas()
     {
-        $data['data'] = $this->ModelBerkas->data_berkas();
+        $data['data'] = $this->ModelBerkas->tabel_berkas();
         echo json_encode($data);
     }
 

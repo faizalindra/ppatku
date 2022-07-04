@@ -40,6 +40,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">#</th>
+                            <th scope="col">Kode</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nomor Sertipikat</th>
                             <th scope="col">Kecamatan</th>

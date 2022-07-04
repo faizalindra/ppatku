@@ -8,20 +8,23 @@ $(document).ready(function () {
     function data_BPN() {
         $.ajax({
             method: 'GET',
-            url: base_url + '/bpn/get_prosesBPN',
+            url: base_url + '/bpn/tabel_bpn',
             async: true,
             dataType: 'json',
             success: function (data) {
                 var html = '';
                 var i;
+                var a = 1;
                 var aksi = '';
                 for (i = 0; i < data.length; i++) {
+                    
                     if (user_role != 2 || user_role != '2') {
                         var aksi = '<td style="text-align:center;">' +
                             '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>';
                     }
                     html += '<tr class="text-capitalize text-center">' +
-                        '<td>' + data[i].no_proses_bpn + '</td>' +
+                        '<td>' + a++ + '</td>' +
+                        '<td>P' + data[i].kode_p + '</td>' +
                         '<td>' + data[i].tgl_masuk + '</td>' +
                         '<td>' + data[i].nama_pemohon + '</td>' +
                         '<td>' + data[i].no_bpn + '/' + data[i].tahun + '</td>' +
@@ -85,7 +88,7 @@ $(document).ready(function () {
             $(this).toggleClass('badge-warning badge-success');
             $(this).html('selesai');
             // console.log(id)
-            $.post(base_url + '/proses/berkas_selesai', { id: id },
+            $.post(base_url + '/bpn/selesai', { id: id },
                 function (data) {
                     console.log(data)
                 }, "json").fail(function () { console.log('gagal') });

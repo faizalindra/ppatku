@@ -1,7 +1,11 @@
 var berkas_id_detail = 0;
 var jenis_modal = 0;
 // var table; // 0 = modal berkas, 1 = modal berkas cabut
-data_berkas(); //pemanggilan fungsi tampil barang.
+tabel_berkas(); //pemanggilan fungsi tampil barang.
+$(document).ready(function () {
+    setTimeout(function () {
+    $('#tabel-berkas').removeAttr('style')}, 1);
+});
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
 $('.select2').select2();
@@ -9,16 +13,20 @@ $('.proses').select2();
 
 /////////////////////////////////////////////////// -- Tabel Berkas -- //////////////////////////////////////////////////
 // fungsi tampil tabel berkas
-function data_berkas() {
+function tabel_berkas() {
     // $('#tabel-berkas').DataTable().clear().destroy();
     var table = $('#tabel-berkas').dataTable({
         "ajax": {
-            "url": base_url + "/berkas/data_berkas",
+            "url": base_url + "/berkas/tabel_berkas",
             "type": "post",
+            "autoWidth": true,
             // "dataSrc": "data",
         },
         columns: [{
-            data: 'id_berkas'
+            data: 'no_urut'
+        },
+        {
+            data: 'kode_b'
         },
         {
             data: 'tgl_masuk'
@@ -104,7 +112,7 @@ $('#show_data').on('click', '.item_detail2', function () {
 });
 
 //tombol print nomor berkas
-$('#print_b').click(function(){
+$('#print_b').click(function () {
     var idb = berkas_id_detail;
     window.open(base_url + '/berkas/print_berkas/' + idb, '_blank');
 })
@@ -215,7 +223,7 @@ $('#show_data').on('click', '.status_berkas', function () {
     if (confirm('Pastikan proses telah selesai !!!!')) {
         var id = $(this).attr('data');
         $(this).toggleClass('badge-warning badge-success');
-        $(this).html('selesai');
+        $(this).html('Selesai');
         console.log(id)
         $.post(base_url + '/proses/berkas_selesai', { id: id },
             function (data) {

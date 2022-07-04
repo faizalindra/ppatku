@@ -13,6 +13,7 @@ $(document).ready(function () {
             success: function (data) {
                 var html = '';
                 var i;
+                var a=1;
                 var aksi = '';
                 for (i = 0; i < data.length; i++) {
                     if (user_role != 2 || user_role != '2') {
@@ -20,7 +21,8 @@ $(document).ready(function () {
                             '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_reg + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>'
                     }
                     html += '<tr class="text-capitalize text-center">' +
-                        '<td>' + data[i].no_reg + '</td>' +
+                        '<td>' + a++  + '</td>' +
+                        '<td>S' + data[i].kode_s + '</td>' +
                         '<td>' + data[i].tgl_daftar + '</td>' +
                         '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + '/' + data[i].desa + '</td>' +
                         '<td>' + data[i].kecamatan + '</td>' +

@@ -3,11 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelBpn extends CI_Model
 {
-    public function get_prosesBPN()
+    public function tabel_bpn()
     {
         $data = $this->db->get('tb_proses_bpn')->result();
         for ($i=0; $i<count($data); $i++) {
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
+            $data[$i]->kode_p = str_pad($data[$i]->no_proses_bpn, "5", "0", STR_PAD_LEFT);
+            
         }
         return $data;
     }

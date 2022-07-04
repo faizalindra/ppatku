@@ -22,9 +22,9 @@ class Bpn extends CI_Controller
     }
 
     //untuk tabel bpn
-    public function get_prosesBPN()
+    public function tabel_bpn()
     {
-        $data = $this->ModelBpn->get_prosesBPN();
+        $data = $this->ModelBpn->tabel_bpn();
         echo json_encode($data);
         return $data;
     }
@@ -50,6 +50,7 @@ class Bpn extends CI_Controller
         $id = array('no_proses_bpn' => $this->input->post('no_proses_bpn_e'));
         $data = array(
             'nama_pemohon' => $this->input->post('nama_pemohon_e'),
+            'id_berkas' => $this->input->post('no_berkas_e'),
             'no_bpn' => $this->input->post('no_bpn_e'),
             'tahun' => $this->input->post('tahun_e'),
             'jenis_proses' => $this->input->post('jenis_proses_e'),

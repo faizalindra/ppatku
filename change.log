@@ -1,3 +1,12 @@
+4 Juli 2022 #00062
+    - mengubah link font
+    - menambah icon
+    - mengubah nama fungsi 'data_berkas' menjadi 'tabel_berkas'
+    - mengubah nama fungsi 'get_prosesBPN' menjadi 'tabel_bpn'
+    - fix proses bpn tidak bisa berganti status
+    - menambah kode pada berkas, sertipikat dan proses BPN
+    - fix 'tabel_berkas' menjadi responsive
+
 2 Juli 2022 #00061
     - menambah fungsi print nomor berkas
     - merombak fungsi 'data_berkas' di tabelBerkas

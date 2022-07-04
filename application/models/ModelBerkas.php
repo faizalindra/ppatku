@@ -34,7 +34,7 @@ class ModelBerkas extends CI_Model
     }
 
     //untuk tabelBerkas
-    function data_berkas()
+    function tabel_berkas()
     {
         $data = $this->db->select('*, tb_berkas.id as id_berkas, desa.nama as desa, kecamatan.nama as kecamatan')
             ->from('tb_berkas')
@@ -44,7 +44,11 @@ class ModelBerkas extends CI_Model
             ->get()
             ->result();
         for ($i = 0; $i < count($data); $i++) {
+            $kode_b = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
+            $data[$i]->no_urut = $i+1;
+            $data[$i]->kode_b = 'B' . $kode_b;
             $data[$i]->nama_penjual = str_replace(":", ": \n", $data[$i]->nama_penjual);
+            $data[$i]->jenis_berkas = str_replace(",", ", ", $data[$i]->jenis_berkas);
             //membuat field sertipikat
             if (!empty($data[$i]->jenis_hak)) {
                 $data[$i]->sertipikat = '<href class="btn_sertipikat" data="' . $data[$i]->reg_sertipikat . '">' . $data[$i]->jenis_hak . '. ' . $data[$i]->no_sertipikat . '/' . $data[$i]->desa;

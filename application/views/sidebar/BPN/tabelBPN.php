@@ -75,6 +75,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">No.</th>
+                            <th scope="col">Kode</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
