@@ -3,10 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelBerkas extends CI_Model
 {
+    //untuk input berkas jika kelengkapan berkas tidak ada
     public function simpanBerkas($data1 = null)
     {
         $this->db->insert('tb_berkas', $data1);
     }
+
+    //untuk input berkas jika kelengkapan berkas dimasukan 
     public function insert_berkas_kelengkapan($data, $datas = null)
     {
         $this->db->insert('tb_berkas', $data);
@@ -14,12 +17,7 @@ class ModelBerkas extends CI_Model
         $this->db->update('tb_kelengkapan', $datas, $id);
     }
 
-    // public function getBerkas()
-    // {
-    //     return $this->db->get('tb_berkas');
-    // }
-
-    //menambilkan berkas yang belum selesai + di join dengan tabel sertipikat
+    //untuk card berkas pada Dashboard
     public function getBerkasUnfinish()
     {
         // $hsl = $this->db->query("SELECT * FROM tb_berkas left join tb_sertipikat on tb_sertipikat.no_reg = tb_berkas.reg_sertipikat WHERE berkas_selesai='0'");
@@ -30,6 +28,9 @@ class ModelBerkas extends CI_Model
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->where('berkas_selesai', 0)
             ->get();
+        foreach ($hsl->result() as $data) {
+            $data->kode = 'B' . $data->id_berkas;
+        }
         return $hsl->result_array();
     }
 
@@ -122,6 +123,7 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
+    //untuk selector berkas pada input BPN
     public function get_berkas_for_select()
     {
         $data = $this->db->select('tb_berkas.id as id_berkas, no_sertipikat, nama_penjual, nama_pembeli, desa.nama as desa, jenis_hak, berkas_selesai')
@@ -154,6 +156,7 @@ class ModelBerkas extends CI_Model
         return $hasil;
     }
 
+    //untuk data record card
     public function record_b()
     {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_berkas")->result();
@@ -175,6 +178,7 @@ class ModelBerkas extends CI_Model
         return $hsl;
     }
 
+    //untuk update berkas
     function update_berkas($data, $id)
     {
         $hasil = $this->db->update('tb_berkas', $data, array('id' => $id));
@@ -196,6 +200,7 @@ class ModelBerkas extends CI_Model
         return $hsl;
     }
 
+    //untuk halaman print berkas
     function get_berkas_for_print($id)
     {
         $data = $this->db->select('*, desa.nama as desa, kecamatan.nama as kecamatan')

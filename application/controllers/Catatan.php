@@ -16,8 +16,6 @@ class Catatan extends CI_Controller
         $data['catatan'] = $this->ModelCatatan->catatan($uid);
         $data['judul'] = "Catatan";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/catatan/tabelCatatan', $data);
         $this->load->view('templates/footer');
     }

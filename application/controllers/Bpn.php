@@ -15,8 +15,6 @@ class Bpn extends CI_Controller
         $data['judul'] = "Daftar Proses BPN";
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/bpn/tabelBpn', $data);
         $this->load->view('templates/footer');
     }

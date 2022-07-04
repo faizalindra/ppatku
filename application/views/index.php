@@ -82,7 +82,7 @@
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline" style="min-height: 210px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 justify-content-left" ><h5><u><?= $b['id_berkas'] ?></u></h5></div>
+                                            <div class="col-md-12 justify-content-left" ><h5><u><?= $b['kode'] ?></u></h5></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 text-center"><?= $b['jenis_berkas']; ?></div>

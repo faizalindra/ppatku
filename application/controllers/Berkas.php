@@ -20,8 +20,6 @@ class Berkas extends CI_Controller
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Berkas";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar');
         if ($this->session->userdata('role_id') == 2) { //notaris
             $this->load->view('sidebar/berkas/tabelBerkas_staff', $data);
         } else {
@@ -178,8 +176,8 @@ class Berkas extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
         $judul['judul'] = "Cabut Berkas";
         $this->load->view('templates/header', $judul);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
+        // $this->load->view('templates/sidebar');
+        // $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
     }

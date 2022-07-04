@@ -5,6 +5,8 @@ tabel_berkas(); //pemanggilan fungsi tampil barang.
 $(document).ready(function () {
     setTimeout(function () {
     $('#tabel-berkas').removeAttr('style')}, 1);
+    var cari = $('#cari_data').attr('data');
+    $('#tabel-berkas').dataTable().fnFilter(cari);
 });
 
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });

@@ -90,10 +90,11 @@
 
         <div class="row">
             <div class="col-lg-12 col-auto">
-                <table class="table table-striped" id="tabel-berkas">
+                <table class="table table-striped" id="tabel-berkas" style="width: flex;">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
+                            <th>Kode</th>
                             <th>Tanggal Masuk</th>
                             <th>No Sertipikat</th>
                             <th>Kecamatan</th>

@@ -64,8 +64,6 @@ class User extends CI_Controller
         $data['username'] = $this->session->userdata('username');
         $data['role_id'] = $this->session->userdata('role_id');
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/user/profile', $data);
         $this->load->view('templates/footer');
     }
@@ -94,8 +92,6 @@ class User extends CI_Controller
             $data['staff'] = $this->db->get('user')->result_array();
             $data['judul'] = 'Registrasi';
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar');
-            $this->load->view('templates/topbar');
             $this->load->view('sidebar/user/tabelUser', $data);
             $this->load->view('templates/footer');
         } else {

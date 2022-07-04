@@ -1,3 +1,9 @@
+4 Juli 2022 #00063
+    - menggabung topbar, sidebar, dan header menjadi 1
+    - menambah fitur pencarian
+    - fix 'tabel_berkas' menjadi responsive
+    - menambah icon di sidebar
+
 4 Juli 2022 #00062
     - mengubah link font
     - menambah icon
