@@ -54,6 +54,9 @@ class ModelKelengkapan extends CI_Model
                 case "Ganti Blangko":
                     $jenis_berkas = array(1, 3, 11, 12);
                     break;
+                case "Roya":
+                    $jenis_berkas = array(1, 3, 11, 12, 18);
+                    break;
             }
             $jb_hasil = array_merge($jb_hasil, $jenis_berkas);
             $jb_hasil = array_unique($jb_hasil);
@@ -68,7 +71,7 @@ class ModelKelengkapan extends CI_Model
         $a_keleng = '<li><span class="badge badge-success tbl_keleng" >';
         $b_keleng = '<li><span class="badge badge-danger tbl_keleng"';
         $c_keleng = '</span></li>';
-        $kelengkapan = array("", "KTP Penjual", "KTP Suami/Istri Penjual", "KK Penjual", "KTP Pembeli", "KTP Suami/Istri Pembeli", "KK Pembeli", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK");
+        $kelengkapan = array("", "KTP Penjual", "KTP Suami/Istri Penjual", "KK Penjual", "KTP Pembeli", "KTP Suami/Istri Pembeli", "KK Pembeli", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK", "Pengantar Roya");
         $hasil = $this->db->get_where('tb_kelengkapan', $id2)->result();
         foreach ($hasil as $hasil) {
             $data['ket'] = $hasil->ket_kelengkapan;
@@ -82,7 +85,7 @@ class ModelKelengkapan extends CI_Model
                         };
                         break;
                     case 2:
-                        if ($hasil->ktp_pasangan_penjual != null) {
+                        if ($hasil->ktp_p_penjual != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
                             $data['belum'] .=  $b_keleng . 'data="' . $id . '" data_s="2">'.$kelengkapan[$b] . $c_keleng;
@@ -103,7 +106,7 @@ class ModelKelengkapan extends CI_Model
                         };
                         break;
                     case 5:
-                        if ($hasil->ktp_pasangan_pembeli != null) {
+                        if ($hasil->ktp_p_pembeli != null) {
                             $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
                         } else {
                             $data['belum'] .=  $b_keleng . 'data="' . $id . '" data_s="5">'.$kelengkapan[$b] . $c_keleng;
@@ -193,6 +196,13 @@ class ModelKelengkapan extends CI_Model
                             $data['belum'] .=  $b_keleng . 'data="' . $id . '" data_s="17">'.$kelengkapan[$b] . $c_keleng;
                         };
                         break;
+                    case 18:
+                        if ($hasil->pengantar_roya != null) {
+                            $data['ada'] .=  $a_keleng . $kelengkapan[$b] . $c_keleng;
+                        } else {
+                            $data['belum'] .=  $b_keleng . 'data="' . $id . '" data_s="18">'.$kelengkapan[$b] . $c_keleng;
+                        };
+                        break;
                 }
             }
         }
@@ -208,7 +218,7 @@ class ModelKelengkapan extends CI_Model
                 $jk['ktp_penjual'] = 1;
                 break;
             case 2:
-                $jk['ktp_pasangan_penjual'] = 1;
+                $jk['ktp_p_penjual'] = 1;
                 break;
             case 3:
                 $jk['kk_penjual'] = 1;
@@ -217,7 +227,7 @@ class ModelKelengkapan extends CI_Model
                 $jk['ktp_pembeli'] = 1;
                 break;
             case 5:
-                $jk['ktp_pasangan_pembeli'] = 1;
+                $jk['ktp_p_pembeli'] = 1;
                 break;
             case 6:
                 $jk['kk_pembeli'] = 1;
@@ -254,6 +264,9 @@ class ModelKelengkapan extends CI_Model
                 break;
             case 17:
                 $jk['spk'] = 1;
+                break;
+            case 18:
+                $jk['pengantar_roya'] = 1;
                 break;
         }
         $this->db->update('tb_kelengkapan', $jk, $id);

@@ -40,6 +40,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">#</th>
+                            <th scope="col">Kode</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nomor Sertipikat</th>
                             <th scope="col">Kecamatan</th>
@@ -172,18 +173,20 @@
                                                 <option value="Ganti Nama">Ganti Nama</option>
                                                 <option value="Hibah">Hibah</option>
                                                 <option value="Konversi">Konversi</option>
+                                                <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                 <option value="Pemecahan">Pemecahan</option>
                                                 <option value="Pengeringan">Pengeringan</option>
                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
                                                 <option value="Roya">Roya</option>
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
+                                                <option value="Wasiat">Wasiat</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Pemilik
                                                 </div>
@@ -192,7 +195,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Penerima
                                                 </div>
@@ -309,18 +312,20 @@
                                                     <option value="Ganti Nama">Ganti Nama</option>
                                                     <option value="Hibah">Hibah</option>
                                                     <option value="Konversi">Konversi</option>
+                                                    <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                     <option value="Pemecahan">Pemecahan</option>
                                                     <option value="Pengeringan">Pengeringan</option>
                                                     <option value="Peningkatan Hak">Peningkatan Hak</option>
                                                     <option value="SKMHT">SKMHT</option>
                                                     <option value="Waris">Waris</option>
+                                                    <option value="Wasiat">Wasiat</option>
                                                 </select>
                                                 <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">Pemilik
                                                     </div>

@@ -16,8 +16,6 @@ class Sertipikat extends CI_Controller
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
         $this->load->view('templates/footer');
     }

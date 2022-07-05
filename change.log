@@ -1,3 +1,43 @@
+5 Juli 2022 #00064
+    - fix bug
+    - mengubah 'base_url' menjadi dynamic
+    - menambah 'id_berkas' pada Tabel BPN
+    - menambah pilihan bulan dan tahun di form input
+
+4 Juli 2022 #00063
+    - menggabung topbar, sidebar, dan header menjadi 1
+    - menambah fitur pencarian
+    - fix 'tabel_berkas' menjadi responsive
+    - menambah icon di sidebar
+
+4 Juli 2022 #00062
+    - mengubah link font
+    - menambah icon
+    - mengubah nama fungsi 'data_berkas' menjadi 'tabel_berkas'
+    - mengubah nama fungsi 'get_prosesBPN' menjadi 'tabel_bpn'
+    - fix proses bpn tidak bisa berganti status
+    - menambah kode pada berkas, sertipikat dan proses BPN
+    - fix 'tabel_berkas' menjadi responsive
+
+2 Juli 2022 #00061
+    - menambah fungsi print nomor berkas
+    - merombak fungsi 'data_berkas' di tabelBerkas
+    - penyesuaian jenis_berkas dan proses berkas
+    - pemilik hak sekarang dapat menginput minimal 4 karakter
+    - fix penerima_hak tidak bisa kosong di input sertipikat
+
+1 Juli 2022 #00060
+    - menambah proses roya
+    - menambah kelengkapan roya & HT
+    - mengganti kolom database 'tb_kelengkapan' : 'ktp_pasangan_penjual' ke 'ktp_p_penjual', 'ktp_pasangan_pembeli' ke 'ktp_p_pembeli'
+    - fix 'jenis_berkas' tidak tampil sebagaimana mestinya di 'detail_berkas'
+    - fix input pembeli tidak bisa diisi kosong
+    - update database 
+
+30 Juni 2022 #00059
+    - small fix
+    - menambah proses baru di field 'proses[]' pada input & edit sertipikat
+
 27 Juni 2022 #00058
     - setelah memilih sertipikat di input berkas, beberapa form input akan terisi otomatis berdasarkan sertipikat yang di pilih
     - memperbaiki tampilan kecamatan & desa di form input & edit

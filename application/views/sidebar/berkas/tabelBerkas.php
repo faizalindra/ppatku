@@ -1,5 +1,7 @@
-    <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
     <link href="<?= base_url('assets/vendor/jquery/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
     <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
@@ -90,10 +92,11 @@
 
             <div class="row">
                 <div class="col-lg-12 col-auto">
-                    <table class="table table-striped" id="tabel-berkas">
+                    <table class="table table-striped" id="tabel-berkas" style="width: flex !important;;">
                         <thead>
                             <tr class="text-center">
                                 <th>#</th>
+                                <th>Kode</th>
                                 <th>Tanggal Masuk</th>
                                 <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
@@ -138,7 +141,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas ?>">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+2 ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -209,6 +212,7 @@
                                                                 <option value="Pemecahan">Pemecahan</option>
                                                                 <option value="Pengeringan">Pengeringan</option>
                                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                                <option value="Roya">Roya</option>
                                                                 <option value="SKMHT">SKMHT</option>
                                                                 <option value="Waris">Waris</option>
                                                             </select>
@@ -216,7 +220,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50" required>
+                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50" required>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 1
                                                                 </div>
@@ -225,7 +229,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 2
                                                                 </div>
@@ -436,7 +440,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="30"></textarea>
+                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="50"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -544,6 +548,7 @@
                                                         <option value="Pemecahan">Pemecahan</option>
                                                         <option value="Pengeringan">Pengeringan</option>
                                                         <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                        <option value="Roya">Roya</option>
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
                                                     </select>
@@ -551,7 +556,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">Penjual
                                                         </div>
@@ -600,9 +605,9 @@
         <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header p-1" style="background-color:#9efff4;">
-                        <h4 class="modal-title" id="id_berkas_"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="modal-header p-1 bg-primary text-white rounded">
+                        <h4 class="modal-title pl-3" id="id_berkas_"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -613,7 +618,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <div class="row">
                                                         <div class="col-md-6 text-left">
                                                             <h6><strong>
@@ -653,7 +658,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Kelengkapan</h6>
                                                 </div>
                                                 <div class="card-body p-1 text-left">
@@ -685,7 +690,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Proses</h6>
                                                 </div>
                                                 <div class="card-body p-1">
@@ -703,7 +708,7 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
                                         <div class="card-body p-1">
@@ -714,9 +719,9 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
-                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
                                                     Total Biaya
                                                 </div>
                                             </div>
@@ -777,6 +782,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer p-0">
+                        <button type="button" class="btn btn-lg btn-white border" data-dismiss="modal"><a id="print_b" href="" class="fa fa-print p-0 m-0"></a></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -824,22 +832,25 @@
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">
-                            <div id="id_berkas_2"></div>
-                        </h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <div class="modal-header p-1 bg-primary text-white">
+                        <h4 class="modal-title pl-3" id="id_berkas_2"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="text-center ">
+                                    <h4 class="text-center text-dark">Berkas Dicabut</h4>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6 pr-3">
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <div class="row">
                                                         <div class="col-md-6 text-left">
                                                             <h6><strong>
@@ -879,7 +890,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Kelengkapan</h6>
                                                 </div>
                                                 <div class="card-body p-1 text-left">
@@ -909,7 +920,7 @@
                                     <div class="row">
                                         <div class="col-md-12 p-1">
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Proses</h6>
                                                 </div>
                                                 <div class="card-body p-1">
@@ -926,7 +937,7 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
                                         <div class="card-body p-1">
@@ -937,9 +948,9 @@
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
-                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
                                                     Total Biaya
                                                 </div>
                                             </div>
@@ -974,20 +985,20 @@
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/select2/select2.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/custom-js/tabelBerkas.js') ?>"></script>
-        <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
+
 
         <style>
             #ui-datepicker-div {
                 z-index: 10000 !important;
             }
-
+            #tabel-berkas {
+                width: flex !important;
+            }
             /* table,
             th,
             td {

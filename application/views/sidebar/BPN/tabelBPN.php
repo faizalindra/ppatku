@@ -76,6 +76,7 @@
                         <tr class="text-center">
                             <th scope="col">No.</th>
                             <th scope="col">Tanggal Masuk</th>
+                            <th scope="col">ID Berkas</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
                             <th scope="col">Jenis Proses</th>
