@@ -9,7 +9,9 @@ class ModelBpn extends CI_Model
         for ($i=0; $i<count($data); $i++) {
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
             $data[$i]->kode_p = str_pad($data[$i]->no_proses_bpn, "5", "0", STR_PAD_LEFT);
-            
+            $data[$i]->nomor = str_pad($data[$i]->no_bpn, "6", "0", STR_PAD_LEFT);
+            $id_berkas = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
+            $data[$i]->id_berkas = '<a href="' . base_url('cari/cari_berkas/B') . $id_berkas . '">B' . $id_berkas . '</a>';
         }
         return $data;
     }

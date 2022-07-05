@@ -33,4 +33,10 @@ class Cari extends CI_Controller
         }
 
     }
+    public function cari_berkas(){
+        $data = $this->uri->segment(3);
+        $this->session->set_flashdata('cari_data', $data);
+        redirect('berkas');
+        echo json_encode($data);
+    }
 }

@@ -82,8 +82,8 @@ class Bpn extends CI_Controller
 
         //post data ke modelBPN
         $this->ModelBpn->inputBPN($data);
-        echo json_encode($data);
         redirect('bpn');
+        echo json_encode($data);
     }
 
 

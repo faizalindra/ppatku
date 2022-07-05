@@ -2,7 +2,7 @@
 data_BPN();
 //select2 for proses
 $('.select2').select2();
-$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
+$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
 
 // fungsi tampil proses
 function data_BPN() {
@@ -24,10 +24,10 @@ function data_BPN() {
                 }
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + a++ + '</td>' +
-                    '<td>P' + data[i].kode_p + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
+                    '<td>' + data[i].id_berkas + '</td>' +
                     '<td>' + data[i].nama_pemohon + '</td>' +
-                    '<td>' + data[i].no_bpn + '/' + data[i].tahun + '</td>' +
+                    '<td>' + data[i].nomor + '/' + data[i].tahun + '</td>' +
                     '<td>' + data[i].jenis_proses + '</td>' +
                     '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
                     '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' + aksi + '</tr>';

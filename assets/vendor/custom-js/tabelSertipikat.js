@@ -1,7 +1,7 @@
 
 data_sertipikat();
 $('.select2').select2();
-$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
+$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
 
 
 // fungsi tampil berkas
@@ -18,20 +18,20 @@ function data_sertipikat() {
             var aksi = '';
             for (i = 0; i < data.length; i++) {
                 if (user_role != 2 || user_role != '2') {
-                    aksi = '<td style="text-align:center;">' +
+                    aksi = '<td >' +
                         '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_reg + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>'
                 }
-                html += '<tr class="text-capitalize text-center">' +
+                html += '<tr class="text-capitalize">' +
                     '<td>' + a++ + '</td>' +
                     '<td>S' + data[i].kode_s + '</td>' +
                     '<td>' + data[i].tgl_daftar + '</td>' +
-                    '<td>' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + '/' + data[i].desa + '</td>' +
-                    '<td>' + data[i].kecamatan + '</td>' +
+                    '<td >' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + '/' + data[i].desa + '</td>' +
+                    '<td >' + data[i].kecamatan + '</td>' +
                     '<td class="text-lowercase">' + luas_null(data[i].luas) + '</td>' +
-                    '<td>' + nl2br(data[i].pemilik_hak) + '</td>' +
-                    '<td>' + data[i].pembeli_hak + '</td>' +
+                    '<td class="text-center text-uppercase">' + nl2br(data[i].pemilik_hak) + '</td>' +
+                    '<td class="text-center text-uppercase">' + data[i].pembeli_hak + '</td>' +
                     '<td>' + data[i].proses + '</td>' +
-                    '<td class="text-left">' + nl2br(data[i].ket) + '</td>' + aksi + '</tr>';
+                    '<td>' + nl2br(data[i].ket) + '</td>' + aksi + '</tr>';
             }
             $('#show_data').html(html);
             var cari = $('#cari_data').attr('data');

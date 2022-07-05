@@ -1,3 +1,9 @@
+5 Juli 2022 #00064
+    - fix bug
+    - mengubah 'base_url' menjadi dynamic
+    - menambah 'id_berkas' pada Tabel BPN
+    - menambah pilihan bulan dan tahun di form input
+
 4 Juli 2022 #00063
     - menggabung topbar, sidebar, dan header menjadi 1
     - menambah fitur pencarian

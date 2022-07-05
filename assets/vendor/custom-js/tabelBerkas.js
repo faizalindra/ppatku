@@ -9,7 +9,7 @@ $(document).ready(function () {
     $('#tabel-berkas').dataTable().fnFilter(cari);
 });
 
-$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1) });
+$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
 $('.select2').select2();
 $('.proses').select2();
 
