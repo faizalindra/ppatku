@@ -151,4 +151,18 @@ class ModelSertipikat extends CI_Model
         $data['proses'] = explode(',', $data['proses']);
         return $data;
     }
+
+    public function get_last_id()
+    {
+        $data = $this->db->select('no_reg')
+            ->from('tb_sertipikat')
+            ->order_by('no_reg', 'desc')
+            ->limit(1)
+            ->get()
+            ->result_array();
+        foreach ($data as $key) {
+            $hsl = $key['no_reg'];
+        }
+        return $hsl;
+    }
 }

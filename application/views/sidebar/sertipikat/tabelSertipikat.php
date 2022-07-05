@@ -86,7 +86,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">No. </div>
                                                     </div>
-                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="2222">
+                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="<?= $max_sertipikat+5 ?>">
                                                 </div>
                                             </div>
                                         </div>

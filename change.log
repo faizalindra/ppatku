@@ -1,3 +1,6 @@
+6 Juli 2022 #00065
+    - menambah limit 'no_berkas' dan 'no_reg' pada form inputan berkas
+
 5 Juli 2022 #00064
     - fix bug
     - mengubah 'base_url' menjadi dynamic
