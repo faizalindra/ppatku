@@ -58,6 +58,12 @@ class Bpn extends CI_Controller
             $data['tgl_masuk'] = $this->input->post('tgl_masuk_e');
         }
         $this->ModelBpn->update_bpn($data, $id);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        STTD Berhasil di Update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('bpn');
         // echo json_encode($data);
         // echo json_encode($id);
@@ -82,6 +88,12 @@ class Bpn extends CI_Controller
 
         //post data ke modelBPN
         $this->ModelBpn->inputBPN($data);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        STTD Berhasil Ditambahkan
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('bpn');
         echo json_encode($data);
     }

@@ -70,6 +70,12 @@ class Berkas extends CI_Controller
             $this->ModelSertipikat->update_sertipikat($sert, $no_reg, $id_berkas);
         }
         $this->ModelBerkas->update_berkas($data, $id);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Berkas Berhasil di Update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('berkas');
     }
 
@@ -167,6 +173,12 @@ class Berkas extends CI_Controller
             $this->ModelBerkas->simpanBerkas($data);
             echo json_encode($data);
         }
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                        Berkas Berhasil Ditambahkan
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>');
         redirect('berkas');
     }
 
@@ -193,8 +205,8 @@ class Berkas extends CI_Controller
     {
         $id = $this->uri->segment(3);
         if ($id == null) {
-            $data['heading']= 'Error 404';
-            $data['message']= 'Halaman tidak ditemukan';
+            $data['heading'] = 'Error 404';
+            $data['message'] = 'Halaman tidak ditemukan';
             $this->load->view('errors/html/error_404', $data);
         } else {
             $data['berkas'] = $this->ModelBerkas->get_berkas($id);

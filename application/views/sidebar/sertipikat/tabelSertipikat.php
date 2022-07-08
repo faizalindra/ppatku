@@ -33,7 +33,7 @@
         </div>
 
         <p></p>
-
+        <?= $this->session->flashdata('success'); ?>
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-sertipikat">
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <select name="jenis_hak_i" id="jenis_hak_i" class="custom-select">
+                                            <select name="jenis_hak_i" id="jenis_hak_i" class="custom-select" required>
                                                 <option disabled selected value> -- Jenis Hak -- </option>
                                                 <option value="M"> Hak Milik </option>
                                                 <option value="GB"> Guna Banggunan </option>
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="number" name="nomor_sertipikat_i" class="form-control" id="nomor_sertipikat_i" placeholder="-- Nomor Sertipikat --" autocomplete="off" max="99999" title="Angka maximal 99999">
+                                            <input type="number" name="nomor_sertipikat_i" class="form-control" id="nomor_sertipikat_i" placeholder="-- Nomor Sertipikat --" autocomplete="off" max="99999" title="Angka maximal 99999" required>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-book"></i>
@@ -129,7 +129,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">Kec. *</div>
                                                     </div>
-                                                    <select name="kecamatan_i" id="kecamatan_i" class="custom-select">
+                                                    <select name="kecamatan_i" id="kecamatan_i" class="custom-select" required>
                                                         <option disabled selected value> -- Kecamatan -- </option>
                                                         <?php foreach ($kecamatan as $row) : ?>
                                                             <option value="<?php echo $row->id; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
@@ -144,7 +144,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">Desa. *</div>
                                                     </div>
-                                                    <select id="desa_i" name="desa_i" class="custom-select">
+                                                    <select id="desa_i" name="desa_i" class="custom-select" required>
                                                         <option disabled selected value> -- Desa -- </option>
                                                     </select>
                                                 </div>
@@ -165,7 +165,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Proses</div>
                                             </div>
-                                            <select name="jenis_berkas[]_i" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;">
+                                            <select name="jenis_berkas[]_i" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
                                                 <option value="AJB">AJB</option>
                                                 <option value="APHB">APHB</option>
                                                 <option value="APHT">APHT</option>
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50" required>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Pemilik
                                                 </div>

@@ -68,7 +68,7 @@
                 <div class="col-md-2"> </div>
             </div>
         </div>
-
+        <?= $this->session->flashdata('success'); ?>
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-BPN">
