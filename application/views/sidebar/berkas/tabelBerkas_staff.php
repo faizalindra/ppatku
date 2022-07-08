@@ -653,6 +653,38 @@
                                     <div class="card-body">
                                         <div class="row" id="row_biaya">
                                         </div>
+                                        <div class="row">
+                                                <br>
+                                                <div class="col-md-12 text-center"><button id="tambah_biaya" data-toggle="collapse" data-target="#collapse_biaya" class="badge badge-success rounded-circle border border-white"><i class="fa fa-plus"></i></button></div>
+                                                <div class="col-md-12">
+                                                    <div id="collapse_biaya" class="collapse">
+                                                        <form action="#" onsubmit="input_biaya();return false" autocomplete="off" id="form-biaya">
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center text-muted">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="pembayaran" name="bayar_" value="0" required>
+                                                                        <label class="form-check-label" for="pembayaran">Bayar/DP</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input bayar_" type="radio" id="penambahan" name="bayar_" value="1" required>
+                                                                        <label class="form-check-label" for="penambahan">Tambah</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="jum_bayar" id="jum_bayar" pattern="[0-9]{3,7}" maxlength="7" title="Masukan Angka antara Rp. 1.000 ~ Rp. 99.999.999" placeholder="Rp." required></div>
+                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" maxlength="20" required></div>
+                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:" maxlength="30"></textarea></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center">
+                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Reset</button>
+                                                                    <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                     <div class="card-footer p-1" id="footer_biaya">
                                         <div class="row">

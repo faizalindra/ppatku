@@ -56,6 +56,12 @@ class Sertipikat extends CI_Controller
         }
         echo json_encode($data);
         $this->ModelSertipikat->simpanSertipikat($data);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Sertipikat Berhasil Ditambahkan
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('sertipikat');
     }
 
@@ -79,6 +85,12 @@ class Sertipikat extends CI_Controller
             $data['dsa'] = $this->input->post('desa_e', true);
         }
         $this->ModelSertipikat->update_sertipikat($data, $no_reg);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Sertipikat Berhasil Di Edit
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('sertipikat');
         echo json_encode($data);
         echo json_encode($no_reg);
