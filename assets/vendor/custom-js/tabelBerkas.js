@@ -1,10 +1,12 @@
 var berkas_id_detail = 0;
 var jenis_modal = 0;
+// print_berkas();
 // var table; // 0 = modal berkas, 1 = modal berkas cabut
 tabel_berkas(); //pemanggilan fungsi tampil barang.
 $(document).ready(function () {
     setTimeout(function () {
-    $('#tabel-berkas').removeAttr('style')}, 1);
+        $('#tabel-berkas').removeAttr('style')
+    }, 10);
     var cari = $('#cari_data').attr('data');
     $('#tabel-berkas').dataTable().fnFilter(cari);
 });
@@ -112,6 +114,21 @@ $('#show_data').on('click', '.item_detail2', function () {
     });
     return false;
 });
+
+//input berkas
+// function input_berkas() {
+//     $('#form_input').submit();
+//     window.open(base_url + '/berkas/print_berkas/', '_blank');
+//     window.open(base_url + '/berkas', '_self');
+// }
+
+// $('#submit_berkas').click(function(){
+//     $('#form_input').submit();
+//     return false;
+//     // window.open(base_url + '/berkas/print_berkas/' + print_b, '_blank');
+
+// })
+
 
 //tombol print nomor berkas
 $('#print_b').click(function () {

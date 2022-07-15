@@ -104,6 +104,9 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('no_berkas'))) {
             $data['id'] = $this->input->post('no_berkas');
+            $print_berkas = $this->input->post('no_berkas');
+        } else {
+            $print_berkas = $this->ModelBerkas->get_last_id();
         }
 
 
@@ -167,10 +170,12 @@ class Berkas extends CI_Controller
 
         if (!empty($data_k)) {
             $this->ModelBerkas->insert_berkas_kelengkapan($data, $data_k);
+            $this->session->set_flashdata('print_berkas', $print_berkas);
             echo json_encode($data);
             echo json_encode($data_k);
         } else {
             $this->ModelBerkas->simpanBerkas($data);
+            $this->session->set_flashdata('print_berkas', $print_berkas);
             echo json_encode($data);
         }
         $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -188,8 +193,6 @@ class Berkas extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
         $judul['judul'] = "Cabut Berkas";
         $this->load->view('templates/header', $judul);
-        // $this->load->view('templates/sidebar');
-        // $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
     }
@@ -203,11 +206,12 @@ class Berkas extends CI_Controller
 
     function print_berkas()
     {
+        // sleep(3);
         $id = $this->uri->segment(3);
         if ($id == null) {
-            $data['heading'] = 'Error 404';
-            $data['message'] = 'Halaman tidak ditemukan';
-            $this->load->view('errors/html/error_404', $data);
+            $id = $this->ModelBerkas->get_last_id();
+            $data['berkas'] = $this->ModelBerkas->get_berkas($id);
+            $this->load->view('sidebar/berkas/print', $data);
         } else {
             $data['berkas'] = $this->ModelBerkas->get_berkas($id);
             $this->load->view('sidebar/berkas/print', $data);

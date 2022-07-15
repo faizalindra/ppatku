@@ -2,6 +2,7 @@
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
+    <div id="print" data="<?= $this->session->flashdata('print_berkas') ?>"></div>
     <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
@@ -125,8 +126,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <form id="formAwesome" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
+                        <div class="container-fluid"> 
+                            <form id="form_input" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
                                 <div class="row">
                                     <div class="col-md-7">
                                         <h6><u>Berkas</u></h6>
@@ -141,7 +142,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+5 ?>">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas + 5 ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -473,7 +474,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/update_berkas" autocomplete="off">
+                            <form id="form_edit" method="post" action="<?= base_url() ?>berkas/update_berkas" autocomplete="off">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="container-fluid">
@@ -985,6 +986,7 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
@@ -996,9 +998,11 @@
             #ui-datepicker-div {
                 z-index: 10000 !important;
             }
+
             #tabel-berkas {
                 width: flex !important;
             }
+
             /* table,
             th,
             td {

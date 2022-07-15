@@ -46,7 +46,7 @@ class ModelBerkas extends CI_Model
             ->result();
         for ($i = 0; $i < count($data); $i++) {
             $kode_b = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
-            $data[$i]->no_urut = $i+1;
+            $data[$i]->no_urut = $i + 1;
             $data[$i]->kode_b = 'B' . $kode_b;
             $data[$i]->nama_penjual = str_replace(":", ": \n", $data[$i]->nama_penjual);
             $data[$i]->jenis_berkas = str_replace(",", ", ", $data[$i]->jenis_berkas);
@@ -130,12 +130,11 @@ class ModelBerkas extends CI_Model
             ->from('tb_berkas')
             ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
             ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->where('berkas_selesai', 0)
             ->get()
             ->result();
-
-        foreach ($data as $item) {
-            //cek apakah berkas sudah selesai atau berkas dicabut
-            if ($item->berkas_selesai < 1) {
+        if ($data) {
+            foreach ($data as $item) {
                 //cek apakah berkas memiliki sertipikat atau tidak
                 if (!empty($item->no_sertipikat)) {
                     if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
@@ -151,9 +150,8 @@ class ModelBerkas extends CI_Model
                     }
                 }
             }
+            return $hasil;
         }
-
-        return $hasil;
     }
 
     //untuk data record card
@@ -211,7 +209,7 @@ class ModelBerkas extends CI_Model
             ->get()
             ->result();
         foreach ($data as $item) {
-            if($item->reg_sertipikat == null || $item->reg_sertipikat == ''){
+            if ($item->reg_sertipikat == null || $item->reg_sertipikat == '') {
                 $hasil['sertipikat'] = 'Desa ' . $item->desa . ', Kec. ' . $item->kecamatan;
             }
             $hasil = array(
