@@ -21,3 +21,4 @@ assets/test/
 .ModelTest.php
 application/controllers/Testing.php
 application/models/ModelTest.php
+application/libraries/test
