@@ -14,7 +14,7 @@ $('#submit_cabut').on('click', function () {
     var i_kode = $("#input_konfirmasi").val();
     if (kode === i_kode) {
         var id = $("#select_cabut").val();
-        $.post(base_url + '/proses/berkas_selesai', { id: id, kode: kode },
+        $.post(base_url + '/proses/cabut_berkas', { id: id, kode: kode },
             function () {
                 alert('Berkas No. ' + id + ' Dicabut');
                 $(location).attr('href', base_url + '/berkas');

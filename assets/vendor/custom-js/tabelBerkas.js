@@ -19,7 +19,7 @@ $('.proses').select2();
 // fungsi tampil tabel berkas
 function tabel_berkas() {
     // $('#tabel-berkas').DataTable().clear().destroy();
-    var table = $('#tabel-berkas').dataTable({
+    var table = $('#tabel-berkas').DataTable({
         "ajax": {
             "url": base_url + "/berkas/tabel_berkas",
             "type": "post",
@@ -80,6 +80,10 @@ function tabel_berkas() {
     // $('#tabel-berkas').dataTable().fnFilter('mandiraja');
 }
 
+// function reload_tabel_berkas() {
+//     $('#tabel-berkas').DataTable().ajax.reload();
+// }
+
 // tombol detail berkas
 $('#show_data').on('click', '.item_detail2', function () {
     var id = $(this).attr('data');
@@ -94,7 +98,7 @@ $('#show_data').on('click', '.item_detail2', function () {
         success: function (data) {
             berkas_id_detail = data.id_berkas
             $('#modelDetail2').modal('show');
-            $('#id_berkas_').html('No. ' + data.id_berkas);
+            $('#id_berkas_').html('Kode. B' + data.kode_b);
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
             $('#jenis_berkas_').html(data.jenis_berkas);
             $('#col_sertipikat').html(data.sertipikat);
@@ -132,8 +136,7 @@ $('#show_data').on('click', '.item_detail2', function () {
 
 //tombol print nomor berkas
 $('#print_b').click(function () {
-    var idb = berkas_id_detail;
-    window.open(base_url + '/berkas/print_berkas/' + idb, '_blank');
+    window.open(base_url + '/berkas/print_berkas/' + berkas_id_detail, '_blank');
 })
 
 // tombol detail sertipikat
@@ -189,8 +192,7 @@ $('#show_data').on('click', '.edit_berkas', function () {
             $('[name="kecamatan_e"]').val(data.id_kecamatan);
             var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
             $('[name="desa_e"]').html(html);
-            $('[name="desa_e"]').val(data.id_desa);
-            $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
+            $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas2);
             $('[name="jenis_berkas[]_e"]').trigger('change');
             $('[name="penjual_e"]').val(data.nama_penjual);
             $('[name="pembeli_e"]').val(data.nama_pembeli);

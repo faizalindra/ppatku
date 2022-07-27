@@ -85,6 +85,8 @@ function status_proses(status, id) {
         return '<span data="' + id + '" class="badge badge-warning status_bpn"> Proses </span>';
     } else if (status == "1") {
         return '<span class="badge badge-success">Selesai</span>';
+    } else{
+        return '<span class="badge badge-danger">Dicabut</span>';
     }
 }
 

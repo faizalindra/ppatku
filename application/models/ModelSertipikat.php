@@ -162,9 +162,11 @@ class ModelSertipikat extends CI_Model
             ->limit(1)
             ->get()
             ->result_array();
-        foreach ($data as $key) {
-            $hsl = $key['no_reg'];
+        if ($data) {
+            foreach ($data as $key) {
+                $hsl = $key['no_reg'];
+            }
+            return $hsl;
         }
-        return $hsl;
     }
 }

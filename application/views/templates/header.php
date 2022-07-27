@@ -31,7 +31,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
             <div class="sidebar-brand-icon">
-                <img style="max-height: 40px;" src="<?=base_url('assets/img/icon.png')?>"></img>
+                <img style="max-height: 40px;" src="<?= base_url('assets/img/icon.png') ?>"></img>
             </div>
             <div class="sidebar-brand-text mx-3">
                 <?php if ($this->session->userdata('role_id') == 2) {
@@ -164,6 +164,34 @@
                     </div>
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search justify-content-center" action="<?= base_url('cari'); ?>" method="post">
+                        <!-- <div class="row"> -->
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <div class="form-group row">
+                                    <!-- <div class="col-auto"> -->
+                                    <div class="custom-controls-stacked col-auto">
+                                        <div class="custom-control custom-radio">
+                                            <input name="pilih_cari" id="pilih_cari_0" type="radio" class="custom-control-input" value="b" checked>
+                                            <label for="pilih_cari_0" class="custom-control-label">Berkas</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-controls-stacked col-auto">
+                                        <div class="custom-control custom-radio">
+                                            <input name="pilih_cari" id="pilih_cari_1" type="radio" class="custom-control-input" value="s">
+                                            <label for="pilih_cari_1" class="custom-control-label">Sertipikat</label>
+                                        </div>
+                                    </div>
+                                    <div class="custom-controls-stacked col-auto">
+                                        <div class="custom-control custom-radio">
+                                            <input name="pilih_cari" id="pilih_cari_2" type="radio" class="custom-control-input" value="p">
+                                            <label for="pilih_cari_2" class="custom-control-label">Proses BPN</label>
+                                        </div>
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col"> -->
                         <div class="input-group">
                             <input name="cari" id="cari" type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
@@ -172,6 +200,9 @@
                                 </button>
                             </div>
                         </div>
+                        <!-- </div> -->
+                        <!-- </div> -->
+
                     </form>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

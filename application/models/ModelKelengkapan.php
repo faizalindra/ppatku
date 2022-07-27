@@ -71,7 +71,7 @@ class ModelKelengkapan extends CI_Model
         $a_keleng = '<li><span class="badge badge-success tbl_keleng" >';
         $b_keleng = '<li><span class="badge badge-danger tbl_keleng"';
         $c_keleng = '</span></li>';
-        $kelengkapan = array("", "KTP Penjual", "KTP Suami/Istri Penjual", "KK Penjual", "KTP Pembeli", "KTP Suami/Istri Pembeli", "KK Pembeli", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK", "Pengantar Roya");
+        $kelengkapan = array("", "KTP Pihak 1", "KTP Suami/Istri Pihak 1", "KK Pihak 1", "KTP Pihak 2", "KTP Suami/Istri Pihak 2", "KK Pihak 2", "BPJS", "KTP Ahli Waris", "KK Ahli Waris", "Akta Kematian", "SHM", "SPPT", "IMB", "Order", "Pernyataan Beda Nama", "Persetujuan Hibah", "SPK", "Pengantar Roya");
         $hasil = $this->db->get_where('tb_kelengkapan', $id2)->result();
         foreach ($hasil as $hasil) {
             $data['ket'] = $hasil->ket_kelengkapan;

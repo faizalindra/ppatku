@@ -20,6 +20,10 @@ class ModelProses extends CI_Model
         $this->db->update('tb_berkas', $data, $where);
     }
 
+    function cabut_berkas($data, $where){
+        $this->db->update('tb_berkas', $data, $where);
+    }
+
 
     function get_proses($id, $ids)
     {
@@ -342,11 +346,26 @@ class ModelProses extends CI_Model
         $this->db->update('tb_ket_proses', $data, $id);
         $hsl = array_merge($data, $id);
         return $hsl;
-
     }
 
     function update_keterangan($ket, $id)
     {
         $this->db->update('tb_ket_proses', $ket, $id);
+    }
+
+    function cabut_bpn($id)
+    {
+        // $this->db->update('tb_ket_proses', array('bpn' => 0), $id);
+        $data = $this->db->select('no_proses_bpn, id_berkas, status')
+            ->from('tb_proses_bpn')
+            ->where('id_berkas', $id)
+            ->where('status', '0')
+            ->get()
+            ->result();
+        foreach ($data as $value) {
+            $value->status = 3;
+        }
+        $this->db->update_batch('tb_proses_bpn', $data, 'no_proses_bpn');
+        return 'success';
     }
 }

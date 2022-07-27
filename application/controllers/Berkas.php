@@ -104,9 +104,7 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('no_berkas'))) {
             $data['id'] = $this->input->post('no_berkas');
-            $print_berkas = $this->input->post('no_berkas');
-        } else {
-            $print_berkas = $this->ModelBerkas->get_last_id();
+            $print = $data['id'];
         }
 
 
@@ -170,16 +168,20 @@ class Berkas extends CI_Controller
 
         if (!empty($data_k)) {
             $this->ModelBerkas->insert_berkas_kelengkapan($data, $data_k);
-            $this->session->set_flashdata('print_berkas', $print_berkas);
             echo json_encode($data);
             echo json_encode($data_k);
         } else {
             $this->ModelBerkas->simpanBerkas($data);
-            $this->session->set_flashdata('print_berkas', $print_berkas);
             echo json_encode($data);
         }
+
+        if (empty($print)) {
+            $print = $this->ModelBerkas->get_last_id();
+        }
+
         $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
                                                         Berkas Berhasil Ditambahkan
+                                                        <a href="' . base_url('berkas/print_berkas/') . $print . '" target="_blank"><button type="button" class="btn btn-lg btn-white border"><span class="fa fa-print"></span></button></a>
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>

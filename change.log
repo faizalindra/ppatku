@@ -1,3 +1,16 @@
+27 Juli 2022 #00068
+    - memambah tombol print pada alert input berkas setelah menginput berkas
+    - merombak form pencarian pada header
+    - saat mencabut berkas proses bpn pada berkas tersebut menjadi bersetatus dicabut
+    - mengubah tampilan print nomor sertipikat
+    - card record dapat diklik dan menampilkan data sesuai dengan jenis card
+    - fix jenis_berkas tidak tampil jika ada lebih dari 1 jenis_berkas
+    - memperbaiki fungsi cabut berkas
+    - menambah href pada card berkas di dashboard
+    - mengubah 'Penjual' menjadi 'Pihak 1' dan 'Pembeli' menjadi 'Pihak 2'
+    - memperbaiki tampilan card biaya dan proses bpn pada detail_berkas
+    - penyesuaian kode
+
 16 Juli 2022 #00067
     - penyesuaian kecil
 

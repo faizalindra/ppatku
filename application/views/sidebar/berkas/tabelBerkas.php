@@ -18,7 +18,7 @@
                         <div class="row">
                             <!-- Terdaftar -->
                             <div class="col-md-3">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-primary shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -35,7 +35,7 @@
                             </div>
                             <!-- Dalam Proses -->
                             <div class="col-md-3">
-                                <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card border-left-warning shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('proses');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -52,7 +52,7 @@
                             </div>
                             <!-- Selesai -->
                             <div class="col-md-3">
-                                <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card border-left-success shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('selesai');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -69,7 +69,7 @@
                             </div>
                             <!-- Dicabut -->
                             <div class="col-md-3">
-                                <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card border-left-danger shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('dicabut');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -261,7 +261,7 @@
                                             <div class="col-md-12">
                                                 <div class="container-fluid">
                                                     <div class="row">
-                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Penjual</u> :</span>
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 1</u> :</span>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="row">
@@ -293,7 +293,7 @@
                                                     </div>
                                                     <hr class="mt-1 mb-1" />
                                                     <div class="row">
-                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pembeli</u> :</span>
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 2</u> :</span>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="row">
@@ -707,8 +707,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;  min-width:17rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
@@ -718,8 +718,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;  min-width:17rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
                                                 <div class="col-md-12 text-left" style="font-size: 12px;">
