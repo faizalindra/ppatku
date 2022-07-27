@@ -3,11 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelBpn extends CI_Model
 {
-    public function get_prosesBPN()
+    public function tabel_bpn()
     {
         $data = $this->db->get('tb_proses_bpn')->result();
         for ($i=0; $i<count($data); $i++) {
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
+            $data[$i]->kode_p = str_pad($data[$i]->no_proses_bpn, "5", "0", STR_PAD_LEFT);
+            $data[$i]->nomor = str_pad($data[$i]->no_bpn, "6", "0", STR_PAD_LEFT);
+            $id_berkas = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
+            $data[$i]->id_berkas = '<a href="' . base_url('cari/cari_berkas/B') . $id_berkas . '">B' . $id_berkas . '</a>';
         }
         return $data;
     }
@@ -70,19 +74,14 @@ class ModelBpn extends CI_Model
         return $data;
     }
 
-    public function bpn_terdaftar()
-    {
+    public function record_bpn(){
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn")->result();
         foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+            $hsl['bb_terdaftar'] = $data->total_record;
         }
-        return $hsl;
-    }
-    public function bpn_proses()
-    {
-        $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
-        foreach ($hasil as $data) {
-            $hsl = $data->total_record;
+        $hasil1 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
+        foreach ($hasil1 as $data) {
+            $hsl['bb_proses'] = $data->total_record;
         }
         return $hsl;
     }

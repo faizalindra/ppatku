@@ -1,5 +1,7 @@
-    <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
     <link href="<?= base_url('assets/vendor/jquery/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
     <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
@@ -21,7 +23,7 @@
                                             <div class="col p-1">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Terdaftar</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_terdaftar'] ?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -38,7 +40,7 @@
                                             <div class="col p-1">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Dalam Proses</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_proses'] ?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-cogs fa-2x text-gray-300"></i>
@@ -55,7 +57,7 @@
                                             <div class="col p-1">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Selesai</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $c ?></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_selesai'] ?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-check-square fa-2x text-gray-300"></i>
@@ -72,7 +74,7 @@
                                             <div class="col p-1">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Dicabut</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $d ?></div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b['b_dicabut'] ?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-unlink fa-2x text-gray-300"></i>
@@ -87,13 +89,14 @@
                     </div>
                 </div>
             </div>
-
+            <?= $this->session->flashdata('success'); ?>
             <div class="row">
                 <div class="col-lg-12 col-auto">
-                    <table class="table table-striped" id="tabel-berkas">
+                    <table class="table table-striped" id="tabel-berkas" style="width: flex !important;;">
                         <thead>
                             <tr class="text-center">
                                 <th>#</th>
+                                <th>Kode</th>
                                 <th>Tanggal Masuk</th>
                                 <th>No Sertipikat</th>
                                 <th>Kecamatan</th>
@@ -138,7 +141,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" autocapitalize="on" pattern="[0-9]{1,5}" maxlength="5" title="Nomor berkas harus menggunakan Angka">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+5 ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -199,24 +202,25 @@
                                                                 <div class="input-group-text">Proses</div>
                                                             </div>
                                                             <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
-                                                                <option>AJB</option>
-                                                                <option>APHB</option>
-                                                                <option>APHT</option>
-                                                                <option>Ganti Blangko</option>
-                                                                <option>Ganti Nama</option>
-                                                                <option>Hibah</option>
-                                                                <option>Konversi</option>
-                                                                <option>Pemecahan</option>
-                                                                <option>Pengeringan</option>
-                                                                <option>Peningkatan Hak</option>
-                                                                <option>SKMHT</option>
-                                                                <option>Waris</option>
+                                                                <option value="AJB">AJB</option>
+                                                                <option value="APHB">APHB</option>
+                                                                <option value="APHT">APHT</option>
+                                                                <option value="Ganti Blangko">Ganti Blangko</option>
+                                                                <option value="Ganti Nama">Ganti Nama</option>
+                                                                <option value="Hibah">Hibah</option>
+                                                                <option value="Konversi">Konversi</option>
+                                                                <option value="Pemecahan">Pemecahan</option>
+                                                                <option value="Pengeringan">Pengeringan</option>
+                                                                <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                                <option value="Roya">Roya</option>
+                                                                <option value="SKMHT">SKMHT</option>
+                                                                <option value="Waris">Waris</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50" required>
+                                                            <input type="text" class="form-control" name="penjual" id="penjual_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50" required>
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 1
                                                                 </div>
@@ -225,7 +229,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                            <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                                             <div class="input-group-append">
                                                                 <div class="input-group-text">Pihak 2
                                                                 </div>
@@ -436,7 +440,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="input-group">
-                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="30"></textarea>
+                                                            <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="50"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -499,15 +503,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">Alamat
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
-                                                </div>
-                                            </div>
                                             <div class="row">
                                                 <div class="col-auto">
                                                     <div class="form-group row">
@@ -553,15 +548,15 @@
                                                         <option value="Pemecahan">Pemecahan</option>
                                                         <option value="Pengeringan">Pengeringan</option>
                                                         <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                        <option value="Roya">Roya</option>
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
                                                     </select>
-                                                    <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                    <input type="text" class="form-control" name="penjual_e" id="penjual_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">Penjual
                                                         </div>
@@ -610,9 +605,9 @@
         <div class="modal fade" id="modelDetail2" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                    <div class="modal-header p-1" style="background-color:#9efff4;">
-                        <h4 class="modal-title" id="id_berkas_"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="modal-header p-1 bg-primary text-white rounded">
+                        <h4 class="modal-title pl-3" id="id_berkas_"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -622,9 +617,8 @@
                                 <div class="col-md-6 pr-3">
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <div class="row">
                                                         <div class="col-md-6 text-left">
                                                             <h6><strong>
@@ -659,26 +653,24 @@
                                                 <div class="card-footer text-muted" id="ket_berkas">
                                                 </div>
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Kelengkapan</h6>
                                                 </div>
                                                 <div class="card-body p-1 text-left">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <div>
+                                                            <div>Kelengkapan Ada
                                                                 <ul id="kelengkapan_ada">
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div>
+                                                            <div>Kelengkapan Belum Ada
                                                                 <ul id="kelengkapan_belum_ada">
 
                                                                 </ul>
@@ -692,22 +684,17 @@
                                                         <div class="col-auto p-0"><button class="btn btn-circle btn-sm btn-success" id="save_ket_keleng"><i class="fa fa-save"></i></button></div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="card-footer text-muted p-2 m-2" id="ket_kelengkapan">
-
-                                                    </div> -->
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 p-1">
-                                            <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                             <div class="card border-dark">
-                                                <div class="card-header p-1" style="background-color:#9efff4;">
+                                                <div class="card-header p-1 bg-primary text-white">
                                                     <h6>Proses</h6>
                                                 </div>
                                                 <div class="card-body p-1">
-                                                    <div id="proses_"></div>
+                                                    <div id="proses_" class="text-white"></div>
                                                     <div class="row pl-3 pt-1">
                                                         <div class="col-md-11 p-0">
                                                             <p id="ket_proses" class="text-muted" contenteditable="true"></p>
@@ -716,14 +703,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
                                         <div class="card-body p-1">
@@ -731,14 +716,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- </div> -->
                                 </div>
                                 <div class="col-md-3 p-1">
-                                    <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
                                     <div class="card border-dark" style=" min-height: 555px;">
-                                        <div class="card-header p-1" style="background-color:#9efff4;">
+                                        <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
-                                                <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
                                                     Total Biaya
                                                 </div>
                                             </div>
@@ -784,7 +767,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer p-1" id="footer_biaya">
+                                        <div class="card-footer p-1 text-white" id="footer_biaya">
                                             <div class="row">
                                                 <div id="ket_bayar_" class="col-md-12 text-left" style="font-size: 12px;"></div>
                                             </div>
@@ -795,10 +778,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer p-0">
+                        <button type="button" class="btn btn-lg btn-white border" data-dismiss="modal"><a id="print_b" href="" class="fa fa-print p-0 m-0"></a></button>
                     </div>
                 </div>
             </div>
@@ -847,31 +832,151 @@
         <div class="modal fade" id="ModalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-mdb-backdrop="static" data-mdb-keyboard="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel">Detail Berkas</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <div class="modal-header p-1 bg-primary text-white">
+                        <h4 class="modal-title pl-3" id="id_berkas_2"></h4>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="reload">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>No Berkas</th>
-                                        <th>Tanggal Masuk</th>
-                                        <th>No Sertipikat</th>
-                                        <th>Kecamatan</th>
-                                        <th>Jenis Berkas</th>
-                                        <th>Nama Penjual</th>
-                                        <th>Nama Pembeli</th>
-                                        <th>Total Biaya</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="data_detail">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
+                                <div class="text-center ">
+                                    <h4 class="text-center text-dark">Berkas Dicabut</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pr-3">
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1 bg-primary text-white">
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-left">
+                                                            <h6><strong>
+                                                                    <div id="tgl_masuk_berkas_2"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <h6><strong>
+                                                                    <div id="jenis_berkas_2"></div>
+                                                                </strong></h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div class="row text-left ml-0">
+                                                        <div class="col-md-12 text-muted">
+                                                            <div id="col_sertipikat_2"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 1</div>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_1_2"></h5>
+                                                        </div>
 
-                                </tbody>
-                            </table>
+                                                        <div class="col-md-6 text-center p-2">
+                                                            <div class="card-title">Pihak 2</div>
+                                                            <h5 class="card-text" style="text-transform:capitalize" id="pihak_2_2"></h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-muted" id="ket_berkas_2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1 bg-primary text-white">
+                                                    <h6>Kelengkapan</h6>
+                                                </div>
+                                                <div class="card-body p-1 text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_ada_2">
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div>
+                                                                <ul id="kelengkapan_belum_ada_2">
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-0">
+                                                        <div class="col-md-11 pl-3">
+                                                            <p id="ket_keleng_2" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 p-1">
+                                            <div class="card border-dark">
+                                                <div class="card-header p-1 bg-primary text-white">
+                                                    <h6>Proses</h6>
+                                                </div>
+                                                <div class="card-body p-1">
+                                                    <div id="proses_2" class="text-white"></div>
+                                                    <div class="row pl-3 pt-1">
+                                                        <div class="col-md-11 p-0">
+                                                            <p id="ket_proses_2" class="text-muted" contenteditable="true"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1 bg-primary text-white">
+                                            <h6>Proses BPN</h6>
+                                        </div>
+                                        <div class="card-body p-1">
+                                            <div id="bpn_2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 p-1">
+                                    <div class="card border-dark" style=" min-height: 555px;">
+                                        <div class="card-header p-1 bg-primary text-white">
+                                            <div class="row">
+                                                <div class="col-md-12 text-left" style="font-size: 12px;">
+                                                    Total Biaya
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5 id="total_biaya__2"></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row" id="row_biaya_2">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-1" id="footer_biaya_2">
+                                            <div class="row">
+                                                <div id="ket_bayar_2" class="col-md-12 text-left" style="font-size: 12px;"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h4 class="" id="status_bayar_2"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -880,20 +985,20 @@
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/select2/select2.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/custom-js/tabelBerkas.js') ?>"></script>
-        <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
-        <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
+
 
         <style>
             #ui-datepicker-div {
                 z-index: 10000 !important;
             }
-
+            #tabel-berkas {
+                width: flex !important;
+            }
             /* table,
             th,
             td {

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Wilayah extends CI_Controller {
     function __construct(){
         parent::__construct();
+        cek_login();
         $this->load->model('ModelWilayah');
     }
  

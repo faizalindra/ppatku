@@ -13,11 +13,10 @@ class Sertipikat extends CI_Controller
     public function index()
     {
         $data['a'] = $this->ModelSertipikat->s_terdaftar();
+        $data['max_sertipikat'] = $this->ModelSertipikat->get_last_id();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Sertipikat";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/sertipikat/tabelSertipikat', $data);
         $this->load->view('templates/footer');
     }
@@ -46,6 +45,9 @@ class Sertipikat extends CI_Controller
             'proses' => implode(",", $this->input->post('jenis_berkas[]_i', true)),
             'ket' => $this->input->post('keterangan_i', true),
         ];
+        if (!empty($this->input->post('id_i', true))) {
+            $data['no_reg'] = $this->input->post('id_i', true);
+        }
         if (!empty($this->input->post('penerima_hak_i', true))) {
             $data['pembeli_hak'] = $this->input->post('penerima_hak_i', true);
         }
@@ -54,6 +56,12 @@ class Sertipikat extends CI_Controller
         }
         echo json_encode($data);
         $this->ModelSertipikat->simpanSertipikat($data);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Sertipikat Berhasil Ditambahkan
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('sertipikat');
     }
 
@@ -77,6 +85,12 @@ class Sertipikat extends CI_Controller
             $data['dsa'] = $this->input->post('desa_e', true);
         }
         $this->ModelSertipikat->update_sertipikat($data, $no_reg);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Sertipikat Berhasil Di Edit
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('sertipikat');
         echo json_encode($data);
         echo json_encode($no_reg);

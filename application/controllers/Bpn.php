@@ -11,23 +11,18 @@ class Bpn extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'a' => $this->ModelBpn->bpn_terdaftar(),
-            'b' => $this->ModelBpn->bpn_proses(),
-        );
+        $data['bb'] = $this->ModelBpn->record_bpn();
         $data['judul'] = "Daftar Proses BPN";
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select();
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/bpn/tabelBpn', $data);
         $this->load->view('templates/footer');
     }
 
     //untuk tabel bpn
-    public function get_prosesBPN()
+    public function tabel_bpn()
     {
-        $data = $this->ModelBpn->get_prosesBPN();
+        $data = $this->ModelBpn->tabel_bpn();
         echo json_encode($data);
         return $data;
     }
@@ -53,6 +48,7 @@ class Bpn extends CI_Controller
         $id = array('no_proses_bpn' => $this->input->post('no_proses_bpn_e'));
         $data = array(
             'nama_pemohon' => $this->input->post('nama_pemohon_e'),
+            'id_berkas' => $this->input->post('no_berkas_e'),
             'no_bpn' => $this->input->post('no_bpn_e'),
             'tahun' => $this->input->post('tahun_e'),
             'jenis_proses' => $this->input->post('jenis_proses_e'),
@@ -62,6 +58,12 @@ class Bpn extends CI_Controller
             $data['tgl_masuk'] = $this->input->post('tgl_masuk_e');
         }
         $this->ModelBpn->update_bpn($data, $id);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        STTD Berhasil di Update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('bpn');
         // echo json_encode($data);
         // echo json_encode($id);
@@ -86,16 +88,22 @@ class Bpn extends CI_Controller
 
         //post data ke modelBPN
         $this->ModelBpn->inputBPN($data);
-        echo json_encode($data);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        STTD Berhasil Ditambahkan
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('bpn');
+        echo json_encode($data);
     }
 
 
     //untuk badge status proses bpn
     public function selesai()
     {
-        $id = $this->uri->segment(3);
+        $id = $this->input->post('id');
         $this->ModelBpn->selesai($id);
-        redirect('bpn');
+        echo json_encode('berhasil');
     }
 }

@@ -1,3 +1,18 @@
+<?php $hasil = 0;
+if (validation_errors()) {
+    $hasil = 1;
+} ?>
+<div id="hasil_input" data="<?= $hasil ?>"></div>
+
+<script>
+    $(document).ready(function() {
+        var input = $('#hasil_input').attr('data');
+        if (input == 1) {
+            $('#formModal').modal('show');
+        }
+    });
+</script>
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Manajemen User</h6>
@@ -6,86 +21,10 @@
         <!-- This script got from www.frontendfreecode.com -->
         <button id="btnStart" type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Tambah User</button>
 
-        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="formModalLabel">Form Registrasi</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- <?= $this->session->flashdata('pesan'); ?> -->
-                    <form id="formAwesome" method="post" action="<?= base_url('user/manajemenUser') ?>">
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <label for="nama" class="col-sm-6 col-form-label">
-                                    Nama Staff
-                                </label>
-                                <div class="col-sm-6">
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Staff" value="<?= set_value('nama'); ?>" pattern="\s*(?:[\w\.]\s*){5,20}$" maxlength="20">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="username" class="col-sm-6 col-form-label">
-                                    Username
-                                </label>
-                                <div class="col-sm-6">
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?= set_value('username'); ?>" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password1" class="col-sm-6 col-form-label">
-                                    Password
-                                </label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="password1" placeholder="Password" name="password1" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password2" class="col-sm-6 col-form-label">
-                                    Password
-                                </label>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="password2" placeholder="Ulangi Password" name="password2" minlength="5">
-                                    <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
-                                </div>
-                            </div>
-                            <?php if ($this->session->userdata('role_id') == 0) {
-                                echo '  <div class="form-group row">
-                                            <label for="role" class="col-sm-6 col-form-label">
-                                                Role
-                                            </label>
-                                            <div class="col-sm-6">
-                                                <select class="form-control" id="role" name="role">
-                                                    <option value=1>Admin</option>
-                                                    <option value=2>Staff</option>
-                                                </select>
-                                            </div>
-                                        </div>';
-                            }; ?>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <?= $this->session->flashdata('pesan'); ?>
         <div class="row">
             <div class="col-lg-12">
-                <?php if (validation_errors()) { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= validation_errors(); ?>
-                    </div>
-                <?php } ?>
-                <table class="table table-hover">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -93,7 +32,9 @@
                             <th scope="col">Username</th>
                             <th scope="col">Role</th>
                             <th scope="col">Is Active</th>
-                            <th scope="col"></th>
+                            <?php if ($this->session->userdata('role_id') == 0) { ?>
+                                <th scope="col">Aksi</th>
+                            <?php } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,7 +84,9 @@
                                             }
                                             ?></td>
                                         <td>
-                                            <button id="hapus_user" type="button" class="btn btn-sm btn-danger" data="<?= $b['id']; ?>"><i class="fa fa-trash"></i>Hapus</button>
+                                            <?php if ($this->session->userdata('role_id') == 0) { ?>
+                                                <button id="hapus_user" type="button" class="btn btn-sm btn-danger" data="<?= $b['id']; ?>"><i class="fa fa-trash"></i>Hapus</button>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                         <?php }
@@ -157,6 +100,79 @@
 
         <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
 
+        <!-- form input user -->
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="formModalLabel">Form Registrasi</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="formAwesome" method="post" action="<?= base_url('user/manajemenUser') ?>" autocomplete="off">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="nama" class="col-sm-6 col-form-label">
+                                    Nama Staff
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Staff" value="<?= set_value('nama'); ?>" pattern="\s*(?:[\w\.]\s*){5,20}$" maxlength="20" required>
+                                    <?= form_error('nama', '<span class="text-danger pl-3">', '</span>') ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="username" class="col-sm-6 col-form-label">
+                                    Username
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="<?= set_value('username'); ?>" minlength="5" required>
+                                    <?= form_error('username', '<span class="text-danger pl-3">', '</span>') ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password1" class="col-sm-6 col-form-label">
+                                    Password
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" id="password1" placeholder="Password" name="password1" minlength="5" required>
+                                    <?= form_error('password1', '<span class="text-danger pl-3">', '</span>') ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password2" class="col-sm-6 col-form-label">
+                                    Ulangi Password
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" id="password2" placeholder="Ulangi Password" name="password2" minlength="5" required>
+                                    <span id="textHelpBlock">
+                                        <?= form_error('password2', '<span class="text-danger pl-3">', '</span>') ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <?php if ($this->session->userdata('role_id') == 0) {
+                                echo '  <div class="form-group row">
+                                            <label for="role" class="col-sm-6 col-form-label">
+                                                Role
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="role" name="role">
+                                                    <option value=1>Admin</option>
+                                                    <option value=2>Staff</option>
+                                                </select>
+                                            </div>
+                                        </div>';
+                            }; ?>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- Modal Konfirmasi -->
         <div class="modal fade" id="modal_hapus" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">

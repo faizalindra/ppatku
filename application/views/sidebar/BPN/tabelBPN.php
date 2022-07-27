@@ -20,7 +20,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Terdaftar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_terdaftar'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -37,7 +37,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Dalam Proses</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $b ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cogs fa-2x text-gray-300"></i>
@@ -54,7 +54,7 @@
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Selesai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $a - $b ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-check-square fa-2x text-gray-300"></i>
@@ -68,7 +68,7 @@
                 <div class="col-md-2"> </div>
             </div>
         </div>
-
+        <?= $this->session->flashdata('success'); ?>
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-BPN">
@@ -76,6 +76,7 @@
                         <tr class="text-center">
                             <th scope="col">No.</th>
                             <th scope="col">Tanggal Masuk</th>
+                            <th scope="col">ID Berkas</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
                             <th scope="col">Jenis Proses</th>

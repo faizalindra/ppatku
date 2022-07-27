@@ -13,18 +13,13 @@ class Berkas extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'a' => $this->ModelBerkas->b_terdaftar(),
-            'b' => $this->ModelBerkas->b_proses(),
-            'c' =>  $this->ModelBerkas->b_selesai(),
-            'd' => $this->ModelBerkas->b_dicabut(),
-        );
+
+        $data['max_berkas'] = $this->ModelBerkas->get_last_id();
+        $data['b'] = $this->ModelBerkas->record_b();
         $data['sertipikat'] = $this->ModelSertipikat->get_sert_for_select();
         $data['kecamatan'] = $this->ModelWilayah->get_kecamatan()->result();
         $data['judul'] = "Daftar Berkas";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar');
         if ($this->session->userdata('role_id') == 2) { //notaris
             $this->load->view('sidebar/berkas/tabelBerkas_staff', $data);
         } else {
@@ -33,9 +28,9 @@ class Berkas extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    function data_berkas()
+    function tabel_berkas()
     {
-        $data = $this->ModelBerkas->data_berkas();
+        $data['data'] = $this->ModelBerkas->tabel_berkas();
         echo json_encode($data);
     }
 
@@ -69,8 +64,18 @@ class Berkas extends CI_Controller
         }
         if ($this->input->post('sertipikat_e') != null) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat_e', true);
+            $no_reg['no_reg'] = $this->input->post('sertipikat_e');
+            $sert['is_used'] = "1";
+            $id_berkas = $this->input->post('id_e');
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg, $id_berkas);
         }
         $this->ModelBerkas->update_berkas($data, $id);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Berkas Berhasil di Update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
         redirect('berkas');
     }
 
@@ -90,6 +95,9 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('sertipikat'))) {
             $data['reg_sertipikat'] = $this->input->post('sertipikat');
+            $no_reg['no_reg'] = $this->input->post('sertipikat');
+            $sert['is_used'] = "1";
+            $this->ModelSertipikat->update_sertipikat($sert, $no_reg);
         }
         if (!empty($this->input->post('tgl_masuk'))) {
             $data['tgl_masuk'] = $this->input->post('tgl_masuk');
@@ -105,7 +113,7 @@ class Berkas extends CI_Controller
             $data_k['ktp_penjual'] = 1;
         }
         if (!empty($this->input->post('ktp_is_penjual'))) {
-            $data_k['ktp_pasangan_penjual'] = 1;
+            $data_k['ktp_p_penjual'] = 1;
         }
         if (!empty($this->input->post('kk_penjual'))) {
             $data_k['kk_penjual'] = 1;
@@ -114,7 +122,7 @@ class Berkas extends CI_Controller
             $data_k['ktp_pembeli'] = 1;
         }
         if (!empty($this->input->post('ktp_is_pembeli'))) {
-            $data_k['ktp_pasangan_pembeli'] = 1;
+            $data_k['ktp_p_pembeli'] = 1;
         }
         if (!empty($this->input->post('kk_pembeli'))) {
             $data_k['kk_pembeli'] = 1;
@@ -165,6 +173,12 @@ class Berkas extends CI_Controller
             $this->ModelBerkas->simpanBerkas($data);
             echo json_encode($data);
         }
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                        Berkas Berhasil Ditambahkan
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>');
         redirect('berkas');
     }
 
@@ -174,9 +188,29 @@ class Berkas extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
         $judul['judul'] = "Cabut Berkas";
         $this->load->view('templates/header', $judul);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
+        // $this->load->view('templates/sidebar');
+        // $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
+    }
+
+    function get_sert_for_auto()
+    {
+        $id = $this->input->post('id');
+        $sert = $this->ModelSertipikat->get_sert_for_auto($id);
+        echo json_encode($sert);
+    }
+
+    function print_berkas()
+    {
+        $id = $this->uri->segment(3);
+        if ($id == null) {
+            $data['heading'] = 'Error 404';
+            $data['message'] = 'Halaman tidak ditemukan';
+            $this->load->view('errors/html/error_404', $data);
+        } else {
+            $data['berkas'] = $this->ModelBerkas->get_berkas($id);
+            $this->load->view('sidebar/berkas/print', $data);
+        }
     }
 }

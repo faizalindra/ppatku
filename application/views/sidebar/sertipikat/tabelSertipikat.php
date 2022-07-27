@@ -33,13 +33,14 @@
         </div>
 
         <p></p>
-
+        <?= $this->session->flashdata('success'); ?>
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-sertipikat">
                     <thead>
                         <tr class="text-center">
                             <th scope="col">#</th>
+                            <th scope="col">Kode</th>
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nomor Sertipikat</th>
                             <th scope="col">Kecamatan</th>
@@ -73,24 +74,38 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form id="formAwesome" method="post" action="<?= base_url() ?>sertipikat/inputSertipikat" autocomplete="off">
+                    <form id="formAwesome" method="post" action="<?= base_url('sertipikat/inputSertipikat') ?>" autocomplete="off">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="container-fluid">
                                     <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
-                                    <div class="form-group row">
-                                        <div class="input-group">
-                                            <input type="text" name="tgl_masuk_i" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
-                                            <div class="input-group-append">
-                                                <div class="input-group-text">
-                                                    <i class="fa fa-calendar"></i>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">No. </div>
+                                                    </div>
+                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="<?= $max_sertipikat+5 ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="input-group">
+                                                    <input type="text" name="tgl_masuk_i" class="form-control datepicker" id="tgl_masuk_i" placeholder="Tanggal Masuk" autocomplete="off">
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <select name="jenis_hak_i" id="jenis_hak_i" class="custom-select">
+                                            <select name="jenis_hak_i" id="jenis_hak_i" class="custom-select" required>
                                                 <option disabled selected value> -- Jenis Hak -- </option>
                                                 <option value="M"> Hak Milik </option>
                                                 <option value="GB"> Guna Banggunan </option>
@@ -99,7 +114,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="number" name="nomor_sertipikat_i" class="form-control" id="nomor_sertipikat_i" placeholder="-- Nomor Sertipikat --" autocomplete="off" max="99999" title="Angka maximal 99999">
+                                            <input type="number" name="nomor_sertipikat_i" class="form-control" id="nomor_sertipikat_i" placeholder="-- Nomor Sertipikat --" autocomplete="off" max="99999" title="Angka maximal 99999" required>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <i class="fa fa-book"></i>
@@ -112,9 +127,9 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Kec</div>
+                                                        <div class="input-group-text">Kec. *</div>
                                                     </div>
-                                                    <select name="kecamatan_i" id="kecamatan_i" class="custom-select">
+                                                    <select name="kecamatan_i" id="kecamatan_i" class="custom-select" required>
                                                         <option disabled selected value> -- Kecamatan -- </option>
                                                         <?php foreach ($kecamatan as $row) : ?>
                                                             <option value="<?php echo $row->id; ?>" data-value="<?php echo $row->id ?>"><?php echo $row->nama; ?></option>
@@ -127,9 +142,9 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Desa</div>
+                                                        <div class="input-group-text">Desa. *</div>
                                                     </div>
-                                                    <select id="desa_i" name="desa_i" class="custom-select">
+                                                    <select id="desa_i" name="desa_i" class="custom-select" required>
                                                         <option disabled selected value> -- Desa -- </option>
                                                     </select>
                                                 </div>
@@ -150,7 +165,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">Proses</div>
                                             </div>
-                                            <select name="jenis_berkas[]_i" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;">
+                                            <select name="jenis_berkas[]_i" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
                                                 <option value="AJB">AJB</option>
                                                 <option value="APHB">APHB</option>
                                                 <option value="APHT">APHT</option>
@@ -158,17 +173,20 @@
                                                 <option value="Ganti Nama">Ganti Nama</option>
                                                 <option value="Hibah">Hibah</option>
                                                 <option value="Konversi">Konversi</option>
+                                                <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                 <option value="Pemecahan">Pemecahan</option>
                                                 <option value="Pengeringan">Pengeringan</option>
                                                 <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                <option value="Roya">Roya</option>
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
+                                                <option value="Wasiat">Wasiat</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="pemilik_hak_i" id="pemilik_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50" required>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Pemilik
                                                 </div>
@@ -177,7 +195,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                            <input type="text" class="form-control" name="penerima_hak_i" id="penerima_hak_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">Penerima
                                                 </div>
@@ -243,15 +261,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">Alamat
-                                                    </div>
-                                                </div>
-                                                <input type="text" class="form-control" name="alamat_e" id="alamat_e" aria-describedby="helpId" autocapitalize="on" readonly>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-auto">
                                                 <div class="form-group row">
@@ -303,18 +312,20 @@
                                                     <option value="Ganti Nama">Ganti Nama</option>
                                                     <option value="Hibah">Hibah</option>
                                                     <option value="Konversi">Konversi</option>
+                                                    <option value="Pelepasan Hak">Pelepasan Hak</option>
                                                     <option value="Pemecahan">Pemecahan</option>
                                                     <option value="Pengeringan">Pengeringan</option>
                                                     <option value="Peningkatan Hak">Peningkatan Hak</option>
                                                     <option value="SKMHT">SKMHT</option>
                                                     <option value="Waris">Waris</option>
+                                                    <option value="Wasiat">Wasiat</option>
                                                 </select>
                                                 <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){5,50}$" maxlength="50">
+                                                <input type="text" class="form-control" name="pemilik_hak_e" id="pemilik_hak_e" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){4,50}$" maxlength="50">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">Pemilik
                                                     </div>

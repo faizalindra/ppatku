@@ -1,4 +1,92 @@
-22 Juni 2022 #00050
+8 Juli 2022 #00066
+    - admin sekarang tidak bisa menghapus user
+    - menambah pesan setelah input dan update data
+    - memperbaiki halaman login
+
+6 Juli 2022 #00065
+    - menambah limit 'no_berkas' dan 'no_reg' pada form inputan berkas
+
+5 Juli 2022 #00064
+    - fix bug
+    - mengubah 'base_url' menjadi dynamic
+    - menambah 'id_berkas' pada Tabel BPN
+    - menambah pilihan bulan dan tahun di form input
+
+4 Juli 2022 #00063
+    - menggabung topbar, sidebar, dan header menjadi 1
+    - menambah fitur pencarian
+    - fix 'tabel_berkas' menjadi responsive
+    - menambah icon di sidebar
+
+4 Juli 2022 #00062
+    - mengubah link font
+    - menambah icon
+    - mengubah nama fungsi 'data_berkas' menjadi 'tabel_berkas'
+    - mengubah nama fungsi 'get_prosesBPN' menjadi 'tabel_bpn'
+    - fix proses bpn tidak bisa berganti status
+    - menambah kode pada berkas, sertipikat dan proses BPN
+    - fix 'tabel_berkas' menjadi responsive
+
+2 Juli 2022 #00061
+    - menambah fungsi print nomor berkas
+    - merombak fungsi 'data_berkas' di tabelBerkas
+    - penyesuaian jenis_berkas dan proses berkas
+    - pemilik hak sekarang dapat menginput minimal 4 karakter
+    - fix penerima_hak tidak bisa kosong di input sertipikat
+
+1 Juli 2022 #00060
+    - menambah proses roya
+    - menambah kelengkapan roya & HT
+    - mengganti kolom database 'tb_kelengkapan' : 'ktp_pasangan_penjual' ke 'ktp_p_penjual', 'ktp_pasangan_pembeli' ke 'ktp_p_pembeli'
+    - fix 'jenis_berkas' tidak tampil sebagaimana mestinya di 'detail_berkas'
+    - fix input pembeli tidak bisa diisi kosong
+    - update database 
+
+30 Juni 2022 #00059
+    - small fix
+    - menambah proses baru di field 'proses[]' pada input & edit sertipikat
+
+27 Juni 2022 #00058
+    - setelah memilih sertipikat di input berkas, beberapa form input akan terisi otomatis berdasarkan sertipikat yang di pilih
+    - memperbaiki tampilan kecamatan & desa di form input & edit
+    - memperbaiki tampilan jenis_berkas & proses di form input & edit
+    - optimasi script tabelBerkas.js
+
+26 Juni 2022 #00057
+    - memperbarui tampilan detail_berkas dicabut
+    - mengganti metode update kelengkapan & ket_proses
+
+25 Juni 2022 #00056
+    - tombol berkas_selesai dan proses selesai tidak lagi mereload halaman
+    - penyesuaian footer card biaya pada detail_berkas
+
+25 Juni 2022 #00055
+    - update database
+    - get_sert_for_select sekarang hanya menampilkan sertipikat yang tidak dalam proses atau selesai proses
+
+24 Juni 2022 #00054
+    - update database
+    - menambah input 'no_reg' sertipikat
+    - penyesuaian max input No 'id' berkas
+    - penyesuaian fungsi 'get_berkas_for_select'
+    - penyesuaian fungsi 'get_sert_for_select'
+    - fix tampilan input sertipikat
+    - staff dapat memasukan nomor berkas di input berkas
+    - menambah kolom input 'no_reg' di input sertipikat
+
+22 Juni 2022 #00053
+
+22 Juni 2022 #00052
+    - assets url adjustment
+    - redisign record berkas & proses_bpn
+    - fix bug, setelah ubah role halaman tidak reload
+    - small cleaning
+    - mematikan autocomplete pada form edit profil
+
+21 Juni 2022 #00051
+    - membuat link kembali ke dashboard di halaman acc_block
+
+21 Juni 2022 #00050
     - small fix
     - menata code Javascript
 

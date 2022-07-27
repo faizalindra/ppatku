@@ -41,7 +41,7 @@ class User extends CI_Controller
                 $data = ['role_id' => '2'];
             }
             $this->ModelUser->update_user($where, $data);
-            // echo json_encode($where);
+            echo json_encode($where);
         }
     }
 
@@ -64,8 +64,6 @@ class User extends CI_Controller
         $data['username'] = $this->session->userdata('username');
         $data['role_id'] = $this->session->userdata('role_id');
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('sidebar/user/profile', $data);
         $this->load->view('templates/footer');
     }
@@ -74,7 +72,7 @@ class User extends CI_Controller
     {
         // Rule, nama harus di isi, jika belum muncul peringatan 'Nama Belum Diisi'
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required', [
-            'required' => 'Nama Belum diis!!'
+            'required' => 'Nama Belum diisi!!'
         ]);
         // Rule, username harus di isi, minimal panjang username adalah 5 karakter, username harus unik
         $this->form_validation->set_rules('username', 'Username', 'required|trim|min_length[5]|is_unique[user.username]', [
@@ -82,11 +80,14 @@ class User extends CI_Controller
             'is_unique' => 'Username Sudah Terdaftar!'
         ]);
         // Rule, Password harus di isi, minimal 3 karakter, password harus sama dengan password2
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => 'Password Tidak Sama!!',
-            'min_length' => 'Password Terlalu Pendek'
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]', [
+            'min_length' => 'Password Terlalu Pendek',
+            'required' => 'Password Harus diisi!!'
         ]);
-        $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]');
+        $this->form_validation->set_rules('password2', 'Repeat Password', 'required|trim|matches[password1]', [
+            'required' => 'Password Harus diisi!!',
+            'matches' => 'Password Tidak Sama!!',
+        ]);
         //jika jida disubmit kemudian validasi form diatas tidak berjalan, maka akan tetap berada di
         //tampilan registrasi. tapi jika disubmit kemudian validasi form diatas berjalan, maka data yang 
         //diinput akan disimpan ke dalam tabel user
@@ -94,10 +95,9 @@ class User extends CI_Controller
             $data['staff'] = $this->db->get('user')->result_array();
             $data['judul'] = 'Registrasi';
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar');
-            $this->load->view('templates/topbar');
             $this->load->view('sidebar/user/tabelUser', $data);
             $this->load->view('templates/footer');
+            $this->session->set_flashdata('hasil_input', 1);
         } else {
             $username = $this->input->post('username', true);
             $data = [
@@ -114,7 +114,9 @@ class User extends CI_Controller
 
             $this->ModelUser->simpanData($data); //menggunakan model
 
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">User '. $username .' berhasil dibuat</div>');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">User '. $username .' berhasil dibuat<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>');
             redirect('user/manajemenUser');
         }
     }

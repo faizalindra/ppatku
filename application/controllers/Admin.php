@@ -16,13 +16,9 @@ class Admin extends CI_Controller
     public function index()
     {
         $data = array(
-            'ba' => $this->ModelBerkas->b_terdaftar(),
-            'bb' => $this->ModelBerkas->b_proses(),
-            'bc' =>  $this->ModelBerkas->b_selesai(),
-            'bd' => $this->ModelBerkas->b_dicabut(),
-            'sa' => $this->ModelSertipikat->s_terdaftar(),
-            'bpn_a' => $this->ModelBpn->bpn_terdaftar(),
-            'bpn_b' => $this->ModelBpn->bpn_proses(),
+            'b' => $this->ModelBerkas->record_b(),
+            's' => $this->ModelSertipikat->s_terdaftar(),
+            'bb' => $this->ModelBpn->record_bpn(),
         );
         $uid = array(
             'user_id_catatan' => $this->session->userdata('id'),
@@ -32,8 +28,6 @@ class Admin extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->getBerkasUnfinish();
         $data['judul'] = "Dashboard";
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
         $this->load->view('index', $data);
         $this->load->view('templates/footer');
     }
