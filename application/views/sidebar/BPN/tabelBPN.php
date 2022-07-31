@@ -13,8 +13,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row justify-content-center">
-                        <div class="col-md-3">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                        <!-- selesai -->
+                        <div class="col-md-2">
+                            <div class="card border-left-primary shadow h-100 py-2" onclick="$('#tabel-BPN').dataTable().fnFilter('');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -30,8 +31,8 @@
                             </div>
                         </div>
                         <!-- Dalam Proses -->
-                        <div class="col-md-3">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="col-md-2">
+                            <div class="card border-left-warning shadow h-100 py-2" onclick="$('#tabel-BPN').dataTable().fnFilter('Proses');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -47,17 +48,51 @@
                             </div>
                         </div>
                         <!-- Selesai -->
-                        <div class="col-md-3">
-                            <div class="card border-left-success shadow h-100 py-2">
+                        <div class="col-md-2">
+                            <div class="card border-left-success shadow h-100 py-2" onclick="$('#tabel-BPN').dataTable().fnFilter('Selesai');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Selesai</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_selesai'] ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-check-square fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dicabut -->
+                        <div class="col-md-2">
+                            <div class="card border-left-danger shadow h-100 py-2" onclick="$('#tabel-BPN').dataTable().fnFilter('Dicabut');">
+                                <div class="card-body p-1">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col p-1">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Dicabut</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_dicabut'] ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-unlink fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Gagal -->
+                        <div class="col-md-2">
+                            <div class="card border-left-dark shadow h-100 py-2" onclick="$('#tabel-BPN').dataTable().fnFilter('Gagal');">
+                                <div class="card-body p-1">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col p-1">
+                                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                                Gagal</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_gagal'] ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -347,6 +382,37 @@
             </div>
         </div>
     </div>
+
+    <!-- modal proses gagal -->
+    <div class="modal fade" id="modal-gagal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Proses BPN Gagal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form method="post" action="<?= base_url('proses/bpn_gagal')?>" autocomplete="off">
+                            <div class="row">
+                                <input type="text" class="form-control" name="id_bpn" id="id_bpn" placeholder="Keterangan" hidden>
+                                <input type="text" class="form-control" name="ket_gagal" id="ket_gagal" placeholder="Keterangan" required>
+                            </div>
+                            <br>
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                    <button id="submit_gagal" type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>
 
 
@@ -362,6 +428,10 @@
 <style>
     #ui-datepicker-div {
         z-index: 10000 !important;
+    }
+
+    .border-left-dark {
+        border-left: 0.25rem solid black !important;
     }
 
     /* table,

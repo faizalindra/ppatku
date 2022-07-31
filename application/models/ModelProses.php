@@ -20,8 +20,15 @@ class ModelProses extends CI_Model
         $this->db->update('tb_berkas', $data, $where);
     }
 
-    function cabut_berkas($data, $where){
+    function cabut_berkas($data, $where)
+    {
         $this->db->update('tb_berkas', $data, $where);
+        $this->ModelProses->cabut_bpn($where->id);
+    }
+
+    function bpn_gagal($id,$ket){
+        $ket['status'] = 2;
+        $this->db->update('tb_proses_bpn', $ket, ['no_proses_bpn' => $id]);
     }
 
 
@@ -353,7 +360,7 @@ class ModelProses extends CI_Model
         $this->db->update('tb_ket_proses', $ket, $id);
     }
 
-    function cabut_bpn($id)
+    function cabut_bpn($id = null)
     {
         // $this->db->update('tb_ket_proses', array('bpn' => 0), $id);
         $data = $this->db->select('no_proses_bpn, id_berkas, status')
@@ -362,10 +369,12 @@ class ModelProses extends CI_Model
             ->where('status', '0')
             ->get()
             ->result();
-        foreach ($data as $value) {
-            $value->status = 3;
+        if ($data) {
+            foreach ($data as $value) {
+                $value->status = 3;
+            }
+            $this->db->update_batch('tb_proses_bpn', $data, 'no_proses_bpn');
+            return 'success';
         }
-        $this->db->update_batch('tb_proses_bpn', $data, 'no_proses_bpn');
-        return 'success';
     }
 }

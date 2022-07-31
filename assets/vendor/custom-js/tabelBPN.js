@@ -1,5 +1,6 @@
 
 data_BPN();
+var id_bpn;;
 //select2 for proses
 $('.select2').select2();
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
@@ -16,12 +17,16 @@ function data_BPN() {
             var i;
             var a = 1;
             var aksi = '';
+            var report = '';
             for (i = 0; i < data.length; i++) {
-
-                if (user_role != 2 || user_role != '2') {
-                    var aksi = '<td style="text-align:center;">' +
-                        '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>';
+                if (data[i].status == '0') {
+                    report = "<button class='badge badge-warning btn-sm btn-gagal' data='" + data[i].no_proses_bpn + "'><i class='fa fa-exclamation-triangle'></i></button>";
                 }
+                if (user_role != 2 || user_role != '2') {
+                    aksi = '<td style="text-align:center;">' +
+                        '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>&nbsp;' + report + '</td>';
+                }
+
                 html += '<tr class="text-capitalize text-center">' +
                     '<td>' + a++ + '</td>' +
                     '<td>' + data[i].tgl_masuk + '</td>' +
@@ -34,12 +39,12 @@ function data_BPN() {
             }
             $('#show_data').html(html);
             var cari = $('#cari_data').attr('data');
-            if(cari != '' || cari != null){
+            if (cari != '' || cari != null) {
                 var table = $('#tabel-BPN').dataTable().fnFilter(cari);
-            } else{
+            } else {
                 var table = $('#tabel-BPN').dataTable({});
             }
-            
+
             if (user_role == 2 || user_role == '2') {
                 $('.status_bpn').removeAttr('href').removeAttr('onclick');
             }
@@ -85,11 +90,14 @@ function status_proses(status, id) {
         return '<span data="' + id + '" class="badge badge-warning status_bpn"> Proses </span>';
     } else if (status == "1") {
         return '<span class="badge badge-success">Selesai</span>';
-    } else{
+    } else if (status == '2') {
+        return '<span class="badge badge-secondary">Gagal</span>';
+    } else if (status == '3') {
         return '<span class="badge badge-danger">Dicabut</span>';
     }
 }
 
+//fungsi untuk mengbuah status proses BPN menjadi selesai
 $('#show_data').on('click', '.status_bpn', function () {
     if (confirm('Pastikan proses telah selesai !!!!')) {
         var id = $(this).attr('data');
@@ -101,8 +109,14 @@ $('#show_data').on('click', '.status_bpn', function () {
                 console.log(data)
             }, "json").fail(function () { console.log('gagal') });
     }
-
 });
+
+//membuka modal proses gagal
+$('#show_data').on('click', '.btn-gagal', function () {
+    id_bpn = $(this).attr('data');
+    $('#id_bpn').val(id_bpn);
+    $('#modal-gagal').modal('show');
+})
 
 //untuk menjaga line break pada textarea
 function nl2br(str, is_xhtml) {

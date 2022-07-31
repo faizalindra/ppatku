@@ -854,8 +854,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <h6>Proses BPN</h6>
                                     </div>
@@ -865,8 +865,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <div class="row">
                                             <div class="col-md-12 text-left" style="font-size: 12px;">

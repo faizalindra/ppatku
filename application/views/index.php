@@ -53,7 +53,7 @@
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Proses BPN Terdaftar</div>
                                 <div class="h1 mb-0 font-weight-bold text-white"><?= $bb['bb_terdaftar'] ?></div>
                                 <div class="text-white">Proses &nbsp; : <?= $bb['bb_proses'] ?></div>
-                                <div class="text-white">Selesai &nbsp; : <?= $bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?= $bb['bb_selesai'] ?></div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-5x text-warning"></i></a>

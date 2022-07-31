@@ -1,3 +1,9 @@
+31 Juli 2022 #00069
+    - menambah fungsi report Proses BPN Gagal
+    - menambah card Bpn Gagal
+    - fix bug, saat berkas dicabut proses BPN berkas tersebut tidak ikut tercabut
+    - memperbaiki tampilan card pada 'detail_berkas'
+
 27 Juli 2022 #00068
     - memambah tombol print pada alert input berkas setelah menginput berkas
     - merombak form pencarian pada header
