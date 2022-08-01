@@ -106,6 +106,7 @@
                                 <th>Pihak 2</th>
                                 <th>Berkas Selesai</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="show_data">
@@ -216,6 +217,7 @@
                                                                 <option value="Roya">Roya</option>
                                                                 <option value="SKMHT">SKMHT</option>
                                                                 <option value="Waris">Waris</option>
+                                                                <option value="Lain-Lain">Lain-Lain</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -552,6 +554,7 @@
                                                         <option value="Roya">Roya</option>
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
+                                                        <option value="Lain-Lain">Lain-Lain</option>
                                                     </select>
                                                 </div>
                                             </div>

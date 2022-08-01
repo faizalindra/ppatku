@@ -180,6 +180,7 @@
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
                                                 <option value="Wasiat">Wasiat</option>
+                                                <option value="Lain-Lain">Lain-Lain</option>
                                             </select>
                                         </div>
                                     </div>
@@ -318,6 +319,7 @@
                                                     <option value="SKMHT">SKMHT</option>
                                                     <option value="Waris">Waris</option>
                                                     <option value="Wasiat">Wasiat</option>
+                                                    <option value="Lain-Lain">Lain-Lain</option>
                                                 </select>
                                                 <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>

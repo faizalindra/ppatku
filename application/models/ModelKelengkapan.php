@@ -57,6 +57,9 @@ class ModelKelengkapan extends CI_Model
                 case "Roya":
                     $jenis_berkas = array(1, 3, 11, 12, 18);
                     break;
+                case "Lain-Lain":
+                    $jenis_berkas = array(1, 3, 11, 12);
+                    break;
             }
             $jb_hasil = array_merge($jb_hasil, $jenis_berkas);
             $jb_hasil = array_unique($jb_hasil);
