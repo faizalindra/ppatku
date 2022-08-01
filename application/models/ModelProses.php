@@ -20,6 +20,17 @@ class ModelProses extends CI_Model
         $this->db->update('tb_berkas', $data, $where);
     }
 
+    function cabut_berkas($data, $where)
+    {
+        $this->db->update('tb_berkas', $data, $where);
+        $this->ModelProses->cabut_bpn($where->id);
+    }
+
+    function bpn_gagal($id,$ket){
+        $ket['status'] = 2;
+        $this->db->update('tb_proses_bpn', $ket, ['no_proses_bpn' => $id]);
+    }
+
 
     function get_proses($id, $ids)
     {
@@ -70,6 +81,9 @@ class ModelProses extends CI_Model
                 case "Roya":
                     $jenis_berkas = array(7);
                     break;
+                case "Lain-Lain":
+                    $jenis_berkas = array(5, 6, 10, 13, 21);
+                    break;
             }
             $jb_hasil = array_merge($jb_hasil, $jenis_berkas);
             $jb_hasil = array_unique($jb_hasil);
@@ -79,7 +93,7 @@ class ModelProses extends CI_Model
             $b_proses = '<a class="badge badge-warning tbl_proses" ';
             $c_proses = '<a class="badge badge-success tbl_proses" >';
             $d = '</a>';
-            $arr_proses = array("", "Ukur", "Pertimbangan Teknis", "Perijinan", "Pengeringan", "Cek Plot", "Cek Sertipikat", "Roya", "Ganti Nama", "Tapak Kapling", "Validasi Pajak", "Konversi", "Waris", "Balik Nama", "Peningkatan Hak", "SKMHT", "APHT", "Kutip SU", "IPH", "ZNT", "Validasi Sertipikat");
+            $arr_proses = array("", "Ukur", "Pertimbangan Teknis", "Perijinan", "Pengeringan", "Cek Plot", "Cek Sertipikat", "Roya", "Ganti Nama", "Tapak Kapling", "Validasi Pajak", "Konversi", "Waris", "Balik Nama", "Peningkatan Hak", "SKMHT", "APHT", "Kutip SU", "IPH", "ZNT", "Validasi Sertipikat", "Lain-Lain");
             // $arr_prose2 = array("", "ukur", "pert_teknis", "perijinan", "pengeringan", "cek_plot", "cek_sertipikat", "roya", "ganti_nama", "tapak_kapling", "bayar_pajak", "konversi", "waris", "balik_nama", "peningkatan_hak", "skmht", "ht", "kutip_su", "iph", "znt", "validasi_sert");
             $hasil = $this->db->get_where('tb_ket_proses', $ids)->result();
             foreach ($hasil as $hsl) {
@@ -259,10 +273,19 @@ class ModelProses extends CI_Model
                             break;
                         case 20:
                             if ($hsl->validasi_sert == null && $hsl->validasi_sert == 0) {
-                                $data['proses'][] = $a_proses . 'data="' . $id . '"datas="1" datat="10">' . $arr_proses[$b] . $d;
+                                $data['proses'][] = $a_proses . 'data="' . $id . '"datas="1" datat="20">' . $arr_proses[$b] . $d;
                             } else if ($hsl->validasi_sert == 1) {
                                 $data['proses'][] = $b_proses . 'data="' . $id . '"datas="2" datat="20">' . $arr_proses[$b] . $d;
                             } else if ($hsl->validasi_sert == 2) {
+                                $data['proses'][] = $c_proses . $arr_proses[$b] . $d;
+                            };
+                            break;
+                        case 21:
+                            if ($hsl->lainnya == null && $hsl->lainnya == 0) {
+                                $data['proses'][] = $a_proses . 'data="' . $id . '"datas="1" datat="21">' . $arr_proses[$b] . $d;
+                            } else if ($hsl->lainnya == 1) {
+                                $data['proses'][] = $b_proses . 'data="' . $id . '"datas="2" datat="21">' . $arr_proses[$b] . $d;
+                            } else if ($hsl->lainnya == 2) {
                                 $data['proses'][] = $c_proses . $arr_proses[$b] . $d;
                             };
                             break;
@@ -338,15 +361,35 @@ class ModelProses extends CI_Model
             case 20:
                 $data['validasi_sert'] = $b;
                 break;
+            case 21:
+                $data['lainnya'] = $b;
+                break;
         }
         $this->db->update('tb_ket_proses', $data, $id);
         $hsl = array_merge($data, $id);
         return $hsl;
-
     }
 
     function update_keterangan($ket, $id)
     {
         $this->db->update('tb_ket_proses', $ket, $id);
+    }
+
+    function cabut_bpn($id = null)
+    {
+        // $this->db->update('tb_ket_proses', array('bpn' => 0), $id);
+        $data = $this->db->select('no_proses_bpn, id_berkas, status')
+            ->from('tb_proses_bpn')
+            ->where('id_berkas', $id)
+            ->where('status', '0')
+            ->get()
+            ->result();
+        if ($data) {
+            foreach ($data as $value) {
+                $value->status = 3;
+            }
+            $this->db->update_batch('tb_proses_bpn', $data, 'no_proses_bpn');
+            return 'success';
+        }
     }
 }

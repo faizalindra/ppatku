@@ -106,7 +106,6 @@
                                     <div class="form-group row">
                                         <div class="input-group">
                                             <select name="jenis_hak_i" id="jenis_hak_i" class="custom-select" required>
-                                                <option disabled selected value> -- Jenis Hak -- </option>
                                                 <option value="M"> Hak Milik </option>
                                                 <option value="GB"> Guna Banggunan </option>
                                             </select>
@@ -127,7 +126,7 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Kec. *</div>
+                                                        <div class="input-group-text">Kec.</div>
                                                     </div>
                                                     <select name="kecamatan_i" id="kecamatan_i" class="custom-select" required>
                                                         <option disabled selected value> -- Kecamatan -- </option>
@@ -142,7 +141,7 @@
                                             <div class="form-group row">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text">Desa. *</div>
+                                                        <div class="input-group-text">Desa</div>
                                                     </div>
                                                     <select id="desa_i" name="desa_i" class="custom-select" required>
                                                         <option disabled selected value> -- Desa -- </option>
@@ -181,6 +180,7 @@
                                                 <option value="SKMHT">SKMHT</option>
                                                 <option value="Waris">Waris</option>
                                                 <option value="Wasiat">Wasiat</option>
+                                                <option value="Lain-Lain">Lain-Lain</option>
                                             </select>
                                         </div>
                                     </div>
@@ -319,6 +319,7 @@
                                                     <option value="SKMHT">SKMHT</option>
                                                     <option value="Waris">Waris</option>
                                                     <option value="Wasiat">Wasiat</option>
+                                                    <option value="Lain-Lain">Lain-Lain</option>
                                                 </select>
                                                 <span id="textHelpBlock" class="form-text text-muted coment"></span>
                                             </div>

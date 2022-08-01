@@ -6,7 +6,7 @@ class ModelBpn extends CI_Model
     public function tabel_bpn()
     {
         $data = $this->db->get('tb_proses_bpn')->result();
-        for ($i=0; $i<count($data); $i++) {
+        for ($i = 0; $i < count($data); $i++) {
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
             $data[$i]->kode_p = str_pad($data[$i]->no_proses_bpn, "5", "0", STR_PAD_LEFT);
             $data[$i]->nomor = str_pad($data[$i]->no_bpn, "6", "0", STR_PAD_LEFT);
@@ -51,6 +51,8 @@ class ModelBpn extends CI_Model
                 $card = '<div class="card border-dark bg-success" style="color:white;">';
             } else if ($h->status == 0) {
                 $card = '<div class="card border-dark bg-warning">';
+            } else if ($h->status == 2) {
+                $card = '<div class="card border-dark bg-secondary" style="color:white;">';
             }
             $data[] = $card .  '<div class="card-body p-1" >
                                 <div class="row" style="font-size: 12px;">
@@ -74,14 +76,27 @@ class ModelBpn extends CI_Model
         return $data;
     }
 
-    public function record_bpn(){
+    public function record_bpn()
+    {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn")->result();
         foreach ($hasil as $data) {
             $hsl['bb_terdaftar'] = $data->total_record;
         }
-        $hasil1 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
-        foreach ($hasil1 as $data) {
+        $hasil0 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=0")->result();
+        foreach ($hasil0 as $data) {
             $hsl['bb_proses'] = $data->total_record;
+        }
+        $hasil1 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=1")->result();
+        foreach ($hasil1 as $data) {
+            $hsl['bb_selesai'] = $data->total_record;
+        }
+        $hasil2 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=2")->result();
+        foreach ($hasil2 as $data) {
+            $hsl['bb_gagal'] = $data->total_record;
+        }
+        $hasil3 = $this->db->query("SELECT count( * ) as  total_record FROM tb_proses_bpn WHERE status=3")->result();
+        foreach ($hasil3 as $data) {
+            $hsl['bb_dicabut'] = $data->total_record;
         }
         return $hsl;
     }

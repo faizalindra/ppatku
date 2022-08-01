@@ -29,7 +29,7 @@ class ModelBerkas extends CI_Model
             ->where('berkas_selesai', 0)
             ->get();
         foreach ($hsl->result() as $data) {
-            $data->kode = 'B' . $data->id_berkas;
+            $data->kode = 'B' . str_pad($data->id_berkas, "5", "0", STR_PAD_LEFT);
         }
         return $hsl->result_array();
     }
@@ -46,7 +46,7 @@ class ModelBerkas extends CI_Model
             ->result();
         for ($i = 0; $i < count($data); $i++) {
             $kode_b = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
-            $data[$i]->no_urut = $i+1;
+            $data[$i]->no_urut = $i + 1;
             $data[$i]->kode_b = 'B' . $kode_b;
             $data[$i]->nama_penjual = str_replace(":", ": \n", $data[$i]->nama_penjual);
             $data[$i]->jenis_berkas = str_replace(",", ", ", $data[$i]->jenis_berkas);
@@ -95,7 +95,8 @@ class ModelBerkas extends CI_Model
                 'id_desa' => $data->id_desa,
                 'id_kecamatan' => $data->id_kecamatan,
                 'kecamatan' => $data->kecamatan,
-                'jenis_berkas' => $data->jenis_berkas,
+                'jenis_berkas' => str_replace(",", ", ", $data->jenis_berkas),
+                'jenis_berkas2' => explode(",", $data->jenis_berkas),
                 'nama_penjual' => str_replace(":", ": \n", $data->nama_penjual),
                 'nama_pembeli' => $data->nama_pembeli,
                 'tot_biaya' => 'Rp. ' . number_format($data->tot_biaya),
@@ -111,6 +112,8 @@ class ModelBerkas extends CI_Model
                 'pembeli_hak' => $data->pembeli_hak,
                 'proses' => $data->proses,
                 'ket' => $data->ket,
+                'kode_b' => str_pad($data->id_berkas, "5", "0", STR_PAD_LEFT),
+                'kode_s' => str_pad($data->reg_sertipikat, "5", "0", STR_PAD_LEFT),
             );
             if (!empty($data->jenis_hak && !empty($data->no_sertipikat))) {
                 $hasil['sertipikat'] = $data->jenis_hak . '. ' . $data->no_sertipikat . ' / ' . $data->desa . ', Kec. ' . $data->kecamatan;
@@ -118,6 +121,11 @@ class ModelBerkas extends CI_Model
             } else {
                 $hasil['sertipikat'] = 'Desa ' . $data->desa . ', Kec. ' . $data->kecamatan;
                 $hasil['sertipikat2'] = 'Desa ' . $data->desa;
+            }
+            if ($data->jenis_hak == 'M') {
+                $hasil['jenis_hak2'] = 'SHM';
+            } else {
+                $hasil['jenis_hak2'] = 'SHGB';
             }
         }
         return $hasil;
@@ -130,12 +138,11 @@ class ModelBerkas extends CI_Model
             ->from('tb_berkas')
             ->join('desa', 'tb_berkas.alamat = desa.id', 'left')
             ->join('tb_sertipikat', 'tb_sertipikat.no_reg = tb_berkas.reg_sertipikat', 'left')
+            ->where('berkas_selesai', 0)
             ->get()
             ->result();
-
-        foreach ($data as $item) {
-            //cek apakah berkas sudah selesai atau berkas dicabut
-            if ($item->berkas_selesai < 1) {
+        if ($data) {
+            foreach ($data as $item) {
                 //cek apakah berkas memiliki sertipikat atau tidak
                 if (!empty($item->no_sertipikat)) {
                     if ($item->nama_penjual != '' && $item->nama_pembeli != ' ') {
@@ -151,9 +158,8 @@ class ModelBerkas extends CI_Model
                     }
                 }
             }
+            return $hasil;
         }
-
-        return $hasil;
     }
 
     //untuk data record card
@@ -194,10 +200,12 @@ class ModelBerkas extends CI_Model
             ->limit(1)
             ->get()
             ->result_array();
-        foreach ($data as $key) {
-            $hsl = $key['id'];
+        if ($data) {
+            foreach ($data as $key) {
+                $hsl = $key['id'];
+            }
+            return $hsl;
         }
-        return $hsl;
     }
 
     //untuk halaman print berkas
@@ -211,7 +219,7 @@ class ModelBerkas extends CI_Model
             ->get()
             ->result();
         foreach ($data as $item) {
-            if($item->reg_sertipikat == null || $item->reg_sertipikat == ''){
+            if ($item->reg_sertipikat == null || $item->reg_sertipikat == '') {
                 $hasil['sertipikat'] = 'Desa ' . $item->desa . ', Kec. ' . $item->kecamatan;
             }
             $hasil = array(

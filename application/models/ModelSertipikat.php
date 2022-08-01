@@ -133,10 +133,12 @@ class ModelSertipikat extends CI_Model
             ->where('is_used', 0)
             ->get()
             ->result();
-        foreach ($data as $item) {
-            $hasil[] = '<option value="' . $item->no_reg . '">' . $item->no_reg . '. ' . $item->jenis_hak  . ". " . $item->no_sertipikat . "/" . $item->desa . ' A.n.  ' . $item->pemilik_hak . ' | ' . $item->proses . '</option>';
+        if ($data) {
+            foreach ($data as $item) {
+                $hasil[] = '<option value="' . $item->no_reg . '">' . $item->no_reg . '. ' . $item->jenis_hak  . ". " . $item->no_sertipikat . "/" . $item->desa . ' A.n.  ' . $item->pemilik_hak . ' | ' . $item->proses . '</option>';
+            }
+            return $hasil;
         }
-        return $hasil;
     }
 
     public function get_sert_for_auto($id)
@@ -160,9 +162,11 @@ class ModelSertipikat extends CI_Model
             ->limit(1)
             ->get()
             ->result_array();
-        foreach ($data as $key) {
-            $hsl = $key['no_reg'];
+        if ($data) {
+            foreach ($data as $key) {
+                $hsl = $key['no_reg'];
+            }
+            return $hsl;
         }
-        return $hsl;
     }
 }

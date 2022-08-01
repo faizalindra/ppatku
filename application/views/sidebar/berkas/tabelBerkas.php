@@ -2,6 +2,7 @@
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
+    <div id="print" data="<?= $this->session->flashdata('print_berkas') ?>"></div>
     <div class="card mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Manajemen Berkas</h6>
@@ -17,7 +18,7 @@
                         <div class="row">
                             <!-- Terdaftar -->
                             <div class="col-md-3">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-left-primary shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -34,7 +35,7 @@
                             </div>
                             <!-- Dalam Proses -->
                             <div class="col-md-3">
-                                <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card border-left-warning shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('proses');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -51,7 +52,7 @@
                             </div>
                             <!-- Selesai -->
                             <div class="col-md-3">
-                                <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card border-left-success shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('selesai');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -68,7 +69,7 @@
                             </div>
                             <!-- Dicabut -->
                             <div class="col-md-3">
-                                <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card border-left-danger shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('dicabut');">
                                     <div class="card-body p-1">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col p-1">
@@ -105,6 +106,7 @@
                                 <th>Pihak 2</th>
                                 <th>Berkas Selesai</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="show_data">
@@ -125,8 +127,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <form id="formAwesome" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
+                        <div class="container-fluid"> 
+                            <form id="form_input" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
                                 <div class="row">
                                     <div class="col-md-7">
                                         <h6><u>Berkas</u></h6>
@@ -141,7 +143,7 @@
                                                                         <div class="input-group-text">No.
                                                                         </div>
                                                                     </div>
-                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+5 ?>">
+                                                                    <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas + 5 ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -215,6 +217,7 @@
                                                                 <option value="Roya">Roya</option>
                                                                 <option value="SKMHT">SKMHT</option>
                                                                 <option value="Waris">Waris</option>
+                                                                <option value="Lain-Lain">Lain-Lain</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -260,7 +263,7 @@
                                             <div class="col-md-12">
                                                 <div class="container-fluid">
                                                     <div class="row">
-                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Penjual</u> :</span>
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 1</u> :</span>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="row">
@@ -292,7 +295,7 @@
                                                     </div>
                                                     <hr class="mt-1 mb-1" />
                                                     <div class="row">
-                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pembeli</u> :</span>
+                                                        <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 2</u> :</span>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="row">
@@ -473,7 +476,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form id="formAwesome" method="post" action="<?= base_url() ?>berkas/update_berkas" autocomplete="off">
+                            <form id="form_edit" method="post" action="<?= base_url() ?>berkas/update_berkas" autocomplete="off">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="container-fluid">
@@ -551,6 +554,7 @@
                                                         <option value="Roya">Roya</option>
                                                         <option value="SKMHT">SKMHT</option>
                                                         <option value="Waris">Waris</option>
+                                                        <option value="Lain-Lain">Lain-Lain</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -706,8 +710,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;  min-width:17rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
@@ -717,8 +721,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;  min-width:17rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
                                                 <div class="col-md-12 text-left" style="font-size: 12px;">
@@ -935,8 +939,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <h6>Proses BPN</h6>
                                         </div>
@@ -946,8 +950,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 p-1">
-                                    <div class="card border-dark" style=" min-height: 555px;">
+                                <div class="col-md-3 p-1 d-flex">
+                                    <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                         <div class="card-header p-1 bg-primary text-white">
                                             <div class="row">
                                                 <div class="col-md-12 text-left" style="font-size: 12px;">
@@ -985,6 +989,7 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
         <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
@@ -996,9 +1001,11 @@
             #ui-datepicker-div {
                 z-index: 10000 !important;
             }
+
             #tabel-berkas {
                 width: flex !important;
             }
+
             /* table,
             th,
             td {

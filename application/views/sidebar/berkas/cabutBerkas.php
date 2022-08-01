@@ -107,19 +107,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 p-1">
-            <div class="card border-dark" style=" min-height: 555px;">
+        <div class="col-md-3 p-1 d-flex">
+            <div class="card border-dark" style=" min-height: 555px;min-width:26rem">
                 <div class="card-header p-1" style="background-color:#9efff4;">
                     <h6>Proses BPN</h6>
                 </div>
-                <div class="card-body p-1">
+                <div class="card-body p-1 text-white">
                     <div id="bpn_">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 p-1">
-            <div class="card border-dark" style=" min-height: 555px;">
+        <div class="col-md-3 p-1 d-flex">
+            <div class="card border-dark" style=" min-height: 555px;min-width:26rem">
                 <div class="card-header p-1" style="background-color:#9efff4;">
                     <div class="row">
                         <div class="col-md-12 text-left text-muted" style="font-size: 12px;">

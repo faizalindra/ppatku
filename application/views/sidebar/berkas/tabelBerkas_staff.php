@@ -15,7 +15,7 @@
                     <div class="row">
                         <!-- Terdaftar -->
                         <div class="col-md-3">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-primary shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -32,7 +32,7 @@
                         </div>
                         <!-- Dalam Proses -->
                         <div class="col-md-3">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card border-left-warning shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('proses');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -49,7 +49,7 @@
                         </div>
                         <!-- Selesai -->
                         <div class="col-md-3">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-success shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('selesai');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -66,7 +66,7 @@
                         </div>
                         <!-- Dicabut -->
                         <div class="col-md-3">
-                            <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2" onclick="$('#tabel-berkas').dataTable().fnFilter('dicabut');">
                                 <div class="card-body p-1">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-
+        <?= $this->session->flashdata('success'); ?>
         <div class="row">
             <div class="col-lg-12 col-auto">
                 <table class="table table-striped" id="tabel-berkas" style="width: flex;">
@@ -139,7 +139,7 @@
                                                                     <div class="input-group-text">No.
                                                                     </div>
                                                                 </div>
-                                                                <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas+5 ?>">
+                                                                <input type="number" class="form-control" name="no_berkas" id="no_berkas" aria-describedby="helpId" max="<?= $max_berkas + 5 ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -257,7 +257,7 @@
                                         <div class="col-md-12">
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <span id="checkboxHelpBlock" class="form-text text-muted"><u>Penjual</u> :</span>
+                                                    <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 1</u> :</span>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="row">
@@ -289,7 +289,7 @@
                                                 </div>
                                                 <hr class="mt-1 mb-1" />
                                                 <div class="row">
-                                                    <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pembeli</u> :</span>
+                                                    <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 2</u> :</span>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="row">
@@ -625,8 +625,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px; min-width:17rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <h6>Proses BPN</h6>
                                     </div>
@@ -636,8 +636,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px; min-width:17rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <div class="row">
                                             <div class="col-md-12 text-left" style="font-size: 12px;">
@@ -654,37 +654,37 @@
                                         <div class="row" id="row_biaya">
                                         </div>
                                         <div class="row">
-                                                <br>
-                                                <div class="col-md-12 text-center"><button id="tambah_biaya" data-toggle="collapse" data-target="#collapse_biaya" class="badge badge-success rounded-circle border border-white"><i class="fa fa-plus"></i></button></div>
-                                                <div class="col-md-12">
-                                                    <div id="collapse_biaya" class="collapse">
-                                                        <form action="#" onsubmit="input_biaya();return false" autocomplete="off" id="form-biaya">
-                                                            <div class="row">
-                                                                <div class="col-md-12 text-center text-muted">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input bayar_" type="radio" id="pembayaran" name="bayar_" value="0" required>
-                                                                        <label class="form-check-label" for="pembayaran">Bayar/DP</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input bayar_" type="radio" id="penambahan" name="bayar_" value="1" required>
-                                                                        <label class="form-check-label" for="penambahan">Tambah</label>
-                                                                    </div>
+                                            <br>
+                                            <div class="col-md-12 text-center"><button id="tambah_biaya" data-toggle="collapse" data-target="#collapse_biaya" class="badge badge-success rounded-circle border border-white"><i class="fa fa-plus"></i></button></div>
+                                            <div class="col-md-12">
+                                                <div id="collapse_biaya" class="collapse">
+                                                    <form action="#" onsubmit="input_biaya();return false" autocomplete="off" id="form-biaya">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center text-muted">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input bayar_" type="radio" id="pembayaran" name="bayar_" value="0" required>
+                                                                    <label class="form-check-label" for="pembayaran">Bayar/DP</label>
                                                                 </div>
-                                                                <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
-                                                                <div class="col-md-12"><input type="text" class="form-control" name="jum_bayar" id="jum_bayar" pattern="[0-9]{3,7}" maxlength="7" title="Masukan Angka antara Rp. 1.000 ~ Rp. 99.999.999" placeholder="Rp." required></div>
-                                                                <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" maxlength="20" required></div>
-                                                                <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:" maxlength="30"></textarea></div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-12 text-center">
-                                                                    <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Reset</button>
-                                                                    <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input bayar_" type="radio" id="penambahan" name="bayar_" value="1" required>
+                                                                    <label class="form-check-label" for="penambahan">Tambah</label>
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                            <div class="col-md-12"><input type="text" class="form-control datepicker" name="tgl_bayar" id="tgl_bayar" placeholder="Tanggal"></div>
+                                                            <div class="col-md-12"><input type="text" class="form-control" name="jum_bayar" id="jum_bayar" pattern="[0-9]{3,7}" maxlength="7" title="Masukan Angka antara Rp. 1.000 ~ Rp. 99.999.999" placeholder="Rp." required></div>
+                                                            <div class="col-md-12"><input type="text" class="form-control" name="penyetor" id="penyetor" placeholder="Bpk/Ibu" maxlength="20" required></div>
+                                                            <div class="col-md-12"><textarea class="form-control" name="ket_bayar" id="ket_bayar" placeholder="Ket:" maxlength="30"></textarea></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <button type="reset" class="btn btn-sm btn-danger" data-dismiss="true">Reset</button>
+                                                                <button id="save_bayar" type="submit" class="btn btn-sm btn-primary">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                     <div class="card-footer p-1" id="footer_biaya">
                                         <div class="row">
@@ -854,8 +854,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <h6>Proses BPN</h6>
                                     </div>
@@ -865,8 +865,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 p-1">
-                                <div class="card border-dark" style=" min-height: 555px;">
+                            <div class="col-md-3 p-1 d-flex">
+                                <div class="card border-dark" style=" min-height: 555px;min-width:16.5rem">
                                     <div class="card-header p-1 bg-primary text-white">
                                         <div class="row">
                                             <div class="col-md-12 text-left" style="font-size: 12px;">

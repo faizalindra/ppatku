@@ -27,19 +27,23 @@ class Proses extends CI_Controller
     }
 
     function berkas_selesai()
-    {        
+    {
         $id = $this->input->post('id');
         $where = ['id' => $id];
-        //cabut berkas
-        if (!empty($this->input->post('kode'))) {
-            $data = ['berkas_selesai' =>  3];
-            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
-            echo json_encode('berhasil update status berkas');
-        //berkas selesai    
-        } else {
-            $data = ['berkas_selesai' =>  1];
-            $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
-            echo json_encode('berhasil update status berkas');
+        $data = ['berkas_selesai' =>  1];
+        $datas = $this->ModelProses->berkas_selesai($data, $where, $id);
+        echo json_encode('berhasil update status berkas');
+    }
+
+    function cabut_berkas()
+    {
+        $id = $this->input->post('id');
+        $where = ['id' => $id];
+        $data = ['berkas_selesai' =>  3];
+        if ($this->input->post('kode')) {
+            $this->ModelProses->berkas_selesai($data, $where, $id);
+            $this->ModelProses->cabut_bpn($id);
+            echo json_encode('berhasil cabut status berkas');
         }
     }
 
@@ -49,5 +53,13 @@ class Proses extends CI_Controller
         $ket = array('ket_proses' => $this->input->post('ket'));
         $this->ModelProses->update_keterangan($ket, $id);
         echo json_encode($ket);
+    }
+
+    function bpn_gagal(){
+        $id = $this->input->post('id_bpn');
+        $ket['ket'] = $this->input->post('ket_gagal');
+        $this->ModelProses->bpn_gagal($id, $ket);
+        echo json_encode('berhasil');
+        redirect('bpn');
     }
 }

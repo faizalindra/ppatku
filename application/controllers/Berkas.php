@@ -104,6 +104,7 @@ class Berkas extends CI_Controller
         }
         if (!empty($this->input->post('no_berkas'))) {
             $data['id'] = $this->input->post('no_berkas');
+            $print = $data['id'];
         }
 
 
@@ -173,8 +174,14 @@ class Berkas extends CI_Controller
             $this->ModelBerkas->simpanBerkas($data);
             echo json_encode($data);
         }
+
+        if (empty($print)) {
+            $print = $this->ModelBerkas->get_last_id();
+        }
+
         $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
                                                         Berkas Berhasil Ditambahkan
+                                                        <a href="' . base_url('berkas/print_berkas/') . $print . '" target="_blank"><button type="button" class="btn btn-lg btn-white border"><span class="fa fa-print"></span></button></a>
                                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -188,8 +195,6 @@ class Berkas extends CI_Controller
         $data['berkas'] = $this->ModelBerkas->get_berkas_for_select($b);
         $judul['judul'] = "Cabut Berkas";
         $this->load->view('templates/header', $judul);
-        // $this->load->view('templates/sidebar');
-        // $this->load->view('templates/topbar');
         $this->load->view('sidebar/berkas/cabutBerkas', $data);
         $this->load->view('templates/footer');
     }
@@ -203,11 +208,12 @@ class Berkas extends CI_Controller
 
     function print_berkas()
     {
+        // sleep(3);
         $id = $this->uri->segment(3);
         if ($id == null) {
-            $data['heading'] = 'Error 404';
-            $data['message'] = 'Halaman tidak ditemukan';
-            $this->load->view('errors/html/error_404', $data);
+            $id = $this->ModelBerkas->get_last_id();
+            $data['berkas'] = $this->ModelBerkas->get_berkas($id);
+            $this->load->view('sidebar/berkas/print', $data);
         } else {
             $data['berkas'] = $this->ModelBerkas->get_berkas($id);
             $this->load->view('sidebar/berkas/print', $data);

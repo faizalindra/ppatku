@@ -17,7 +17,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Berkas Terdaftar</div>
-                                <div class="h1 mb-0 font-weight-bold text-white"><?=  $b['b_terdaftar'] ?></div>
+                                <div class="h1 mb-0 font-weight-bold text-white"><?= $b['b_terdaftar'] ?></div>
                                 <div class="text-white">Proses &nbsp; : <?= $b['b_proses'] ?></div>
                                 <div class="text-white">Selesai &nbsp; : <?= $b['b_selesai'] ?></div>
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="text-md font-weight-bold text-white text-uppercase mb-1">Proses BPN Terdaftar</div>
                                 <div class="h1 mb-0 font-weight-bold text-white"><?= $bb['bb_terdaftar'] ?></div>
                                 <div class="text-white">Proses &nbsp; : <?= $bb['bb_proses'] ?></div>
-                                <div class="text-white">Selesai &nbsp; : <?= $bb['bb_terdaftar'] - $bb['bb_proses'] ?></div>
+                                <div class="text-white">Selesai &nbsp; : <?= $bb['bb_selesai'] ?></div>
                             </div>
                             <div class="col-auto">
                                 <a href="<?= base_url('bpn'); ?>"><i class="fas fa-cogs fa-5x text-warning"></i></a>
@@ -82,7 +82,9 @@
                                 <div class="card bg-success font-weight-bold text-white shadow text-decoration-underline" style="min-height: 210px;">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-12 justify-content-left" ><h5><u><?= $b['kode'] ?></u></h5></div>
+                                            <div class="col-md-12 justify-content-left">
+                                                <h5><u><a style="color:white;" href="https://localhost/ppatku/cari/cari_berkas/<?= $b['kode'] ?>"><?= $b['kode'] ?></a></u></h5>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 text-center"><?= $b['jenis_berkas']; ?></div>
@@ -132,7 +134,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div align='left' class="col-md-6 text-white-50 small font-weight-bold">
-                                                    <?= date_format(date_create( $r['tgl']), 'd M Y')?>
+                                                    <?= date_format(date_create($r['tgl']), 'd M Y') ?>
                                                 </div>
                                                 <div class="col-md-6 text-right">
                                                     <a href='<?= base_url('catatan/hapus_catatan_dash/') . $r['id_catatan'] ?>' align='right'>

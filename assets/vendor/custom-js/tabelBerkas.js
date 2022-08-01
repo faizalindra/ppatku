@@ -1,28 +1,44 @@
+// Variable untuk menyimpan data id berkas yang dibuka pada modal
+// Variable berubah sesuai berkas yang dipilih saat membuka modal
 var berkas_id_detail = 0;
+
+// jenis modal untuk menentukan modal berkas dicabut atau bukan
+// variable ini dugunakan untuk menonaktifkan tombol-tombol pada detail berkas yang sudah dicabut
+// Default 0 = berkas normal
 var jenis_modal = 0;
-// var table; // 0 = modal berkas, 1 = modal berkas cabut
-tabel_berkas(); //pemanggilan fungsi tampil barang.
+
+//pemanggilan fungsi tampil barang.
+tabel_berkas();
+
 $(document).ready(function () {
+
+    // Menghapus width pada tabel-berkas setelah inisialisasi tabel
     setTimeout(function () {
-    $('#tabel-berkas').removeAttr('style')}, 1);
+        $('#tabel-berkas').removeAttr('style')
+    }, 10);
+
+    // Menampung variabel untuk berkas yang dicari menggunakan form pencarian di header
     var cari = $('#cari_data').attr('data');
+    // filter berkas sesuai kriteria yang dicari
     $('#tabel-berkas').dataTable().fnFilter(cari);
 });
 
+// Datepicker untuk input dan edit
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
+
+// Select2 untuk pemilihan jenis berkas pada input dan edit berkas
 $('.select2').select2();
-$('.proses').select2();
 
 /////////////////////////////////////////////////// -- Tabel Berkas -- //////////////////////////////////////////////////
 // fungsi tampil tabel berkas
 function tabel_berkas() {
-    // $('#tabel-berkas').DataTable().clear().destroy();
-    var table = $('#tabel-berkas').dataTable({
+    var table = $('#tabel-berkas').DataTable({
+
+        // Ajax untuk mengambil data berkas
         "ajax": {
             "url": base_url + "/berkas/tabel_berkas",
             "type": "post",
             "autoWidth": true,
-            // "dataSrc": "data",
         },
         columns: [{
             data: 'no_urut'
@@ -49,10 +65,14 @@ function tabel_berkas() {
             data: 'nama_pembeli'
         },
         {
-            data: 'status_berkas'
+            data: 'status_berkas',
         },
         {
             data: 'aksi'
+        },
+        {
+            data: 'ket',
+            visible: false
         },
         ],
         'columnDefs': [
@@ -75,12 +95,21 @@ function tabel_berkas() {
         ]
     }
     );
-    // $('#tabel-berkas').dataTable().fnFilter('mandiraja');
 }
+
+
+// fungsi untuk mereload ajax tabel berkas
+// function reload_tabel_berkas() {
+//     $('#tabel-berkas').DataTable().ajax.reload();
+// }
 
 // tombol detail berkas
 $('#show_data').on('click', '.item_detail2', function () {
+
+    // mengambil id berkas yang diklik
     var id = $(this).attr('data');
+
+    // atur jenis_modal menjadi 0
     jenis_modal = 0;
     $.ajax({
         method: "GET",
@@ -90,9 +119,11 @@ $('#show_data').on('click', '.item_detail2', function () {
             id: id
         },
         success: function (data) {
+
+            // masukan data ke dalam DOM masing-masing
             berkas_id_detail = data.id_berkas
             $('#modelDetail2').modal('show');
-            $('#id_berkas_').html('No. ' + data.id_berkas);
+            $('#id_berkas_').html('Kode. B' + data.kode_b);
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
             $('#jenis_berkas_').html(data.jenis_berkas);
             $('#col_sertipikat').html(data.sertipikat);
@@ -113,13 +144,15 @@ $('#show_data').on('click', '.item_detail2', function () {
     return false;
 });
 
-//tombol print nomor berkas
+
+// Tombol print nomor berkas
+// tombol ini digunakan untuk mencetak nomor berkas pada modal detail_berkas
 $('#print_b').click(function () {
-    var idb = berkas_id_detail;
-    window.open(base_url + '/berkas/print_berkas/' + idb, '_blank');
+    window.open(base_url + '/berkas/print_berkas/' + berkas_id_detail, '_blank');
 })
 
 // tombol detail sertipikat
+// Memunculkan modal detail sertipikat saat sertipikat pada berkas diklik
 $('#show_data').on('click', '.btn_sertipikat', function () {
     var id = $(this).attr('data');
     $.ajax({
@@ -148,7 +181,6 @@ $('#show_data').on('click', '.btn_sertipikat', function () {
         },
         error: function () {
             alert('gagal mengambil data sertipikat');
-
         }
     });
     return false;
@@ -172,8 +204,7 @@ $('#show_data').on('click', '.edit_berkas', function () {
             $('[name="kecamatan_e"]').val(data.id_kecamatan);
             var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
             $('[name="desa_e"]').html(html);
-            $('[name="desa_e"]').val(data.id_desa);
-            $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas);
+            $('[name="jenis_berkas[]_e"]').val(data.jenis_berkas2);
             $('[name="jenis_berkas[]_e"]').trigger('change');
             $('[name="penjual_e"]').val(data.nama_penjual);
             $('[name="pembeli_e"]').val(data.nama_pembeli);
@@ -221,21 +252,30 @@ $('#show_data').on('click', '.item_detail', function () {
 });
 
 //tombol status berkas
+// Fungsi untuk mengubah status berkas dari 'Proses' ke 'Selesai'
 $('#show_data').on('click', '.status_berkas', function () {
     if (confirm('Pastikan proses telah selesai !!!!')) {
+
+        // ambil id berkas
         var id = $(this).attr('data');
+
+        // ubah class status berkas
         $(this).toggleClass('badge-warning badge-success');
+
+        //ubah keterangan status berkas
         $(this).html('Selesai');
-        console.log(id)
+
+        // ubah status berkas pada database
         $.post(base_url + '/proses/berkas_selesai', { id: id },
-            function (data) {
-                console.log(data)
-            }, "json").fail(function () { console.log('gagal') });
+            function () {
+            }, "json").fail(function () { console.log('gagal mengubah status berkas!!!') });
     }
 
 });
 
-//auto select when sertipikat is inputed
+// Auto input berkas
+// Fungsi ini akan aktif jika menginput berkas berdasarkan sertipikat yang sudah terdaftar
+// fungsi ini dapat megisi secara otomatis dengan data yang sudah ada berdasarkan data sertipikat yang sudah dipilih
 $('#formInputBerkas').on('change', '#sertipikat_i', function () {
     var id = $(this).val();
     $.post(base_url + '/berkas/get_sert_for_auto', { id: id },
@@ -296,8 +336,7 @@ $('#formedit').on('change', '#kecamatan_e', function () {
         dataType: 'json',
         success: function (data) {
             var html = '<option disabled selected value> -- Desa -- </option>';
-            var i;
-            for (i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 html += '<option value=' + data[i].id + '>' + data[i].nama + '</option>';
             }
             $('#desa_e').html(html);
@@ -313,7 +352,9 @@ $('#formedit').on('change', '#kecamatan_e', function () {
 
 
 //////////////////////////////////////////////////////- Card Kelengkapan -///////////////////////////////////////////////
-//fungsi untuk menampilkan kelengkapan berkas
+// fungsi untuk menampilkan kelengkapan berkas
+// untuk menampilkan kelengkapan berkas berdasarkan status berkas
+// status berkas null = berkas proses atau berkas selesai
 function detail_kelengkapan(id, opt) {
     $.ajax({
         url: base_url + '/Kelengkapan/get_kelengkapan',
@@ -398,7 +439,6 @@ function detail_proses(id, opt) {
                 $('#proses_2').html(data.proses);
                 $('#ket_proses_2').html(nl2br(data.ket));
             }
-
         },
         error: function (data) {
             alert('gagal mengambil data proses');
@@ -410,9 +450,8 @@ $('#modelDetail2').on('click', '.tbl_proses', function () {
     var id = $(this).attr('data');
     var val = $(this).attr('datas');
     var jp = $(this).attr('datat');
-    console.log(id + "-" + jp + "-" + val);
+    // console.log(id + "-" + jp + "-" + val);
     if (jenis_modal == 0) {
-        // if (user_role != 2 || user_role != 3) {
         if (confirm('Konfirmasi proses?')) {
             $.post(base_url + '/proses/update_proses', { id: id, jp: jp, val: val },
                 function (data) {
@@ -420,7 +459,6 @@ $('#modelDetail2').on('click', '.tbl_proses', function () {
                     detail_proses(id);
                 }, "json").fail(function () { console.log('gagal mengupdate proses') });
         }
-        // }
     }
 });
 
@@ -502,7 +540,8 @@ function biaya(id, opt) {
         }, 'json').fail(function () { console.log('gagal mengambil data biaya') });
 }
 
-// nonaktifkan field tergantung dari tombol radio
+// Pilihan biaya Card Biaya pada detail_berkas
+// digunakan untuk menonaktifkan field tergantung pilihan yang dipilih
 $("#modelDetail2").on('click', ".bayar_", function () {
     var val = $('input[name="bayar_"]:checked').val();
     if (val == 1) {
@@ -514,14 +553,19 @@ $("#modelDetail2").on('click', ".bayar_", function () {
     }
 })
 
-//fungsi untuk input biaya
+//fungsi untuk input biaya pada detail_berkas
 function input_biaya() {
+    // set id sesuai id berkas
     var id = berkas_id_detail;
+
+    // dapatkan value untuk setiap field
     var bayar_ = $('input[name="bayar_"]:checked').val();
     var tgl_bayar = $('[name="tgl_bayar"]').val();
     var jum_bayar = $('[name="jum_bayar"]').val();
     var penyetor = $('[name="penyetor"]').val();
     var ket_bayar = $('[name="ket_bayar"]').val();
+
+    // Post data ke server
     $.post(base_url + '/biaya/input_biaya', {
         id: id,
         bayar: bayar_,
@@ -532,13 +576,17 @@ function input_biaya() {
     }, function () {
         biaya(id);
     }, 'json').fail(function () { console.log('Gagal') })
+
+    // reset form
     $('#form-biaya').find('input[type=text]').val('')
     $('#form-biaya').find('textarea').val('')
+
+    // tutup modal
     $('#collapse_biaya').collapse('hide');
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-//untuk menghapus div di contenteditable
+//untuk menghapus div di contenteditable pada detail berkas
 function remove_div_in_ket(val) {
     var split1 = val.split("</div><div>").join("\n")
     var split2 = split1.split("<div>").join("\n")
