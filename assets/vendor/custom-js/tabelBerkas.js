@@ -103,6 +103,12 @@ function tabel_berkas() {
 //     $('#tabel-berkas').DataTable().ajax.reload();
 // }
 
+// Tombol Reset form input berkas
+$('#reset_form_i').on('click', function(){
+    $('[name="jenis_berkas[]"]').val(null).trigger('change');
+    $('#desa_i').html('<option disabled selected value> -- Desa -- </option>');
+})
+
 // tombol detail berkas
 $('#show_data').on('click', '.item_detail2', function () {
 

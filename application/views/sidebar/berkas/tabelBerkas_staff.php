@@ -103,6 +103,7 @@
                             <th>Pihak 2</th>
                             <th>Berkas Selesai</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="show_data">
@@ -200,18 +201,20 @@
                                                             <div class="input-group-text">Proses</div>
                                                         </div>
                                                         <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
-                                                            <option>AJB</option>
-                                                            <option>APHB</option>
-                                                            <option>APHT</option>
-                                                            <option>Ganti Blangko</option>
-                                                            <option>Ganti Nama</option>
-                                                            <option>Hibah</option>
-                                                            <option>Konversi</option>
-                                                            <option>Pemecahan</option>
-                                                            <option>Pengeringan</option>
-                                                            <option>Peningkatan Hak</option>
-                                                            <option>SKMHT</option>
-                                                            <option>Waris</option>
+                                                            <option value="AJB">AJB</option>
+                                                            <option value="APHB">APHB</option>
+                                                            <option value="APHT">APHT</option>
+                                                            <option value="Ganti Blangko">Ganti Blangko</option>
+                                                            <option value="Ganti Nama">Ganti Nama</option>
+                                                            <option value="Hibah">Hibah</option>
+                                                            <option value="Konversi">Konversi</option>
+                                                            <option value="Pemecahan">Pemecahan</option>
+                                                            <option value="Pengeringan">Pengeringan</option>
+                                                            <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                            <option value="Roya">Roya</option>
+                                                            <option value="SKMHT">SKMHT</option>
+                                                            <option value="Waris">Waris</option>
+                                                            <option value="Lain-Lain">Lain-Lain</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -446,7 +449,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="reset" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
+                                <button type="reset" id="reset_form_i" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button name="submit" type="submit" class="btn btn-primary">Save</button>
                             </div>

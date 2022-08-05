@@ -452,7 +452,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="reset" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
+                                    <button type="reset" id="reset_form_i" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button name="submit" type="submit" class="btn btn-primary">Save</button>
                                 </div>

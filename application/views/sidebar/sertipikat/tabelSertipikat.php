@@ -14,7 +14,7 @@
             <div class="col-md-8">
                 <div class="row justify-content-center">
                     <div class="col-md-2">
-                        <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card border-left-primary shadow h-100 py-2" onclick="$('#tabel-sertipikat').dataTable().fnFilter('');">
                             <div class="card-body p-1">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col p-1">

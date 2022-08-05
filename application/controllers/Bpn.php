@@ -22,7 +22,7 @@ class Bpn extends CI_Controller
     //untuk tabel bpn
     public function tabel_bpn()
     {
-        $data = $this->ModelBpn->tabel_bpn();
+        $data['data'] = $this->ModelBpn->tabel_bpn();
         echo json_encode($data);
         return $data;
     }

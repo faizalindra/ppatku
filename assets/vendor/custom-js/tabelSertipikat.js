@@ -22,7 +22,6 @@ function data_sertipikat() {
             "type": "post",
             "autoWidth": true,
         },
-        // "dom": 'lBfrtip',
         columns: [{
             data: 'no_urut'
         },
@@ -67,12 +66,8 @@ function data_sertipikat() {
                 "className": "text-center",
             },
         ],
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
-        // ]
     })
 }
-
 
 // fungsi edit sertipikat, tombol edit sertipikat
 $('#show_data').on('click', '.edit_sertipikat', function () {
@@ -162,6 +157,7 @@ $('#kecamatan_e').change(function desa() {
     return false;
 });
 
+//tombol reset form input sertipikat
 $('#reset_form').on('click', function(){
     $('[name="jenis_berkas[]_i"]').val(null).trigger('change');
 })
