@@ -30,7 +30,7 @@ class Sertipikat extends CI_Controller
 
     public function tabel_sertipikat()
     {
-        $data = $this->ModelSertipikat->tabel_sertipikat();
+        $data['data'] = $this->ModelSertipikat->tabel_sertipikat();
         echo json_encode($data);
     }
 

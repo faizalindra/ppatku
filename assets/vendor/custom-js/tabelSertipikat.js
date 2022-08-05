@@ -3,55 +3,76 @@ data_sertipikat();
 $('.select2').select2();
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
 
+// document ready
+$(document).ready(function () {
+    var cari = $('#cari_data').attr('data');
+    if (cari) {
+        $('#tabel-sertipikat').dataTable().fnFilter(cari);
+    }
+    setTimeout(function () {
+        $('#tabel-sertipikat').removeAttr('style')
+    }, 10);
+})
 
-// fungsi tampil berkas
+// Tabel Sertipikat
 function data_sertipikat() {
-    $.ajax({
-        method: 'GET',
-        url: base_url + '/sertipikat/tabel_sertipikat',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            var html = '';
-            var i;
-            var a = 1;
-            var aksi = '';
-            for (i = 0; i < data.length; i++) {
-                if (user_role != 2 || user_role != '2') {
-                    aksi = '<td >' +
-                        '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' + data[i].no_reg + '"><i class="fa fa-edit" ></i>Edit</button>' + '</td>'
-                }
-                html += '<tr class="text-capitalize">' +
-                    '<td>' + a++ + '</td>' +
-                    '<td>S' + data[i].kode_s + '</td>' +
-                    '<td>' + data[i].tgl_daftar + '</td>' +
-                    '<td >' + data[i].jenis_hak + '. ' + data[i].no_sertipikat + '/' + data[i].desa + '</td>' +
-                    '<td >' + data[i].kecamatan + '</td>' +
-                    '<td class="text-lowercase">' + luas_null(data[i].luas) + '</td>' +
-                    '<td class="text-center text-uppercase">' + nl2br(data[i].pemilik_hak) + '</td>' +
-                    '<td class="text-center text-uppercase">' + data[i].pembeli_hak + '</td>' +
-                    '<td>' + data[i].proses + '</td>' +
-                    '<td>' + nl2br(data[i].ket) + '</td>' + aksi + '</tr>';
-            }
-            $('#show_data').html(html);
-            var cari = $('#cari_data').attr('data');
-            if(cari != '' || cari != null){
-                var table = $('#tabel-sertipikat').dataTable().fnFilter(cari);
-            } else {
-                var table = $('#tabel-sertipikat').dataTable({});
-            }
-            
-            if (user_role == 2 || user_role == '2') {
-                $('.edit_sertipikat').removeAttr('href').removeAttr('data');
-            }
-
+    var table = $('#tabel-sertipikat').dataTable({
+        "ajax": {
+            "url": base_url + "/sertipikat/tabel_sertipikat",
+            "type": "post",
+            "autoWidth": true,
         },
-        error: function () {
-            alert("gagal");
-        }
-
-    });
+        // "dom": 'lBfrtip',
+        columns: [{
+            data: 'no_urut'
+        },
+        {
+            data: 'kode_s'
+        },
+        {
+            data: 'tgl_daftar'
+        },
+        {
+            data: 'sertipikat'
+        },
+        {
+            data: 'kecamatan'
+        },
+        {
+            data: 'luas'
+        },
+        {
+            data: 'pemilik_hak'
+        },
+        {
+            data: 'pembeli_hak'
+        },
+        {
+            data: 'proses',
+        },
+        {
+            data: 'ket'
+        },
+        {
+            data: 'aksi',
+        },
+        ],
+        'columnDefs': [
+            {
+                "targets": 6,
+                "className": "text-center",
+            },
+            {
+                "targets": 7,
+                "className": "text-center",
+            },
+        ],
+        // buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
+        // ]
+    })
 }
+
 
 // fungsi edit sertipikat, tombol edit sertipikat
 $('#show_data').on('click', '.edit_sertipikat', function () {
@@ -141,18 +162,6 @@ $('#kecamatan_e').change(function desa() {
     return false;
 });
 
-//untuk menjaga line break pada textarea
-function nl2br(str, is_xhtml) {
-    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-}
-
-//mengubah null di kolom keterangan menjadi whitespace
-function luas_null(val) {
-    var text = " m2";
-    if (val <= 0 || val == null) {
-        return val = " ";
-    } else {
-        return val + text;
-    }
-}
+$('#reset_form').on('click', function(){
+    $('[name="jenis_berkas[]_i"]').val(null).trigger('change');
+})

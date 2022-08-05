@@ -1,5 +1,8 @@
-<script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
+
 <link href="<?= base_url('assets/vendor/jquery/jquery-ui.min.css') ?>" rel="stylesheet" type="text/css">
+<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
+<link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
+<link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Manajemen Sertipikat</h6>
@@ -86,7 +89,7 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">No. </div>
                                                     </div>
-                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="<?= $max_sertipikat+5 ?>">
+                                                    <input type="number" name="id_i" class="form-control" id="id_i" autocomplete="off" max="<?= $max_sertipikat + 5 ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -211,7 +214,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" value="reset" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <button id="reset_form" type="reset" value="reset" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button name="submit" type="submit" class="btn btn-primary">Save</button>
                         </div>
@@ -363,14 +366,12 @@
     <!-- end model edit -->
 <?php } ?>
 
-
+<script type="text/javascript" src="<?= base_url('assets/vendor/jquery/jquery-ui.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/jquery.dataTables.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendor/select2/select2.min.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/vendor/custom-js/tabelSertipikat.js') ?>"></script>
-<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
-<link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.css') ?>" rel="stylesheet" type="text/css">
-<link href="<?= base_url('assets/vendor/select2/select2.min.css') ?>" rel="stylesheet" type="text/css">
+
 <style>
     #ui-datepicker-div {
         z-index: 10000 !important;

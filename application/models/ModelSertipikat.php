@@ -10,19 +10,6 @@ class ModelSertipikat extends CI_Model
         $this->db->insert('tb_sertipikat', $data);
     }
 
-    //Manajemen Sertipikat
-    //List Sertipikat Tersimpan di tabel tb_sertipikat
-    public function cekSertipikat()
-    {
-        return $this->db->get('tb_sertipikat');
-    }
-
-    //Mencari Sertipikat di tabel tb_sertipikat
-    public function getSertipikat($where)
-    {
-        return $this->db->where('tb_sertipikat', $where);
-    }
-
     //List Sertipikat Tersimpan di tabel tb_sertipikat
     function tabel_sertipikat()
     {
@@ -33,11 +20,22 @@ class ModelSertipikat extends CI_Model
             ->join('kecamatan', 'desa.id_kecamatan = kecamatan.id', 'left')
             ->get()->result();
 
+        $a = 1;
         for ($i = 0; $i < count($hasil); $i++) {
-            $hasil[$i]->kode_s = str_pad($hasil[$i]->no_reg, "5", "0", STR_PAD_LEFT);
+            $hasil[$i]->kode_s = 'S' . str_pad($hasil[$i]->no_reg, "5", "0", STR_PAD_LEFT);
             $hasil[$i]->pemilik_hak = str_replace(":", ": \n", $hasil[$i]->pemilik_hak);
             $hasil[$i]->proses = str_replace(",", ", ", $hasil[$i]->proses);
             $hasil[$i]->tgl_daftar = date_format(date_create($hasil[$i]->tgl_daftar), 'd M Y');
+            $hasil[$i]->sertipikat = $hasil[$i]->jenis_hak . '. ' . $hasil[$i]->no_sertipikat . '/' . $hasil[$i]->desa;
+            $hasil[$i]->aksi = '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' . $hasil[$i]->no_reg . '"><i class="fa fa-edit" ></i>Edit</button>'; 
+            $hasil[$i]->ket = nl2br($hasil[$i]->ket);
+            if ($hasil[$i]->luas == 0){
+                $hasil[$i]->luas = '';
+            } else{
+                $hasil[$i]->luas = $hasil[$i]->luas . ' m2';
+            }
+            $hasil[$i]->no_urut = $a;
+            $a++;
         }
         return $hasil;
     }
@@ -82,6 +80,7 @@ class ModelSertipikat extends CI_Model
         return $hasil;
     }
 
+    // jumlah sertipikat terdaftar yang ditampilkan pada card record sertipikat
     public function s_terdaftar()
     {
         $hasil = $this->db->query("SELECT count( * ) as  total_record FROM tb_sertipikat")->result();
@@ -91,33 +90,39 @@ class ModelSertipikat extends CI_Model
         return $hsl;
     }
 
-    // buat fungsi untuk update sertipikat
+    // fungsi untuk update sertipikat
     public function update_sertipikat($data, $no_reg, $id_berkas = null)
     {
         // cek apakah 'is_used' ada di data yang akan diupdate
         // digunakan untuk update status sertipikat di input dan edit berkas
         if (!empty($data['is_used'])) {
+
             //c ek apakah 'id_berkas' tidak kosong
             // digunakan pada saat edit berkas
             if (!empty($id_berkas)) {
+
                 //dapatkan reg_sertipikat lama di tabel tb_berkas
                 $datas = $this->db->select('reg_sertipikat')
                     ->from('tb_berkas')
                     ->where('id', $id_berkas)
                     ->get()
                     ->row_array();
+
                 // jika reg_sertipikat lama ada maka ganti status is_used sertipikat lama menjadi 0
                 if (!empty($datas['reg_sertipikat'])) {
                     $hasil = $this->db->update('tb_sertipikat', array('is_used' => 0), array('no_reg' => $datas['reg_sertipikat']));
                 }
+
                 // update status is_used seetipikat baru menjadi 1
                 $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
             } else {
+                
                 // digunakan pada saat input berkas
                 // update status is_used seetipikat baru menjadi 1
                 $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
             }
         } else {
+
             // digunakan untuk update sertipikat di edit sertipikat tabelSertipikat
             $hasil = $this->db->update('tb_sertipikat', $data, $no_reg);
         }
@@ -141,6 +146,7 @@ class ModelSertipikat extends CI_Model
         }
     }
 
+    // untuk mengisi form berkas secara otomatis di input berkas
     public function get_sert_for_auto($id)
     {
         $data = $this->db->select('kecamatan.id as id_kecamatan, desa.id as id_desa, desa.nama as desa, proses, pemilik_hak, pembeli_hak')
@@ -150,10 +156,13 @@ class ModelSertipikat extends CI_Model
             ->where('no_reg', $id)
             ->get()
             ->row_array();
+            
+        // ubah 'proses' menjadi array
         $data['proses'] = explode(',', $data['proses']);
         return $data;
     }
 
+    //untuk mendapatkan id dari sertipikat terakhir    
     public function get_last_id()
     {
         $data = $this->db->select('no_reg')
