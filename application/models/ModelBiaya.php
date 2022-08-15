@@ -6,14 +6,23 @@ class ModelBiaya extends CI_Model
 
     function input_biaya($data)
     {
+
         $this->db->insert('tb_bayar', $data);
-        return 'sukses';
+        if($data['jenis_bayar'] == 1){
+            $this->db->query("UPDATE tb_berkas SET tot_biaya = tot_biaya + $data[jum_bayar] WHERE id = $data[id_berkas]");
+        }
+        $tot_biaya = $this->db->select('tot_biaya')
+            ->from('tb_berkas')
+            ->where('id', $data['id_berkas'])
+            ->get()->result();
+        $hasil = 'Rp. ' . number_format($tot_biaya[0]->tot_biaya);
+        return $hasil;
     }
 
     function get_biaya($id, $idb)
     {
         $hasil = $this->db->get_where('tb_bayar', $id)->result();
-        $total_biaya = $this->db->select('tot_biaya')->get_where('tb_berkas', $idb)->row()->tot_biaya;
+        $total_biaya = 0;
         $bayar = 0;
         $data['card'][] = '';
         foreach ($hasil as $h) {

@@ -56,6 +56,7 @@ class ModelBerkas extends CI_Model
             } else {
                 $data[$i]->sertipikat = $data[$i]->desa;
             }
+
             //membuat field tombol status berkas
             if ($data[$i]->berkas_selesai == 0) {
                 $data[$i]->status_berkas = '<span data="' . $data[$i]->id_berkas . '" class="badge badge-warning status_berkas">Proses</span>';
@@ -63,8 +64,13 @@ class ModelBerkas extends CI_Model
                                    <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
             } else if ($data[$i]->berkas_selesai == 1) {
                 $data[$i]->status_berkas = '<span class="badge badge-success"> Selesai </span>';
-                $data[$i]->aksi = '<button  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
-                                   <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                if ($this->session->userdata('role_id') == 0) {
+                    $data[$i]->aksi = '<button  class="badge badge-info edit_berkas" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                                       <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                } else {
+                    $data[$i]->aksi = '<button  class="badge badge-info edit_berkas2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-edit" ></i></button>
+                                       <button  class="badge badge-primary item_detail2" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';
+                }
             } else {
                 $data[$i]->status_berkas = '<span class="badge badge-danger"> Berkas Dicabut </span>';
                 $data[$i]->aksi = '<button  class="badge badge-primary item_detail" data="' . $data[$i]->id_berkas . '"><i class="fa fa-search" ></i> Detail</button>';

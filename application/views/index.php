@@ -89,10 +89,10 @@
                                         <div class="row">
                                             <div class="col-md-12 text-center"><?= $b['jenis_berkas']; ?></div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row gx-1">
                                             <div class="col-md-6 text-left">
                                                 <?php $napen = str_replace(":", ": \n", $b['nama_penjual'])  ?>
-                                                <div class="text-capitalize"><strong><u><?= nl2br($napen) ?></u></strong></div>
+                                                <div class="text-sm"><strong><u><?= nl2br($napen) ?></u></strong></div>
                                                 <div class=" small font-weight-bold">
                                                     <?php
                                                     if ($b['no_sertipikat'] = null) {
@@ -106,8 +106,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 text-right">
-                                                <p class="text-uppercase"><strong><u><?= $b['nama_pembeli']; ?></u></strong></p>
-                                                <div class="text-white-50 font-weight-bold"></div>
+                                                <p class="text-sm"><strong><u><?= $b['nama_pembeli']; ?></u></strong></p>
+                                                <!-- <div class="text-white-50 font-weight-bold"></div> -->
                                             </div>
                                         </div>
                                         <div class="row">

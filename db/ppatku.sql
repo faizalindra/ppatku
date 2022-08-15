@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2022 at 03:37 PM
+-- Generation Time: Aug 15, 2022 at 10:52 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -375,12 +375,22 @@ CREATE TABLE `tb_bayar` (
 --
 
 INSERT INTO `tb_bayar` (`id_bayar`, `tgl_bayar`, `jum_bayar`, `jenis_bayar`, `ket_bayar`, `penyetor`, `id_berkas`) VALUES
-(1, '2022-06-24', 2000000, 0, '', 'Indra', 2),
-(2, '2022-06-24', 4000000, 1, 'biaya total', 'Tamu', 4),
-(3, '2022-06-25', 5000000, 1, 'kndiac', 'Tamu', 1),
-(4, '2022-06-25', 1313133, 1, 'afad', 'Tamu', 1),
-(5, '2022-06-25', 1245242, 0, '', 'fsf', 1),
-(6, '2022-06-25', 131313, 0, '', 'qdada', 1);
+(1, '2022-08-09', 400000, 1, 'Validasi Pajak', 'Tamu', 1),
+(2, '2022-08-09', 100000, 1, 'Suket Desa', 'Tamu', 1),
+(3, '2022-08-09', 100000, 1, '', 'Tamu', 1),
+(4, '2022-08-09', 500000, 0, '', 'indra', 1),
+(5, '2022-08-09', 500000, 1, 'Roya', 'Tamu', 2),
+(6, '2022-08-09', 700000, 1, 'SKMHT', 'Tamu', 2),
+(7, '2022-08-09', 700000, 0, '', 'Bank Surya Mandiri', 2),
+(8, '2022-08-09', 500000, 0, '', 'Bank Surya Mandiri', 2),
+(9, '2022-08-09', 900000, 1, 'Peningkatan Hak', 'Tamu', 3),
+(10, '2022-08-09', 900000, 0, '', 'Serti', 3),
+(11, '2022-08-10', 400000, 1, 'cek plot', 'Tamu', 4),
+(12, '2022-08-13', 100000, 1, 'Cek Plot', 'Tamu', 5),
+(13, '2022-08-13', 5000000, 1, 'validasi Pajak', 'Tamu', 5),
+(14, '2022-08-13', 4500000, 1, 'Balik Nama', 'Tamu', 5),
+(15, '2022-08-13', 7000000, 0, '', 'Mujir', 5),
+(16, '2022-08-13', 2600000, 0, '', 'Yeni', 5);
 
 -- --------------------------------------------------------
 
@@ -398,7 +408,7 @@ CREATE TABLE `tb_berkas` (
   `nama_pembeli` varchar(50) DEFAULT ' ',
   `tot_biaya` int(9) DEFAULT 0,
   `keterangan` varchar(50) DEFAULT ' ',
-  `berkas_selesai` tinyint(1) NOT NULL DEFAULT 0
+  `berkas_selesai` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -406,15 +416,14 @@ CREATE TABLE `tb_berkas` (
 --
 
 INSERT INTO `tb_berkas` (`id`, `tgl_masuk`, `reg_sertipikat`, `alamat`, `jenis_berkas`, `nama_penjual`, `nama_pembeli`, `tot_biaya`, `keterangan`, `berkas_selesai`) VALUES
-(1, '2022-06-24', 1, 18, 'AJB,APHB', 'Indra', ' ', 0, '', 3),
-(2, '2022-06-24', 1, 23, 'Ganti Nama,Roya', 'Faizal', ' ', 0, '', 1),
-(3, '2022-06-24', NULL, 111, 'AJB', 'Rustam', ' ', 0, '', 0),
-(4, '2022-06-24', NULL, 116, 'APHT,Ganti Nama', 'Indra Faizal', ' ', 0, '', 0),
-(5, '2022-06-24', 2, 111, 'AJB', 'Irfan', ' ', 0, '', 1),
-(6, '2022-06-25', 7, 23, 'AJB', 'rini rohmi', ' ', 0, '', 0),
-(7, '2022-06-25', 6, 3, 'APHB,Ganti Blangko', 'rrrrr', ' ', 7000000, '', 0),
-(8, '2022-06-29', 21, 41, 'AJB,Waris', 'Indra, irfan: hamid, irfan', 'Rini Rohmi', 0, '', 0),
-(9, '2022-06-30', 22, 78, 'Roya', 'Indra', 'Faizal', 0, '', 0);
+(1, '2022-08-09', 1, 31, 'AJB,SKMHT', 'Faizal Indra', 'Amri', 600000, '', 3),
+(2, '2022-08-09', 2, 125, 'Roya,SKMHT', 'Qedara Faqih', ' Deb. Agus Fatur', 1200000, 'tttuuy', 0),
+(3, '2022-08-09', 3, 35, 'Peningkatan Hak', 'Serti Murti', ' ', 900000, '', 1),
+(4, '2022-08-10', 9, 136, 'Pemecahan', 'Ruslam Hadi', 'Suwito Nugroho, Darmo Suwito', 400000, 'KTP Darmo hilang', 1),
+(5, '2022-08-13', 6, 23, 'APHB', 'Fadlun', 'Yeni, Mujir', 9600000, 'belum ada', 1),
+(6, '2022-08-13', 5, 49, 'APHB,Waris', 'Dasda', 'adaffa', 0, '', 3),
+(7, '2022-08-13', NULL, 163, 'Waris', 'Suratmo:  Agus, Fitri', 'Fitri', 0, 'yuyuy', 0),
+(8, '2022-08-13', NULL, 116, 'AJB,Konversi', 'Fadlun Fauiz', 'Irfan Mahrufi', 0, '', 0);
 
 --
 -- Triggers `tb_berkas`
@@ -447,7 +456,13 @@ CREATE TABLE `tb_catatan` (
 --
 
 INSERT INTO `tb_catatan` (`id_catatan`, `tgl`, `isi_catatan`, `star_catatan`, `user_id_catatan`) VALUES
-(5, '2022-05-27', 'Butuh ktp', 1, 1);
+(5, '2022-05-27', 'Butuh ktp', 1, 1),
+(9, '2022-07-28', 'Butuh KK Agus B09976', 0, 1),
+(10, '2022-07-28', 'Besok pengikatan di PT. Nugraha', 0, 1),
+(12, '2022-08-13', 'Besok daftar APHB berkas Yeni', 1, 44),
+(13, '2022-08-13', 'Catatan 2', 0, 44),
+(14, '2022-08-13', 'Catatan 3', 0, 44),
+(15, '2022-08-13', 'Catatan 4', 0, 44);
 
 -- --------------------------------------------------------
 
@@ -483,15 +498,14 @@ CREATE TABLE `tb_kelengkapan` (
 --
 
 INSERT INTO `tb_kelengkapan` (`id_kelengkapan`, `ktp_penjual`, `ktp_p_penjual`, `kk_penjual`, `ktp_pembeli`, `ktp_p_pembeli`, `kk_pembeli`, `sppt`, `akta_kematian`, `bpjs`, `imb`, `ktp_ahli_waris`, `kk_ahli_waris`, `persetujuan_hibah`, `ket_beda_nama`, `shm`, `order_`, `spk`, `pengantar_roya`, `ket_kelengkapan`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ffasf'),
-(2, 1, 1, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, 1, NULL, ''),
-(3, 1, 1, 1, 1, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(4, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, ''),
-(5, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(7, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(8, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, ''),
-(9, 1, NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, 1, '');
+(1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(2, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, ''),
+(3, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, ''),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(5, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 'KTP Pihak 2 salah'),
+(6, NULL, NULL, 1, 1, NULL, 1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -522,6 +536,7 @@ CREATE TABLE `tb_ket_proses` (
   `iph` tinyint(1) DEFAULT NULL,
   `kutip_su` tinyint(1) DEFAULT NULL,
   `validasi_sert` tinyint(1) DEFAULT NULL,
+  `lainnya` tinyint(1) DEFAULT NULL,
   `ket_proses` varchar(256) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -529,16 +544,15 @@ CREATE TABLE `tb_ket_proses` (
 -- Dumping data for table `tb_ket_proses`
 --
 
-INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `pengeringan`, `cek_plot`, `cek_sertipikat`, `roya`, `ganti_nama`, `tapak_kapling`, `bayar_pajak`, `konversi`, `waris`, `balik_nama`, `peningkatan_hak`, `skmht`, `ht`, `ganti_blangko`, `znt`, `iph`, `kutip_su`, `validasi_sert`, `ket_proses`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(2, NULL, NULL, NULL, NULL, 2, NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(3, NULL, NULL, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(4, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(5, 7, NULL, NULL, NULL, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(6, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(8, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
-(9, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `pengeringan`, `cek_plot`, `cek_sertipikat`, `roya`, `ganti_nama`, `tapak_kapling`, `bayar_pajak`, `konversi`, `waris`, `balik_nama`, `peningkatan_hak`, `skmht`, `ht`, `ganti_blangko`, `znt`, `iph`, `kutip_su`, `validasi_sert`, `lainnya`, `ket_proses`) VALUES
+(1, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 2, NULL, NULL, 2, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(2, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(4, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(5, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 2, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Belum ada NOP'),
+(6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -549,7 +563,8 @@ INSERT INTO `tb_ket_proses` (`no_proses`, `ukur`, `pert_teknis`, `perijinan`, `p
 CREATE TABLE `tb_proses_bpn` (
   `no_proses_bpn` int(5) NOT NULL,
   `tgl_masuk` date NOT NULL DEFAULT current_timestamp(),
-  `no_bpn` tinyint(6) NOT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `no_bpn` smallint(6) NOT NULL,
   `tahun` int(4) NOT NULL,
   `nama_pemohon` varchar(25) NOT NULL,
   `jenis_proses` varchar(30) NOT NULL,
@@ -562,11 +577,12 @@ CREATE TABLE `tb_proses_bpn` (
 -- Dumping data for table `tb_proses_bpn`
 --
 
-INSERT INTO `tb_proses_bpn` (`no_proses_bpn`, `tgl_masuk`, `no_bpn`, `tahun`, `nama_pemohon`, `jenis_proses`, `id_berkas`, `ket`, `status`) VALUES
-(6, '2022-06-24', 127, 2022, 'INdra', 'Ganti Blangko', 3, '', 1),
-(7, '2022-06-25', 127, 2022, 'Indra', 'Ganti Nama', 4, '', 0),
-(8, '2022-06-25', 127, 2022, 'adadda', 'Roya', 1, '', 0),
-(9, '2022-06-25', 127, 2022, 'bafad', 'Kutip SU', 1, '', 0);
+INSERT INTO `tb_proses_bpn` (`no_proses_bpn`, `tgl_masuk`, `tgl_selesai`, `no_bpn`, `tahun`, `nama_pemohon`, `jenis_proses`, `id_berkas`, `ket`, `status`) VALUES
+(1, '2022-08-09', '2020-10-12', 6281, 2022, 'Agus Faturi', 'Roya', 2, '', 1),
+(2, '2022-08-13', '2022-08-13', 32767, 2022, 'Mujir', 'Balik Nama', 5, '', 1),
+(3, '2022-08-13', NULL, 4244, 2022, 'Agust', 'Balik Nama', 2, 'KTP Tidak terdaftar Dukcapil', 2),
+(4, '2022-08-13', NULL, 32767, 2022, 'Agus Fatur', 'Ganti Nama', 2, 'Pending', 0),
+(5, '2022-08-13', NULL, 32767, 2022, 'Adfaaa', 'Waris', 6, '', 3);
 
 -- --------------------------------------------------------
 
@@ -613,16 +629,16 @@ CREATE TABLE `tb_sertipikat` (
 --
 
 INSERT INTO `tb_sertipikat` (`no_reg`, `tgl_daftar`, `no_sertipikat`, `jenis_hak`, `dsa`, `luas`, `pemilik_hak`, `pembeli_hak`, `proses`, `ket`, `is_used`) VALUES
-(1, '2022-05-22', 1111, 'M', 116, 100, 'Indra Faizal: Muhammad Irfan, Munwar Hamid', ' amri', 'APHT', 'bfububud', 1),
-(2, '2022-05-22', 2222, 'M', 111, 200, 'Irfan', ' bubuzuke', 'AJB', ' ', 0),
-(3, '2022-05-22', 3333, 'M', 121, NULL, 'Hamid', ' ', 'AJB', ' ', 0),
-(6, '2022-05-24', 4444, 'M', 3, 4444, 'rrrr', 'tttt', 'APHB,Ganti Blangko', 'huh', 1),
-(7, '2022-05-27', 24111, 'M', 23, 250, 'rini rohmi', 'erma', 'AJB', '', 1),
-(8, '2022-06-11', 67676, 'M', 73, 500, 'Gunawan', 'Warsono', 'AJB,APHB', '- BSY', 0),
-(9, '2022-06-12', 23414, 'M', 19, 1313, 'Mahmud', 'MD', 'AJB', '', 0),
-(20, '2022-06-22', 41317, 'M', 59, 0, 'Indfra', ' ', 'APHB', '', 0),
-(21, '2022-06-29', 4162, 'M', 41, 0, 'Indra, irfan', ' ', 'AJB,Waris', '', 1),
-(22, '2022-06-30', 6171, 'M', 78, 0, 'Indra', 'Faizal', 'Roya', '', 1);
+(1, '2022-07-28', 555, 'M', 31, 0, 'Faizal Indra', 'Amri', 'AJB,SKMHT', '- Titipan Agung', 0),
+(2, '2022-07-28', 523, 'M', 125, 0, 'Qedara Faqih', ' Deb. Agus Fatur', 'SKMHT', '', 1),
+(3, '2022-07-28', 524, 'GB', 35, 45, 'Serti Murti', ' ', 'Peningkatan Hak', '', 0),
+(4, '2022-07-28', 634, 'M', 71, 0, 'Ratna Fatima', ' Deb. Mujer', 'Roya,SKMHT', '', 0),
+(5, '2022-07-28', 24, 'M', 49, 500, 'Dasda', 'adaffa', 'APHB,Waris', '', 0),
+(6, '2022-08-01', 90, 'M', 23, 79, 'Fadlun', 'Yeni, Mujir', 'APHB', '', 0),
+(7, '2022-08-01', 555, 'M', 59, 305, 'Kusuma', 'Cahyo Guntur Wijaya Hartanto', 'Lain-Lain', '', 0),
+(8, '2022-08-05', 9898, 'GB', 23, 45, 'PT. Adi Cahya Purnama', 'Indra Faizal Amri', 'AJB,Peningkatan Hak', '- Akad PT', 0),
+(9, '2022-08-09', 467, 'M', 136, 60, 'Ruslam Hadi', 'Suwito Nugroho', 'Pemecahan', '', 0),
+(10, '2022-08-09', 926, 'M', 204, 120, 'Hajarudin', 'Deb. Muhidin al Komari', 'APHT', '', 0);
 
 -- --------------------------------------------------------
 
@@ -646,9 +662,10 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `role_id`, `is_active`) VALUES
 (0, 'Sugeng Purwito', 'notaris', '$2y$10$6c3801qy.3f4e9PNqaEpfO828/fa3wys/5IAkP.nLMBMzARsLrLa6', 0, 1),
 (1, 'Indra', 'admin', '$2y$10$bRDio3SJA/kf2dsCwl5RP.9uWusCWgFPQrmmj98LhN0fT7XlI9c22', 1, 1),
-(40, 'Erma', 'ermar', '$2y$10$wTHPREaSzpLQmHybxKz3L.Uo2n.J84l0.hFZBkOITEktI6ssF.iQq', 1, 1),
-(42, 'Faizal', 'faizala', '$2y$10$Tap85J2WER9bAmGFFNm9C.pntVgjTrtd9E69UIGbLnyOZlRj4rm/i', 2, 1),
-(44, 'staff', 'staff', '$2y$10$YNTVps0/aXL8.h6MGSjmhObu5NFo/L.Z5.xx4KSSGszEuyoEroTAy', 2, 1);
+(44, 'staff', 'staff', '$2y$10$YNTVps0/aXL8.h6MGSjmhObu5NFo/L.Z5.xx4KSSGszEuyoEroTAy', 2, 1),
+(45, 'qazwsx', 'qazwsx', '$2y$10$lRElG/7jHOhhALJiLehn1OLnoordsPPLrCHWo75odo8Mh780JUDHq', 2, 1),
+(46, 'odnww', 'faizal', '$2y$10$dNKzITh05.IImzFHFrzLAeHZO.K2ucpPhn8ZsmQS69u9LvinV46y2', 2, 0),
+(48, 'Agus Khoerudin', 'aguss', '$2y$10$cs5ZTUCYtnZ9e4.tIBmo1.nI8zPm6KdkoDbCSNpn2dJZ9BaNISAhO', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -749,31 +766,25 @@ ALTER TABLE `kecamatan`
 -- AUTO_INCREMENT for table `tb_bayar`
 --
 ALTER TABLE `tb_bayar`
-  MODIFY `id_bayar` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_bayar` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_berkas`
 --
 ALTER TABLE `tb_berkas`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_catatan`
 --
 ALTER TABLE `tb_catatan`
-  MODIFY `id_catatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tb_kelengkapan`
---
-ALTER TABLE `tb_kelengkapan`
-  MODIFY `id_kelengkapan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id_catatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_proses_bpn`
 --
 ALTER TABLE `tb_proses_bpn`
-  MODIFY `no_proses_bpn` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `no_proses_bpn` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -785,13 +796,13 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_sertipikat`
 --
 ALTER TABLE `tb_sertipikat`
-  MODIFY `no_reg` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `no_reg` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
@@ -838,8 +849,8 @@ ALTER TABLE `tb_ket_proses`
 -- Constraints for table `tb_proses_bpn`
 --
 ALTER TABLE `tb_proses_bpn`
-  ADD CONSTRAINT `tb_proses_bpn_ibfk_1` FOREIGN KEY (`id_berkas`) REFERENCES `tb_berkas` (`id`) ON DELETE NO ACTION ON UPDATE SET NULL,
-  ADD CONSTRAINT `tb_proses_bpn_ibfk_2` FOREIGN KEY (`id_berkas`) REFERENCES `tb_berkas` (`id`) ON DELETE NO ACTION ON UPDATE SET NULL;
+  ADD CONSTRAINT `tb_proses_bpn_ibfk_1` FOREIGN KEY (`id_berkas`) REFERENCES `tb_berkas` (`id`) ON DELETE CASCADE ON UPDATE SET NULL,
+  ADD CONSTRAINT `tb_proses_bpn_ibfk_2` FOREIGN KEY (`id_berkas`) REFERENCES `tb_berkas` (`id`) ON DELETE CASCADE ON UPDATE SET NULL;
 
 --
 -- Constraints for table `tb_sertipikat`

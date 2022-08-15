@@ -103,6 +103,7 @@
                             <th>Pihak 2</th>
                             <th>Berkas Selesai</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="show_data">
@@ -124,7 +125,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form id="formAwesome" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
+                        <form id="form_input" method="post" action="<?= base_url('berkas/simpanBer') ?>" autocomplete="off" style="font-weight: 400 !important">
                             <div class="row">
                                 <div class="col-md-7">
                                     <h6><u>Berkas</u></h6>
@@ -200,18 +201,20 @@
                                                             <div class="input-group-text">Proses</div>
                                                         </div>
                                                         <select name="jenis_berkas[]" class="form-control select2 select2-hidden-accessible" multiple="" id="jenis_berkas_i" tabindex="-1" style="width: 83%;" required>
-                                                            <option>AJB</option>
-                                                            <option>APHB</option>
-                                                            <option>APHT</option>
-                                                            <option>Ganti Blangko</option>
-                                                            <option>Ganti Nama</option>
-                                                            <option>Hibah</option>
-                                                            <option>Konversi</option>
-                                                            <option>Pemecahan</option>
-                                                            <option>Pengeringan</option>
-                                                            <option>Peningkatan Hak</option>
-                                                            <option>SKMHT</option>
-                                                            <option>Waris</option>
+                                                            <option value="AJB">AJB</option>
+                                                            <option value="APHB">APHB</option>
+                                                            <option value="APHT">APHT</option>
+                                                            <option value="Ganti Blangko">Ganti Blangko</option>
+                                                            <option value="Ganti Nama">Ganti Nama</option>
+                                                            <option value="Hibah">Hibah</option>
+                                                            <option value="Konversi">Konversi</option>
+                                                            <option value="Pemecahan">Pemecahan</option>
+                                                            <option value="Pengeringan">Pengeringan</option>
+                                                            <option value="Peningkatan Hak">Peningkatan Hak</option>
+                                                            <option value="Roya">Roya</option>
+                                                            <option value="SKMHT">SKMHT</option>
+                                                            <option value="Waris">Waris</option>
+                                                            <option value="Lain-Lain">Lain-Lain</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -226,25 +229,25 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50" autocapitalize="on">
+                                                        <input type="text" class="form-control" name="pembeli" id="pembeli_i" aria-describedby="helpId" autocapitalize="on" pattern="\s*(?:[\w:,\.]\s*){0,50}$" maxlength="50">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">Pihak 2
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="input-group">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">Rp.
+                                                <!-- <div class="form-group row">
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <div class="input-group-text">Rp.
+                                                                </div>
                                                             </div>
+                                                            <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya" max="99999999">
                                                         </div>
-                                                        <input type="number" class="form-control" name="tot_biaya" id="tot_biaya_i" aria-describedby="helpId" placeholder="Biaya" max="99999999">
-                                                    </div>
-                                                </div>
+                                                    </div> -->
                                                 <div class="form-group row">
                                                     <div class="input-group">
-                                                        <textarea id="keterangan_i" name="keterangan" cols="40" rows="3" class="form-control" maxlength="50"></textarea>
+                                                        <textarea id="keterangan_i" name="keterangan" cols="40" rows="2" class="form-control" maxlength="50" placeholder="--- Keterangan ---"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -259,7 +262,7 @@
                                                 <div class="row">
                                                     <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 1</u> :</span>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row mb-0">
                                                     <div class="row">
                                                         <div class="col-auto">
                                                             <div class="input-group">
@@ -291,7 +294,7 @@
                                                 <div class="row">
                                                     <span id="checkboxHelpBlock" class="form-text text-muted"><u>Pihak 2</u> :</span>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row  mb-0">
                                                     <div class="row">
                                                         <div class="col-auto">
                                                             <div class="input-group">
@@ -331,7 +334,7 @@
                                                 <div class="row">
                                                     <span id="checkboxHelpBlock" class="form-text text-muted"><u>Ahli Waris</u> :</span>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row  mb-0">
                                                     <div class="row">
                                                         <div class="col-auto">
                                                             <div class="input-group">
@@ -363,7 +366,7 @@
                                                 <div class="row">
                                                     <span id="checkboxHelpBlock" class="form-text text-muted"><u>Tanah</u> :</span>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row  mb-0">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="input-group">
@@ -389,7 +392,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <div class="form-group row">
+                                                        <div class="form-group row mb-0">
                                                             <div class="input-group">
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input type="checkbox" class="custom-control-input" id="order_i" name="order_">
@@ -399,7 +402,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <div class="form-group row">
+                                                        <div class="form-group row mb-0">
                                                             <div class="input-group">
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input type="checkbox" class="custom-control-input" id="imb_i" name="imb">
@@ -409,7 +412,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <div class="form-group row">
+                                                        <div class="form-group row mb-0">
                                                             <div class="input-group">
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input type="checkbox" class="custom-control-input" id="spk_i" name="spk">
@@ -419,7 +422,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row mb-0">
                                                     <div class="input-group">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" id="ket_beda_nama" name="ket_beda_nama">
@@ -427,7 +430,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row mb-0">
                                                     <div class="input-group">
                                                         <div class="custom-control custom-checkbox">
                                                             <input type="checkbox" class="custom-control-input" id="persetujuan_hibah_i" name="persetujuan_hibah">
@@ -435,9 +438,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row mt-2">
                                                     <div class="input-group">
-                                                        <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="30"></textarea>
+                                                        <textarea id="ket_kelengkapan_i" name="ket_kelengkapan" cols="40" rows="2" class="form-control" maxlength="50" placeholder="--- Keterangan ---"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -446,7 +449,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="reset" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
+                                <button type="reset" id="reset_form_i" class="btn btn-danger" value="reset"><i class="fa fa-trash"></i></button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button name="submit" type="submit" class="btn btn-primary">Save</button>
                             </div>
@@ -476,7 +479,7 @@
                                     <div class="container-fluid">
                                         <input type="text" name="id_e" id="id_e" hidden readonly>
                                         <input type="text" class="form-control" name="id_e" id="id_e" hidden readonly>
-                                        <div class="form-group row">
+                                        <div class="form-group row" id="sert_edit">
                                             <div class="input-group">
                                                 <select name="sertipikat_e" id="sertipikat_e" class="custom-select">
                                                     <option disabled selected value> -- Sertipikat -- </option>
@@ -491,7 +494,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <!-- <div class="form-group row">
                                             <div class="input-group">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">Rp.
@@ -499,10 +502,10 @@
                                                 </div>
                                                 <input type="number" class="form-control" name="tot_biaya_e" id="tot_biaya_e" aria-describedby="helpId" placeholder="Biaya" max="99999999">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group row">
                                             <div class="input-group">
-                                                <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control" maxlength="50"></textarea>
+                                                <textarea id="keterangan_e" name="keterangan_e" cols="40" rows="3" class="form-control" maxlength="50" placeholder="--- Keterangan ---"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -581,7 +584,7 @@
                                                 <h6>Kelengkapan</h6>
                                             </div>
                                             <div class="card-body p-1 text-left">
-                                                <div class="row">
+                                                <div class="row" id="list_kelengkapan">
                                                     <div class="col-md-6">
                                                         <div>
                                                             <ul id="kelengkapan_ada">
@@ -702,7 +705,7 @@
                     </div>
                 </div>
                 <div class="modal-footer p-0">
-                    <button type="button" class="btn btn-lg btn-white border" data-dismiss="modal"><a id="print_b" href="" class="fa fa-print p-0 m-0"></a></button>
+                    <button id="print_b" type="button" class="btn btn-lg btn-white border"><a href="" class="fa fa-print p-0 m-0"></a></button>
                 </div>
             </div>
         </div>

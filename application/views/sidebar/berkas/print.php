@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berkas-ID.B<?= $berkas['kode_b'] ?></title>
+    <title>Berkas-ID_B<?= $berkas['kode_b'] ?></title>
     <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon.png') ?>">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap">
@@ -85,17 +85,17 @@
                     <h5 class="m-0"><b><?= $berkas['tgl_masuk'] ?></b></h5>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 nober" style=" min-height:120px">
+                    <div class="col-md-5 nober" style=" min-height:120px">
                         <div class="row">
                             <div class="col-md-12 text-left"><u><b>Nomor Berkas</b></u></div>
                             <div class="col-md-12 text-center display-3 p-0 m-0"><b class="text-muted">B</b><b><?= $berkas['kode_b'] ?></b></div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row pl-3"><b><u>Pihak 1</u></b></div>
-                                <div class="row text-center align-items-center justify-content-center text-uppercase">
+                                <div class="row text-center align-items-center justify-content-center">
                                     <h4 class="h-100"><b><?= $berkas['nama_penjual'] ?></b></h4>
                                 </div>
                             </div>
@@ -103,19 +103,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 noreg" style="min-height:120px">
+                    <div class="col-md-5 noreg" style="min-height:120px">
                         <div class="row">
                             <div class="col-md-12 text-left"><u><b>Registrasi Sertipikat</b></u></div>
-                            <div class="col-md-12 text-center display-3"><b class="text-muted"><?php if ($berkas['kode_s'] != null || $berkas['kode_s'] != '') {
-                                                                                                    echo 'S';
-                                                                                                } ?></b><b><?= $berkas['kode_s'] ?></b></div>
+                            <div class="col-md-12 text-center display-3 p-0 m-0"><b class="text-muted"><?php if ($berkas['reg_sertipikat']) {
+                                                                                                            echo 'S';
+                                                                                                            $kode = $berkas['kode_s'];
+                                                                                                        } else {
+                                                                                                            $kode = '';
+                                                                                                        } ?></b><b><?= $kode ?></b></div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row pl-3"><b><u>Pihak 2</u></b></div>
-                                <div class="row text-center align-items-center justify-content-center text-uppercase">
+                                <div class="row text-center align-items-center justify-content-center">
                                     <h4 class="h-100"><b><?= $berkas['nama_pembeli'] ?></b></h4>
                                 </div>
                             </div>
@@ -123,7 +126,7 @@
                     </div>
                 </div>
                 <div class="row h-100">
-                    <div class="col-md-4 noser" style="min-height:50px">
+                    <div class="col-md-5 noser" style="min-height:50px">
                         <div class="row">
                             <div class="col-md-12 text-left"><u><b>Proses</b></u></div>
                             <div class="col-md-12 text-center pl-1 pr-0">
@@ -131,7 +134,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8" style="border-top: 3px solid black;border-bottom: 3px solid black;">
+                    <div class="col-md-7" style="border-top: 3px solid black;border-bottom: 3px solid black;">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row pl-3 text-left text-lg align-items-center"><b><?= $berkas['sertipikat2'] ?></b></div>
@@ -147,12 +150,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12" style="min-height: 50px;">
-                            <div class="row pl-3 ">
-                                <div class="col-md-12"><b><u>Ket :</u></b></div>
-                                <div class="col-md-12 text-lg"><?= $berkas['keterangan'] ?></div>
-                            </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pl-0" style="min-height: 50px;">
+                        <div class="row pl-3 ">
+                            <div class="col-md-12 text-left"><b><u>Ket :</u></b></div>
+                            <div class="col-md-12 text-lg"><?= $berkas['keterangan'] ?></div>
                         </div>
                     </div>
                 </div>
@@ -178,16 +182,16 @@
                             </b>
                         </div>
                     </div>
-                    <div class="container" style="border: 4px solid black;">
+                    <div class="col" style="border: 4px solid black;">
                         <div class="row" style="border-bottom: 4px solid black;">
-                            <div class="col-auto text-white pl-1" style="background-color: black;"><span><?= $berkas['jenis_hak2'] ?></span>. <span><?= $berkas['no_sertipikat'] ?></span></div>
+                            <div class="col-auto text-white pl-1" style="background-color: black;"><b><span><?= $berkas['jenis_hak2'] ?></span>. <span><?= $berkas['no_sertipikat'] ?></span></b></div>
                             <div class="col-md-8 pl-1"><?= $berkas['desa'] ?>, <?= $berkas['kecamatan'] ?></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 d-flex align-items-center text-center justify-content-center text-uppercase" style="border-right: 3px solid black;">
+                            <div class="col-md-5 d-flex align-items-center text-center justify-content-center" style="border-right: 3px solid black;">
                                 <h5><b><?= $berkas['pemilik_hak'] ?></b></h5>
                             </div>
-                            <div class="col-md-6 pl-0">
+                            <div class="col-md-7 pl-0">
                                 <table width="110%" class="p-0 m-0">
                                     <tbody>
                                         <tr class="bb">
@@ -227,10 +231,17 @@
     </div>
 
 
+    <style>
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
     <script type="text/javascript" src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
     <script>
-        // window.print();
+        window.print();
     </script>
 </body>
 

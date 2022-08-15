@@ -5,55 +5,78 @@ var id_bpn;;
 $('.select2').select2();
 $('.datepicker').datepicker({ dateFormat: 'yy-mm-dd', maxDate: "0d", minDate: new Date(2015, 1 - 1, 1), changeMonth: true, changeYear: true });
 
+$(document).ready(function () {
+    var cari = $('#cari_data').attr('data');
+    if (cari) {
+        $('#tabel-BPN').dataTable().fnFilter(cari);
+    }
+    setTimeout(function () {
+        $('#tabel-BPN').removeAttr('style')
+    }, 10);
+})
+
 // fungsi tampil proses
 function data_BPN() {
-    $.ajax({
-        method: 'GET',
-        url: base_url + '/bpn/tabel_bpn',
-        async: true,
-        dataType: 'json',
-        success: function (data) {
-            var html = '';
-            var i;
-            var a = 1;
-            var aksi = '';
-            var report = '';
-            for (i = 0; i < data.length; i++) {
-                if (data[i].status == '0') {
-                    report = "<button class='badge badge-warning btn-sm btn-gagal' data='" + data[i].no_proses_bpn + "'><i class='fa fa-exclamation-triangle'></i></button>";
-                }
-                if (user_role != 2 || user_role != '2') {
-                    aksi = '<td style="text-align:center;">' +
-                        '<button href="javascript:;" class="badge badge-info edit_bpn" data="' + data[i].no_proses_bpn + '"><i class="fa fa-edit" ></i>Edit</button>&nbsp;' + report + '</td>';
-                }
-
-                html += '<tr class="text-capitalize text-center">' +
-                    '<td>' + a++ + '</td>' +
-                    '<td>' + data[i].tgl_masuk + '</td>' +
-                    '<td>' + data[i].id_berkas + '</td>' +
-                    '<td>' + data[i].nama_pemohon + '</td>' +
-                    '<td>' + data[i].nomor + '/' + data[i].tahun + '</td>' +
-                    '<td>' + data[i].jenis_proses + '</td>' +
-                    '<td class="text-left">' + nl2br(data[i].ket) + '</td>' +
-                    '<td class="text-center">' + status_proses(data[i].status, data[i].no_proses_bpn) + '</td>' + aksi + '</tr>';
-            }
-            $('#show_data').html(html);
-            var cari = $('#cari_data').attr('data');
-            if (cari != '' || cari != null) {
-                var table = $('#tabel-BPN').dataTable().fnFilter(cari);
-            } else {
-                var table = $('#tabel-BPN').dataTable({});
-            }
-
-            if (user_role == 2 || user_role == '2') {
-                $('.status_bpn').removeAttr('href').removeAttr('onclick');
-            }
+    var table = $('#tabel-BPN').dataTable({
+        "ajax": {
+            "url": base_url + "/bpn/tabel_bpn",
+            "type": "post",
+            "autoWidth": true,
         },
-        error: function () {
-            alert("gagal");
-        }
+        // "dom": 'lBfrtip',
+        columns: [{
+            data: 'no_urut'
+        },
+        {
+            data: 'tgl_masuk'
+        },
+        // {
+        //     data: 'tgl_selesai',
+        //     visible: false,
+        //     searchable: false
+        // },
+        {
+            data: 'id_berkas'
+        },
+        {
+            data: 'nama_pemohon'
+        },
+        {
+            data: 'nomor'
+        },
+        {
+            data: 'jenis_proses'
+        },
+        {
+            data: 'ket'
+        },
+        {
+            data: 'status',
+        },
+        {
+            data: 'aksi',
+            visible: false
+        },
+        ],
+        'columnDefs': [
+            {
+                "targets": 2,
+                "className": "text-center",
+            },
+            {
+                "targets": 3,
+                "className": "text-center",
+            },
+            {
+                "targets": 7,
+                "className": "text-center",
+            },
+        ],
+    })
+    if(user_role != 2){
+        $('#tabel-BPN').DataTable().column(8).visible(true);
+    }
 
-    });
 }
 
 // fungsi edit proses BPN, tombol edit proses BPN
@@ -84,19 +107,6 @@ $('#show_data').on('click', '.edit_bpn', function () {
     return false;
 });
 
-//fungsi badge status proses BPN
-function status_proses(status, id) {
-    if (status == "0") {
-        return '<span data="' + id + '" class="badge badge-warning status_bpn"> Proses </span>';
-    } else if (status == "1") {
-        return '<span class="badge badge-success">Selesai</span>';
-    } else if (status == '2') {
-        return '<span class="badge badge-secondary">Gagal</span>';
-    } else if (status == '3') {
-        return '<span class="badge badge-danger">Dicabut</span>';
-    }
-}
-
 //fungsi untuk mengbuah status proses BPN menjadi selesai
 $('#show_data').on('click', '.status_bpn', function () {
     if (confirm('Pastikan proses telah selesai !!!!')) {
@@ -117,10 +127,4 @@ $('#show_data').on('click', '.btn-gagal', function () {
     $('#id_bpn').val(id_bpn);
     $('#modal-gagal').modal('show');
 })
-
-//untuk menjaga line break pada textarea
-function nl2br(str, is_xhtml) {
-    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-}
 

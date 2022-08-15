@@ -37,7 +37,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Dalam Proses</div>
+                                                Proses</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
@@ -111,6 +111,7 @@
                         <tr class="text-center">
                             <th scope="col">No.</th>
                             <th scope="col">Tanggal Masuk</th>
+                            <!-- <th scope="col">Tanggal Selesai</th> -->
                             <th scope="col">ID Berkas</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>
@@ -203,7 +204,7 @@
                                                         <div class="input-group-text">No BPN
                                                         </div>
                                                     </div>
-                                                    <input type="number" class="form-control" name="no_bpn_i" id="no_bpn_i" aria-describedby="helpId" autocapitalize="on" max="999999" title="Angka maksimal 999999" required>
+                                                    <input type="number" class="form-control" name="no_bpn_i" id="no_bpn_i" aria-describedby="helpId" autocapitalize="on" max="999999" title="Angka maksimal 999999" placeholder="--- Nomor BPN ---" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,9 +218,8 @@
                                                     <select class="form-control" name="tahun_i" id="tahun_i" required>
                                                         <option value="<?= date('Y') ?>"><?= date('Y') ?></option>
                                                         <?php $tahun = date('Y');
-                                                        $min_tahun = $tahun - 5;
                                                         $max_tahun = $tahun + 5;
-                                                        for ($i = $min_tahun; $i <= $max_tahun; $i++) : ?>
+                                                        for ($i = 2015; $i <= $max_tahun; $i++) : ?>
                                                             <option value="<?= $i ?>"><?= $i ?></option>
                                                         <?php endfor; ?>
                                                     </select>
@@ -233,19 +233,19 @@
                                                 <div class="input-group-text">Pemohon
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" name="nama_pemohon_i" id="nama_pemohon_i" aria-describedby="helpId" autocapitalize="on" required pattern="\s*(?:[\w:,\.]\s*){5,25}$" maxlength="25">
+                                            <input type="text" class="form-control" name="nama_pemohon_i" id="nama_pemohon_i" aria-describedby="helpId" autocapitalize="on" required pattern="\s*(?:[\w:,\.]\s*){5,25}$" maxlength="25" placeholder="---- Nama Pemohon ----">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="input-group">
-                                            <textarea id="ket_i" name="ket_i" cols="40" rows="3" class="form-control" maxlength="30"></textarea>
+                                            <textarea id="ket_i" name="ket_i" cols="40" rows="3" class="form-control" maxlength="30" placeholder="--- Keterangan ---"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" value="reset" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-trash"></i></button>
+                            <button type="reset" value="reset" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button name="submit" type="submit" class="btn btn-primary">Save</button>
                         </div>
