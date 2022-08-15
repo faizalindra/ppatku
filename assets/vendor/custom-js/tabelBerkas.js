@@ -71,7 +71,7 @@ function tabel_berkas() {
             data: 'aksi'
         },
         {
-            data: 'ket',
+            data: 'keterangan',
             visible: false
         },
         ],
@@ -104,7 +104,7 @@ function tabel_berkas() {
 // }
 
 // Tombol Reset form input berkas
-$('#reset_form_i').on('click', function(){
+$('#reset_form_i').on('click', function () {
     $('[name="jenis_berkas[]"]').val(null).trigger('change');
     $('#desa_i').html('<option disabled selected value> -- Desa -- </option>');
 })
@@ -129,7 +129,7 @@ $('#show_data').on('click', '.item_detail2', function () {
             // masukan data ke dalam DOM masing-masing
             berkas_id_detail = data.id_berkas
             $('#modelDetail2').modal('show');
-            $('#id_berkas_').html('Kode. B' + data.kode_b);
+            $('#id_berkas_').html('Kode B' + data.kode_b);
             $('#tgl_masuk_berkas_').html(data.tgl_masuk);
             $('#jenis_berkas_').html(data.jenis_berkas);
             $('#col_sertipikat').html(data.sertipikat);
@@ -192,7 +192,7 @@ $('#show_data').on('click', '.btn_sertipikat', function () {
     return false;
 });
 
-// tombol edit berkas
+// tombol edit berkas untuk berkas proses
 $('#show_data').on('click', '.edit_berkas', function () {
     var id = $(this).attr('data');
     $.ajax({
@@ -207,6 +207,11 @@ $('#show_data').on('click', '.edit_berkas', function () {
             $('[name="id_e"]').val(data.id_berkas);
             $('[name="tgl_masuk_e"]').val(data.tgl_masuk);
             $('[name="sertipikat_e"]').val(data.reg_sertipikat);
+
+            //matikan form sertipikat jika sudah ada untuk user staff
+            if (data.reg_sertipikat && user_role == 2) { $('#sertipikat_e').attr('disabled', 'disabled'); }
+            else { $('#sertipikat_e').removeAttr("disabled") }
+
             $('[name="kecamatan_e"]').val(data.id_kecamatan);
             var html = '<option value="' + data.id_desa + '">' + data.desa + '</option>';
             $('[name="desa_e"]').html(html);
@@ -224,6 +229,35 @@ $('#show_data').on('click', '.edit_berkas', function () {
     return false;
 });
 
+// tombol edit berkas untuk berkas selesai
+$('#show_data').on('click', '.edit_berkas2', function () {
+    var id = $(this).attr('data');
+    $.ajax({
+        type: "GET",
+        url: base_url + "/berkas/get_berkas",
+        dataType: "JSON",
+        data: {
+            id: id
+        },
+        success: function (data) {
+            if (user_role != 2) {
+                $('#formedit2').modal('show');
+                $('[name="id_e2"]').val(data.id_berkas);
+                $('[name="keterangan_e2"]').val(data.keterangan);
+            } else {
+                $('#formedit').modal('show');
+                $('#sertipikat_e').attr('disabled', 'disabled')
+                $('[name="id_e"]').val(data.id_berkas);
+                $('[name="keterangan_e"]').val(data.keterangan);
+            }
+        },
+        error: function (data) {
+            alert('Gagal mengambil data modal edit_berkas');
+        }
+    });
+})
+
+
 //tombol detail berkas dicabut
 $('#show_data').on('click', '.item_detail', function () {
     var id = $(this).attr('data');
@@ -237,7 +271,7 @@ $('#show_data').on('click', '.item_detail', function () {
         },
         success: function (data) {
             $('#ModalDetail').modal('show');
-            $('#id_berkas_2').html('No. ' + data.id_berkas);
+            $('#id_berkas_2').html('Kode B' + data.kode_b);
             $('#tgl_masuk_berkas_2').html(data.tgl_masuk);
             $('#jenis_berkas_2').html(data.jenis_berkas);
             $('#col_sertipikat_2').html(data.sertipikat);
@@ -273,7 +307,8 @@ $('#show_data').on('click', '.status_berkas', function () {
 
         // ubah status berkas pada database
         $.post(base_url + '/proses/berkas_selesai', { id: id },
-            function () {
+            function (data) {
+                console.log(data);
             }, "json").fail(function () { console.log('gagal mengubah status berkas!!!') });
     }
 
@@ -579,8 +614,10 @@ function input_biaya() {
         jum_bayar: jum_bayar,
         penyetor: penyetor,
         ket_bayar: ket_bayar
-    }, function () {
+    }, function (data) {
         biaya(id);
+        console.log(data);
+        $('#total_biaya_').html(data);
     }, 'json').fail(function () { console.log('Gagal') })
 
     // reset form

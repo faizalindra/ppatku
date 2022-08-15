@@ -1,3 +1,18 @@
+06 Agustus 2022 #00074
+    - menghapus field tot_bayar pada input berkas
+    - mengurangi fitur notaris, berkas selesai tidak dapat di edit kecuali keterangan berkas tersebut
+    - mengubah metode penghitungan total biaya berkas
+    - tombol edit dibuat pada model
+    - memperbaiki tampilan text pada halaman cabut berkas
+    - menyesuaikan tampilan form input berkas
+    - staff hanya dapat menambah sertipikat pada berkas yang belum memiliki sertipikat
+    - memperbaiki tombol print pada detail_berkas
+    - alert sekarang dapat menutup otomastis setelah 4 detik
+    - memperbaiki kilom keterangan pada tabel_berkas
+    - menampilkan aksi pada tabel_bpn jika user bukan staff
+    - menampilkan aksi pada tabel_setipikat jika user bukan staff
+    - update database
+
 05 Agustus 2022 #00073
     - Penyesuaian kode pada manajemen Proses BPN
     - menambah opsi 'Lain-Lain' pada input berkas

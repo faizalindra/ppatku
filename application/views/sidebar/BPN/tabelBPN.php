@@ -37,7 +37,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col p-1">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Dalam Proses</div>
+                                                Proses</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $bb['bb_proses'] ?></div>
                                         </div>
                                         <div class="col-auto">
@@ -111,6 +111,7 @@
                         <tr class="text-center">
                             <th scope="col">No.</th>
                             <th scope="col">Tanggal Masuk</th>
+                            <!-- <th scope="col">Tanggal Selesai</th> -->
                             <th scope="col">ID Berkas</th>
                             <th scope="col">Nama Pemohon</th>
                             <th scope="col">Nomor BPN</th>

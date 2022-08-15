@@ -30,6 +30,11 @@ function data_BPN() {
         {
             data: 'tgl_masuk'
         },
+        // {
+        //     data: 'tgl_selesai',
+        //     visible: false,
+        //     searchable: false
+        // },
         {
             data: 'id_berkas'
         },
@@ -50,6 +55,7 @@ function data_BPN() {
         },
         {
             data: 'aksi',
+            visible: false
         },
         ],
         'columnDefs': [
@@ -67,6 +73,9 @@ function data_BPN() {
             },
         ],
     })
+    if(user_role != 2){
+        $('#tabel-BPN').DataTable().column(8).visible(true);
+    }
 
 }
 

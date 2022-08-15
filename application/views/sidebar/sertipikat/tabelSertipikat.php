@@ -47,10 +47,10 @@
                             <th scope="col">Tanggal Masuk</th>
                             <th scope="col">Nomor Sertipikat</th>
                             <th scope="col">Kecamatan</th>
-                            <th scope="col">Luas</th>
+                            <th scope="col">Proses</th>
                             <th scope="col">Pemilik Hak</th>
                             <th scope="col">Penerima Hak</th>
-                            <th scope="col">Proses</th>
+                            <th scope="col">Luas m<sup>2</sup></th>
                             <th scope="col">Keterangan</th>
                             <?php if ($this->session->userdata('role_id') != 2) {
                                 echo '<th scope="col">Aksi</th>';

@@ -13,37 +13,47 @@ class ModelBpn extends CI_Model
             $data[$i]->tgl_masuk = date_format(date_create($data[$i]->tgl_masuk), 'd M Y');
 
             // Mengabunkan nomor PBN dengan tahun BPN. cth: 26131/2022
-            $data[$i]->nomor = str_pad($data[$i]->no_bpn, "6", "0", STR_PAD_LEFT) .'/'. $data[$i]->tahun;
+            $data[$i]->nomor = str_pad($data[$i]->no_bpn, "6", "0", STR_PAD_LEFT) . '/' . $data[$i]->tahun;
 
             // mengubah id berkas menjadi link url yang dapat digunakan untuk merujuk berkas
             $id_berkas = str_pad($data[$i]->id_berkas, "5", "0", STR_PAD_LEFT);
             $data[$i]->id_berkas = '<a href="' . base_url('cari/cari_berkas/B') . $id_berkas . '">B' . $id_berkas . '</a>';
-            
+
             //ubah icon badge status proses BPN berdasarkan value
             // Sedang Proses
-            if ( $data[$i]->status == "0") {
+            if ($data[$i]->status == "0") {
                 $status = '<span data="' . $data[$i]->no_proses_bpn . '" class="badge badge-warning status_bpn"> Proses </span>';
                 $report = "<button class='badge badge-warning btn-sm btn-gagal' data='" . $data[$i]->no_proses_bpn . "'><i class='fa fa-exclamation-triangle'></i></button>";
-            // Proses Selesai
-            } else if ( $data[$i]->status == "1") {
+                // Proses Selesai
+            } else if ($data[$i]->status == "1") {
                 $status = '<span class="badge badge-success">Selesai</span>';
                 $report = '';
-            // Proses Gagal
-            } else if ( $data[$i]->status == '2') {
+                // Proses Gagal
+            } else if ($data[$i]->status == '2') {
                 $status = '<span class="badge badge-secondary">Gagal</span>';
                 $report = '';
-            // Proses Dicabut
-            } else if ( $data[$i]->status == '3') {
+                // Proses Dicabut
+            } else if ($data[$i]->status == '3') {
                 $status = '<span class="badge badge-danger">Dicabut</span>';
                 $report = '';
             }
+            $stat = $data[$i]->status;
             $data[$i]->status = $status;
 
             // Menjaga line break pada keterangan
             $data[$i]->ket = nl2br($data[$i]->ket);
 
             // untuk membuat tombol edit
-            $data[$i]->aksi = '<button href="javascript:;" class="badge badge-info edit_bpn" data="' . $data[$i]->no_proses_bpn . '"><i class="fa fa-edit" ></i>Edit</button>&nbsp;' . $report;
+            if ($this->session->userdata('role_id') != 2) {
+                if ($stat == '0' || $this->session->userdata('role_id') == 0) {
+                    $data[$i]->aksi =  '<button href="javascript:;" class="badge badge-info edit_bpn" data="' . $data[$i]->no_proses_bpn . '"><i class="fa fa-edit" ></i>Edit</button>&nbsp;' . $report;
+                } else {
+                    $data[$i]->aksi = '';
+                }
+                // $data[$i]->aksi = '<button href="javascript:;" class="badge badge-info edit_bpn" data="' . $data[$i]->no_proses_bpn . '"><i class="fa fa-edit" ></i>Edit</button>&nbsp;' . $report;
+            } else {
+                $data[$i]->aksi = '';
+            }
             $data[$i]->no_urut = $a;
             $a++;
         }
@@ -88,6 +98,8 @@ class ModelBpn extends CI_Model
                 $card = '<div class="card border-dark bg-warning">';
             } else if ($h->status == 2) {
                 $card = '<div class="card border-dark bg-secondary" style="color:white;">';
+            } else if ($h->status == 3) {
+                $card = '<div class="card border-dark bg-danger" style="color:white;">';
             }
             $data[] = $card .  '<div class="card-body p-1" >
                                 <div class="row" style="font-size: 12px;">
@@ -138,7 +150,8 @@ class ModelBpn extends CI_Model
 
     public function selesai($id)
     {
-        $hasil = $this->db->query("UPDATE `tb_proses_bpn` SET `status`= 1 WHERE `no_proses_bpn`='$id'");
+        $tgl = date("Y-m-d");
+        $hasil = $this->db->query("UPDATE `tb_proses_bpn` SET `status`= 1, `tgl_selesai`= '$tgl' WHERE `no_proses_bpn`='$id'");
         return $hasil;
     }
 }

@@ -50,9 +50,7 @@ class Berkas extends CI_Controller
         if ($this->input->post('pembeli_e') != null) {
             $data['nama_pembeli'] = $this->input->post('pembeli_e', true);
         }
-        if ($this->input->post('tot_biaya_e') != null) {
-            $data['tot_biaya'] = $this->input->post('tot_biaya_e', true);
-        }
+
         if ($this->input->post('keterangan_e') != null) {
             $data['keterangan'] = $this->input->post('keterangan_e', true);
         }
@@ -79,6 +77,23 @@ class Berkas extends CI_Controller
         redirect('berkas');
     }
 
+    function update_berkas2()
+    {
+        $id = $this->input->post('id_e2');
+        if ($this->input->post('keterangan_e2') != null) {
+            $data['keterangan'] = $this->input->post('keterangan_e2', true);
+        }
+        $hasil = $this->ModelBerkas->update_berkas($data, $id);
+        echo json_decode($hasil);
+        $this->session->set_flashdata('success', '  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Berkas Berhasil di Update
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
+        redirect('berkas');
+    }
+
 
     function simpanBer()
     {
@@ -87,7 +102,7 @@ class Berkas extends CI_Controller
             'alamat' => $this->input->post('desa'),
             'jenis_berkas' => implode(",", $this->input->post('jenis_berkas')),
             'nama_penjual' => $this->input->post('penjual'),
-            'tot_biaya' => $this->input->post('tot_biaya'),
+            // 'tot_biaya' => $this->input->post('tot_biaya'),
             'keterangan' => $this->input->post('keterangan'),
         );
         if (!empty($this->input->post('pembeli'))) {

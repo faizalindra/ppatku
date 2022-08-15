@@ -38,7 +38,7 @@ function data_sertipikat() {
             data: 'kecamatan'
         },
         {
-            data: 'luas'
+            data: 'proses',
         },
         {
             data: 'pemilik_hak'
@@ -47,13 +47,14 @@ function data_sertipikat() {
             data: 'pembeli_hak'
         },
         {
-            data: 'proses',
+            data: 'luas'
         },
         {
             data: 'ket'
         },
         {
             data: 'aksi',
+            visible: false
         },
         ],
         'columnDefs': [
@@ -65,8 +66,16 @@ function data_sertipikat() {
                 "targets": 7,
                 "className": "text-center",
             },
+            {
+                "targets": 8,
+                "className": "text-center",
+            },
         ],
     })
+    if(user_role != 2){
+        $('#tabel-sertipikat').DataTable().column( 10 ).visible(true );
+    }
+
 }
 
 // fungsi edit sertipikat, tombol edit sertipikat
@@ -158,6 +167,6 @@ $('#kecamatan_e').change(function desa() {
 });
 
 //tombol reset form input sertipikat
-$('#reset_form').on('click', function(){
+$('#reset_form').on('click', function () {
     $('[name="jenis_berkas[]_i"]').val(null).trigger('change');
 })

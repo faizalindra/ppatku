@@ -27,12 +27,16 @@ class ModelSertipikat extends CI_Model
             $hasil[$i]->proses = str_replace(",", ", ", $hasil[$i]->proses);
             $hasil[$i]->tgl_daftar = date_format(date_create($hasil[$i]->tgl_daftar), 'd M Y');
             $hasil[$i]->sertipikat = $hasil[$i]->jenis_hak . '. ' . $hasil[$i]->no_sertipikat . '/' . $hasil[$i]->desa;
-            $hasil[$i]->aksi = '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' . $hasil[$i]->no_reg . '"><i class="fa fa-edit" ></i>Edit</button>'; 
+            if( $this->session->userdata('role_id')!= 2){
+                $hasil[$i]->aksi = '<button href="javascript:;" class="badge badge-info edit_sertipikat" data="' . $hasil[$i]->no_reg . '"><i class="fa fa-edit" ></i>Edit</button>';
+            } else {
+                $hasil[$i]->aksi = '';
+            }
             $hasil[$i]->ket = nl2br($hasil[$i]->ket);
             if ($hasil[$i]->luas == 0){
                 $hasil[$i]->luas = '';
             } else{
-                $hasil[$i]->luas = $hasil[$i]->luas . ' m2';
+                $hasil[$i]->luas = $hasil[$i]->luas;
             }
             $hasil[$i]->no_urut = $a;
             $a++;

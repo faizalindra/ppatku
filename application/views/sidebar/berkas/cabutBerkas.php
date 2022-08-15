@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-12 p-1">
                     <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                    <div class="card border-dark">
+                    <div class="card border-dark text-dark">
                         <div class="card-header p-1" style="background-color:#9efff4;">
                             <div class="row">
                                 <div class="col-md-6 text-left">
@@ -60,9 +60,9 @@
             <div class="row">
                 <div class="col-md-12 p-1">
                     <!-- <div class=" p-2 mb-2 bg-white rounded"> -->
-                    <div class="card border-dark">
+                    <div class="card border-dark text-dark">
                         <div class="card-header p-1" style="background-color:#9efff4;">
-                            <h6>Kelengkapan</h6>
+                            <h6><b>Kelengkapan</b></h6>
                         </div>
                         <div class="card-body p-1 text-left">
                             <div class="row">
@@ -91,9 +91,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12 p-1">
-                    <div class="card border-dark">
+                    <div class="card border-dark text-dark">
                         <div class="card-header p-1" style="background-color:#9efff4;">
-                            <h6>Proses</h6>
+                            <h6><b>Proses</b></h6>
                         </div>
                         <div class="card-body p-1">
                             <div id="proses_" style="color: white;"></div>
@@ -108,9 +108,9 @@
             </div>
         </div>
         <div class="col-md-3 p-1 d-flex">
-            <div class="card border-dark" style=" min-height: 555px;min-width:26rem">
+            <div class="card border-dark text-dark" style=" min-height: 555px;min-width:23rem">
                 <div class="card-header p-1" style="background-color:#9efff4;">
-                    <h6>Proses BPN</h6>
+                    <h6><b>Proses BPN</b></h6>
                 </div>
                 <div class="card-body p-1 text-white">
                     <div id="bpn_">
@@ -119,15 +119,15 @@
             </div>
         </div>
         <div class="col-md-3 p-1 d-flex">
-            <div class="card border-dark" style=" min-height: 555px;min-width:26rem">
+            <div class="card border-dark text-dark" style=" min-height: 555px;min-width:23rem">
                 <div class="card-header p-1" style="background-color:#9efff4;">
                     <div class="row">
-                        <div class="col-md-12 text-left text-muted" style="font-size: 12px;">
+                        <div class="col-md-12 text-left" style="font-size: 12px;">
                             Total Biaya
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-center">
+                        <div class="col-md-12 text-center text-dark">
                             <h5 id="total_biaya_"></h5>
                         </div>
                     </div>

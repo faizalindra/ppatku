@@ -1,7 +1,7 @@
 var getUrl = window.location;
 const base_url = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 const user_role = document.getElementById('roleid').getAttribute('data');
-$(document).ready(function() {
+$(document).ready(function () {
     currentTime();
     hari();
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
         let time = hh + ":" + mm + ":" + ss + " " + session;
 
         $('#clock').html(time);
-        var t = setTimeout(function() { currentTime() }, 1000);
+        var t = setTimeout(function () { currentTime() }, 1000);
 
     }
 
@@ -54,4 +54,8 @@ $(document).ready(function() {
     //     console.log('add');
     // });
 
+    // otomatis hilangkan alert
+    $(".alert-success").fadeTo(4000, 500).slideUp(500, function () {
+        $(".alert-success").slideUp(500);
+    });
 });
