@@ -26,7 +26,8 @@ class ModelProses extends CI_Model
         $this->ModelProses->cabut_bpn($where->id);
     }
 
-    function bpn_gagal($id,$ket){
+    function bpn_gagal($id, $ket)
+    {
         $ket['status'] = 2;
         $this->db->update('tb_proses_bpn', $ket, ['no_proses_bpn' => $id]);
     }
@@ -52,7 +53,7 @@ class ModelProses extends CI_Model
                     $jenis_berkas = array(5, 10, 13);
                     break;
                 case "Pemecahan":
-                    $jenis_berkas = array(5, 9);
+                    $jenis_berkas = array(5, 9, 22);
                     break;
                 case "APHT":
                     $jenis_berkas = array(5, 6, 16);
@@ -93,7 +94,7 @@ class ModelProses extends CI_Model
             $b_proses = '<a class="badge badge-warning tbl_proses" ';
             $c_proses = '<a class="badge badge-success tbl_proses" >';
             $d = '</a>';
-            $arr_proses = array("", "Ukur", "Pertimbangan Teknis", "Perijinan", "Pengeringan", "Cek Plot", "Cek Sertipikat", "Roya", "Ganti Nama", "Tapak Kapling", "Validasi Pajak", "Konversi", "Waris", "Balik Nama", "Peningkatan Hak", "SKMHT", "APHT", "Kutip SU", "IPH", "ZNT", "Validasi Sertipikat", "Lain-Lain");
+            $arr_proses = array("", "Ukur", "Pertimbangan Teknis", "Perijinan", "Pengeringan", "Cek Plot", "Cek Sertipikat", "Roya", "Ganti Nama", "Tapak Kapling", "Validasi Pajak", "Konversi", "Waris", "Balik Nama", "Peningkatan Hak", "SKMHT", "APHT", "Kutip SU", "IPH", "ZNT", "Validasi Sertipikat", "Lain-Lain", "Pemecahan");
             // $arr_prose2 = array("", "ukur", "pert_teknis", "perijinan", "pengeringan", "cek_plot", "cek_sertipikat", "roya", "ganti_nama", "tapak_kapling", "bayar_pajak", "konversi", "waris", "balik_nama", "peningkatan_hak", "skmht", "ht", "kutip_su", "iph", "znt", "validasi_sert");
             $hasil = $this->db->get_where('tb_ket_proses', $ids)->result();
             foreach ($hasil as $hsl) {
@@ -289,6 +290,15 @@ class ModelProses extends CI_Model
                                 $data['proses'][] = $c_proses . $arr_proses[$b] . $d;
                             };
                             break;
+                        case 22:
+                            if ($hsl->pemecahan == null && $hsl->pemecahan == 0) {
+                                $data['proses'][] = $a_proses . 'data="' . $id . '"datas="1" datat="22">' . $arr_proses[$b] . $d;
+                            } else if ($hsl->pemecahan == 1) {
+                                $data['proses'][] = $b_proses . 'data="' . $id . '"datas="2" datat="22">' . $arr_proses[$b] . $d;
+                            } else if ($hsl->pemecahan == 2) {
+                                $data['proses'][] = $c_proses . $arr_proses[$b] . $d;
+                            };
+                            break;
                     }
                 }
             }
@@ -363,6 +373,9 @@ class ModelProses extends CI_Model
                 break;
             case 21:
                 $data['lainnya'] = $b;
+                break;
+            case 22:
+                $data['pemecahan'] = $b;
                 break;
         }
         $this->db->update('tb_ket_proses', $data, $id);

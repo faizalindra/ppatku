@@ -14,6 +14,7 @@ class Berkas extends CI_Controller
     public function index()
     {
 
+        // $data['berkas'] = $this->ModelBerkas->tabel_berkas();
         $data['max_berkas'] = $this->ModelBerkas->get_last_id();
         $data['b'] = $this->ModelBerkas->record_b();
         $data['sertipikat'] = $this->ModelSertipikat->get_sert_for_select();
