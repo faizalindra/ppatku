@@ -1,3 +1,6 @@
+30 Oktober 2022 #00075
+    - Fix proses "Pemecahan" tidak muncul pada dsftar proses berkas pada detail_berkas
+
 06 Agustus 2022 #00074
     - menghapus field tot_bayar pada input berkas
     - mengurangi fitur notaris, berkas selesai tidak dapat di edit kecuali keterangan berkas tersebut
